@@ -1,5 +1,6 @@
 package it.reply.cof.utils;
 
+import it.reply.cof.utils.exception.COFException;
 import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Mac;
