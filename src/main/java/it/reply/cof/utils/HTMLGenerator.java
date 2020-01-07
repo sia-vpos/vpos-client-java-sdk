@@ -24,22 +24,22 @@ public class HTMLGenerator {
         return paymentInstrumentUrl;
     }
 
-    private String generateRedirectHtml(Map<String, String> replacements, DtoTransactions transaction)
+    private String generateRedirectHtml(Map<String, String> replacements, DtoTransactions transaction,String urlDone,String urlBack,String urlMs)
             throws COFException {
         String paymentInstrumentUrl;
-        Map<String, String> map = Utils.generateMap(transaction, configuration.getShopId(), configuration.getUrlMs(),
-                configuration.getUrlDone(), configuration.getUrlBack());
+        Map<String, String> map = Utils.generateMap(transaction, configuration.getShopId(), urlMs,
+                urlDone, urlBack);
 
         String redirectUrl = Utils.generateUrl(map, configuration.getRedirectHMacKey(), configuration.getUrlRedirect());
         replacements.put("REDIRECTURL", redirectUrl);
-        replacements.put("URLDONE", configuration.getUrlDone());
-        replacements.put("URLBACK", configuration.getUrlBack());
+        replacements.put("URLDONE", urlDone);
+        replacements.put("URLBACK", urlBack);
         paymentInstrumentUrl = Utils.htmlToBase64("RedirectURL.html", replacements);
         return paymentInstrumentUrl;
     }
 
     private String generateACSHtml(HttpServletRequest httpRequest, Map<String, String> replacements, String refNumber,
-                                   APosResponse authRes) throws PGException500 {
+                                   APosResponse authRes) throws PGException500, COFException {
         String paymentInstrumentUrl;
         replacements.put("URLACS", authRes.getAcsURL());
         replacements.put("PAREQ", authRes.getPaReq());

@@ -1,20 +1,16 @@
 package it.reply.cof.utils;
 
+import it.reply.cof.utils.exception.COFException;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.springframework.core.io.ClassPathResource;
-
-import com.cirfood.payment.gateway.dto.DtoTransactions;
-import com.cirfood.payment.gateway.exceptions.PGException500;
-import com.cirfood.payment.gateway.log.PGLogger;
-import com.cirfood.payment.gateway.util.Constants.AposConstant;
-import com.cirfood.payment.gateway.util.Constants.Currency;
 
 public class Utils {
 
@@ -30,43 +26,43 @@ public class Utils {
 			String urlDone, String urlBack) {
 		Map<String, String> map = new HashMap<>();
 
-		map.put(AposConstant.URLMS, urlMs);
-		map.put(AposConstant.URLDONE, urlDone);
-		map.put(AposConstant.ORDERID, transaction.getOrderId());
-		map.put(AposConstant.SHOPID, shopId);
-		map.put(AposConstant.AMOUNT, transaction.getAmount());
-		map.put(AposConstant.CURRENCY, Currency.getCurrency(transaction.getCurrency()).getValue());
-		map.put(AposConstant.ACCOUNTINGMODE, transaction.getAccountingMode());
-		map.put(AposConstant.AUTHORMODE, "I"); // TODO missing
-		map.put(AposConstant.OPTIONS, "GM"); // TODO missing
-		map.put(AposConstant.URLBACK, urlBack);
-		map.put(AposConstant.EMAIL, "enelpaytest@yopmail.com"); // TODO missing
+		map.put(Constants.AposConstant.URLMS, urlMs);
+		map.put(Constants.AposConstant.URLDONE, urlDone);
+		map.put(Constants.AposConstant.ORDERID, transaction.getOrderId());
+		map.put(Constants.AposConstant.SHOPID, shopId);
+		map.put(Constants.AposConstant.AMOUNT, transaction.getAmount());
+		map.put(Constants.AposConstant.CURRENCY, Currency.getCurrency(transaction.getCurrency()).getValue());
+		map.put(Constants.AposConstant.ACCOUNTINGMODE, transaction.getAccountingMode());
+		map.put(Constants.AposConstant.AUTHORMODE, "I"); // TODO missing
+		map.put(Constants.AposConstant.OPTIONS, "GM"); // TODO missing
+		map.put(Constants.AposConstant.URLBACK, urlBack);
+		map.put(Constants.AposConstant.EMAIL, "enelpaytest@yopmail.com"); // TODO missing
 
 		return map;
 	}
 
-	public static String generateUrl(Map<String, String> map, String key, String urlApos) throws PGException500 {
+	public static String generateUrl(Map<String, String> map, String key, String urlApos) throws  COFException {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(AposConstant.URLMS + '=' + map.get(AposConstant.URLMS));
+		sb.append(Constants.AposConstant.URLMS + '=' + map.get(Constants.AposConstant.URLMS));
 
-		appendField(AposConstant.URLDONE, map.get(AposConstant.URLDONE), sb);
-		appendField(AposConstant.ORDERID, map.get(AposConstant.ORDERID), sb);
-		appendField(AposConstant.SHOPID, map.get(AposConstant.SHOPID), sb);
-		appendField(AposConstant.AMOUNT, map.get(AposConstant.AMOUNT), sb);
-		appendField(AposConstant.CURRENCY, map.get(AposConstant.CURRENCY), sb);
-		appendField(AposConstant.ACCOUNTINGMODE, map.get(AposConstant.ACCOUNTINGMODE), sb);
-		appendField(AposConstant.AUTHORMODE, map.get(AposConstant.AUTHORMODE), sb);
-		appendField(AposConstant.OPTIONS, map.get(AposConstant.OPTIONS), sb);
+		appendField(Constants.AposConstant.URLDONE, map.get(Constants.AposConstant.URLDONE), sb);
+		appendField(Constants.AposConstant.ORDERID, map.get(Constants.AposConstant.ORDERID), sb);
+		appendField(Constants.AposConstant.SHOPID, map.get(Constants.AposConstant.SHOPID), sb);
+		appendField(Constants.AposConstant.AMOUNT, map.get(Constants.AposConstant.AMOUNT), sb);
+		appendField(Constants.AposConstant.CURRENCY, map.get(Constants.AposConstant.CURRENCY), sb);
+		appendField(Constants.AposConstant.ACCOUNTINGMODE, map.get(Constants.AposConstant.ACCOUNTINGMODE), sb);
+		appendField(Constants.AposConstant.AUTHORMODE, map.get(Constants.AposConstant.AUTHORMODE), sb);
+		appendField(Constants.AposConstant.OPTIONS, map.get(Constants.AposConstant.OPTIONS), sb);
 
 		String tmp = sb.toString();
 
-		appendField(AposConstant.MAC, HmacCalculator.calculate(tmp, key), sb);
+		appendField(Constants.AposConstant.MAC, HmacCalculator.calculate(tmp, key), sb);
 
-		appendField(AposConstant.URLBACK, map.get(AposConstant.URLBACK), sb);
-		appendField(AposConstant.EMAIL, map.get(AposConstant.EMAIL), sb);
+		appendField(Constants.AposConstant.URLBACK, map.get(Constants.AposConstant.URLBACK), sb);
+		appendField(Constants.AposConstant.EMAIL, map.get(Constants.AposConstant.EMAIL), sb);
 
-		PGLogger.debug("Apos Url: " + urlApos + "&LANG=ITA&" + sb.toString(),CLASSNAME);
+		//PGLogger.debug("Apos Url: " + urlApos + "&LANG=ITA&" + sb.toString(),CLASSNAME);
 
 		return urlApos + "&LANG=ITA&" + sb.toString();
 	}
@@ -129,13 +125,13 @@ public class Utils {
 		return rndBuilder.toString();
 	}
 
-	public static String htmlToBase64(String fileName, Map<String, String> replacements) throws PGException500 {
+	public static String htmlToBase64(String fileName, Map<String, String> replacements) throws COFException {
 		String html = "";
 
 		try {
 			html = Jsoup.parse(new ClassPathResource(fileName).getFile(), "UTF-8").toString();
 		} catch (IOException e) {
-			throw new PGException500("", e.getCause());
+			throw new COFException("", e.getCause());
 		}
 
 		for (Map.Entry<String, String> replacement : replacements.entrySet()) {
