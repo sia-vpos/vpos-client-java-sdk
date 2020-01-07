@@ -1,6 +1,7 @@
 package it.reply.cof.client;
 
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.utils.exception.COFException;
 
 /**
  * VPOS Client interface used to perform common requests and validate returned results from SIA.

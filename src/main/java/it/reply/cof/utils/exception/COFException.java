@@ -1,4 +1,4 @@
-package it.reply.cof.utils;
+package it.reply.cof.utils.exception;
 
 public class COFException extends Exception{
 
