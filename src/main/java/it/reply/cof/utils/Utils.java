@@ -3,18 +3,10 @@ package it.reply.cof.utils;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.springframework.core.io.ClassPathResource;
-
-import com.cirfood.payment.gateway.dto.DtoTransactions;
-import com.cirfood.payment.gateway.exceptions.PGException500;
-import com.cirfood.payment.gateway.log.PGLogger;
-import com.cirfood.payment.gateway.util.Constants.AposConstant;
-import com.cirfood.payment.gateway.util.Constants.Currency;
 
 public class Utils {
 
@@ -141,6 +133,7 @@ public class Utils {
 		for (Map.Entry<String, String> replacement : replacements.entrySet()) {
 			html = html.replace("[" + replacement.getKey() + "]", replacement.getValue());
 		}
+
 
 		return Base64.getEncoder().encodeToString(html.getBytes());
 	}
