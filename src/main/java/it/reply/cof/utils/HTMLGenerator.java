@@ -1,14 +1,15 @@
 package it.reply.cof.utils;
 
 import it.reply.cof.apos.response.APosResponse;
+import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.exception.COFException;
 
 import java.util.Map;
 
 public class HTMLGenerator {
 
-    private String generateHtml(HttpServletRequest httpRequest, Map<String, String> replacements,
-                                DtoTransactions transaction, String refNumber, APosResponse authRes, String statusCode)
+    private String generateHtml(Map<String, String> replacements,
+                                PaymentInfo transaction, String refNumber, APosResponse authRes, String statusCode)
             throws COFException {
         String paymentInstrumentUrl = "";
         final String NO_PID = Constants.StatusCode.NO_PID.getValue();
@@ -24,7 +25,7 @@ public class HTMLGenerator {
         return paymentInstrumentUrl;
     }
 
-    private String generateRedirectHtml(Map<String, String> replacements, DtoTransactions transaction,String urlDone,String urlBack,String urlMs)
+    private String generateRedirectHtml(Map<String, String> replacements, PaymentInfo transaction,String urlDone,String urlBack,String urlMs)
             throws COFException {
         String paymentInstrumentUrl;
         Map<String, String> map = Utils.generateMap(transaction, configuration.getShopId(), urlMs,

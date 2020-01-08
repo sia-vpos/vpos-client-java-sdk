@@ -14,7 +14,7 @@ public interface VPOSClient {
 
     void injectMasterTemplate();
 
-    String getPaymentHtmlDocument(PaymentInfo paymentInfo);
+    String getPaymentHtmlDocument(PaymentInfo paymentInfo) throws COFException;
 
     void verifyResponse() throws COFException;
 

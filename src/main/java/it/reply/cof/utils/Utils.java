@@ -1,13 +1,12 @@
 package it.reply.cof.utils;
 
+import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.exception.COFException;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,14 +15,13 @@ public class Utils {
 
 	private static final String CLASSNAME = Utils.class.getSimpleName();
 	private static final String NUMBERS = "0123456789";
-	public static final String DATE_PATTERN = "MMyy";
 
 	private Utils() {
 
 	}
 
-	public static Map<String, String> generateMap(DtoTransactions transaction, String shopId, String urlMs,
-			String urlDone, String urlBack) {
+	public static Map<String, String> generateMap(PaymentInfo transaction, String shopId, String urlMs,
+												  String urlDone, String urlBack) {
 		Map<String, String> map = new HashMap<>();
 
 		map.put(Constants.AposConstant.URLMS, urlMs);
@@ -31,7 +29,7 @@ public class Utils {
 		map.put(Constants.AposConstant.ORDERID, transaction.getOrderId());
 		map.put(Constants.AposConstant.SHOPID, shopId);
 		map.put(Constants.AposConstant.AMOUNT, transaction.getAmount());
-		map.put(Constants.AposConstant.CURRENCY, Currency.getCurrency(transaction.getCurrency()).getValue());
+		map.put(Constants.AposConstant.CURRENCY, Constants.Currency.getCurrency(transaction.getCurrency()).getValue());
 		map.put(Constants.AposConstant.ACCOUNTINGMODE, transaction.getAccountingMode());
 		map.put(Constants.AposConstant.AUTHORMODE, "I"); // TODO missing
 		map.put(Constants.AposConstant.OPTIONS, "GM"); // TODO missing
@@ -76,7 +74,7 @@ public class Utils {
 
 	public static String addField(String field, String fieldName) {
 		String mac = "";
-		if (StringUtils.isNotBlank(field) || (fieldName.equals(Constants.OPERATIONS.PARAMETERS.URLDONE.NAME)
+		if ((field != null && !field.isEmpty()) || (fieldName.equals(Constants.OPERATIONS.PARAMETERS.URLDONE.NAME)
 				|| fieldName.equals(Constants.OPERATIONS.PARAMETERS.ORDERID.NAME)
 				|| fieldName.equals(Constants.OPERATIONS.PARAMETERS.SHOPID.NAME)
 				|| fieldName.equals(Constants.OPERATIONS.PARAMETERS.AMOUNT.NAME)
@@ -89,7 +87,7 @@ public class Utils {
 
 	public static String addFieldAuth(String field, String fieldName) {
 		String mac = "";
-		if (StringUtils.isNotBlank(field) || (!fieldName.equals(Constants.OPERATIONS.AUTHORIZATION.PANTAIL)
+		if ((field != null && !field.isEmpty()) || (!fieldName.equals(Constants.OPERATIONS.AUTHORIZATION.PANTAIL)
 				&& !fieldName.equals(Constants.OPERATIONS.AUTHORIZATION.PANEXPIRYDATE)
 				&& !fieldName.equals(Constants.OPERATIONS.AUTHORIZATION.CARDTYPE))) {
 			mac = "&" + field;
@@ -99,7 +97,7 @@ public class Utils {
 
 	public static String addFieldDone(String field, String fieldName) {
 		String mac = "";
-		if (StringUtils.isNotBlank(field) || (fieldName.equals(Constants.OPERATIONS.PARAMETERS.ORDERID.NAME)
+		if ((field != null && !field.isEmpty())  || (fieldName.equals(Constants.OPERATIONS.PARAMETERS.ORDERID.NAME)
 				|| fieldName.equals(Constants.OPERATIONS.PARAMETERS.SHOPID.NAME)
 				|| fieldName.equals(Constants.OPERATIONS.CONFIRMATION.AUTHORIZATIONUMBER)
 				|| fieldName.equals(Constants.OPERATIONS.PARAMETERS.AMOUNT.NAME)

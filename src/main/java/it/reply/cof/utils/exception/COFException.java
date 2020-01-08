@@ -5,6 +5,11 @@ public class COFException extends Exception{
     private final String message;
     private final Throwable rootCause;
 
+    public COFException(String message){
+        this.message = message;
+        rootCause = null;
+    }
+
     public COFException(String message, Throwable rootCause) {
         this.message = message;
         this.rootCause = rootCause;
