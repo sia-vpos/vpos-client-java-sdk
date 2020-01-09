@@ -18,4 +18,10 @@ public interface VPOSClient {
 
     void verifyResponse() throws COFException;
 
+    void onlineAuthorizationRequest();
+
+    void deferredAuthorizationRequest();
+
+    void threeDSAuthorizationRequest();
+
 }

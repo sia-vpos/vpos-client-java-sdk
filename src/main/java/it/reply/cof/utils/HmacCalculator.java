@@ -26,21 +26,17 @@ public class HmacCalculator {
         }
 
         return result;
-
     }
 
     private static String innerCalculate(String value, String key, String algorithm) throws Exception {
-
         Mac mac = Mac.getInstance(algorithm);
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes("UTF-8"), algorithm);
         mac.init(secretKey);
-
         return Hex.encodeHexString(mac.doFinal(value.getBytes("UTF-8")));
     }
 
     public static String calculateWith512(String value, String key) throws Exception {
-
         return innerCalculate(value, key, ALGORITHM_512);
-
     }
+
 }

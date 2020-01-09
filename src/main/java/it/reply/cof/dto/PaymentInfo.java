@@ -1,8 +1,29 @@
 package it.reply.cof.dto;
 
+import java.util.Map;
+
+/**
+ * General purpose data transfer object passed to VPOS client when starting a new operation
+ *
+ * @author gab.marini
+ */
 public class PaymentInfo {
 
+    private String operation;
+
+    private String timestamp;
+
+    private String shopId;
+
+    private String orderId;
+
+    private String operatorId;
+
     private String amount;
+
+    private String pan;
+
+    private String expDate;
 
     private String currency;
 
@@ -19,6 +40,8 @@ public class PaymentInfo {
     private String accountingMode;
 
     private String authorMode;
+
+    private Map<String, String> notCompulsoryFields;
 
     public String getAmount() {
         return amount;
@@ -91,4 +114,13 @@ public class PaymentInfo {
     public void setAuthorMode(String authorMode) {
         this.authorMode = authorMode;
     }
+
+    public Map<String, String> getNotCompulsoryFields() {
+        return notCompulsoryFields;
+    }
+
+    public void setNotCompulsoryFields(Map<String, String> notCompulsoryFields) {
+        this.notCompulsoryFields = notCompulsoryFields;
+    }
+
 }

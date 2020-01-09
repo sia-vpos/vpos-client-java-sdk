@@ -1,0 +1,6 @@
+
+csquid:CommentedOutCodeLineú"<This block of commented-out lines of code should be removed.(Àäåâ
+_squid:S1192Æ"GDefine a constant instead of duplicating this literal "[0-9]{" 8 times.(û›î”
+*squid:S1700ù"Rename field "NAME"(ôžåd
+jsquid:S1192 "MDefine a constant instead of duplicating this literal "^https?://.{" 3 times.(Û¤›·üÿÿÿÿ
+`squid:S1192í"HDefine a constant instead of duplicating this literal "^[0-9]{" 3 times.(õè¢´

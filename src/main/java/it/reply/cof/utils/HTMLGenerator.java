@@ -9,7 +9,7 @@ import java.util.Map;
 public class HTMLGenerator {
 
     private String generateHtml(Map<String, String> replacements,
-                                PaymentInfo transaction, String refNumber, APosResponse authRes, String statusCode)
+                                PaymentInfo transaction, String refNumber, String statusCode)
             throws COFException {
         String paymentInstrumentUrl = "";
         final String NO_PID = Constants.StatusCode.NO_PID.getValue();
@@ -19,19 +19,19 @@ public class HTMLGenerator {
         if (NO_PID.equals(statusCode) || INVALID_EXPIRED_PID.equals(statusCode)) {
             paymentInstrumentUrl = generateRedirectHtml(replacements, transaction);
         } else if (STEP2_3DS.equals(statusCode)) {
-            paymentInstrumentUrl = generateACSHtml(httpRequest, replacements, refNumber, authRes);
+            paymentInstrumentUrl = generateACSHtml(replacements, refNumber);
         }
 
         return paymentInstrumentUrl;
     }
 
-    private String generateRedirectHtml(Map<String, String> replacements, PaymentInfo transaction,String urlDone,String urlBack,String urlMs)
+    private String generateRedirectHtml(Map<String, String> replacements, PaymentInfo transaction, String urlDone, String urlBack, String urlMs)
             throws COFException {
         String paymentInstrumentUrl;
-        Map<String, String> map = Utils.generateMap(transaction, configuration.getShopId(), urlMs,
+        Map<String, String> map = Utils.generateMap(transaction, transaction.getShopId(), urlMs,
                 urlDone, urlBack);
 
-        String redirectUrl = Utils.generateUrl(map, configuration.getRedirectHMacKey(), configuration.getUrlRedirect());
+        String redirectUrl = Utils.generateUrl(map, configuration.getRedirectHMacKey(), transaction.getUrlRedirect());
         replacements.put("REDIRECTURL", redirectUrl);
         replacements.put("URLDONE", urlDone);
         replacements.put("URLBACK", urlBack);
@@ -39,8 +39,8 @@ public class HTMLGenerator {
         return paymentInstrumentUrl;
     }
 
-    private String generateACSHtml(HttpServletRequest httpRequest, Map<String, String> replacements, String refNumber,
-                                   APosResponse authRes) throws PGException500, COFException {
+    private String generateACSHtml(Map<String, String> replacements, String refNumber,
+                                   APosResponse authRes) throws COFException {
         String paymentInstrumentUrl;
         replacements.put("URLACS", authRes.getAcsURL());
         replacements.put("PAREQ", authRes.getPaReq());
@@ -51,6 +51,5 @@ public class HTMLGenerator {
         paymentInstrumentUrl = Utils.htmlToBase64("ACSRedirect.html", replacements);
         return paymentInstrumentUrl;
     }
-
 
 }
