@@ -2,6 +2,7 @@ package it.reply.cof.utils;
 
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.exception.COFException;
+import it.reply.cof.utils.mac.HmacCalculator;
 
 import java.io.File;
 import java.io.IOException;

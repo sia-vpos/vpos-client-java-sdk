@@ -1,5 +1,6 @@
-package it.reply.cof.utils;
+package it.reply.cof.utils.mac;
 
+import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.exception.COFException;
 import org.apache.commons.codec.binary.Hex;
 
@@ -13,6 +14,8 @@ import java.security.NoSuchAlgorithmException;
  * @author gab.marini
  */
 public final class HmacCalculator {
+
+    private static final String CHARSET = "UTF-8";
 
     private MacAlgorithms algorithm;
     private Mac mac;
@@ -61,9 +64,9 @@ public final class HmacCalculator {
     }
 
     private String innerCalculate(String value, String key) throws Exception {
-        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes("UTF-8"), algorithm.getValue());
+        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), algorithm.getValue());
         mac.init(secretKey);
-        return Hex.encodeHexString(mac.doFinal(value.getBytes("UTF-8")));
+        return Hex.encodeHexString(mac.doFinal(value.getBytes(CHARSET)));
     }
 
     /**
