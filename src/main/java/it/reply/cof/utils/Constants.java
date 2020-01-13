@@ -24,6 +24,7 @@ public class Constants {
         public static final String OPTIONS = "OPTIONS";
         public static final String MAC = "MAC";
         public static final String EMAIL = "EMAIL";
+        public static final String EXPONENT= "EXPONENT";
         public static final String RESP_OK = "00";
         public static final String RESP_3DS = "20";
         public static final String RESP_TRANS_KO = "99";

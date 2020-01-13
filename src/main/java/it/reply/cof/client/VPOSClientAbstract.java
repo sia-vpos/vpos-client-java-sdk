@@ -19,8 +19,11 @@ public abstract class VPOSClientAbstract implements VPOSClient {
                 paymentInfo.getAuthorMode() == null || paymentInfo.getCurrency() == null ||
                 paymentInfo.getExponent() == null || paymentInfo.getOrderId() == null ||
                 paymentInfo.getShopId() == null || paymentInfo.getUrlBack() == null ||
-                paymentInfo.getUrlDone() == null)
+                paymentInfo.getUrlDone() == null|| paymentInfo.getUrlMs() == null ||
+                paymentInfo.getMac() == null
+        )
             throw new COFException("One or more mandatory field were not specified");
+
 
         return null;
     }

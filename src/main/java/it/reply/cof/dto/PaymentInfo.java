@@ -9,21 +9,7 @@ import java.util.Map;
  */
 public class PaymentInfo {
 
-    private String operation;
-
-    private String timestamp;
-
-    private String shopId;
-
-    private String orderId;
-
-    private String operatorId;
-
     private String amount;
-
-    private String pan;
-
-    private String expDate;
 
     private String currency;
 
@@ -37,9 +23,13 @@ public class PaymentInfo {
 
     private String urlDone;
 
+    private String urlMs;
+
     private String accountingMode;
 
     private String authorMode;
+
+    private String mac;
 
     private Map<String, String> notCompulsoryFields;
 
@@ -99,6 +89,14 @@ public class PaymentInfo {
         this.urlDone = urlDone;
     }
 
+    public String getUrlMs() {
+        return urlMs;
+    }
+
+    public void setUrlMs(String urlMs) {
+        this.urlMs = urlMs;
+    }
+
     public String getAccountingMode() {
         return accountingMode;
     }
@@ -113,6 +111,14 @@ public class PaymentInfo {
 
     public void setAuthorMode(String authorMode) {
         this.authorMode = authorMode;
+    }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
     }
 
     public Map<String, String> getNotCompulsoryFields() {

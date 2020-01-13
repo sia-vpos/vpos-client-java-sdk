@@ -24,19 +24,20 @@ public class Utils {
     public static Map<String, String> generateMap(PaymentInfo transaction, String shopId, String urlMs,
                                                   String urlDone, String urlBack) {
         Map<String, String> map = new HashMap<>();
-
-        map.put(Constants.AposConstant.URLMS, urlMs);
-        map.put(Constants.AposConstant.URLDONE, urlDone);
-        map.put(Constants.AposConstant.ORDERID, transaction.getOrderId());
-        map.put(Constants.AposConstant.SHOPID, shopId);
-        map.put(Constants.AposConstant.AMOUNT, transaction.getAmount());
-        map.put(Constants.AposConstant.CURRENCY, Constants.Currency.getCurrency(transaction.getCurrency()).getValue());
         map.put(Constants.AposConstant.ACCOUNTINGMODE, transaction.getAccountingMode());
-        map.put(Constants.AposConstant.AUTHORMODE, "I"); // TODO missing
-        map.put(Constants.AposConstant.OPTIONS, "GM"); // TODO missing
-        map.put(Constants.AposConstant.URLBACK, urlBack);
-        map.put(Constants.AposConstant.EMAIL, "enelpaytest@yopmail.com"); // TODO missing
-
+        map.put(Constants.AposConstant.AMOUNT, transaction.getAmount());
+        map.put(Constants.AposConstant.AUTHORMODE, transaction.getAuthorMode());
+        map.put(Constants.AposConstant.CURRENCY, transaction.getCurrency());
+        map.put(Constants.AposConstant.EXPONENT, transaction.getExponent());
+        map.put(Constants.AposConstant.MAC, transaction.getMac());
+        map.put(Constants.AposConstant.ORDERID, transaction.getOrderId());
+        map.put(Constants.AposConstant.SHOPID, transaction.getShopId());
+        map.put(Constants.AposConstant.URLBACK, transaction.getUrlBack());
+        map.put(Constants.AposConstant.URLDONE, transaction.getUrlDone());
+        map.put(Constants.AposConstant.URLMS, transaction.getUrlMs());
+        for (String option : transaction.getNotCompulsoryFields().keySet()) {
+            map.put(option, transaction.getNotCompulsoryFields().get(option));
+        }
         return map;
     }
 
