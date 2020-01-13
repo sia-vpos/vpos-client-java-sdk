@@ -1,0 +1,37 @@
+# Java
+*.class
+*.ear
+*.jar
+*.war
+
+# Eclipse
+.classpath
+.project
+.settings
+
+# Idea
+.idea
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gradle
+.gradle
+!gradle-wrapper.jar
+
+# Maven
+target/
+
+# Build
+out
+build
+.metadata/
+.recommenders/
+
+
+#LOG
+pos-vas-provider-sodexo-jar-main/microservice-vasprovider-sodexo
