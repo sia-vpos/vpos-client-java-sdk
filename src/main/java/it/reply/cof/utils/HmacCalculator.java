@@ -14,13 +14,25 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class HmacCalculator {
 
-    private static MacAlgorithms algorithm;
-    private static Mac mac;
+    private MacAlgorithms algorithm;
+    private Mac mac;
 
+    /**
+     * Creates an instance of HmacCalculator enabled to perform HMAC-256 calculations
+     *
+     * @throws COFException in case of code corruption (invalid algorithm)
+     */
     public HmacCalculator() throws COFException {
         this(MacAlgorithms.HMAC_SHA_256);
     }
 
+    /**
+     * Creates an instance of HmacCalculator initialized to perform calculations
+     * with the specified algorithm
+     *
+     * @param algorithm used to perform the MAC calculation
+     * @throws COFException in case of code corruption (invalid algorithm)
+     */
     public HmacCalculator(MacAlgorithms algorithm) throws COFException {
         try {
             this.algorithm = algorithm;
@@ -36,7 +48,7 @@ public final class HmacCalculator {
      * @return the MAC of the string value
      * @throws COFException with relative description in case of failure
      */
-    public static String calculate(String value, String key) throws COFException {
+    public String calculate(String value, String key) throws COFException {
         String result = "";
 
         try {
@@ -48,7 +60,7 @@ public final class HmacCalculator {
         return result;
     }
 
-    private static String innerCalculate(String value, String key) throws Exception {
+    private String innerCalculate(String value, String key) throws Exception {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes("UTF-8"), algorithm.getValue());
         mac.init(secretKey);
         return Hex.encodeHexString(mac.doFinal(value.getBytes("UTF-8")));
@@ -60,10 +72,23 @@ public final class HmacCalculator {
      * @return the MAC of the string value
      * @throws COFException with relative description in case of failure
      */
-    public static String calculateWith512(String value, String key) throws Exception {
+    public String calculateWith512(String value, String key) throws Exception {
         algorithm = MacAlgorithms.HMAC_SHA_512;
         mac = Mac.getInstance(MacAlgorithms.HMAC_SHA_512.getValue());
         return innerCalculate(value, key);
     }
 
+    /**
+     * @return the algorithm used to perform HMAC calculation
+     */
+    public MacAlgorithms getAlgorithm() {
+        return algorithm;
+    }
+
+    /**
+     * @param algorithm used to perform the MAC calculation
+     */
+    public void setAlgorithm(MacAlgorithms algorithm) {
+        this.algorithm = algorithm;
+    }
 }
