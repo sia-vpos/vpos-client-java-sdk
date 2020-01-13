@@ -4,7 +4,7 @@ import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.exception.COFException;
 
 /**
- * VPOS Client interface used to perform common requests and validate returned results from SIA.
+ * Client interface used to perform common requests and validate returned results from SIA.
  * Different implementations are provided to offer a full spectre of tools fitting security and
  * and common scenarios requirements.
  *
@@ -14,7 +14,7 @@ public interface VPOSClient {
 
     void injectMasterTemplate();
 
-    String getPaymentHtmlDocument(PaymentInfo paymentInfo) throws COFException;
+    String getPaymentHtmlDocument(PaymentInfo paymentInfo, Boolean onlyVirtualized) throws COFException;
 
     void verifyResponse() throws COFException;
 

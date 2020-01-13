@@ -113,14 +113,6 @@ public class PaymentInfo {
         this.authorMode = authorMode;
     }
 
-    public String getMac() {
-        return mac;
-    }
-
-    public void setMac(String mac) {
-        this.mac = mac;
-    }
-
     public Map<String, String> getNotCompulsoryFields() {
         return notCompulsoryFields;
     }

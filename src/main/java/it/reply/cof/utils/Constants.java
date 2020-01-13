@@ -170,6 +170,30 @@ public class Constants {
         public static final String ANTIFRAUD = "ANTIFRAUD";
         public static final String DATA3DS = "3DSDATA";
 
+        public static final String RESULT = "RESULT";
+        public static final String TRANSACTION_TYPE = "TRANSACTION_TYPE";
+        public static final String ISSUERCOUNTRY = "ISSUERCOUNTRY";
+        public static final String AUTHCODE = "AUTHCODE";
+        public static final String PAYERID = "PAYERID";
+        public static final String PAYER = "PAYER";
+        public static final String PAYERSTATUS = "PAYERSTATUS";
+        public static final String HASHPAN = "HASHPAN";
+        public static final String PANALIASREV = "PANALIASREV";
+        public static final String PANALIAS = "PANALIAS";
+        public static final String PANALIASEXPDATE = "PANALIASEXPDATE";
+        public static final String PANALIASTAIL = "PANALIASTAIL";
+        public static final String MASKEDPAN = "MASKEDPAN";
+        public static final String PANTAIL = "PANTAIL";
+        public static final String PANEXPIRYDATE = "PANEXPIRYDATE";
+        public static final String ACCOUNTHOLDER = "ACCOUNTHOLDER";
+        public static final String IBAN = "IBAN";
+        public static final String ALIASSTR = "ALIASSTR";
+        public static final String ACQUIRERBIN = "ACQUIRERBIN";
+        public static final String MERCHANTID = "MERCHANTID";
+        public static final String CARDTYPE = "CARDTYPE";
+        public static final String AUTHNUMBER = "AUTHNUMBER";
+        public static final String TRANSACTIONID = "TRANSACTIONID";
+
         public static final String RESP_OK = "00";
         public static final String RESP_3DS = "20";
         public static final String RESP_TRANS_KO = "99";

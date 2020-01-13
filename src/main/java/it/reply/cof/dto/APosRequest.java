@@ -1,4 +1,4 @@
-package it.reply.cof.apos.request;
+package it.reply.cof.dto;
 
 public class APosRequest {
 
