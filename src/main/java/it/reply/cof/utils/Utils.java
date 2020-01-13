@@ -1,8 +1,8 @@
 package it.reply.cof.utils;
 
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.utils.constants.Constants;
 import it.reply.cof.utils.exception.COFException;
-import it.reply.cof.utils.mac.HmacCalculator;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class Utils {
         map.put(Constants.AposConstant.AUTHORMODE, transaction.getAuthorMode());
         map.put(Constants.AposConstant.CURRENCY, transaction.getCurrency());
         map.put(Constants.AposConstant.EXPONENT, transaction.getExponent());
-        map.put(Constants.AposConstant.MAC, transaction.getMac());
+     //   map.put(Constants.AposConstant.MAC, transaction.getMac());
         map.put(Constants.AposConstant.ORDERID, transaction.getOrderId());
         map.put(Constants.AposConstant.SHOPID, transaction.getShopId());
         map.put(Constants.AposConstant.URLBACK, transaction.getUrlBack());
@@ -56,7 +56,7 @@ public class Utils {
         appendField(Constants.AposConstant.OPTIONS, map.get(Constants.AposConstant.OPTIONS), sb);
 
         String tmp = sb.toString();
-        appendField(Constants.AposConstant.MAC, HmacCalculator.calculate(tmp, key), sb);
+    //    appendField(Constants.AposConstant.MAC, HmacCalculator.calculate(tmp, key), sb);
 
         appendField(Constants.AposConstant.URLBACK, map.get(Constants.AposConstant.URLBACK), sb);
         appendField(Constants.AposConstant.EMAIL, map.get(Constants.AposConstant.EMAIL), sb);

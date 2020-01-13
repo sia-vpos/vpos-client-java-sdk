@@ -1,4 +1,4 @@
-package it.reply.cof.utils;
+package it.reply.cof.utils.constants;
 
 public class Constants {
 
@@ -193,6 +193,11 @@ public class Constants {
         public static final String CARDTYPE = "CARDTYPE";
         public static final String AUTHNUMBER = "AUTHNUMBER";
         public static final String TRANSACTIONID = "TRANSACTIONID";
+
+        public static final String OPERATION = "OPERATION";
+        public static final String TIMESTAMP = "TIMESTAMP";
+        public static final String OPERATORID = "OPERATORID";
+        public static final String REQREFNUM = "REQREFNUM";
 
         public static final String RESP_OK = "00";
         public static final String RESP_3DS = "20";

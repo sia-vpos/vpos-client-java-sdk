@@ -1,5 +1,9 @@
 package it.reply.cof.dto;
 
+import java.lang.reflect.Field;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class APosRequest {
 
 	private String shopId;
@@ -30,6 +34,26 @@ public class APosRequest {
 	private String merchantURL;
 	private String originalRefNum;
 	private String paRes;
+
+	public static void main(String[] args)  {
+		APosRequest request = new APosRequest();
+		request.setTaxId("atdfas");
+		Map<String, String> linkedMap = new LinkedHashMap<>();
+
+		try {
+			for (Field field : request.getClass().getDeclaredFields()) {
+				linkedMap.put(field.getName(), (String) field.get(request));
+				System.out.println(field.getName().toUpperCase());
+				System.out.println("\n key : ");
+			}
+
+			for (Map.Entry<String, String> entry : linkedMap.entrySet()) {
+				System.out.println("\n key : " + entry.getKey().toUpperCase() + " value: " + entry.getValue());
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 
 	public String getTransactionId() {
 		return transactionId;

@@ -2,6 +2,7 @@ package it.reply.cof.utils;
 
 import it.reply.cof.apos.response.APosResponse;
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.utils.constants.Constants;
 import it.reply.cof.utils.exception.COFException;
 
 import java.util.Map;
