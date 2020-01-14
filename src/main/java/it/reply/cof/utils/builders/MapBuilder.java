@@ -11,7 +11,7 @@ import java.util.Map;
 public class MapBuilder {
 
     public static Map<String, String> getRefundMap(BPWXmlRequest request) {
-        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        Map<String, String> map = new LinkedHashMap<>();
         map.put(Operations.PARAMETERS.OPERATION, Operations.PARAMETERS.REFUND);
         map.put(Operations.PARAMETERS.TIMESTAMP, request.getRequest().getTimestamp());
 
@@ -28,5 +28,10 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.OPDESCR.NAME, refund.getOpDescr());
         map.put(Operations.PARAMETERS.OPTIONS.NAME, refund.getOptions());
         return map;
+    }
+
+    public static Map<String, String> getConfirmMap() {
+        Map<String, String> map = new LinkedHashMap<>();
+
     }
 }

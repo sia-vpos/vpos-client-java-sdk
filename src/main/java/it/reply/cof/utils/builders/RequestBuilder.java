@@ -54,7 +54,7 @@ public class RequestBuilder {
 
         //calculate MAC
         Encoder encoder = new Encoder();
-        request.getRequest().setMac(encoder.getMac(getRefundMap(request), "KEY"));
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getRefundMap(request), key);
         return request;
     }
 
@@ -84,7 +84,7 @@ public class RequestBuilder {
         data.setConfirmRequest(confirm);
         request.setData(data);
 
-        request.getRequest().setMac(encoder.getMac(getConfirmMap(reque), key);
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getConfirmMap(), key);
         return request;
     }
 
