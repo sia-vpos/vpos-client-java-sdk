@@ -11,4 +11,6 @@ public class VerifyRequestDto extends RequestDto {
     public void setOriginalReqRefNum(String originalReqRefNum) {
         this.originalReqRefNum = originalReqRefNum;
     }
+
+
 }
