@@ -1,12 +1,7 @@
 package it.reply.cof.dto.request;
 
-public class ConfirmRequestDto {
+public class ConfirmRequestDto extends RequestDto{
 
-    private String operation;
-    private String timestamp;
-    private String shopId;
-    private String operatorId;
-    private String reqRefNum;
     private String transactionId;
     private String orderId;
     private String amount;
@@ -17,46 +12,6 @@ public class ConfirmRequestDto {
     private String release;
     private String options;
     private String mac;
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
-    }
-
-    public String getReqRefNum() {
-        return reqRefNum;
-    }
-
-    public void setReqRefNum(String reqRefNum) {
-        this.reqRefNum = reqRefNum;
-    }
 
     public String getTransactionId() {
         return transactionId;
