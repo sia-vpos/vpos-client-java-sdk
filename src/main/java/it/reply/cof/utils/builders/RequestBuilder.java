@@ -1,8 +1,9 @@
 package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
-import it.reply.cof.dto.ConfirmRequestDto;
+import it.reply.cof.dto.request.ConfirmRequestDto;
 import it.reply.cof.dto.request.RefundRequestDto;
+import it.reply.cof.dto.request.VerifyRequestDto;
 import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
@@ -112,6 +113,29 @@ public class RequestBuilder {
         request.setData(data);
 
         request.getRequest().setMac(encoder.getMac(MapBuilder.getConfirmMap(request), key));
+        return request;
+    }
+
+    public BPWXmlRequest buildVerifyRequest(VerifyRequestDto dtoRequest) throws COFException {
+        Date reqDate = new Date();
+        BPWXmlRequest request = new BPWXmlRequest();
+        request.setRelease(AposConstants.RELEASE);
+        request.setRequest(new Request(Operations.PARAMETERS.VERIFY, reqDate));
+
+        StatusRequest statusRequest = new StatusRequest(reqDate);
+        //HEADER
+        statusRequest.getHeader().setShopId(dtoRequest.getShopId());
+        statusRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
+
+        //VERIFY REQUEST
+        statusRequest.setOriginalReqRefNum(dtoRequest.getOriginalReqRefNum());
+        statusRequest.setOptions(dtoRequest.getOptions());
+
+        Data data = new Data();
+        data.setVerifyRequest(statusRequest);
+        request.setData(data);
+
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getVerifyMap(request), key));
         return request;
     }
 

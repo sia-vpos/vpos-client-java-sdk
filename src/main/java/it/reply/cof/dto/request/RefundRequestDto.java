@@ -1,11 +1,9 @@
 package it.reply.cof.dto.request;
 
 
-public class RefundRequestDto {
+public class RefundRequestDto extends RequestDto{
 
-    private String shopId;
-    private String operatorId;
-    private String TransactionId;
+    private String transactionId;
     private String orderId;
     private String amount;
     private String currency;
@@ -16,7 +14,7 @@ public class RefundRequestDto {
     public RefundRequestDto(String shopId, String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr) {
         this.shopId = shopId;
         this.operatorId = operatorId;
-        TransactionId = transactionId;
+        this.transactionId = transactionId;
         this.orderId = orderId;
         this.amount = amount;
         this.currency = currency;
@@ -27,7 +25,7 @@ public class RefundRequestDto {
     public RefundRequestDto(String shopId, String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr, String options) {
         this.shopId = shopId;
         this.operatorId = operatorId;
-        TransactionId = transactionId;
+        this.transactionId = transactionId;
         this.orderId = orderId;
         this.amount = amount;
         this.currency = currency;
@@ -36,28 +34,12 @@ public class RefundRequestDto {
         this.options = options;
     }
 
-    public String getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
-
-    public String getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(String operatorId) {
-        this.operatorId = operatorId;
-    }
-
     public String getTransactionId() {
-        return TransactionId;
+        return transactionId;
     }
 
     public void setTransactionId(String transactionId) {
-        TransactionId = transactionId;
+        this.transactionId = transactionId;
     }
 
     public String getOrderId() {

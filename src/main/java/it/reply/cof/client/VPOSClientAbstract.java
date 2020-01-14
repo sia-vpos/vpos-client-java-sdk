@@ -42,6 +42,8 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         BPWXmlRequest request = requestBuilder.buildRefundRequest(dtoRequest);
         BPWXmlResponse response = aposClient.executeCall(request);
 
+
+
         //Verify MAC
         verifyMacResponse(response);
         return response;

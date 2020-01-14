@@ -36,7 +36,6 @@ public class MapBuilder {
         Map<String, String> map = getStdMap(request);
 
         StatusRequest verifyRequest = request.getData().getVerifyRequest();
-
         map.put(AposConstants.SHOPID, verifyRequest.getHeader().getShopId());
         map.put(Operations.PARAMETERS.OPERATORID.NAME, verifyRequest.getHeader().getOperatorId());
         map.put(Operations.PARAMETERS.REQREFNUM, verifyRequest.getHeader().getReqRefNum());

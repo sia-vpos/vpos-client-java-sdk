@@ -13,6 +13,7 @@ public final class Operations {
         public static final String AUTHORIZATION3DSSTEP2 = "AUTHORIZATION3DSSTEP2";
         public static final String IBANAUTHORIZATION = "IBANAUTHORIZATION";
         public static final String REFUND = "REFUND";
+        public static final String VERIFY = "VERIFY";
         public static final String DEFERREDREQUEST = "DEFERREDREQUEST";
         public static final String CONFIRM = "CONFIRM";
         public static final String TIMESTAMP = "TIMESTAMP";
@@ -39,6 +40,7 @@ public final class Operations {
             public static final boolean MANDATORY = true;
 
             private AMOUNT() {
+
             }
         }
 
@@ -53,6 +55,7 @@ public final class Operations {
             private CURRENCY() {
 
             }
+
         }
 
         public static final class EXPONENT {
@@ -67,6 +70,7 @@ public final class Operations {
             private EXPONENT() {
 
             }
+
         } // Only if Currency is different from 978 (Euro)
 
         public static final class ORDERID {
