@@ -13,8 +13,10 @@ public class Request {
 
     @XmlElement(name = "Operation")
     private String operation;
+
     @XmlElement(name = "Timestamp")
     private String timestamp;
+
     @XmlElement(name = "MAC")
     private String mac;
 

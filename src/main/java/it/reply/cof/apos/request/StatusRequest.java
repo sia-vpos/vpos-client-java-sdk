@@ -9,10 +9,13 @@ public class StatusRequest {
 
     @XmlElement(name = "Header")
     protected Header header;
+
     @XmlElement(name = "OriginalReqRefNum")
     protected String originalReqRefNum;
+
     @XmlElement(name = "OrderID")
     protected String orderId;
+
     @XmlElement(name = "Options")
     private String options;
 

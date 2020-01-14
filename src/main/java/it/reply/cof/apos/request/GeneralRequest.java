@@ -10,14 +10,19 @@ public class GeneralRequest {
 
     @XmlElement(name = "Header")
     protected Header header;
+
     @XmlElement(name = "TransactionID")
     protected String transactionId;
+
     @XmlElement(name = "OrderID")
     protected String orderId;
+
     @XmlElement(name = "Amount")
     protected String amount;
+
     @XmlElement(name = "Currency")
     protected String currency;
+
     @XmlElement(name = "Exponent")
     protected String exponent;
 

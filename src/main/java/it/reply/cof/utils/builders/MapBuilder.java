@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class MapBuilder {
 
+    private MapBuilder(){}
+
     public static Map<String, String> getRefundMap(BPWXmlRequest request) {
         Map<String, String> map = getGeneralMap(request);
 

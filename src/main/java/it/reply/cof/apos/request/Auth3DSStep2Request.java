@@ -9,8 +9,10 @@ public class Auth3DSStep2Request {
 
 	@XmlElement(name = "Header")
 	private Header header;
+
 	@XmlElement(name = "OriginalReqRefNum")
 	private String originalReqRefNum;
+
 	@XmlElement(name = "PaRes")
 	private String paRes;
 

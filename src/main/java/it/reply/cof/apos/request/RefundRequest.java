@@ -8,9 +8,9 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RefundRequest extends GeneralRequest {
 
-    private String exponent;
     @XmlElement(name = "OpDescr")
     private String opDescr;
+
     @XmlElement(name = "Options")
     private String options;
 

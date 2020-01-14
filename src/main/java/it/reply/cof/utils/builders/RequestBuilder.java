@@ -10,8 +10,6 @@ import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Utility class used to convert a DTO into its corresponding XML request format.
@@ -22,12 +20,12 @@ import java.util.Map;
 public class RequestBuilder {
 
     private String key;
-    private MacAlgorithms algorithm;
     private Encoder encoder;
 
     /**
      * Creates an instance of the builder with HMAC-SHA-256 as default algorithm for
      * MAC calculation
+     *
      * @param key used to encode the MAC
      * @throws COFException in case of failure (see exception message for more info)
      */
@@ -37,18 +35,19 @@ public class RequestBuilder {
 
     /**
      * Creates an instance of the builder using the specified algorithm for MAC calculation
-     * @param key used to encode the MAC
+     *
+     * @param key       used to encode the MAC
      * @param algorithm used to calculate the MAC
      * @throws COFException in case of failure (see exception message for more info)
      */
     public RequestBuilder(String key, MacAlgorithms algorithm) throws COFException {
-        this.algorithm = algorithm;
         this.key = key;
         encoder = new Encoder(algorithm);
     }
 
     /**
      * Build the XML request for REFUND operations
+     *
      * @param dtoRequest object containing the necessary infos to perform a REFUND
      * @return the XML request
      * @throws COFException
@@ -76,16 +75,14 @@ public class RequestBuilder {
         data.setRefundRequest(refund);
         request.setData(data);
 
-        //calculate MAC
-        Encoder encoder = new Encoder();
         request.getRequest().setMac(encoder.getMac(MapBuilder.getRefundMap(request), key));
         return request;
     }
 
 
-
     /**
      * Build the XML request for CONFIRM operations
+     *
      * @param dtoRequest object containing the necessary infos to perform a CONFIRM payment
      * @return the XML request
      * @throws COFException

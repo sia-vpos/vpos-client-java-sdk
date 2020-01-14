@@ -11,8 +11,10 @@ public class BPWXmlRequest {
 
     @XmlElement(name = "Release")
     private String release;
+
     @XmlElement(name = "Request")
     private Request request;
+
     @XmlElement(name = "Data")
     private Data data;
 

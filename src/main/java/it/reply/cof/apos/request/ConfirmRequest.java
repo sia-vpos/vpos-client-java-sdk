@@ -8,11 +8,12 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ConfirmRequest extends GeneralRequest {
 
-    private String exponent;
     @XmlElement(name = "AccountingMode")
     private String accountingMode;
+
     @XmlElement(name = "CloseOrder")
     private String closeOrder;
+
     @XmlElement(name = "Options")
     private String options;
 

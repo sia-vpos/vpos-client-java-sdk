@@ -14,22 +14,31 @@ public class Data {
 
     @XmlElement(name = "AuthorizationRequest")
     private Authorization3DSRequest authorizationRequest;
+
     @XmlElement(name = "Authorization")
     private Authorization authorization;
+
     @XmlElement(name = "Operation")
     private Operation operation;
+
     @XmlElement(name = "PanAliasData")
     private PanAliasData panAliasData;
+
     @XmlElement(name = "OrderStatus")
     private StatusRequest orderStatus;
+
     @XmlElement(name = "VerifyRequest")
     private StatusRequest verifyRequest;
+
     @XmlElement(name = "Refund")
     private RefundRequest refundRequest;
+
     @XmlElement(name = "DeferredRequest")
     private ConfirmRequest confirmRequest;
+
     @XmlElement(name = "Authorization3DS")
     private Auth3DSStep2Request auth3DSStep2Request;
+
     @XmlElement(name = "VBVRedirect")
     private VBVRedirect vbvRedirect;
 

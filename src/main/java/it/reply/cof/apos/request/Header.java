@@ -14,8 +14,10 @@ public class Header {
 
     @XmlElement(name = "ShopID")
     private String shopId;
+
     @XmlElement(name = "OperatorID")
     private String operatorId;
+
     @XmlElement(name = "ReqRefNum")
     private String reqRefNum;
 

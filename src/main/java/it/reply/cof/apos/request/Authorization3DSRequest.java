@@ -9,52 +9,76 @@ public class Authorization3DSRequest {
 
 	@XmlElement(name = "Header")
 	private Header header;
+
 	@XmlElement(name = "OrderId")
 	private String orderId;
+
 	@XmlElement(name = "PAN")
 	private String pan;
+
 	@XmlElement(name = "CVV2")
 	private String cvv2;
+
 	@XmlElement(name = "ExpDate")
 	private String expDate;
+
 	@XmlElement(name = "Amount")
 	private String amount;
+
 	@XmlElement(name = "Currency")
 	private String currency;
+
 	@XmlElement(name = "Exponent")
 	private String exponent;
+
 	@XmlElement(name = "AccountingMode")
 	private String accountingMode;
+
 	@XmlElement(name = "Network")
 	private String network;
+
 	@XmlElement(name = "EmailCH")
 	private String emailCH;
+
 	@XmlElement(name = "UserId")
 	private String userId;
+
 	@XmlElement(name = "Acquirer")
 	private String acquirer;
+
 	@XmlElement(name = "IpAddress")
 	private String ipAddress;
+
 	@XmlElement(name = "UsrAuthFlag")
 	private String usrAuthFlag;
+
 	@XmlElement(name = "OpDescr")
 	private String opDescr;
+
 	@XmlElement(name = "Options")
 	private String options;
+
 	@XmlElement(name = "Antifraud")
 	private String antifraud;
+
 	@XmlElement(name = "ProductRef")
 	private String productRef;
+
 	@XmlElement(name = "Name")
 	private String name;
+
 	@XmlElement(name = "Surname")
 	private String surname;
+
 	@XmlElement(name = "TaxId")
 	private String taxId;
+
 	@XmlElement(name = "CreatePanAlias")
 	private String createPanAlias;
+
 	@XmlElement(name = "InPerson")
 	private String inPerson;
+
 	@XmlElement(name = "MerchantURL")
 	private String merchantURL;
 
