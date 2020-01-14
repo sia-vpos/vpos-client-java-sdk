@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RefundRequest {
+public class ConfirmRequest {
 
     @XmlElement(name = "Header")
     private Header header;
@@ -20,12 +20,14 @@ public class RefundRequest {
     private String currency;
     @XmlElement(name = "Exponent")
     private String exponent;
-    @XmlElement(name = "OpDescr")
-    private String opDescr;
+    @XmlElement(name = "AccountingMode")
+    private String accountingMode;
+    @XmlElement(name = "CloseOrder")
+    private String closeOrder;
     @XmlElement(name = "Options")
     private String options;
 
-    public RefundRequest(Date reqDate) {
+    public ConfirmRequest(Date reqDate) {
         this.header = new Header(reqDate);
     }
 
@@ -77,12 +79,20 @@ public class RefundRequest {
         this.exponent = exponent;
     }
 
-    public String getOpDescr() {
-        return opDescr;
+    public String getAccountingMode() {
+        return accountingMode;
     }
 
-    public void setOpDescr(String opDescr) {
-        this.opDescr = opDescr;
+    public void setAccountingMode(String accountingMode) {
+        this.accountingMode = accountingMode;
+    }
+
+    public String getCloseOrder() {
+        return closeOrder;
+    }
+
+    public void setCloseOrder(String closeOrder) {
+        this.closeOrder = closeOrder;
     }
 
     public String getOptions() {

@@ -1,7 +1,7 @@
 package it.reply.cof.apos.request;
 
-import it.reply.cof.utils.Constants;
 import it.reply.cof.utils.Utils;
+import it.reply.cof.utils.constants.Constants;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -1,7 +1,6 @@
 package it.reply.cof.apos.request;
 
-import it.reply.cof.utils.Constants;
-import jdk.nashorn.internal.parser.DateParser;
+import it.reply.cof.utils.constants.Constants;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
