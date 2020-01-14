@@ -21,8 +21,6 @@ import java.io.StringWriter;
 
 public class AposPaymentClient {
 
-    private static final String CLASSNAME = AposPaymentClient.class.getSimpleName();
-
     private String urlWebApi;
 
     public AposPaymentClient(String urlWebApi) {
@@ -30,7 +28,7 @@ public class AposPaymentClient {
     }
 
     public AposPaymentClient() {
-        this.urlWebApi = "https://atpostest.ssb.it/atpos/apibo/apiBOXML.app";
+        this("https://atpostest.ssb.it/atpos/apibo/apiBOXML.app");
     }
 
     public BPWXmlResponse executeCall(BPWXmlRequest input) throws COFException {
@@ -47,16 +45,14 @@ public class AposPaymentClient {
             String xmlResponse = response.readEntity(String.class);
 
             if (org.apache.http.HttpStatus.SC_OK != response.getStatus()) {
-                //PGLogger.info("########### ERROR: HTTP STATUS " + response.getStatus() + " ###########", CLASSNAME);
+
                 throw new COFException(Constants.TransactionStatus.AUTHORIZATION_IN_PROGRESS.getValue());
             }
-            //PGLogger.info(xmlResponse, CLASSNAME);
             return parseResponse(xmlResponse);
 
         } catch (COFException pe) {
             throw pe;
         } catch (Exception e) {
-            //PGLogger.debug("########### @POS CALL GENERIC ERROR #############" + e.getMessage(), CLASSNAME);
             throw new COFException(Constants.TransactionStatus.AUTHORIZATION_IN_PROGRESS.getValue(), e.getCause());
         }
     }
@@ -68,10 +64,8 @@ public class AposPaymentClient {
             JAXBContext jaxbContext = JAXBContext.newInstance(BPWXmlRequest.class);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//			marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
             marshaller.marshal(input, sw);
         } catch (JAXBException e) {
-            //PGLogger.info("########### ERROR IN PARSING @POS REQUEST #################", CLASSNAME);
             throw new COFException(Constants.TransactionStatus.AUTHORIZATION_IN_PROGRESS.getValue(), e.getCause());
         }
         return sw.toString();
@@ -86,14 +80,13 @@ public class AposPaymentClient {
             StringReader reader = new StringReader(xmlResponse);
             return (BPWXmlResponse) unmarshaller.unmarshal(reader);
         } catch (JAXBException e) {
-            //PGLogger.info("########### ERROR IN PARSING @POS RESPONSE #################", CLASSNAME);
             throw new COFException(Constants.TransactionStatus.AUTHORIZATION_IN_PROGRESS.getValue(), e.getCause());
         }
     }
 
     private ResteasyClient getClientBuilder() {
-            ResteasyClientBuilder restBuilder = new ResteasyClientBuilder();
-            return restBuilder.build();
+        ResteasyClientBuilder restBuilder = new ResteasyClientBuilder();
+        return restBuilder.build();
     }
 
 }

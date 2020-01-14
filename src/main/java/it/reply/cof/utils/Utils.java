@@ -1,7 +1,9 @@
 package it.reply.cof.utils;
 
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Constants;
+import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.exception.COFException;
 
 import java.io.File;
@@ -25,17 +27,17 @@ public class Utils {
     public static Map<String, String> generateMap(PaymentInfo transaction, String shopId, String urlMs,
                                                   String urlDone, String urlBack) {
         Map<String, String> map = new HashMap<>();
-        map.put(Constants.AposConstant.ACCOUNTINGMODE, transaction.getAccountingMode());
-        map.put(Constants.AposConstant.AMOUNT, transaction.getAmount());
-        map.put(Constants.AposConstant.AUTHORMODE, transaction.getAuthorMode());
-        map.put(Constants.AposConstant.CURRENCY, transaction.getCurrency());
-        map.put(Constants.AposConstant.EXPONENT, transaction.getExponent());
-     //   map.put(Constants.AposConstant.MAC, transaction.getMac());
-        map.put(Constants.AposConstant.ORDERID, transaction.getOrderId());
-        map.put(Constants.AposConstant.SHOPID, transaction.getShopId());
-        map.put(Constants.AposConstant.URLBACK, transaction.getUrlBack());
-        map.put(Constants.AposConstant.URLDONE, transaction.getUrlDone());
-        map.put(Constants.AposConstant.URLMS, transaction.getUrlMs());
+        map.put(AposConstants.ACCOUNTINGMODE, transaction.getAccountingMode());
+        map.put(AposConstants.AMOUNT, transaction.getAmount());
+        map.put(AposConstants.AUTHORMODE, transaction.getAuthorMode());
+        map.put(AposConstants.CURRENCY, transaction.getCurrency());
+        map.put(AposConstants.EXPONENT, transaction.getExponent());
+     //   map.pus.AposConstasnt.MAC, transaction.getMac());
+        map.put(AposConstants.ORDERID, transaction.getOrderId());
+        map.put(AposConstants.SHOPID, transaction.getShopId());
+        map.put(AposConstants.URLBACK, transaction.getUrlBack());
+        map.put(AposConstants.URLDONE, transaction.getUrlDone());
+        map.put(AposConstants.URLMS, transaction.getUrlMs());
         for (String option : transaction.getNotCompulsoryFields().keySet()) {
             map.put(option, transaction.getNotCompulsoryFields().get(option));
         }
@@ -44,22 +46,22 @@ public class Utils {
 
     public static String generateUrl(Map<String, String> map, String key, String urlApos) throws COFException {
         StringBuilder sb = new StringBuilder();
-        sb.append(Constants.AposConstant.URLMS + '=' + map.get(Constants.AposConstant.URLMS));
+        sb.append(AposConstants.URLMS + '=' + map.get(AposConstants.URLMS));
 
-        appendField(Constants.AposConstant.URLDONE, map.get(Constants.AposConstant.URLDONE), sb);
-        appendField(Constants.AposConstant.ORDERID, map.get(Constants.AposConstant.ORDERID), sb);
-        appendField(Constants.AposConstant.SHOPID, map.get(Constants.AposConstant.SHOPID), sb);
-        appendField(Constants.AposConstant.AMOUNT, map.get(Constants.AposConstant.AMOUNT), sb);
-        appendField(Constants.AposConstant.CURRENCY, map.get(Constants.AposConstant.CURRENCY), sb);
-        appendField(Constants.AposConstant.ACCOUNTINGMODE, map.get(Constants.AposConstant.ACCOUNTINGMODE), sb);
-        appendField(Constants.AposConstant.AUTHORMODE, map.get(Constants.AposConstant.AUTHORMODE), sb);
-        appendField(Constants.AposConstant.OPTIONS, map.get(Constants.AposConstant.OPTIONS), sb);
+        appendField(AposConstants.URLDONE, map.get(AposConstants.URLDONE), sb);
+        appendField(AposConstants.ORDERID, map.get(AposConstants.ORDERID), sb);
+        appendField(AposConstants.SHOPID, map.get(AposConstants.SHOPID), sb);
+        appendField(AposConstants.AMOUNT, map.get(AposConstants.AMOUNT), sb);
+        appendField(AposConstants.CURRENCY, map.get(AposConstants.CURRENCY), sb);
+        appendField(AposConstants.ACCOUNTINGMODE, map.get(AposConstants.ACCOUNTINGMODE), sb);
+        appendField(AposConstants.AUTHORMODE, map.get(AposConstants.AUTHORMODE), sb);
+        appendField(AposConstants.OPTIONS, map.get(AposConstants.OPTIONS), sb);
 
         String tmp = sb.toString();
     //    appendField(Constants.AposConstant.MAC, HmacCalculator.calculate(tmp, key), sb);
 
-        appendField(Constants.AposConstant.URLBACK, map.get(Constants.AposConstant.URLBACK), sb);
-        appendField(Constants.AposConstant.EMAIL, map.get(Constants.AposConstant.EMAIL), sb);
+        appendField(AposConstants.URLBACK, map.get(AposConstants.URLBACK), sb);
+        appendField(AposConstants.EMAIL, map.get(AposConstants.EMAIL), sb);
 
         return urlApos + "&LANG=ITA&" + sb.toString();
     }
@@ -74,12 +76,12 @@ public class Utils {
     public static String addField(String field, String fieldName) {
         String mac = "";
 
-        if ((field != null && !field.isEmpty()) || (fieldName.equals(Constants.OPERATIONS.PARAMETERS.URLDONE.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.ORDERID.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.SHOPID.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.AMOUNT.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.CURRENCY.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.ACCOUNTINGMODE.NAME))) {
+        if ((field != null && !field.isEmpty()) || (fieldName.equals(Operations.PARAMETERS.URLDONE.NAME)
+                || fieldName.equals(Operations.PARAMETERS.ORDERID.NAME)
+                || fieldName.equals(Operations.PARAMETERS.SHOPID.NAME)
+                || fieldName.equals(Operations.PARAMETERS.AMOUNT.NAME)
+                || fieldName.equals(Operations.PARAMETERS.CURRENCY.NAME)
+                || fieldName.equals(Operations.PARAMETERS.ACCOUNTINGMODE.NAME))) {
             mac = "&" + fieldName + "=" + field;
         }
 
@@ -89,9 +91,9 @@ public class Utils {
     public static String addFieldAuth(String field, String fieldName) {
         String mac = "";
 
-        if ((field != null && !field.isEmpty()) || (!fieldName.equals(Constants.OPERATIONS.AUTHORIZATION.PANTAIL)
-                && !fieldName.equals(Constants.OPERATIONS.AUTHORIZATION.PANEXPIRYDATE)
-                && !fieldName.equals(Constants.OPERATIONS.AUTHORIZATION.CARDTYPE))) {
+        if ((field != null && !field.isEmpty()) || (!fieldName.equals(Operations.AUTHORIZATION.PANTAIL)
+                && !fieldName.equals(Operations.AUTHORIZATION.PANEXPIRYDATE)
+                && !fieldName.equals(Operations.AUTHORIZATION.CARDTYPE))) {
             mac = "&" + field;
         }
 
@@ -101,16 +103,16 @@ public class Utils {
     public static String addFieldDone(String field, String fieldName) {
         String mac = "";
 
-        if ((field != null && !field.isEmpty()) || (fieldName.equals(Constants.OPERATIONS.PARAMETERS.ORDERID.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.SHOPID.NAME)
-                || fieldName.equals(Constants.OPERATIONS.CONFIRMATION.AUTHORIZATIONUMBER)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.AMOUNT.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.CURRENCY.NAME)
-                || fieldName.equals(Constants.OPERATIONS.CONFIRMATION.TRANSACTIONID)
-                || fieldName.equals(Constants.OPERATIONS.CONFIRMATION.RESULT)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.ACCOUNTINGMODE.NAME)
-                || fieldName.equals(Constants.OPERATIONS.PARAMETERS.NETWORK.NAME)
-                || fieldName.equals(Constants.OPERATIONS.CONFIRMATION.TRANSACTIONTYPE))) {
+        if ((field != null && !field.isEmpty()) || (fieldName.equals(Operations.PARAMETERS.ORDERID.NAME)
+                || fieldName.equals(Operations.PARAMETERS.SHOPID.NAME)
+                || fieldName.equals(Operations.CONFIRMATION.AUTHORIZATIONUMBER)
+                || fieldName.equals(Operations.PARAMETERS.AMOUNT.NAME)
+                || fieldName.equals(Operations.PARAMETERS.CURRENCY.NAME)
+                || fieldName.equals(Operations.CONFIRMATION.TRANSACTIONID)
+                || fieldName.equals(Operations.CONFIRMATION.RESULT)
+                || fieldName.equals(Operations.PARAMETERS.ACCOUNTINGMODE.NAME)
+                || fieldName.equals(Operations.PARAMETERS.NETWORK.NAME)
+                || fieldName.equals(Operations.CONFIRMATION.TRANSACTIONTYPE))) {
             mac = "&" + fieldName + "=" + field;
         }
 

@@ -2,6 +2,22 @@ package it.reply.cof.utils.constants;
 
 public class Constants {
 
+    public static final String CVV2 = "CVV2";
+    public static final String UTF8 = "UTF-8";
+    public static final String KEY_SEPARATOR = ".";
+    public static final String DEFAULT = "DEFAULT";
+    public static final String CONTACTPOINTS_SEPARATOR = "\\|";
+    public static final String TIMESTAMP_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+    public static final String TIMESTAMP_PATTERN_VALIDATOR_AUTHORIZE = "yyyy-MM-dd'T'HH:mm:ss";
+    public static final String TIMESTAMP_PATTERN_WS = "^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})";
+    public static final String REFNUM_PATTERN = "yyyyMMdd";
+    public static final String MAC_VALIDATION = "true";
+    public static final String PANALIAS_ERROR = "ERROR";
+    public static final String PANALIAS_NULL = "NULL";
+    public static final String ALIAS_NETWORK = "98";
+    public static final String EXP_DATE_FORMAT = "yyMM";
+    public static final String INVALID_PID = "0";
+
     private Constants() {
 
     }

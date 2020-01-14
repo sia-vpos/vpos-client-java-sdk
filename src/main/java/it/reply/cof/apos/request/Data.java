@@ -22,6 +22,8 @@ public class Data {
     private PanAliasData panAliasData;
     @XmlElement(name = "Refund")
     private RefundRequest refundRequest;
+    @XmlElement(name = "DeferredRequest")
+    private ConfirmRequest confirmRequest;
     @XmlElement(name = "Authorization3DS")
     private Auth3DSStep2Request auth3DSStep2Request;
     @XmlElement(name = "VBVRedirect")
@@ -58,6 +60,14 @@ public class Data {
 
     public void setPanAliasData(PanAliasData panAliasData) {
         this.panAliasData = panAliasData;
+    }
+
+    public ConfirmRequest getConfirmRequest() {
+        return confirmRequest;
+    }
+
+    public void setConfirmRequest(ConfirmRequest confirmRequest) {
+        this.confirmRequest = confirmRequest;
     }
 
     public RefundRequest getRefundRequest() {

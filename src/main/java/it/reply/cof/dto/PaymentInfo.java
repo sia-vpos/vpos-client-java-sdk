@@ -10,23 +10,14 @@ import java.util.Map;
 public class PaymentInfo {
 
     private String amount;
-
     private String currency;
-
     private String exponent;
-
     private String orderId;
-
     private String shopId;
-
     private String urlBack;
-
     private String urlDone;
-
     private String urlMs;
-
     private String accountingMode;
-
     private String authorMode;
 
     private String mac;
