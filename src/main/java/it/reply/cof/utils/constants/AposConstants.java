@@ -3,6 +3,7 @@ package it.reply.cof.utils.constants;
 public final class AposConstants {
 
     public static final String RELEASE = "02";
+    public static final String MAC = "MAC";
     public static final String AMOUNT = "AMOUNT";
     public static final String CURRENCY = "CURRENCY";
     public static final String SHOPID = "SHOPID";

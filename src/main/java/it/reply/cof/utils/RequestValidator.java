@@ -20,6 +20,12 @@ public class RequestValidator {
 
     }
 
+    /**
+     * Method used to validate the Refund request.
+     *
+     * @param requestDto request to validate
+     * @throws COFException raised when a field is missing (if it is mandatory) or not valid
+     */
     public static void validateRefundRequest(RefundRequestDto requestDto) throws COFException {
         String field = "";
 
@@ -43,6 +49,12 @@ public class RequestValidator {
             throw new COFException("BAD REQUEST: Field " + field + " is missing or not valid.");
     }
 
+    /**
+     * Method used to validate the Confirm request.
+     *
+     * @param requestDto request to validate
+     * @throws COFException raised when a field is missing (if it is mandatory) or not valid
+     */
     public static void validateConfirmRequest(ConfirmRequestDto requestDto) throws COFException {
         String field = "";
 
@@ -69,6 +81,12 @@ public class RequestValidator {
             throw new COFException("BAD REQUEST: Field " + field + " is missing or not valid.");
     }
 
+    /**
+     * Method used to validate the Order Status request.
+     *
+     * @param requestDto request to validate
+     * @throws COFException raised when a field is missing (if it is mandatory) or not valid
+     */
     public static void validateOrderStatusRequest(OrderStatusRequestDto requestDto) throws COFException {
         String field = "";
         if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
