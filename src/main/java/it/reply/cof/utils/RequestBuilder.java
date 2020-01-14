@@ -46,8 +46,8 @@ public class RequestBuilder {
 
         //calculate MAC
         Encoder encoder= new Encoder();
-        encoder.getMac(getRefundMap(request),"KEY");
-        return null;
+        request.getRequest().setMac(encoder.getMac(getRefundMap(request),"KEY"));
+        return request;
     }
 
     public static Map<String, String> getRefundMap(BPWXmlRequest request) {
