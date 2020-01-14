@@ -1,46 +1,56 @@
 package it.reply.cof.apos.request;
 
+import it.reply.cof.utils.Constants;
+import it.reply.cof.utils.Utils;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Header {
 
-	@XmlElement(name = "ShopID")
-	private String shopId;
-	@XmlElement(name = "OperatorID")
-	private String operatorId;
-	@XmlElement(name = "ReqRefNum")
-	private String reqRefNum;
+    @XmlElement(name = "ShopID")
+    private String shopId;
+    @XmlElement(name = "OperatorID")
+    private String operatorId;
+    @XmlElement(name = "ReqRefNum")
+    private String reqRefNum;
 
-	public String getShopId() {
+    public Header(Date reqDate) {
+        SimpleDateFormat format = new SimpleDateFormat(Constants.REFNUM_PATTERN);
+        this.reqRefNum = format.format(reqDate) + Utils.generateRandomDigits();
+    }
 
-		return shopId;
-	}
+    public String getShopId() {
 
-	public void setShopId(String shopId) {
+        return shopId;
+    }
 
-		this.shopId = shopId;
-	}
+    public void setShopId(String shopId) {
 
-	public String getOperatorId() {
+        this.shopId = shopId;
+    }
 
-		return operatorId;
-	}
+    public String getOperatorId() {
 
-	public void setOperatorId(String operatorId) {
+        return operatorId;
+    }
 
-		this.operatorId = operatorId;
-	}
+    public void setOperatorId(String operatorId) {
 
-	public String getReqRefNum() {
+        this.operatorId = operatorId;
+    }
 
-		return reqRefNum;
-	}
+    public String getReqRefNum() {
 
-	public void setReqRefNum(String reqRefNum) {
+        return reqRefNum;
+    }
 
-		this.reqRefNum = reqRefNum;
-	}
+    public void setReqRefNum(String reqRefNum) {
+
+        this.reqRefNum = reqRefNum;
+    }
 }

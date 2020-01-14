@@ -1,6 +1,7 @@
 package it.reply.cof.client;
 
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.dto.request.RefundRequestDto;
 import it.reply.cof.utils.exception.COFException;
 
 /**
@@ -23,5 +24,7 @@ public interface VPOSClient {
     void deferredAuthorizationRequest();
 
     void threeDSAuthorizationRequest();
+
+    String refund(RefundRequestDto dtoRequest) throws COFException;
 
 }

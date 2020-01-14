@@ -1,47 +1,58 @@
 package it.reply.cof.apos.request;
 
+import it.reply.cof.utils.Constants;
+import jdk.nashorn.internal.parser.DateParser;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Request {
 
-	@XmlElement(name = "Operation")
-	private String operation;
-	@XmlElement(name = "Timestamp")
-	private String timestamp;
-	@XmlElement(name = "MAC")
-	private String mac;
+    @XmlElement(name = "Operation")
+    private String operation;
+    @XmlElement(name = "Timestamp")
+    private String timestamp;
+    @XmlElement(name = "MAC")
+    private String mac;
 
-	public String getOperation() {
+    public Request(String operation, Date reqDate) {
+        this.operation = operation;
+        SimpleDateFormat format = new SimpleDateFormat(Constants.TIMESTAMP_PATTERN);
+        this.timestamp = format.format(reqDate);
+    }
 
-		return operation;
-	}
+    public String getOperation() {
 
-	public void setOperation(String operation) {
+        return operation;
+    }
 
-		this.operation = operation;
-	}
+    public void setOperation(String operation) {
 
-	public String getTimestamp() {
+        this.operation = operation;
+    }
 
-		return timestamp;
-	}
+    public String getTimestamp() {
 
-	public void setTimestamp(String timestamp) {
+        return timestamp;
+    }
 
-		this.timestamp = timestamp;
-	}
+    public void setTimestamp(String timestamp) {
 
-	public String getMac() {
+        this.timestamp = timestamp;
+    }
 
-		return mac;
-	}
+    public String getMac() {
 
-	public void setMac(String mac) {
+        return mac;
+    }
 
-		this.mac = mac;
-	}
+    public void setMac(String mac) {
+
+        this.mac = mac;
+    }
 
 }

@@ -9,41 +9,41 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BPWXmlRequest {
 
-	@XmlElement(name = "Release")
-	private String release;
-	@XmlElement(name = "Request")
-	private Request request;
-	@XmlElement(name = "Data")
-	private Data data;
+    @XmlElement(name = "Release")
+    private String release;
+    @XmlElement(name = "Request")
+    private Request request;
+    @XmlElement(name = "Data")
+    private Data data;
 
-	public String getRelease() {
+    public String getRelease() {
 
-		return release;
-	}
+        return release;
+    }
 
-	public void setRelease(String release) {
+    public void setRelease(String release) {
 
-		this.release = release;
-	}
+        this.release = release;
+    }
 
-	public Request getRequest() {
+    public Request getRequest() {
 
-		return request;
-	}
+        return request;
+    }
 
-	public void setRequest(Request request) {
+    public void setRequest(Request request) {
 
-		this.request = request;
-	}
+        this.request = request;
+    }
 
-	public Data getData() {
+    public Data getData() {
 
-		return data;
-	}
+        return data;
+    }
 
-	public void setData(Data data) {
+    public void setData(Data data) {
 
-		this.data = data;
-	}
+        this.data = data;
+    }
 
 }

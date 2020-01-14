@@ -1,6 +1,8 @@
 package it.reply.cof.client;
 
+import it.reply.cof.apos.request.RefundRequest;
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.dto.request.RefundRequestDto;
 import it.reply.cof.utils.HTMLGenerator;
 import it.reply.cof.utils.exception.COFException;
 
@@ -29,4 +31,12 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     public abstract void verifyResponse() throws COFException;
+
+    @Override
+    public String refund(RefundRequestDto dtoRequest) throws COFException {
+
+
+
+        return null;
+    }
 }

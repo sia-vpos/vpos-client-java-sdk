@@ -3,6 +3,7 @@ package it.reply.cof.apos.request;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RefundRequest {
@@ -23,6 +24,10 @@ public class RefundRequest {
 	private String opDescr;
 	@XmlElement(name = "Options")
 	private String options;
+
+	public RefundRequest(Date reqDate) {
+		this.header=new Header(reqDate);
+	}
 
 	public Header getHeader() {
 		return header;
