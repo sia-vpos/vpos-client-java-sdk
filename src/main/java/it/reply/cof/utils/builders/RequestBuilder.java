@@ -130,7 +130,7 @@ public class RequestBuilder {
         request.setRelease(AposConstants.RELEASE);
         request.setRequest(new Request(Operations.PARAMETERS.ORDERSTATUS, reqDate));
 
-        StatusRequest status = new StatusRequest();
+        StatusRequest status = new StatusRequest(reqDate);
         //HEADER
         status.getHeader().setShopId(dtoRequest.getShopId());
         status.getHeader().setOperatorId(dtoRequest.getOperatorId());
