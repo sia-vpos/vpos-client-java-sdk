@@ -95,10 +95,6 @@ public class AposPaymentClient {
         }
     }
 
-    private void useProxy() {
-
-    }
-
     private ResteasyClient getClientBuilder() {
         ResteasyClientBuilder restBuilder = new ResteasyClientBuilder();
 

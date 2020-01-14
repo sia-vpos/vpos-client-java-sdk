@@ -42,16 +42,19 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         BPWXmlRequest request = requestBuilder.buildRefundRequest(dtoRequest);
         BPWXmlResponse response = aposClient.executeCall(request);
 
-        String responseMac = getResponseMac(response);
-
+        //Verify MAC
+        verifyMacResponse(response);
         return response;
     }
 
-    private String getResponseMac(BPWXmlResponse response) throws COFException {
+    private void verifyMacResponse(BPWXmlResponse response) throws COFException {
         StringBuilder sb = new StringBuilder();
         sb.append(response.getTimestamp());
         sb.append("&");
         sb.append(response.getResult());
-        return hmacCalculator.calculate(sb.toString(), key);
+        String responseHmac = hmacCalculator.calculate(sb.toString(), key);
+        if (!responseHmac.equals(response.getMac())) {
+            throw new COFException("Mac Response not valid");
+        }
     }
 }
