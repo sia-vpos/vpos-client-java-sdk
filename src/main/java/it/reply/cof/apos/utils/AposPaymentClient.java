@@ -21,10 +21,21 @@ import java.io.StringWriter;
 
 public class AposPaymentClient {
 
+    private boolean proxy;
+    private boolean ssl;
+    private String proxyName;
+    private Integer proxyPort;
     private String urlWebApi;
 
     public AposPaymentClient(String urlWebApi) {
         this.urlWebApi = urlWebApi;
+    }
+
+    public AposPaymentClient(String urlWebApi, String proxyName, Integer port) {
+        this(urlWebApi);
+        this.proxy = true;
+        this.proxyName = proxyName;
+        this.proxyPort = port;
     }
 
     public AposPaymentClient() {
@@ -84,8 +95,20 @@ public class AposPaymentClient {
         }
     }
 
+    private void useProxy() {
+
+    }
+
     private ResteasyClient getClientBuilder() {
         ResteasyClientBuilder restBuilder = new ResteasyClientBuilder();
+
+        if (proxy)
+            restBuilder.defaultProxy(proxyName, proxyPort);
+
+        if (ssl) {
+            // SSLContext sslContext = new SSLContext(); restBuilder.sslContext()
+        }
+
         return restBuilder.build();
     }
 
