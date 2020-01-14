@@ -32,14 +32,4 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     public abstract void verifyResponse() throws COFException;
-
-    @Override
-    public String refund(RefundRequestDto dtoRequest) throws COFException {
-        BPWXmlRequest request= RequestBuilder.buildRefundRequest(dtoRequest);
-
-
-
-
-        return null;
-    }
 }

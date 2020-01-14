@@ -26,6 +26,10 @@ public final class Operations {
 
         }
 
+        public static final class CLOSEORDER {
+            public static final String NAME = "CLOSEORDER";
+        }
+
         public static final class AMOUNT {
 
             public static final String NAME = "AMOUNT";
@@ -35,7 +39,6 @@ public final class Operations {
             public static final boolean MANDATORY = true;
 
             private AMOUNT() {
-
             }
         }
 
