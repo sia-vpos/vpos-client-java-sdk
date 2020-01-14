@@ -6,6 +6,8 @@ import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -15,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class HmacCalculator {
 
-    private static final String CHARSET = "UTF-8";
+    private static final Charset CHARSET = StandardCharsets.UTF_8;
 
     private MacAlgorithms algorithm;
     private Mac mac;
