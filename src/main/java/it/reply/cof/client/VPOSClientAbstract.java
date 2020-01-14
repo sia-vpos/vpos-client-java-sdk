@@ -41,12 +41,17 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     public BPWXmlResponse refund(RefundRequestDto dtoRequest) throws COFException {
         BPWXmlRequest request = requestBuilder.buildRefundRequest(dtoRequest);
         BPWXmlResponse response = aposClient.executeCall(request);
+
+        String responseMac = getResponseMac(response);
+
+        return response;
+    }
+
+    private String getResponseMac(BPWXmlResponse response) throws COFException {
         StringBuilder sb = new StringBuilder();
         sb.append(response.getTimestamp());
         sb.append("&");
         sb.append(response.getResult());
-        hmacCalculator.calculate(sb.toString(), key);
-
-        return response;
+        return hmacCalculator.calculate(sb.toString(), key);
     }
 }
