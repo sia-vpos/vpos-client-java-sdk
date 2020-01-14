@@ -4,6 +4,7 @@ import it.reply.cof.apos.request.BPWXmlRequest;
 import it.reply.cof.apos.request.ConfirmRequest;
 import it.reply.cof.apos.request.GeneralRequest;
 import it.reply.cof.apos.request.RefundRequest;
+import it.reply.cof.apos.response.BPWXmlResponse;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
 
