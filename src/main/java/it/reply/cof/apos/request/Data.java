@@ -20,6 +20,10 @@ public class Data {
     private Operation operation;
     @XmlElement(name = "PanAliasData")
     private PanAliasData panAliasData;
+    @XmlElement(name = "OrderStatus")
+    private StatusRequest orderStatus;
+    @XmlElement(name = "VerifyRequest")
+    private StatusRequest verifyRequest;
     @XmlElement(name = "Refund")
     private RefundRequest refundRequest;
     @XmlElement(name = "DeferredRequest")
@@ -68,6 +72,22 @@ public class Data {
 
     public void setConfirmRequest(ConfirmRequest confirmRequest) {
         this.confirmRequest = confirmRequest;
+    }
+
+    public StatusRequest getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(StatusRequest orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public StatusRequest getVerifyRequest() {
+        return verifyRequest;
+    }
+
+    public void setVerifyRequest(StatusRequest verifyRequest) {
+        this.verifyRequest = verifyRequest;
     }
 
     public RefundRequest getRefundRequest() {
