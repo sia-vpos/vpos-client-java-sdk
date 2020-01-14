@@ -13,6 +13,7 @@ public final class Operations {
         public static final String AUTHORIZATION3DSSTEP2 = "AUTHORIZATION3DSSTEP2";
         public static final String IBANAUTHORIZATION = "IBANAUTHORIZATION";
         public static final String REFUND = "REFUND";
+        public static final String ORDERSTATUS = "ORDERSTATUS";
         public static final String DEFERREDREQUEST = "DEFERREDREQUEST";
         public static final String CONFIRM = "CONFIRM";
         public static final String TIMESTAMP = "TIMESTAMP";
@@ -85,6 +86,7 @@ public final class Operations {
         public static final class TRANSACTIONID {
 
             public static final String NAME = "TRANSACTIONID";
+            public static int LEN=25;
 
             private TRANSACTIONID() {
 

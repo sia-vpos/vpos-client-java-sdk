@@ -1,7 +1,8 @@
 package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
-import it.reply.cof.dto.ConfirmRequestDto;
+import it.reply.cof.dto.request.ConfirmRequestDto;
+import it.reply.cof.dto.request.OrderStatusRequestDto;
 import it.reply.cof.dto.request.RefundRequestDto;
 import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.constants.AposConstants;
@@ -113,6 +114,37 @@ public class RequestBuilder {
 
         request.getRequest().setMac(encoder.getMac(MapBuilder.getConfirmMap(request), key));
         return request;
+    }
+
+    /**
+     * Build the XML request for ORDERSTATUS operation
+     *
+     * @param dtoRequest object containing the necessary infos to perform an ORDERSTATUS request
+     * @return the xml request
+     * @throws COFException
+     */
+    public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequestDto dtoRequest) throws COFException {
+        Date reqDate = new Date();
+        BPWXmlRequest request = new BPWXmlRequest();
+        request.setRelease(AposConstants.RELEASE);
+        request.setRequest(new Request(Operations.PARAMETERS.ORDERSTATUS, reqDate));
+
+        StatusRequest status = new StatusRequest();
+        //HEADER
+        status.getHeader().setShopId(dtoRequest.getShopId());
+        status.getHeader().setOperatorId(dtoRequest.getOperatorId());
+
+        //ORDER STATUS REQUEST
+        status.setOrderId(dtoRequest.getOrderId());
+        status.setProductRef(dtoRequest.getProductRef());
+
+        Data data = new Data();
+        data.setOrderStatusRequest(status);
+        request.setData(data);
+
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getOrderStatusMap(request), key));
+        return request;
+
     }
 
 }

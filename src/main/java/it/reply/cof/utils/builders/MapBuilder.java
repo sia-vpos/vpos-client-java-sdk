@@ -75,4 +75,18 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.TIMESTAMP, request.getRequest().getTimestamp());
         return map;
     }
+
+    public static Map<String,String> getOrderStatusMap(BPWXmlRequest request){
+        Map<String, String> map = getStdMap(request);
+
+        StatusRequest statusRequest = request.getData().getOrderStatusRequest();
+
+        map.put(AposConstants.SHOPID, statusRequest.getHeader().getShopId());
+        map.put(Operations.PARAMETERS.OPERATORID.NAME, statusRequest.getHeader().getOperatorId());
+        map.put(Operations.PARAMETERS.REQREFNUM, statusRequest.getHeader().getReqRefNum());
+        map.put(Operations.PARAMETERS.ORDERID.NAME, statusRequest.getOrderId());
+        map.put(Operations.PARAMETERS.OPTIONS.NAME, statusRequest.getOptions());
+        map.put(Operations.PARAMETERS.PRODUCTREF.NAME,statusRequest.getProductRef());
+        return map;
+    }
 }

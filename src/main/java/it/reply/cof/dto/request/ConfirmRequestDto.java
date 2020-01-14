@@ -1,4 +1,4 @@
-package it.reply.cof.dto;
+package it.reply.cof.dto.request;
 
 public class ConfirmRequestDto {
 

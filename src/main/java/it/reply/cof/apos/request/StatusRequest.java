@@ -16,6 +16,9 @@ public class StatusRequest {
     @XmlElement(name = "OrderID")
     protected String orderId;
 
+    @XmlElement(name = "ProductRef")
+    protected String productRef;
+
     @XmlElement(name = "Options")
     private String options;
 
@@ -41,6 +44,14 @@ public class StatusRequest {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public String getProductRef() {
+        return productRef;
+    }
+
+    public void setProductRef(String productRef) {
+        this.productRef = productRef;
     }
 
     public String getOptions() {

@@ -25,7 +25,7 @@ public class Data {
     private PanAliasData panAliasData;
 
     @XmlElement(name = "OrderStatus")
-    private StatusRequest orderStatus;
+    private StatusRequest orderStatusRequest;
 
     @XmlElement(name = "VerifyRequest")
     private StatusRequest verifyRequest;
@@ -83,12 +83,12 @@ public class Data {
         this.confirmRequest = confirmRequest;
     }
 
-    public StatusRequest getOrderStatus() {
-        return orderStatus;
+    public StatusRequest getOrderStatusRequest() {
+        return orderStatusRequest;
     }
 
-    public void setOrderStatus(StatusRequest orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setOrderStatusRequest(StatusRequest orderStatus) {
+        this.orderStatusRequest = orderStatus;
     }
 
     public StatusRequest getVerifyRequest() {
