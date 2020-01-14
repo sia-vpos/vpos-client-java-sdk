@@ -34,7 +34,6 @@ public class RequestBuilder {
         BPWXmlRequest request = new BPWXmlRequest();
         request.setRelease(AposConstants.RELEASE);
         request.setRequest(new Request(Operations.PARAMETERS.REFUND, reqDate));
-
         RefundRequest refund = new RefundRequest(reqDate);
         //HEADER
         refund.getHeader().setOperatorId(dtoRequest.getOperatorId());
@@ -54,7 +53,7 @@ public class RequestBuilder {
 
         //calculate MAC
         Encoder encoder = new Encoder();
-        request.getRequest().setMac(encoder.getMac(MapBuilder.getRefundMap(request), key);
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getRefundMap(request), key));
         return request;
     }
 
@@ -84,7 +83,7 @@ public class RequestBuilder {
         data.setConfirmRequest(confirm);
         request.setData(data);
 
-        request.getRequest().setMac(encoder.getMac(MapBuilder.getConfirmMap(), key);
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getConfirmMap(), key));
         return request;
     }
 
