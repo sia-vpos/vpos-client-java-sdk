@@ -1,7 +1,8 @@
 package it.reply.cof.client;
 
 import it.reply.cof.apos.request.BPWXmlRequest;
-import it.reply.cof.apos.request.RefundRequest;
+import it.reply.cof.apos.response.BPWXmlResponse;
+import it.reply.cof.apos.utils.AposPaymentClient;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.RefundRequestDto;
 import it.reply.cof.utils.HTMLGenerator;
@@ -11,9 +12,11 @@ import it.reply.cof.utils.exception.COFException;
 public abstract class VPOSClientAbstract implements VPOSClient {
 
     protected HTMLGenerator htmlTool;
+    protected AposPaymentClient aposClient;
 
     public VPOSClientAbstract() {
         htmlTool = new HTMLGenerator();
+        aposClient=new AposPaymentClient();
     }
 
     public abstract void injectMasterTemplate();
@@ -35,12 +38,10 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     public abstract void verifyResponse() throws COFException;
 
     @Override
-    public String refund(RefundRequestDto dtoRequest) throws COFException {
+    public BPWXmlResponse refund(RefundRequestDto dtoRequest) throws COFException {
         BPWXmlRequest request= RequestBuilder.buildRefundRequest(dtoRequest);
+        BPWXmlResponse response= aposClient.executeCall(request);
 
-
-
-
-        return null;
+        return response;
     }
 }
