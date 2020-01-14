@@ -1,11 +1,10 @@
 package it.reply.cof.client;
 
 import it.reply.cof.apos.request.BPWXmlRequest;
-import it.reply.cof.apos.request.RefundRequest;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.RefundRequestDto;
 import it.reply.cof.utils.HTMLGenerator;
-import it.reply.cof.utils.RequestBuilder;
+import it.reply.cof.utils.builders.RequestBuilder;
 import it.reply.cof.utils.exception.COFException;
 
 public abstract class VPOSClientAbstract implements VPOSClient {
