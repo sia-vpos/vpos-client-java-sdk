@@ -12,5 +12,4 @@ public class VerifyRequestDto extends RequestDto {
         this.originalReqRefNum = originalReqRefNum;
     }
 
-
 }

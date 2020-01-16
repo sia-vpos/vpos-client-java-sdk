@@ -3,283 +3,309 @@ package it.reply.cof.apos.request;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Authorization3DSRequest {
 
-	@XmlElement(name = "Header")
-	private Header header;
+    @XmlElement(name = "Header")
+    private Header header;
 
-	@XmlElement(name = "OrderId")
-	private String orderId;
+    @XmlElement(name = "Data3DS")
+    private Data3DS data3DS;
 
-	@XmlElement(name = "PAN")
-	private String pan;
+    @XmlElement(name = "MasterpassData")
+    private MasterpassData masterpassData;
 
-	@XmlElement(name = "CVV2")
-	private String cvv2;
+    @XmlElement(name = "OrderId")
+    private String orderId;
 
-	@XmlElement(name = "ExpDate")
-	private String expDate;
+    @XmlElement(name = "PAN")
+    private String pan;
 
-	@XmlElement(name = "Amount")
-	private String amount;
+    @XmlElement(name = "CVV2")
+    private String cvv2;
 
-	@XmlElement(name = "Currency")
-	private String currency;
+    @XmlElement(name = "ExpDate")
+    private String expDate;
 
-	@XmlElement(name = "Exponent")
-	private String exponent;
+    @XmlElement(name = "Amount")
+    private String amount;
 
-	@XmlElement(name = "AccountingMode")
-	private String accountingMode;
+    @XmlElement(name = "Currency")
+    private String currency;
 
-	@XmlElement(name = "Network")
-	private String network;
+    @XmlElement(name = "Exponent")
+    private String exponent;
 
-	@XmlElement(name = "EmailCH")
-	private String emailCH;
+    @XmlElement(name = "AccountingMode")
+    private String accountingMode;
 
-	@XmlElement(name = "UserId")
-	private String userId;
+    @XmlElement(name = "Network")
+    private String network;
 
-	@XmlElement(name = "Acquirer")
-	private String acquirer;
+    @XmlElement(name = "EmailCH")
+    private String emailCH;
 
-	@XmlElement(name = "IpAddress")
-	private String ipAddress;
+    @XmlElement(name = "UserId")
+    private String userId;
 
-	@XmlElement(name = "UsrAuthFlag")
-	private String usrAuthFlag;
+    @XmlElement(name = "Acquirer")
+    private String acquirer;
 
-	@XmlElement(name = "OpDescr")
-	private String opDescr;
+    @XmlElement(name = "IpAddress")
+    private String ipAddress;
 
-	@XmlElement(name = "Options")
-	private String options;
+    @XmlElement(name = "UsrAuthFlag")
+    private String usrAuthFlag;
 
-	@XmlElement(name = "Antifraud")
-	private String antifraud;
+    @XmlElement(name = "OpDescr")
+    private String opDescr;
 
-	@XmlElement(name = "ProductRef")
-	private String productRef;
+    @XmlElement(name = "Options")
+    private String options;
 
-	@XmlElement(name = "Name")
-	private String name;
+    @XmlElement(name = "Antifraud")
+    private String antifraud;
 
-	@XmlElement(name = "Surname")
-	private String surname;
+    @XmlElement(name = "ProductRef")
+    private String productRef;
 
-	@XmlElement(name = "TaxId")
-	private String taxId;
+    @XmlElement(name = "Name")
+    private String name;
 
-	@XmlElement(name = "CreatePanAlias")
-	private String createPanAlias;
+    @XmlElement(name = "Surname")
+    private String surname;
 
-	@XmlElement(name = "InPerson")
-	private String inPerson;
+    @XmlElement(name = "TaxId")
+    private String taxId;
 
-	@XmlElement(name = "MerchantURL")
-	private String merchantURL;
+    @XmlElement(name = "CreatePanAlias")
+    private String createPanAlias;
 
-	public Header getHeader() {
-		return header;
-	}
+    @XmlElement(name = "InPerson")
+    private String inPerson;
 
-	public void setHeader(Header header) {
-		this.header = header;
-	}
+    @XmlElement(name = "MerchantURL")
+    private String merchantURL;
 
-	public String getOrderId() {
-		return orderId;
-	}
+    public Authorization3DSRequest(Date date) {
+        this.header = new Header(date);
+    }
 
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
+    public Header getHeader() {
+        return header;
+    }
 
-	public String getPan() {
-		return pan;
-	}
+    public void setHeader(Header header) {
+        this.header = header;
+    }
 
-	public void setPan(String pan) {
-		this.pan = pan;
-	}
+    public String getOrderId() {
+        return orderId;
+    }
 
-	public String getCvv2() {
-		return cvv2;
-	}
-
-	public void setCvv2(String cvv2) {
-		this.cvv2 = cvv2;
-	}
-
-	public String getExpDate() {
-		return expDate;
-	}
-
-	public void setExpDate(String expDate) {
-		this.expDate = expDate;
-	}
-
-	public String getAmount() {
-		return amount;
-	}
-
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getExponent() {
-		return exponent;
-	}
-
-	public void setExponent(String exponent) {
-		this.exponent = exponent;
-	}
-
-	public String getAccountingMode() {
-		return accountingMode;
-	}
-
-	public void setAccountingMode(String accountingMode) {
-		this.accountingMode = accountingMode;
-	}
-
-	public String getNetwork() {
-		return network;
-	}
-
-	public void setNetwork(String network) {
-		this.network = network;
-	}
-
-	public String getEmailCH() {
-		return emailCH;
-	}
-
-	public void setEmailCH(String emailCH) {
-		this.emailCH = emailCH;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getAcquirer() {
-		return acquirer;
-	}
-
-	public void setAcquirer(String acquirer) {
-		this.acquirer = acquirer;
-	}
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 
-	public String getIpAddress() {
-		return ipAddress;
-	}
+    public String getPan() {
+        return pan;
+    }
 
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
+    public void setPan(String pan) {
+        this.pan = pan;
+    }
 
-	public String getUsrAuthFlag() {
-		return usrAuthFlag;
-	}
+    public String getCvv2() {
+        return cvv2;
+    }
 
-	public void setUsrAuthFlag(String usrAuthFlag) {
-		this.usrAuthFlag = usrAuthFlag;
-	}
+    public void setCvv2(String cvv2) {
+        this.cvv2 = cvv2;
+    }
 
-	public String getOpDescr() {
-		return opDescr;
-	}
+    public String getExpDate() {
+        return expDate;
+    }
 
-	public void setOpDescr(String opDescr) {
-		this.opDescr = opDescr;
-	}
+    public void setExpDate(String expDate) {
+        this.expDate = expDate;
+    }
 
-	public String getOptions() {
-		return options;
-	}
+    public String getAmount() {
+        return amount;
+    }
 
-	public void setOptions(String options) {
-		this.options = options;
-	}
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
 
-	public String getAntifraud() {
-		return antifraud;
-	}
+    public String getCurrency() {
+        return currency;
+    }
 
-	public void setAntifraud(String antifraud) {
-		this.antifraud = antifraud;
-	}
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
-	public String getProductRef() {
-		return productRef;
-	}
+    public String getExponent() {
+        return exponent;
+    }
 
-	public void setProductRef(String productRef) {
-		this.productRef = productRef;
-	}
+    public void setExponent(String exponent) {
+        this.exponent = exponent;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getAccountingMode() {
+        return accountingMode;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setAccountingMode(String accountingMode) {
+        this.accountingMode = accountingMode;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
+    public String getNetwork() {
+        return network;
+    }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public void setNetwork(String network) {
+        this.network = network;
+    }
 
-	public String getTaxId() {
-		return taxId;
-	}
+    public String getEmailCH() {
+        return emailCH;
+    }
 
-	public void setTaxId(String taxId) {
-		this.taxId = taxId;
-	}
+    public void setEmailCH(String emailCH) {
+        this.emailCH = emailCH;
+    }
 
-	public String getCreatePanAlias() {
-		return createPanAlias;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public void setCreatePanAlias(String createPanAlias) {
-		this.createPanAlias = createPanAlias;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public String getInPerson() {
-		return inPerson;
-	}
+    public String getAcquirer() {
+        return acquirer;
+    }
 
-	public void setInPerson(String inPerson) {
-		this.inPerson = inPerson;
-	}
+    public void setAcquirer(String acquirer) {
+        this.acquirer = acquirer;
+    }
 
-	public String getMerchantURL() {
-		return merchantURL;
-	}
+    public String getIpAddress() {
+        return ipAddress;
+    }
 
-	public void setMerchantURL(String merchantURL) {
-		this.merchantURL = merchantURL;
-	}
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
 
+    public String getUsrAuthFlag() {
+        return usrAuthFlag;
+    }
+
+    public void setUsrAuthFlag(String usrAuthFlag) {
+        this.usrAuthFlag = usrAuthFlag;
+    }
+
+    public String getOpDescr() {
+        return opDescr;
+    }
+
+    public void setOpDescr(String opDescr) {
+        this.opDescr = opDescr;
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
+
+    public String getAntifraud() {
+        return antifraud;
+    }
+
+    public void setAntifraud(String antifraud) {
+        this.antifraud = antifraud;
+    }
+
+    public String getProductRef() {
+        return productRef;
+    }
+
+    public void setProductRef(String productRef) {
+        this.productRef = productRef;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getTaxId() {
+        return taxId;
+    }
+
+    public void setTaxId(String taxId) {
+        this.taxId = taxId;
+    }
+
+    public String getCreatePanAlias() {
+        return createPanAlias;
+    }
+
+    public void setCreatePanAlias(String createPanAlias) {
+        this.createPanAlias = createPanAlias;
+    }
+
+    public String getInPerson() {
+        return inPerson;
+    }
+
+    public void setInPerson(String inPerson) {
+        this.inPerson = inPerson;
+    }
+
+    public String getMerchantURL() {
+        return merchantURL;
+    }
+
+    public void setMerchantURL(String merchantURL) {
+        this.merchantURL = merchantURL;
+    }
+
+    public Data3DS getData3DS() {
+        return data3DS;
+    }
+
+    public void setData3DS(Data3DS data3DS) {
+        this.data3DS = data3DS;
+    }
+
+    public MasterpassData getMasterpassData() {
+        return masterpassData;
+    }
+
+    public void setMasterpassData(MasterpassData masterpassData) {
+        this.masterpassData = masterpassData;
+    }
 }

@@ -1,10 +1,7 @@
 package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
-import it.reply.cof.dto.request.ConfirmRequestDto;
-import it.reply.cof.dto.request.OrderStatusRequestDto;
-import it.reply.cof.dto.request.RefundRequestDto;
-import it.reply.cof.dto.request.VerifyRequestDto;
+import it.reply.cof.dto.request.*;
 import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
@@ -56,9 +53,7 @@ public class RequestBuilder {
      */
     public BPWXmlRequest buildRefundRequest(RefundRequestDto dtoRequest) throws COFException {
         Date reqDate = new Date();
-        BPWXmlRequest request = new BPWXmlRequest();
-        request.setRelease(AposConstants.RELEASE);
-        request.setRequest(new Request(Operations.PARAMETERS.REFUND, reqDate));
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.REFUND, reqDate);
 
         RefundRequest refund = new RefundRequest(reqDate);
         //HEADER
@@ -91,9 +86,7 @@ public class RequestBuilder {
      */
     public BPWXmlRequest buildConfirmRequest(ConfirmRequestDto dtoRequest) throws COFException {
         Date reqDate = new Date();
-        BPWXmlRequest request = new BPWXmlRequest();
-        request.setRelease(AposConstants.RELEASE);
-        request.setRequest(new Request(Operations.PARAMETERS.DEFERREDREQUEST, reqDate));
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.DEFERREDREQUEST, reqDate);
 
         ConfirmRequest confirm = new ConfirmRequest(reqDate);
         //HEADER
@@ -126,9 +119,7 @@ public class RequestBuilder {
      */
     public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequestDto dtoRequest) throws COFException {
         Date reqDate = new Date();
-        BPWXmlRequest request = new BPWXmlRequest();
-        request.setRelease(AposConstants.RELEASE);
-        request.setRequest(new Request(Operations.PARAMETERS.ORDERSTATUS, reqDate));
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ORDERSTATUS, reqDate);
 
         StatusRequest status = new StatusRequest(reqDate);
         //HEADER
@@ -150,9 +141,7 @@ public class RequestBuilder {
 
     public BPWXmlRequest buildVerifyRequest(VerifyRequestDto dtoRequest) throws COFException {
         Date reqDate = new Date();
-        BPWXmlRequest request = new BPWXmlRequest();
-        request.setRelease(AposConstants.RELEASE);
-        request.setRequest(new Request(Operations.PARAMETERS.VERIFY, reqDate));
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.VERIFY, reqDate);
 
         StatusRequest statusRequest = new StatusRequest(reqDate);
         //HEADER
@@ -166,8 +155,72 @@ public class RequestBuilder {
         Data data = new Data();
         data.setVerifyRequest(statusRequest);
         request.setData(data);
-
         request.getRequest().setMac(encoder.getMac(MapBuilder.getVerifyMap(request), key));
+        return request;
+    }
+
+    public BPWXmlRequest build3DSAuthRequest(Auth3DSDto dtoRequest) throws COFException {
+        Date reqDate = new Date();
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DSSTEP1, reqDate);
+
+        Authorization3DSRequest authorization3DSRequest = new Authorization3DSRequest(reqDate);
+        //HEADER
+        authorization3DSRequest.getHeader().setShopId(dtoRequest.getShopId());
+        authorization3DSRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
+
+        if (dtoRequest.isMasterpass()) {
+            //3DS DATA
+            Data3DS data3DS = new Data3DS();
+            data3DS.setService(dtoRequest.getService());
+            data3DS.setEci(dtoRequest.getEci());
+            data3DS.setXid(dtoRequest.getxId());
+            data3DS.setCavv(dtoRequest.getCavv());
+            data3DS.setParesStatus(dtoRequest.getParesStatus());
+            data3DS.setScEnrollStatus(dtoRequest.getScrenRollStatus());
+            data3DS.setSignatureVerifytion(dtoRequest.getSignatureVerification());
+            authorization3DSRequest.setData3DS(data3DS);
+
+            // MASTERPASS DATA
+            MasterpassData masterpassData = new MasterpassData();
+            masterpassData.setPpAuthenticationMethod(dtoRequest.getPpAuthenticateMethod());
+            masterpassData.setPpCardEnrollMethod(dtoRequest.getCardEnrollMethod());
+            authorization3DSRequest.setMasterpassData(masterpassData);
+        }
+
+        //AUTH 3DS REQUEST
+        authorization3DSRequest.setOrderId(dtoRequest.getOrderId());
+        authorization3DSRequest.setPan(dtoRequest.getPan());
+        authorization3DSRequest.setCvv2(dtoRequest.getCvv2());
+        authorization3DSRequest.setExpDate(dtoRequest.getExpDate());
+        authorization3DSRequest.setAmount(dtoRequest.getAmount());
+        authorization3DSRequest.setCurrency(dtoRequest.getCurrency());
+        authorization3DSRequest.setExponent(dtoRequest.getExponent());
+        authorization3DSRequest.setAccountingMode(dtoRequest.getAccountingMode());
+        authorization3DSRequest.setNetwork(dtoRequest.getNetwork());
+        authorization3DSRequest.setEmailCH(dtoRequest.getEmailCh());
+        authorization3DSRequest.setUserId(dtoRequest.getUserId());
+        authorization3DSRequest.setAcquirer(dtoRequest.getAcquirer());
+        authorization3DSRequest.setIpAddress(dtoRequest.getIpAddress());
+        authorization3DSRequest.setUsrAuthFlag(dtoRequest.getUsrAuthFlag());
+        authorization3DSRequest.setOpDescr(dtoRequest.getOpDescr());
+        authorization3DSRequest.setAntifraud(dtoRequest.getAntifraud());
+        authorization3DSRequest.setInPerson(dtoRequest.getInPerson());
+        authorization3DSRequest.setMerchantURL(dtoRequest.getMerchantUrl());
+        authorization3DSRequest.setProductRef(dtoRequest.getProductRef());
+        authorization3DSRequest.setName(dtoRequest.getName());
+        authorization3DSRequest.setSurname(dtoRequest.getSurname());
+        authorization3DSRequest.setTaxId(dtoRequest.getTaxId());
+        authorization3DSRequest.setCreatePanAlias(dtoRequest.getCreatePanAlias());
+
+        request.getRequest().setMac(encoder.getMac(MapBuilder.get3DSAuthMap(request), key));
+
+        return request;
+    }
+
+    private BPWXmlRequest getBPWXmlRequest(String operation, Date date) {
+        BPWXmlRequest request = new BPWXmlRequest();
+        request.setRelease(AposConstants.RELEASE);
+        request.setRequest(new Request(operation, date));
         return request;
     }
 
