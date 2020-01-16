@@ -3,6 +3,7 @@ package it.reply.cof.utils;
 import it.reply.cof.dto.request.OrderStatusRequestDto;
 import it.reply.cof.dto.request.ConfirmRequestDto;
 import it.reply.cof.dto.request.RefundRequestDto;
+import it.reply.cof.dto.request.VerifyRequestDto;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Constants;
 import it.reply.cof.utils.constants.Operations;
@@ -76,6 +77,22 @@ public class RequestValidator {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
         else if (requestDto.getCloseOrder() == null)
             field = Operations.PARAMETERS.CLOSEORDER.NAME;
+
+        if (!field.isEmpty())
+            throw new COFException("BAD REQUEST: Field " + field + " is missing or not valid.");
+    }
+
+    public static void validateVerifyRequest(VerifyRequestDto requestDto) throws COFException {
+        String field = "";
+
+        if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
+            field = Operations.PARAMETERS.SHOPID.NAME;
+        } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+            field = Operations.PARAMETERS.OPERATORID.NAME;
+            //TODO regex for refReqNum
+        } else if (requestDto.getOriginalReqRefNum() == null) {
+            field = Operations.PARAMETERS.REQREFNUM;
+        }
 
         if (!field.isEmpty())
             throw new COFException("BAD REQUEST: Field " + field + " is missing or not valid.");
