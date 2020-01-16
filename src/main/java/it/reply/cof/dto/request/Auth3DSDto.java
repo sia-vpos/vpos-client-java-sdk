@@ -1,104 +1,47 @@
-package it.reply.cof.apos.request;
+package it.reply.cof.dto.request;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import java.util.Date;
+public class Auth3DSDto extends RequestDto {
 
-@XmlAccessorType(XmlAccessType.FIELD)
-public class Authorization3DSRequest {
-
-    @XmlElement(name = "Header")
-    private Header header;
-
-    @XmlElement(name = "Data3DS")
-    private Data3DS data3DS;
-
-    @XmlElement(name = "MasterpassData")
-    private MasterpassData masterpassData;
-
-    @XmlElement(name = "OrderId")
+    private boolean isMasterpass;
     private String orderId;
-
-    @XmlElement(name = "PAN")
     private String pan;
-
-    @XmlElement(name = "CVV2")
     private String cvv2;
-
-    @XmlElement(name = "ExpDate")
     private String expDate;
-
-    @XmlElement(name = "Amount")
     private String amount;
-
-    @XmlElement(name = "Currency")
     private String currency;
-
-    @XmlElement(name = "Exponent")
     private String exponent;
-
-    @XmlElement(name = "AccountingMode")
     private String accountingMode;
-
-    @XmlElement(name = "Network")
     private String network;
-
-    @XmlElement(name = "EmailCH")
-    private String emailCH;
-
-    @XmlElement(name = "UserId")
+    private String emailCh;
     private String userId;
-
-    @XmlElement(name = "Acquirer")
     private String acquirer;
-
-    @XmlElement(name = "IpAddress")
     private String ipAddress;
-
-    @XmlElement(name = "UsrAuthFlag")
     private String usrAuthFlag;
-
-    @XmlElement(name = "OpDescr")
     private String opDescr;
-
-    @XmlElement(name = "Options")
-    private String options;
-
-    @XmlElement(name = "Antifraud")
     private String antifraud;
-
-    @XmlElement(name = "ProductRef")
     private String productRef;
-
-    @XmlElement(name = "Name")
     private String name;
-
-    @XmlElement(name = "Surname")
     private String surname;
-
-    @XmlElement(name = "TaxId")
     private String taxId;
-
-    @XmlElement(name = "CreatePanAlias")
     private String createPanAlias;
-
-    @XmlElement(name = "InPerson")
     private String inPerson;
+    private String merchantUrl;
+    private String service;
+    private String xId;
+    private String cavv;
+    private String eci;
+    private String ppAuthenticateMethod;
+    private String cardEnrollMethod;
+    private String paresStatus;
+    private String screnRollStatus;
+    private String signatureVerification;
 
-    @XmlElement(name = "MerchantURL")
-    private String merchantURL;
-
-    public Authorization3DSRequest(Date date) {
-        this.header = new Header(date);
+    public boolean isMasterpass() {
+        return isMasterpass;
     }
 
-    public Header getHeader() {
-        return header;
-    }
-
-    public void setHeader(Header header) {
-        this.header = header;
+    public void setMasterpass(boolean masterpass) {
+        isMasterpass = masterpass;
     }
 
     public String getOrderId() {
@@ -173,12 +116,12 @@ public class Authorization3DSRequest {
         this.network = network;
     }
 
-    public String getEmailCH() {
-        return emailCH;
+    public String getEmailCh() {
+        return emailCh;
     }
 
-    public void setEmailCH(String emailCH) {
-        this.emailCH = emailCH;
+    public void setEmailCh(String emailCh) {
+        this.emailCh = emailCh;
     }
 
     public String getUserId() {
@@ -219,14 +162,6 @@ public class Authorization3DSRequest {
 
     public void setOpDescr(String opDescr) {
         this.opDescr = opDescr;
-    }
-
-    public String getOptions() {
-        return options;
-    }
-
-    public void setOptions(String options) {
-        this.options = options;
     }
 
     public String getAntifraud() {
@@ -285,27 +220,83 @@ public class Authorization3DSRequest {
         this.inPerson = inPerson;
     }
 
-    public String getMerchantURL() {
-        return merchantURL;
+    public String getMerchantUrl() {
+        return merchantUrl;
     }
 
-    public void setMerchantURL(String merchantURL) {
-        this.merchantURL = merchantURL;
+    public void setMerchantUrl(String merchantUrl) {
+        this.merchantUrl = merchantUrl;
     }
 
-    public Data3DS getData3DS() {
-        return data3DS;
+    public String getService() {
+        return service;
     }
 
-    public void setData3DS(Data3DS data3DS) {
-        this.data3DS = data3DS;
+    public void setService(String service) {
+        this.service = service;
     }
 
-    public MasterpassData getMasterpassData() {
-        return masterpassData;
+    public String getxId() {
+        return xId;
     }
 
-    public void setMasterpassData(MasterpassData masterpassData) {
-        this.masterpassData = masterpassData;
+    public void setxId(String xId) {
+        this.xId = xId;
+    }
+
+    public String getCavv() {
+        return cavv;
+    }
+
+    public void setCavv(String cavv) {
+        this.cavv = cavv;
+    }
+
+    public String getEci() {
+        return eci;
+    }
+
+    public void setEci(String eci) {
+        this.eci = eci;
+    }
+
+    public String getPpAuthenticateMethod() {
+        return ppAuthenticateMethod;
+    }
+
+    public void setPpAuthenticateMethod(String ppAuthenticateMethod) {
+        this.ppAuthenticateMethod = ppAuthenticateMethod;
+    }
+
+    public String getCardEnrollMethod() {
+        return cardEnrollMethod;
+    }
+
+    public void setCardEnrollMethod(String cardEnrollMethod) {
+        this.cardEnrollMethod = cardEnrollMethod;
+    }
+
+    public String getParesStatus() {
+        return paresStatus;
+    }
+
+    public void setParesStatus(String paresStatus) {
+        this.paresStatus = paresStatus;
+    }
+
+    public String getScrenRollStatus() {
+        return screnRollStatus;
+    }
+
+    public void setScrenRollStatus(String screnRollStatus) {
+        this.screnRollStatus = screnRollStatus;
+    }
+
+    public String getSignatureVerification() {
+        return signatureVerification;
+    }
+
+    public void setSignatureVerification(String signatureVerification) {
+        this.signatureVerification = signatureVerification;
     }
 }

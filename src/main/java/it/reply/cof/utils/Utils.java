@@ -1,17 +1,12 @@
 package it.reply.cof.utils;
 
-import it.reply.cof.dto.PaymentInfo;
-import it.reply.cof.utils.constants.AposConstants;
-import it.reply.cof.utils.constants.Constants;
 import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.exception.COFException;
-import it.reply.cof.utils.mac.HmacCalculator;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 

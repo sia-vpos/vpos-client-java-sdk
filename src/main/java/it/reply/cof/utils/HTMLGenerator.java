@@ -20,7 +20,7 @@ public class HTMLGenerator {
         final String INVALID_EXPIRED_PID = Constants.StatusCode.PID_EXPIRED_INVALID.getValue();
         final String STEP2_3DS = Constants.StatusCode.STEP2_3DS.getValue();
 
-        if (NO_PID.equals(statusCode) || INVALID_EXPIRED_PID.equals(statusCode)) {
+        if (NO_PID.equals(statusCode)) {
             paymentInstrumentUrl = generateRedirectHtml(replacements, transaction);
         } else if (STEP2_3DS.equals(statusCode)) {
             paymentInstrumentUrl = generateACSHtml(replacements, refNumber);

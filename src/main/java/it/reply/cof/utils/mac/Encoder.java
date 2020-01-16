@@ -11,7 +11,7 @@ import java.util.Map.Entry;
  *
  * @author gab.marini
  */
-public class Encoder {
+public final class Encoder {
 
     private HmacCalculator hmacCalculator;
 

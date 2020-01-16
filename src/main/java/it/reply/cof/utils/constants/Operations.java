@@ -23,6 +23,22 @@ public final class Operations {
         public static final String PARES = "PARES";
         public static final String INPERSON = "INPERSON";
         public static final String MERCHANTURL = "MERCHANTURL";
+        public static final String SERVICE = "SERVICE";
+        public static final String PARESSTATUS = "PARESSTATUS";
+        public static final String CAVV = "CAVV";
+        public static final String ECI = "ECI";
+        public static final String PP_AUTHENTICATEMETHOD = "PP_AUTHENTICATEMETHOD";
+        public static final String PP_CARDENROLLMETHOD = "PP_CARDENROLLMETHOD";
+        public static final String SCENROLLSTATUS = "SCENROLLSTATUS";
+        public static final String SIGNATUREVERIFICATION = "SIGNATUREVERIFICATION";
+
+        public static final class USRAUTHFLAG{
+            public static final String NAME = " USRAUTHFLAG";
+        }
+
+        public static final class XID{
+            public static final String NAME = "XID";
+        }
 
         private PARAMETERS() {
 
@@ -43,6 +59,14 @@ public final class Operations {
             private AMOUNT() {
 
             }
+        }
+
+        public static final class ACQUIRER {
+            public static final String NAME = "ACQUIRER";
+        }
+
+        public static final class IPADDRESS {
+            public static final String NAME = "IPADDRESS";
         }
 
         public static final class CURRENCY {
@@ -90,7 +114,7 @@ public final class Operations {
         public static final class TRANSACTIONID {
 
             public static final String NAME = "TRANSACTIONID";
-            public static int LEN=25;
+            public static int LEN = 25;
 
             private TRANSACTIONID() {
 
@@ -428,6 +452,19 @@ public final class Operations {
             public static final boolean MANDATORY = true;
 
             private CVV() {
+
+            }
+        }
+
+        public static final class CVV2 {
+
+            public static final String NAME = "CVV2";
+            public static final int MIN_LEN = 3;
+            public static final int MAX_LEN = 4;
+            public static final String PATTERN = "[0-9]{" + MIN_LEN + "," + MAX_LEN + "}";
+            public static final boolean MANDATORY = true;
+
+            private CVV2() {
 
             }
         }

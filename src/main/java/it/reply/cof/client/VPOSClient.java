@@ -2,7 +2,7 @@ package it.reply.cof.client;
 
 import it.reply.cof.apos.response.BPWXmlResponse;
 import it.reply.cof.dto.PaymentInfo;
-import it.reply.cof.dto.request.RefundRequestDto;
+import it.reply.cof.dto.request.*;
 import it.reply.cof.utils.exception.COFException;
 
 /**
@@ -14,18 +14,23 @@ import it.reply.cof.utils.exception.COFException;
  */
 public interface VPOSClient {
 
-    void injectMasterTemplate();
+    String getHtmlPaymentDocument(PaymentInfo paymentInfo, Boolean onlyVirtualized) throws COFException;
 
-    String getPaymentHtmlDocument(PaymentInfo paymentInfo, Boolean onlyVirtualized) throws COFException;
+    void verifyURLMS(String urlms) throws COFException;
 
-    void verifyResponse() throws COFException;
+    void verifyURLDone(String urlDone) throws COFException;
 
-    void onlineAuthorizationRequest();
+    void start3DSAuth(Auth3DSDto dto);
 
-    void deferredAuthorizationRequest();
+    void confirmPayment(ConfirmRequestDto dto);
 
-    void threeDSAuthorizationRequest();
+    void refundPayment(RefundRequestDto dto);
+
+    void verifyPayment(VerifyRequestDto dto);
+
+    void getOrderStatus(OrderStatusRequestDto dto);
 
     BPWXmlResponse refund(RefundRequestDto dtoRequest) throws COFException;
 
+    void setProxy(String proxyName, Integer proxyPort);
 }
