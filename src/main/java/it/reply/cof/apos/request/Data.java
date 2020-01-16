@@ -8,6 +8,7 @@ import it.reply.cof.apos.response.VBVRedirect;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Data {
@@ -16,7 +17,7 @@ public class Data {
     private Authorization3DSRequest authorizationRequest;
 
     @XmlElement(name = "Authorization")
-    private Authorization authorization;
+    private List<Authorization> authorization;
 
     @XmlElement(name = "Operation")
     private Operation operation;
@@ -32,6 +33,9 @@ public class Data {
 
     @XmlElement(name = "Refund")
     private RefundRequest refundRequest;
+
+    @XmlElement(name = "Verify")
+    private Operation verifyResponse;
 
     @XmlElement(name = "DeferredRequest")
     private ConfirmRequest confirmRequest;
@@ -50,11 +54,11 @@ public class Data {
         this.authorizationRequest = authorizationRequest;
     }
 
-    public Authorization getAuthorization() {
+    public List<Authorization> getAuthorization() {
         return authorization;
     }
 
-    public void setAuthorization(Authorization authorization) {
+    public void setAuthorization(List<Authorization> authorization) {
         this.authorization = authorization;
     }
 
@@ -121,6 +125,14 @@ public class Data {
 
     public void setVbvRedirect(VBVRedirect vbvRedirect) {
         this.vbvRedirect = vbvRedirect;
+    }
+
+    public Operation getVerifyResponse() {
+        return verifyResponse;
+    }
+
+    public void setVerifyResponse(Operation verifyResponse) {
+        this.verifyResponse = verifyResponse;
     }
 
 }

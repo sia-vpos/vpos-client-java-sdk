@@ -1,6 +1,7 @@
 package it.reply.cof.dto.request;
 
-public class OrderStatusRequestDto {
+public class
+OrderStatusRequestDto {
     private String shopId;
     private String operatorId;
     private String orderId;

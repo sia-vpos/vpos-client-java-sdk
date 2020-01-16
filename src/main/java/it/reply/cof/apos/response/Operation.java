@@ -21,10 +21,15 @@ public class Operation {
 	private String result;
 	@XmlElement(name = "Status")
 	private String status;
+	@XmlElement(name = "OpDescr")
+	private String opDescr;
 	@XmlElement(name = "MAC")
 	private String mac;
+	@XmlElement(name = "Operation")
+	private String operation;
 	@XmlElement(name = "Authorization")
 	private Authorization authorization;
+
 
 	public String getTransactionId() {
 
@@ -115,4 +120,21 @@ public class Operation {
 
 		this.authorization = authorization;
 	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+
+	public String getOpDescr() {
+		return opDescr;
+	}
+
+	public void setOpDesc(String opDescr) {
+		this.opDescr = opDescr;
+	}
+
 }

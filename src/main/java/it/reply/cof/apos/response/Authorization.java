@@ -47,6 +47,10 @@ public class Authorization {
 	private String panTail;
 	@XmlElement(name = "PanExpiryDate")
 	private String panExpiryDate;
+	@XmlElement(name = "PaymentTypePP")
+	private String paymentTypePP;
+	@XmlElement(name = "RRN")
+	private String RRN;
 	@XmlElement(name = "CardType")
 	private String cardType;
 	@XmlElement(name = "MAC")
@@ -226,6 +230,26 @@ public class Authorization {
 
 	public void setPanExpiryDate(String panExpiryDate) {
 		this.panExpiryDate = panExpiryDate;
+	}
+
+	public String getPaymentTypePP() {
+
+		return paymentTypePP;
+	}
+
+	public void setPaymentTypePP(String paymentTypePP) {
+
+		this.paymentTypePP = paymentTypePP;
+	}
+
+	public String getRRN() {
+
+		return RRN;
+	}
+
+	public void setRRN(String RRN) {
+
+		this.RRN = RRN;
 	}
 
 	public String getCardType() {

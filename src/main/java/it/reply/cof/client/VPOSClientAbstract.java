@@ -56,7 +56,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         sb.append(response.getResult());
         String responseHmac = hmacCalculator.calculate(sb.toString(), key);
         if (!responseHmac.equals(response.getMac())) {
-            throw new COFException("Mac Response not valid");
+            throw new COFException("Mac response not valid");
         }
     }
 }
