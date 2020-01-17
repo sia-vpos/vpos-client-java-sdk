@@ -18,6 +18,8 @@ public class Constants {
     public static final String EXP_DATE_FORMAT = "yyMM";
     public static final String INVALID_PID = "0";
 
+
+
     private Constants() {
 
     }
@@ -163,10 +165,6 @@ public class Constants {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
-
         public static String getStatusName(String code) {
             String ts = "";
             for (TransactionStatus status : TransactionStatus.values()) {
@@ -185,6 +183,10 @@ public class Constants {
                 }
             }
             return notPresent;
+        }
+
+        public String getValue() {
+            return value;
         }
     }
 }

@@ -1,5 +1,6 @@
 package it.reply.cof.client;
 
+import com.sun.javafx.collections.MappingChange;
 import it.reply.cof.apos.request.BPWXmlRequest;
 import it.reply.cof.apos.response.Authorization;
 import it.reply.cof.apos.response.BPWXmlResponse;
@@ -16,6 +17,8 @@ import it.reply.cof.utils.builders.RequestBuilder;
 import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
 import it.reply.cof.utils.mac.ResponseMACCalculator;
+
+import java.util.Map;
 
 public abstract class VPOSClientAbstract implements VPOSClient {
 
@@ -64,15 +67,6 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         this.aposClient.setProxy(proxyName, proxyPort);
     }
 
-    @Override
-    public void verifyURLMS(String urlms) throws COFException {
-        //TODO
-    }
-
-    @Override
-    public void verifyURLDone(String urlDone) throws COFException {
-        //TODO
-    }
 
     @Override
     public Auth3DSResponseDto start3DSAuth(Auth3DSDto dto) throws COFException {
@@ -131,5 +125,13 @@ public abstract class VPOSClientAbstract implements VPOSClient {
                     throw new COFException("Authorization MAC is not valid");
             }
         }
+    }
+
+    @Override
+    public void verifyURL(Map<String, String> values, String receivedMac) throws COFException {
+        String calculatedMAc= hmacCalculator.getMac(MapBuilder.getOutcomeMap(values),apiResultKey);
+        if(!receivedMac.equals(calculatedMAc))
+            throw new COFException("Authorization MAC is not valid");
+
     }
 }

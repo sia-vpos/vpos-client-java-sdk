@@ -19,7 +19,7 @@ public interface VPOSClient {
 
     String getHtmlPaymentDocument(PaymentInfo paymentInfo) throws COFException;
 
-    void verifyURL(Map<String, String> values) throws COFException;
+    void verifyURL(Map<String, String> values,String receivedMac) throws COFException;
 
     Auth3DSDto start3DSAuth(Auth3DSDto dto) throws COFException;
 
