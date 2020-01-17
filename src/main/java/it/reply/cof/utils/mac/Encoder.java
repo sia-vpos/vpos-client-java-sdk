@@ -3,13 +3,14 @@ package it.reply.cof.utils.mac;
 import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.exception.COFException;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 /**
  * Utility class used in the context of message integrity check
  *
- * @author gab.marini
+ * @author Gabriel Raul Marini
  */
 public final class Encoder {
 
@@ -34,15 +35,6 @@ public final class Encoder {
         hmacCalculator = new HmacCalculator(algorithm);
     }
 
-    private static void appendField(String key, String value, StringBuilder sb) {
-        if (value != null && !value.trim().isEmpty()) {
-            sb.append('&');
-            sb.append(key);
-            sb.append('=');
-            sb.append(value);
-        }
-    }
-
     /**
      * Calculates the MAC of the string MAPKEY1=MAPVAL1&MAPKEY2=MAPVALUE2...
      *
@@ -60,5 +52,36 @@ public final class Encoder {
         sb.deleteCharAt(0);
 
         return hmacCalculator.calculate(sb.toString(), key);
+    }
+
+    public String getMac(List<String> values, String key) throws COFException {
+        StringBuilder sb = new StringBuilder();
+
+        for (String value : values) {
+            appendField(value, sb);
+        }
+
+        sb.deleteCharAt(0);
+        return hmacCalculator.calculate(sb.toString(), key);
+    }
+
+    public String getMac(String value, String key) throws COFException {
+        return hmacCalculator.calculate(value, key);
+    }
+
+    private void appendField(String key, String value, StringBuilder sb) {
+        if (value != null && !value.trim().isEmpty()) {
+            sb.append('&');
+            sb.append(key);
+            sb.append('=');
+            sb.append(value);
+        }
+    }
+
+    private void appendField(String value, StringBuilder sb) {
+        if (value != null && !value.trim().isEmpty()) {
+            sb.append("&");
+            sb.append(value);
+        }
     }
 }

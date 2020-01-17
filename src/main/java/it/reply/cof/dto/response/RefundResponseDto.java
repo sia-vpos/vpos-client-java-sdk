@@ -266,6 +266,4 @@ public class RefundResponseDto {
         this.authorizationMAC = authorizationMAC;
     }
 
-
-
 }

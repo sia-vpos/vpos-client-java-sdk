@@ -19,32 +19,26 @@ public class BPWXmlRequest {
     private Data data;
 
     public String getRelease() {
-
         return release;
     }
 
     public void setRelease(String release) {
-
         this.release = release;
     }
 
     public Request getRequest() {
-
         return request;
     }
 
     public void setRequest(Request request) {
-
         this.request = request;
     }
 
     public Data getData() {
-
         return data;
     }
 
     public void setData(Data data) {
-
         this.data = data;
     }
 

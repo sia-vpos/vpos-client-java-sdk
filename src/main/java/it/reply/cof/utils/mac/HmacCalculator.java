@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Utility class created to perform HMAC integrity check
  *
- * @author gab.marini
+ * @author Gabriel Raul Marini
  */
 public final class HmacCalculator {
 

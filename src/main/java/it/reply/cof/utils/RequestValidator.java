@@ -13,7 +13,7 @@ import it.reply.cof.utils.exception.COFException;
  * Utility class used to validate requests.
  *
  * @author a.simonetti
- * @author gab.marini
+ * @author Gabriel Raul Marini
  */
 public class RequestValidator {
 

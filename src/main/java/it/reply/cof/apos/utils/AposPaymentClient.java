@@ -48,7 +48,8 @@ public class AposPaymentClient {
     public AposPaymentClient(String urlWebApi, String proxyName, Integer port) {
         this(urlWebApi);
         this.proxy = true;
-        setProxy(proxyName, proxyPort);
+        this.proxyName = proxyName;
+        this.proxyPort = port;
     }
 
     public AposPaymentClient(String urlWebApi, String ppp, KeyStore ks, File kFile) {

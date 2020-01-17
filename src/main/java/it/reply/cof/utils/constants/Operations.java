@@ -32,16 +32,16 @@ public final class Operations {
         public static final String SCENROLLSTATUS = "SCENROLLSTATUS";
         public static final String SIGNATUREVERIFICATION = "SIGNATUREVERIFICATION";
 
-        public static final class USRAUTHFLAG{
+        private PARAMETERS() {
+
+        }
+
+        public static final class USRAUTHFLAG {
             public static final String NAME = " USRAUTHFLAG";
         }
 
-        public static final class XID{
+        public static final class XID {
             public static final String NAME = "XID";
-        }
-
-        private PARAMETERS() {
-
         }
 
         public static final class CLOSEORDER {
@@ -97,6 +97,51 @@ public final class Operations {
             }
 
         } // Only if Currency is different from 978 (Euro)
+
+
+        public static final class COMMIS{
+            public static final String NAME = "COMMIS";
+        }
+
+        public static final class VSID{
+            public static final String NAME = "VSID";
+        }
+
+
+        public static final class REMAININGDURATION{
+            public static final String NAME = "REMAININGDURATION";
+        }
+
+
+        public static final class BP_POSTEPAY{
+            public static final String NAME = "BP_POSTEPAY";
+        }
+
+
+        public static final class BP_CARDS{
+            public static final String NAME = "BP_CARDS";
+        }
+
+
+        public static final class PHONENUMBER{
+            public static final String NAME = "PHONENUMBER";
+        }
+
+
+        public static final class CAUSATION{
+            public static final String NAME = "CAUSATION";
+        }
+
+
+        public static final class USER{
+            public static final String NAME = "USER";
+        }
+
+
+        public static final class DATA3DS{
+            public static final String NAME = "3DSDATA";
+        }
+
 
         public static final class ORDERID {
 
@@ -318,7 +363,9 @@ public final class Operations {
 
         public static final class EMAIL {
 
-            public static final String NAME = "EMAILCH";
+            public static final String NAMECH = "EMAILCH";
+            public static final String NAME = "EMAIL";
+            public static final String SHOPNAME = "SHOPEMAIL";
             public static final int MIN_LEN = 7;
             public static final int MAX_LEN = 50;
             public static final String PATTERN = ".{" + MIN_LEN + "," + MAX_LEN + "}";

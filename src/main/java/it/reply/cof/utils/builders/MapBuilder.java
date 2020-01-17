@@ -1,8 +1,11 @@
 package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
+import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
+import it.reply.cof.utils.exception.COFException;
+import it.reply.cof.utils.mac.Encoder;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -10,6 +13,42 @@ import java.util.Map;
 public class MapBuilder {
 
     private MapBuilder() {
+    }
+
+    public static Map<String, String> getOutcomeMap(Map<String, String> values){
+        Map<String, String> map = new LinkedHashMap<>();
+
+
+        map.put(Operations.PARAMETERS.ORDERID.NAME, values.get(Operations.PARAMETERS.ORDERID.NAME));
+        map.put();
+        map.put(AposConstants.SHOPID, info.getShopId());
+        map.put(Operations.PARAMETERS.AMOUNT.NAME, info.getAmount());
+        map.put(Operations.PARAMETERS.CURRENCY.NAME, info.getCurrency());
+        map.put(Operations.PARAMETERS.EXPONENT.NAME, info.getExponent());
+        map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, info.getAccountingMode());
+        map.put(AposConstants.AUTHORMODE, info.getAuthorMode());
+        map.put(Operations.PARAMETERS.OPTIONS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.OPTIONS.NAME));
+        map.put(Operations.PARAMETERS.NAME.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.NAME.NAME));
+        map.put(Operations.PARAMETERS.SURNAME.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.SURNAME.NAME));
+        map.put(Operations.PARAMETERS.TAXID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.TAXID.NAME));
+        map.put(Operations.PARAMETERS.LOCKCARD.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.LOCKCARD.NAME));
+        map.put(Operations.PARAMETERS.COMMIS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.COMMIS.NAME));
+        map.put(Operations.PARAMETERS.ORDDESCR.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.ORDDESCR.NAME));
+        map.put(Operations.PARAMETERS.VSID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.VSID.NAME));
+        map.put(Operations.PARAMETERS.OPDESCR.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.OPDESCR.NAME));
+        map.put(Operations.PARAMETERS.REMAININGDURATION.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.REMAININGDURATION.NAME));
+        map.put(Operations.PARAMETERS.USERID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.USERID.NAME));
+        map.put(Operations.PARAMETERS.BP_POSTEPAY.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.BP_POSTEPAY.NAME));
+        map.put(Operations.PARAMETERS.BP_CARDS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.BP_CARDS.NAME));
+        map.put(Operations.PARAMETERS.PHONENUMBER.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.PHONENUMBER.NAME));
+        map.put(Operations.PARAMETERS.CAUSATION.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.CAUSATION.NAME));
+        map.put(Operations.PARAMETERS.USER.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.USER.NAME));
+        map.put(Operations.PARAMETERS.PRODUCTREF.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.PRODUCTREF.NAME));
+        map.put(Operations.PARAMETERS.ANTIFRAUD.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.ANTIFRAUD.NAME));
+        map.put(Operations.PARAMETERS.DATA3DS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.DATA3DS.NAME));
+        map.put(Operations.PARAMETERS.MAC.NAME, encoder.getMac(map, key));
+        map.put(Operations.PARAMETERS.URLBACK.NAME, info.getUrlBack());
+        //NOT COMPULSORY
     }
 
     public static Map<String, String> getRefundMap(BPWXmlRequest request) {
@@ -97,7 +136,7 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.EXPONENT.NAME, authorization3DSRequest.getExponent());
         map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, authorization3DSRequest.getAccountingMode());
         map.put(Operations.PARAMETERS.NETWORK.NAME, authorization3DSRequest.getNetwork());
-        map.put(Operations.PARAMETERS.EMAIL.NAME, authorization3DSRequest.getEmailCH());
+        map.put(Operations.PARAMETERS.EMAIL.NAMECH, authorization3DSRequest.getEmailCH());
         map.put(Operations.PARAMETERS.USERID.NAME, authorization3DSRequest.getUserId());
         map.put(Operations.PARAMETERS.ACQUIRER.NAME, authorization3DSRequest.getAcquirer());
         map.put(Operations.PARAMETERS.IPADDRESS.NAME, authorization3DSRequest.getIpAddress());
@@ -120,6 +159,46 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.PARESSTATUS, authorization3DSRequest.getData3DS().getParesStatus());
         map.put(Operations.PARAMETERS.SCENROLLSTATUS, authorization3DSRequest.getData3DS().getScEnrollStatus());
         map.put(Operations.PARAMETERS.SIGNATUREVERIFICATION, authorization3DSRequest.getData3DS().getSignatureVerifytion());
+
+        return map;
+    }
+
+    public static Map<String, String> getRedirectMap(PaymentInfo info, Encoder encoder, String key) throws COFException {
+        Map<String, String> map = new LinkedHashMap<>();
+
+        map.put(Operations.PARAMETERS.URLMS.NAME, info.getUrlMs());
+        map.put(Operations.PARAMETERS.URLDONE.NAME, info.getUrlDone());
+        map.put(Operations.PARAMETERS.ORDERID.NAME, info.getOrderId());
+        map.put(AposConstants.SHOPID, info.getShopId());
+        map.put(Operations.PARAMETERS.AMOUNT.NAME, info.getAmount());
+        map.put(Operations.PARAMETERS.CURRENCY.NAME, info.getCurrency());
+        map.put(Operations.PARAMETERS.EXPONENT.NAME, info.getExponent());
+        map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, info.getAccountingMode());
+        map.put(AposConstants.AUTHORMODE, info.getAuthorMode());
+        map.put(Operations.PARAMETERS.OPTIONS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.OPTIONS.NAME));
+        map.put(Operations.PARAMETERS.NAME.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.NAME.NAME));
+        map.put(Operations.PARAMETERS.SURNAME.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.SURNAME.NAME));
+        map.put(Operations.PARAMETERS.TAXID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.TAXID.NAME));
+        map.put(Operations.PARAMETERS.LOCKCARD.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.LOCKCARD.NAME));
+        map.put(Operations.PARAMETERS.COMMIS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.COMMIS.NAME));
+        map.put(Operations.PARAMETERS.ORDDESCR.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.ORDDESCR.NAME));
+        map.put(Operations.PARAMETERS.VSID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.VSID.NAME));
+        map.put(Operations.PARAMETERS.OPDESCR.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.OPDESCR.NAME));
+        map.put(Operations.PARAMETERS.REMAININGDURATION.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.REMAININGDURATION.NAME));
+        map.put(Operations.PARAMETERS.USERID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.USERID.NAME));
+        map.put(Operations.PARAMETERS.BP_POSTEPAY.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.BP_POSTEPAY.NAME));
+        map.put(Operations.PARAMETERS.BP_CARDS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.BP_CARDS.NAME));
+        map.put(Operations.PARAMETERS.PHONENUMBER.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.PHONENUMBER.NAME));
+        map.put(Operations.PARAMETERS.CAUSATION.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.CAUSATION.NAME));
+        map.put(Operations.PARAMETERS.USER.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.USER.NAME));
+        map.put(Operations.PARAMETERS.PRODUCTREF.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.PRODUCTREF.NAME));
+        map.put(Operations.PARAMETERS.ANTIFRAUD.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.ANTIFRAUD.NAME));
+        map.put(Operations.PARAMETERS.DATA3DS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.DATA3DS.NAME));
+        map.put(Operations.PARAMETERS.MAC.NAME, encoder.getMac(map, key));
+        map.put(Operations.PARAMETERS.URLBACK.NAME, info.getUrlBack());
+        //NOT COMPULSORY
+        map.put(Operations.PARAMETERS.LANG.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.LANG.NAME));
+        map.put(Operations.PARAMETERS.EMAIL.SHOPNAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.EMAIL.SHOPNAME));
 
         return map;
     }

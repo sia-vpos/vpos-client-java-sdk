@@ -8,8 +8,8 @@ import java.security.KeyStore;
 
 public class VPOSClientSSL extends VPOSClientAbstract {
 
-    public VPOSClientSSL(String url, String key, String ksPw, KeyStore ks, File kFile) throws COFException {
-        super(key);
+    public VPOSClientSSL(String url, String startKey, String apiResultKey, String ksPw, KeyStore ks, File kFile) throws COFException {
+        super(startKey, apiResultKey);
         this.aposClient = new AposPaymentClient(url, ksPw, ks, kFile);
     }
 

@@ -1,5 +1,6 @@
 package it.reply.cof.dto;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,10 +20,15 @@ public class PaymentInfo {
     private String urlMs;
     private String accountingMode;
     private String authorMode;
-
-    private String mac;
-
     private Map<String, String> notCompulsoryFields;
+
+    public PaymentInfo(){
+        notCompulsoryFields = new HashMap<>();
+    }
+
+    public void addOption(String option){
+        notCompulsoryFields.put("OPTIONS", option);
+    }
 
     public String getAmount() {
         return amount;

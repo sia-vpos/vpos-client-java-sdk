@@ -77,20 +77,6 @@ public class Utils {
         return rndBuilder.toString();
     }
 
-    public static String htmlToBase64(String fileName, Map<String, String> replacements) throws COFException {
-        String html;
 
-        try {
-            html = new Scanner(new File("filename")).useDelimiter("\\Z").next();
-        } catch (IOException e) {
-            throw new COFException("Error while generating HTML base64 encoded file", e.getCause());
-        }
-
-        for (Map.Entry<String, String> replacement : replacements.entrySet()) {
-            html = html.replace("[" + replacement.getKey() + "]", replacement.getValue());
-        }
-
-        return Base64.getEncoder().encodeToString(html.getBytes());
-    }
 
 }
