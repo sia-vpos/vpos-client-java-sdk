@@ -10,7 +10,11 @@ import java.util.List;
 
 public class ResponseMapper {
 
-
+    /**
+     * Maps a Verify Response to its dto
+     * @param response contains all the relevant information
+     * @return
+     */
     public VerifyResponseDto mapVerifyResponse(BPWXmlResponse response) {
         VerifyResponseDto dto = new VerifyResponseDto();
 
@@ -28,6 +32,11 @@ public class ResponseMapper {
         return dto;
     }
 
+    /**
+     * Maps a Confirmation Response to its dto
+     * @param response contains all the relevant information
+     * @return
+     */
     public ConfirmationResponseDto mapConfirmationResponse(BPWXmlResponse response) {
         ConfirmationResponseDto dto = new ConfirmationResponseDto();
 
@@ -65,6 +74,11 @@ public class ResponseMapper {
         return dto;
     }
 
+    /**
+     * Maps a Refund Response to its dto
+     * @param response contains all the relevant information
+     * @return
+     */
     public RefundResponseDto mapRefundResponseDto(BPWXmlResponse response) {
         RefundResponseDto dto = new RefundResponseDto();
 
@@ -113,6 +127,11 @@ public class ResponseMapper {
         return dto;
     }
 
+    /**
+     * Maps an Order Status Response to its dto
+     * @param response contains all the relevant information
+     * @return
+     */
     public OrderStatusResponseListDto mapOrderStatusResponse(BPWXmlResponse response) {
         OrderStatusResponseListDto dto = new OrderStatusResponseListDto();
 
@@ -164,6 +183,11 @@ public class ResponseMapper {
         return dto;
     }
 
+    /**
+     * Maps the Step 1 Response of a 3D Secure authorization to its dto
+     * @param response contains all the relevant information
+     * @return
+     */
     public Auth3DSResponseDto auth3DSResponseDto(BPWXmlResponse response){
         Auth3DSResponseDto dto = new Auth3DSResponseDto();
 
@@ -218,6 +242,11 @@ public class ResponseMapper {
         return dto;
     }
 
+    /**
+     * Maps the Step 1 Response of a 3D Secure authorization to its dto
+     * @param response contains all the relevant information
+     * @return
+     */
     public Auth3DSStep2ResponseDto auth3DSStep2ResponseDto(BPWXmlResponse response) {
         Auth3DSStep2ResponseDto dto = new Auth3DSStep2ResponseDto();
 

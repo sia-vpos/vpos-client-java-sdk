@@ -51,6 +51,12 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         customTemplate = false;
     }
 
+    /**
+     *
+     * @param startKey
+     * @param apiResultKey
+     * @throws COFException
+     */
     public VPOSClientAbstract(String startKey, String apiResultKey) throws COFException {
         this();
         this.requestBuilder = new RequestBuilder(startKey);
@@ -99,7 +105,6 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     public void setProxy(String proxyName, Integer proxyPort) {
         this.aposClient.setProxy(proxyName, proxyPort);
     }
-
 
     @Override
     public Auth3DSResponseDto start3DSAuth(Auth3DSDto dto) throws COFException {

@@ -80,7 +80,12 @@ public class RequestValidator {
         if (!field.isEmpty())
             throw new COFException("BAD REQUEST: Field " + field + " is missing or not valid.");
     }
-
+    /**
+     * Method used to validate a Verify request.
+     *
+     * @param requestDto request to validate
+     * @throws COFException raised when a field is missing (if it is mandatory) or not valid
+     */
     public static void validateVerifyRequest(VerifyRequestDto requestDto) throws COFException {
         String field = "";
 
@@ -121,6 +126,12 @@ public class RequestValidator {
             throw new COFException("BAD REQUEST: Field " + field + " is missing or not valid.");
     }
 
+    /**
+     * Method used to validate the first step of a 3D Secure authorization.
+     *
+     * @param requestDto request to validate
+     * @throws COFException raised when a field is missing (if it is mandatory) or not valid
+     */
     public static void validateAuth3DSStep1Request (Auth3DSDto requestDto) throws COFException{
         String field = "";
 
@@ -195,6 +206,12 @@ public class RequestValidator {
 
     }
 
+    /**
+     * Method used to validate the second step of a 3D Secure authorization.
+     *
+     * @param requestDto request to validate
+     * @throws COFException raised when a field is missing (if it is mandatory) or not valid
+     */
     public static void validateAuth3DSStep2Request(Auth3DSStep2RequestDto requestDto) throws COFException{
         String field = "";
 

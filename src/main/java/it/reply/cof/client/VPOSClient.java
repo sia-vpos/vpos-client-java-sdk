@@ -47,7 +47,7 @@ public interface VPOSClient {
     void verifyURL(Map<String, String> values, String receivedMac) throws COFException;
 
     /**
-     * @param dto data transfer object containing all the required parameters to perform a
+     * @param dto data transfer object containing all the required parameters to perform the first step of a
      *            3DS authorization
      * @return the outcome of the operation with the relative additional infos
      * @throws COFException in case of failure (see exception message for more info)
@@ -55,7 +55,7 @@ public interface VPOSClient {
     Auth3DSResponseDto start3DSAuth(Auth3DSDto dto) throws COFException;
 
     /**
-     * @param dto data transfer object containing all the required parameters to perform a
+     * @param dto data transfer object containing all the required parameters to perform the second step of a
      *            3DS authorization
      * @return the outcome of the operation with the relative additional infos
      * @throws COFException in case of failure (see exception message for more info)
