@@ -139,6 +139,13 @@ public class RequestBuilder {
 
     }
 
+    /**
+     * Build the XML request for Verify operation
+     *
+     * @param dtoRequest object containing the necessary infos to perform a Verify request
+     * @return the xml request
+     * @throws COFException
+     */
     public BPWXmlRequest buildVerifyRequest(VerifyRequestDto dtoRequest) throws COFException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.VERIFY, reqDate);
@@ -158,7 +165,13 @@ public class RequestBuilder {
         request.getRequest().setMac(encoder.getMac(MapBuilder.getVerifyMap(request), key));
         return request;
     }
-
+    /**
+     * Build the XML request for step 1 of a 3DS authorization
+     *
+     * @param dtoRequest object containing the necessary infos to perform the step 1 of a 3DS authorization
+     * @return the XML request
+     * @throws COFException
+     */
     public BPWXmlRequest build3DSAuthRequest(Auth3DSDto dtoRequest) throws COFException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DSSTEP1, reqDate);
@@ -216,7 +229,13 @@ public class RequestBuilder {
 
         return request;
     }
-
+    /**
+     * Build the XML request for step 2 of a 3DS authorization
+     *
+     * @param dtoRequest object containing the necessary infos to perform the step 2 of a 3DS authorization
+     * @return the XML request
+     * @throws COFException
+     */
     public BPWXmlRequest build3DSStep2AuthRequest(Auth3DSStep2RequestDto dtoRequest) throws COFException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DSSTEP2, reqDate);

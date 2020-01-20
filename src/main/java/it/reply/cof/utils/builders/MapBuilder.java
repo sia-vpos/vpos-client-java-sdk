@@ -1,11 +1,9 @@
 package it.reply.cof.utils.builders;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 import it.reply.cof.apos.request.*;
-import it.reply.cof.apos.response.Operation;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.constants.AposConstants;
-import it.reply.cof.utils.constants.Constants;
 import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
@@ -13,6 +11,9 @@ import it.reply.cof.utils.mac.Encoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Mainly methods generating maps to be fed at the MAC generating encoder and taking a BPWXmlRequest item as parameter
+ */
 public class MapBuilder {
 
     private MapBuilder() {

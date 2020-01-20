@@ -25,7 +25,10 @@ public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {
     private String panTail;
     private String panExpiryDate;
     private String MAC;
-
+    private String PanAlias;
+    private String PanAliasRev;
+    private String PanAliasExpDate;
+    private String PanAliasTail;
 
     public String getPaymentType() {
         return paymentType;
@@ -115,12 +118,10 @@ public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {
         this.transactionResult = transactionResult;
     }
 
-    @Override
     public String getTimestamp() {
         return timestamp;
     }
 
-    @Override
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
@@ -188,5 +189,38 @@ public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {
     public void setMAC(String MAC) {
         this.MAC = MAC;
     }
+
+    public String getPanAlias() {
+        return PanAlias;
+    }
+
+    public void setPanAlias(String panAlias) {
+        PanAlias = panAlias;
+    }
+
+    public String getPanAliasRev() {
+        return PanAliasRev;
+    }
+
+    public void setPanAliasRev(String panAliasRev) {
+        PanAliasRev = panAliasRev;
+    }
+
+    public String getPanAliasExpDate() {
+        return PanAliasExpDate;
+    }
+
+    public void setPanAliasExpDate(String panAliasExpDate) {
+        PanAliasExpDate = panAliasExpDate;
+    }
+
+    public String getPanAliasTail() {
+        return PanAliasTail;
+    }
+
+    public void setPanAliasTail(String panAliasTail) {
+        PanAliasTail = panAliasTail;
+    }
+
 
 }
