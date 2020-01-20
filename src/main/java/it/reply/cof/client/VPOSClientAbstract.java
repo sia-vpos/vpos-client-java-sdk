@@ -1,6 +1,5 @@
 package it.reply.cof.client;
 
-import com.sun.javafx.collections.MappingChange;
 import it.reply.cof.apos.request.BPWXmlRequest;
 import it.reply.cof.apos.response.Authorization;
 import it.reply.cof.apos.response.BPWXmlResponse;
@@ -18,14 +17,21 @@ import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
 import it.reply.cof.utils.mac.ResponseMACCalculator;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 
 public abstract class VPOSClientAbstract implements VPOSClient {
 
+    private static final String HTML_FILE_PATH = "/src/main/resources/template.html";
+    private static final String HTML_DEFAULT_PATH = "src/main/resources/default.html";
     protected String startKey;
     protected String apiResultKey;
     protected AposPaymentClient aposClient;
 
+    private Boolean customTemplate;
+    private String filePath;
     private HTMLGenerator htmlTool;
     private RequestBuilder requestBuilder;
     private Encoder hmacCalculator;
@@ -33,8 +39,10 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     private ResponseMACCalculator responseMACCalculator;
 
     private VPOSClientAbstract() {
+        filePath = new File("").getAbsolutePath();
         htmlTool = new HTMLGenerator();
         responseMapper = new ResponseMapper();
+        customTemplate = false;
     }
 
     public VPOSClientAbstract(String startKey, String apiResultKey) throws COFException {
@@ -56,11 +64,23 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     @Override
-    public String getHtmlPaymentDocument(PaymentInfo paymentInfo) throws COFException {
-        //TODO
-        return htmlTool.htmlToBase64("C:\\Users\\gab.marini\\Documents\\java-library\\test.html", MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey));
+    public void injectHtmlTemplate(String base64, Integer delay) throws COFException {
+        String html = htmlTool.base64ToHtml(base64, delay);
+        customTemplate = true;
+
+        try (FileWriter fileWriter = new FileWriter(filePath.concat(HTML_FILE_PATH))) {
+            fileWriter.write(html);
+            customTemplate = true;
+        } catch (IOException e) {
+            throw new COFException("Error in saving HTML template. Default template will be used to redirect.");
+        }
     }
 
+    @Override
+    public String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException {
+        String path = customTemplate ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
+        return htmlTool.htmlToBase64(filePath, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey));
+    }
 
     @Override
     public void setProxy(String proxyName, Integer proxyPort) {
@@ -129,8 +149,8 @@ public abstract class VPOSClientAbstract implements VPOSClient {
 
     @Override
     public void verifyURL(Map<String, String> values, String receivedMac) throws COFException {
-        String calculatedMAc= hmacCalculator.getMac(MapBuilder.getOutcomeMap(values),apiResultKey);
-        if(!receivedMac.equals(calculatedMAc))
+        String calculatedMAc = hmacCalculator.getMac(MapBuilder.getOutcomeMap(values), apiResultKey);
+        if (!receivedMac.equals(calculatedMAc))
             throw new COFException("Authorization MAC is not valid");
 
     }

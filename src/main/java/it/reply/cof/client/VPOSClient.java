@@ -17,7 +17,9 @@ import java.util.Map;
  */
 public interface VPOSClient {
 
-    String getHtmlPaymentDocument(PaymentInfo paymentInfo) throws COFException;
+    void injectHtmlTemplate(String path, Integer delay) throws COFException;
+
+    String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException;
 
     void verifyURL(Map<String, String> values,String receivedMac) throws COFException;
 
