@@ -1,11 +1,9 @@
 package it.reply.cof.utils;
 
 
+
 import it.reply.cof.apos.request.Data;
-import it.reply.cof.apos.response.Authorization;
-import it.reply.cof.apos.response.BPWXmlResponse;
-import it.reply.cof.apos.response.Operation;
-import it.reply.cof.apos.response.PanAliasData;
+import it.reply.cof.apos.response.*;
 import it.reply.cof.dto.response.*;
 
 import java.util.List;
@@ -164,5 +162,103 @@ public class ResponseMapper {
         }
 
         return dto;
+    }
+
+    public Auth3DSResponseDto auth3DSResponseDto(BPWXmlResponse response){
+        Auth3DSResponseDto dto = new Auth3DSResponseDto();
+
+        if (response != null && response.getData() != null && response.getData().getAuthorization() != null){
+            Authorization authorization = response.getData().getAuthorization().get(0);
+            PanAliasData panAliasData = response.getData().getPanAliasData();
+            VBVRedirect vbvRedirect = response.getData().getVbvRedirect();
+
+            if(authorization != null) {
+
+                dto.setPaymentType(authorization.getPaymentType());
+                dto.setAuthorizationType(authorization.getAuthorizationType());
+                dto.setTransactionID(authorization.getTransactionId());
+                dto.setNetwork(authorization.getNetwork());
+                dto.setOrderID(authorization.getOrderId());
+                dto.setTransactionAmount(authorization.getTransactionAmount());
+                dto.setAuthorizedAmount(authorization.getAuthorizedAmount());
+                dto.setCurrency(authorization.getCurrency());
+                dto.setExponent(authorization.getExponent());
+                dto.setAccountedAmount(authorization.getAccountedAmount());
+                dto.setRefundedAmount(authorization.getRefundedAmount());
+                dto.setTransactionResult(authorization.getTransactionResult());
+                dto.setTimestamp(authorization.getTimestamp());
+                dto.setAuthorizationNumber(authorization.getAuthorizationNumber());
+                dto.setAcquireBIN(authorization.getAcquirerBin());
+                dto.setMerchantID(authorization.getMerchantId());
+                dto.setTransactionStatus(authorization.getTransactionStatus());
+                dto.setResponseCodeIso(authorization.getResponseCodeIso());
+                dto.setPanTail(authorization.getPanTail());
+                dto.setPanExpiryDate(authorization.getPanExpiryDate());
+                dto.setPaymentTypePP(authorization.getPaymentTypePP());
+                dto.setRRN(authorization.getRRN());
+                dto.setCardType(authorization.getCardType());
+                dto.setMAC(authorization.getMac());
+
+            }
+
+            if(vbvRedirect != null) {
+                dto.setPaReq(vbvRedirect.getPaReq());
+                dto.setAcsURL(vbvRedirect.getAcsURL());
+            }
+            if(panAliasData != null) {
+                dto.setPanAlias(panAliasData.getPanAlias());
+                dto.setPanAliasRev(panAliasData.getPanAliasRev());
+                dto.setPanAliasExpDate(panAliasData.getPanAliasExpDate());
+                dto.setPanAliasTail(panAliasData.getPanAliasTail());
+
+            }
+
+        }
+
+        return dto;
+    }
+
+    public Auth3DSStep2ResponseDto auth3DSStep2ResponseDto(BPWXmlResponse response) {
+        Auth3DSStep2ResponseDto dto = new Auth3DSStep2ResponseDto();
+
+        if (response != null && response.getData() != null && response.getData().getAuthorization() != null) {
+            Authorization authorization = response.getData().getAuthorization().get(0);
+            PanAliasData panAliasData = response.getData().getPanAliasData();
+
+            if(authorization != null) {
+                dto.setPaymentType(authorization.getPaymentType());
+                dto.setAuthorizationType(authorization.getAuthorizationType());
+                dto.setTransactionID(authorization.getTransactionId());
+                dto.setNetwork(authorization.getNetwork());
+                dto.setOrderID(authorization.getOrderId());
+                dto.setTransactionAmount(authorization.getTransactionAmount());
+                dto.setAuthorizedAmount(authorization.getAuthorizedAmount());
+                dto.setCurrency(authorization.getCurrency());
+                dto.setAccountedAmount(authorization.getAccountedAmount());
+                dto.setRefundedAmount(authorization.getRefundedAmount());
+                dto.setTransactionResult(authorization.getTransactionResult());
+                dto.setTimestamp(authorization.getTimestamp());
+                dto.setAuthorizationNumber(authorization.getAuthorizationNumber());
+                dto.setAcquireBIN(authorization.getAcquirerBin());
+                dto.setMerchantID(authorization.getMerchantId());
+                dto.setTransactionStatus(authorization.getTransactionStatus());
+                dto.setResponseCodeIso(authorization.getResponseCodeIso());
+                dto.setPanTail(authorization.getPanTail());
+                dto.setPanExpiryDate(authorization.getPanExpiryDate());
+                dto.setMAC(authorization.getMac());
+            }
+
+            if(panAliasData != null) {
+                dto.setPanAlias(panAliasData.getPanAlias());
+                dto.setPanAliasRev(panAliasData.getPanAliasRev());
+                dto.setPanAliasExpDate(panAliasData.getPanAliasExpDate());
+                dto.setPanAliasTail(panAliasData.getPanAliasTail());
+
+
+            }
+        }
+
+        return dto;
+
     }
 }

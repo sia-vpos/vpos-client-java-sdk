@@ -17,6 +17,7 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     private String exponent;
     private String accountedAmount;
     private String refundedAmount;
+   private String transactionResult;
     private String timestamp;
     private String authorizationNumber;
     private String acquireBIN;
@@ -29,6 +30,61 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     private String RRN;
     private String CardType;
     private String MAC;
+    private String PaReq;
+    private String AcsURL;
+    private String PanAlias;
+    private String PanAliasRev;
+    private String PanAliasExpDate;
+    private String PanAliasTail;
+
+
+    public String getPaReq() {
+        return PaReq;
+    }
+
+    public void setPaReq(String paReq) {
+        PaReq = paReq;
+    }
+
+    public String getAcsURL() {
+        return AcsURL;
+    }
+
+    public void setAcsURL(String acsURL) {
+        AcsURL = acsURL;
+    }
+
+    public String getPanAlias() {
+        return PanAlias;
+    }
+
+    public void setPanAlias(String panAlias) {
+        PanAlias = panAlias;
+    }
+
+    public String getPanAliasRev() {
+        return PanAliasRev;
+    }
+
+    public void setPanAliasRev(String panAliasRev) {
+        PanAliasRev = panAliasRev;
+    }
+
+    public String getPanAliasExpDate() {
+        return PanAliasExpDate;
+    }
+
+    public void setPanAliasExpDate(String panAliasExpDate) {
+        PanAliasExpDate = panAliasExpDate;
+    }
+
+    public String getPanAliasTail() {
+        return PanAliasTail;
+    }
+
+    public void setPanAliasTail(String panAliasTail) {
+        PanAliasTail = panAliasTail;
+    }
 
     public String getPaymentType() {
         return paymentType;
@@ -218,8 +274,19 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     public void setMAC(String MAC){
         this.MAC = MAC;
     }
-    
 
-    
-    
+
+    public String getTransactionResult() {
+        return transactionResult;
+    }
+
+    public void setTransactionResult(String transactionResult) {
+        this.transactionResult = transactionResult;
+    }
+
+
+
+
+
+
 }
