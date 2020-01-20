@@ -176,7 +176,7 @@ public class RequestBuilder {
             data3DS.setXid(dtoRequest.getxId());
             data3DS.setCavv(dtoRequest.getCavv());
             data3DS.setParesStatus(dtoRequest.getParesStatus());
-            data3DS.setScEnrollStatus(dtoRequest.getScrenRollStatus());
+            data3DS.setScEnrollStatus(dtoRequest.getScenRollStatus());
             data3DS.setSignatureVerifytion(dtoRequest.getSignatureVerification());
             authorization3DSRequest.setData3DS(data3DS);
 
@@ -213,6 +213,26 @@ public class RequestBuilder {
         authorization3DSRequest.setCreatePanAlias(dtoRequest.getCreatePanAlias());
 
         request.getRequest().setMac(encoder.getMac(MapBuilder.get3DSAuthMap(request), key));
+
+        return request;
+    }
+
+    public BPWXmlRequest build3DSStep2AuthRequest(Auth3DSStep2RequestDto dtoRequest) throws COFException {
+        Date reqDate = new Date();
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DSSTEP2, reqDate);
+
+        Auth3DSStep2Request auth3DSStep2Request = new Auth3DSStep2Request(reqDate);
+
+        //HEADER
+        auth3DSStep2Request.getHeader().setOperatorId(dtoRequest.getOperatorId());
+        auth3DSStep2Request.getHeader().setShopId(dtoRequest.getShopId());
+
+        //AUTH3DS STEP2 REQUEST
+        auth3DSStep2Request.setOriginalReqRefNum(dtoRequest.getOriginalRefReqNum());
+        auth3DSStep2Request.setPaRes(dtoRequest.getPaRes());
+        auth3DSStep2Request.setAcquirer(dtoRequest.getAcquirer());
+
+        request.getRequest().setMac(encoder.getMac(MapBuilder.get3DSStep2AuthMap(request), key));
 
         return request;
     }

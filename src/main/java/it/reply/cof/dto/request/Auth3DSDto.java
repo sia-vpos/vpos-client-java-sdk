@@ -33,7 +33,7 @@ public class Auth3DSDto extends RequestDto {
     private String ppAuthenticateMethod;
     private String cardEnrollMethod;
     private String paresStatus;
-    private String screnRollStatus;
+    private String scenRollStatus;
     private String signatureVerification;
 
     public boolean isMasterpass() {
@@ -284,12 +284,12 @@ public class Auth3DSDto extends RequestDto {
         this.paresStatus = paresStatus;
     }
 
-    public String getScrenRollStatus() {
-        return screnRollStatus;
+    public String getScenRollStatus() {
+        return scenRollStatus;
     }
 
-    public void setScrenRollStatus(String screnRollStatus) {
-        this.screnRollStatus = screnRollStatus;
+    public void setScenRollStatus(String scenRollStatus) {
+        this.scenRollStatus = scenRollStatus;
     }
 
     public String getSignatureVerification() {
