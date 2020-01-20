@@ -5,8 +5,6 @@ import it.reply.cof.client.VPOSSimpleClient;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.exception.COFException;
 
-import java.io.File;
-
 public class Application {
     private static final String SHOP_ID = "129281292800104";
     private static final String PAN_ALIAS = "0000147162817302285";
@@ -23,7 +21,6 @@ public class Application {
 
     public static void main(String[] args) throws COFException {
         VPOSClient vposClient = new VPOSSimpleClient(MAC_KEY_VPOS, API_RESULT_KEY);
-
 
 
         System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));

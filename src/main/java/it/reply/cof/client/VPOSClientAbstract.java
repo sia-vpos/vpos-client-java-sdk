@@ -51,6 +51,14 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         customTemplate = false;
     }
 
+    /**
+     * Instantiate an abstract VPOS client object enabled to perform VPOSClient operations
+     * with HMAC-SHA-256 MAC algorithm
+     *
+     * @param startKey     used to perform MAC calculation of the outcoming requests
+     * @param apiResultKey used to perform MAC calculation of the incoming VPOS responses
+     * @throws COFException in case of instantiation failure (see exception message for more infos)
+     */
     public VPOSClientAbstract(String startKey, String apiResultKey) throws COFException {
         this();
         this.requestBuilder = new RequestBuilder(startKey);
@@ -60,6 +68,15 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         this.apiResultKey = apiResultKey;
     }
 
+    /**
+     * Instantiate an abstract VPOS client object enabled to perform VPOSClient operations
+     * with the specified MAC algorithm
+     *
+     * @param startKey     used to perform MAC calculation of the outcoming requests
+     * @param apiResultKey used to perform MAC calculation of the incoming VPOS responses
+     * @param algorithm    used to perform MAC calculation (HMAC_SHA_256 used by default)
+     * @throws COFException in case of instantiation failure (see exception message for more infos)
+     */
     public VPOSClientAbstract(String startKey, String apiResultKey, MacAlgorithms algorithm) throws COFException {
         this();
         this.requestBuilder = new RequestBuilder(startKey, algorithm);
