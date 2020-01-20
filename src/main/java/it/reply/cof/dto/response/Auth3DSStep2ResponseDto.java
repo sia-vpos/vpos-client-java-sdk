@@ -1,10 +1,9 @@
 package it.reply.cof.dto.response;
 
-import it.reply.cof.apos.response.PanAliasData;
-import it.reply.cof.apos.response.VBVRedirect;
-import it.reply.cof.dto.request.Auth3DSDto;
+import it.reply.cof.apos.response.Authorization;
+import it.reply.cof.dto.request.Auth3DSStep2RequestDto;
 
-public class Auth3DSResponseDto extends Auth3DSDto {
+public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {
 
     private String paymentType;
     private String authorizationType;
@@ -14,9 +13,9 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     private String transactionAmount;
     private String authorizedAmount;
     private String currency;
-    private String exponent;
     private String accountedAmount;
     private String refundedAmount;
+    private String transactionResult;
     private String timestamp;
     private String authorizationNumber;
     private String acquireBIN;
@@ -25,10 +24,8 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     private String responseCodeIso;
     private String panTail;
     private String panExpiryDate;
-    private String PaymentTypePP;
-    private String RRN;
-    private String CardType;
     private String MAC;
+
 
     public String getPaymentType() {
         return paymentType;
@@ -54,12 +51,10 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         this.transactionID = transactionID;
     }
 
-     
     public String getNetwork() {
         return network;
     }
 
-     
     public void setNetwork(String network) {
         this.network = network;
     }
@@ -88,21 +83,12 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         this.authorizedAmount = authorizedAmount;
     }
 
-     
     public String getCurrency() {
         return currency;
     }
-    
+
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
-
-    public String getExponent() {
-        return exponent;
-    }
-    
-    public void setExponent(String exponent) {
-        this.exponent = exponent;
     }
 
     public String getAccountedAmount() {
@@ -121,12 +107,20 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         this.refundedAmount = refundedAmount;
     }
 
-     
+    public String getTransactionResult() {
+        return transactionResult;
+    }
+
+    public void setTransactionResult(String transactionResult) {
+        this.transactionResult = transactionResult;
+    }
+
+    @Override
     public String getTimestamp() {
         return timestamp;
     }
 
-     
+    @Override
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
@@ -187,39 +181,12 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         this.panExpiryDate = panExpiryDate;
     }
 
-    public String getPaymentTypePP() {
-        return PaymentTypePP;
+    public String getMAC() {
+        return MAC;
     }
 
-    public void setPaymentTypePP(String paymentTypePP) {
-        PaymentTypePP = paymentTypePP;
-    }
-
-    public String getRRN() {
-        return RRN;
-    }
-
-    public void setRRN(String RRN) {
-        this.RRN = RRN;
-    }
-
-    public String getCardType() {
-        return CardType;
-    }
-
-    public void setCardType(String cardType) {
-        CardType = cardType;
-    }
-
-    public String getMAC(){
-        return this.MAC;
-    }
-
-    public void setMAC(String MAC){
+    public void setMAC(String MAC) {
         this.MAC = MAC;
     }
-    
 
-    
-    
 }

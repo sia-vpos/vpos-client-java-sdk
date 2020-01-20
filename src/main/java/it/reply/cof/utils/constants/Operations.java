@@ -19,30 +19,88 @@ public final class Operations {
         public static final String CONFIRM = "CONFIRM";
         public static final String TIMESTAMP = "TIMESTAMP";
         public static final String REQREFNUM = "REQREFNUM";
-        public static final String ORIGINALREQREFNUM = "ORIGINALREQREFNUM";
         public static final String PARES = "PARES";
-        public static final String INPERSON = "INPERSON";
-        public static final String MERCHANTURL = "MERCHANTURL";
-        public static final String SERVICE = "SERVICE";
-        public static final String PARESSTATUS = "PARESSTATUS";
-        public static final String CAVV = "CAVV";
-        public static final String ECI = "ECI";
-        public static final String PP_AUTHENTICATEMETHOD = "PP_AUTHENTICATEMETHOD";
-        public static final String PP_CARDENROLLMETHOD = "PP_CARDENROLLMETHOD";
-        public static final String SCENROLLSTATUS = "SCENROLLSTATUS";
-        public static final String SIGNATUREVERIFICATION = "SIGNATUREVERIFICATION";
 
         private PARAMETERS() {
 
         }
 
-        public static final class USRAUTHFLAG {
-            public static final String NAME = " USRAUTHFLAG";
+        public static final class CREATEPANALIAS {
+            public static final String NAME = "CREATEPANALIAS";
+            public static final String PATTERN = "S";
+
+            private CREATEPANALIAS(){
+
+            }
+
         }
 
+        public static final class INPERSON {
+            public static final String NAME = "INPERSON";
+            public static final String PATTERN = "([S]|[N]){1}";
+
+            private INPERSON(){
+
+            }
+        }
+
+        public static final class SERVICE {
+           public static final String NAME = "SERVICE";
+           public static final String PATTERN = "[SV47]{4}";
+
+           private SERVICE(){
+
+            }
+        }
+
+
+        public static final class MERCHANTURL {
+            public static final String NAME ="MERCHANTURL";
+            public static final String PATTERN = "[A-Za-z0-9_\\-/:. ]";
+
+            private MERCHANTURL(){
+
+            }
+        }
+
+
+        public static final class USRAUTHFLAG {
+            public static final String NAME = " USRAUTHFLAG";
+            public static final String PATTERN = "[0-2]{1}";
+
+            private USRAUTHFLAG() {
+
+            }
+        }
+
+        //pattern da controllare per XID e CAVV
         public static final class XID {
             public static final String NAME = "XID";
+            public static final String PATTERN = "{40}";
+
+            private XID(){
+
+            }
         }
+
+        public static final class CAVV {
+            public static final String NAME = "CAVV";
+            public static final String PATTERN = "{40}";
+
+            private CAVV(){
+
+            }
+        }
+
+        public static final class ECI {
+            public static final String NAME = "ECI";
+            public static final String PATTERN = "([01]|[02]|[05]|[07]){2}";
+
+            private ECI(){
+
+            }
+        }
+
 
         public static final class CLOSEORDER {
             public static final String NAME = "CLOSEORDER";
@@ -63,11 +121,52 @@ public final class Operations {
 
         public static final class ACQUIRER {
             public static final String NAME = "ACQUIRER";
+            public static final String PATTERN = "[A-Za-z0-9]{5}";
+
+            private ACQUIRER(){
+
+            }
         }
 
         public static final class IPADDRESS {
             public static final String NAME = "IPADDRESS";
+            public static final String PATTERN = "^(?=.*[^\\.]$)((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.?){4}$";
+
+            private IPADDRESS(){
+
+            }
         }
+
+        public static final class PP_AUTHENTICATEMETHOD {
+           public static final String NAME = "PP_AUTHENTICATEMETHOD";
+           public static final String PATTERN = "([MERCHANT ONLY]|[3DS]|[NO AUTHENTICATION]){3,20}";
+
+           private PP_AUTHENTICATEMETHOD(){
+
+           }
+        }
+
+        public static final class PP_CARDENROLLMETHOD {
+            public static final String NAME = "PP_CARDENROLLMETHOD";
+            public static final String PATTERN = "([Manual]|[Direct Provisioned]|[3DS Manual]|[NFC Tap]){6,20}";
+
+            private PP_CARDENROLLMETHOD(){
+
+            }
+
+        }
+
+        public static final class SCENROLLSTATUS {
+            public static final String NAME = "SCENROLLSTATUS";
+            public static final String PATTERN = "([Y]|[N]|[U]){1}";
+
+            private SCENROLLSTATUS(){
+
+            }
+
+        }
+
+
 
         public static final class CURRENCY {
 
@@ -82,6 +181,34 @@ public final class Operations {
             }
 
         }
+
+        public static final class PARESSTATUS {
+            public static final String NAME = "PARESSTATUS";
+            public static final String PATTERN = "([Y]|[N]|[A]|[U]){1}";
+        }
+
+        public static final class SIGNATUREVERIFICATION {
+            public static final String NAME = "SIGNATUREVERIFICATION";
+            public static final int LEN = 1;
+            public static final String PATTERN = "([Y]|[N]){" + LEN +  "}";
+
+            private SIGNATUREVERIFICATION(){
+
+            }
+        }
+
+        public static final class ORIGINALREQREFNUM {
+            public static final String NAME ="ORIGINALREQREFNUM";
+            public static final int LEN = 32;
+            public static final String PATTERN = "(20[0-90-9])(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))\\w{" + LEN + "}";
+
+            private ORIGINALREQREFNUM() {
+
+
+            }
+        }
+
+
 
         public static final class EXPONENT {
 

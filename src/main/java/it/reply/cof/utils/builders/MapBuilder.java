@@ -82,7 +82,7 @@ public class MapBuilder {
         map.put(AposConstants.SHOPID, verifyRequest.getHeader().getShopId());
         map.put(Operations.PARAMETERS.OPERATORID.NAME, verifyRequest.getHeader().getOperatorId());
         map.put(Operations.PARAMETERS.REQREFNUM, verifyRequest.getHeader().getReqRefNum());
-        map.put(Operations.PARAMETERS.ORIGINALREQREFNUM, verifyRequest.getOriginalReqRefNum());
+        map.put(Operations.PARAMETERS.ORIGINALREQREFNUM.NAME, verifyRequest.getOriginalReqRefNum());
         map.put(Operations.PARAMETERS.OPTIONS.NAME, verifyRequest.getOptions());
 
         return map;
@@ -152,17 +152,31 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.NAME.NAME, authorization3DSRequest.getName());
         map.put(Operations.PARAMETERS.SURNAME.NAME, authorization3DSRequest.getSurname());
         map.put(Operations.PARAMETERS.TAXID.NAME, authorization3DSRequest.getTaxId());
-        map.put(Operations.PARAMETERS.INPERSON, authorization3DSRequest.getInPerson());
-        map.put(Operations.PARAMETERS.MERCHANTURL, authorization3DSRequest.getMerchantURL());
-        map.put(Operations.PARAMETERS.SERVICE, authorization3DSRequest.getData3DS().getService());
+        map.put(Operations.PARAMETERS.INPERSON.NAME, authorization3DSRequest.getInPerson());
+        map.put(Operations.PARAMETERS.MERCHANTURL.NAME, authorization3DSRequest.getMerchantURL());
+        map.put(Operations.PARAMETERS.SERVICE.NAME, authorization3DSRequest.getData3DS().getService());
         map.put(Operations.PARAMETERS.XID.NAME, authorization3DSRequest.getData3DS().getXid());
-        map.put(Operations.PARAMETERS.CAVV, authorization3DSRequest.getData3DS().getCavv());
-        map.put(Operations.PARAMETERS.ECI, authorization3DSRequest.getData3DS().getEci());
-        map.put(Operations.PARAMETERS.PP_AUTHENTICATEMETHOD, authorization3DSRequest.getMasterpassData().getPpAuthenticationMethod());
-        map.put(Operations.PARAMETERS.PP_CARDENROLLMETHOD, authorization3DSRequest.getMasterpassData().getPpCardEnrollMethod());
-        map.put(Operations.PARAMETERS.PARESSTATUS, authorization3DSRequest.getData3DS().getParesStatus());
-        map.put(Operations.PARAMETERS.SCENROLLSTATUS, authorization3DSRequest.getData3DS().getScEnrollStatus());
-        map.put(Operations.PARAMETERS.SIGNATUREVERIFICATION, authorization3DSRequest.getData3DS().getSignatureVerifytion());
+        map.put(Operations.PARAMETERS.CAVV.NAME, authorization3DSRequest.getData3DS().getCavv());
+        map.put(Operations.PARAMETERS.ECI.NAME, authorization3DSRequest.getData3DS().getEci());
+        map.put(Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpAuthenticationMethod());
+        map.put(Operations.PARAMETERS.PP_CARDENROLLMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpCardEnrollMethod());
+        map.put(Operations.PARAMETERS.PARESSTATUS.NAME, authorization3DSRequest.getData3DS().getParesStatus());
+        map.put(Operations.PARAMETERS.SCENROLLSTATUS.NAME, authorization3DSRequest.getData3DS().getScEnrollStatus());
+        map.put(Operations.PARAMETERS.SIGNATUREVERIFICATION.NAME, authorization3DSRequest.getData3DS().getSignatureVerifytion());
+
+        return map;
+    }
+
+    public static Map<String, String> get3DSStep2AuthMap(BPWXmlRequest request){
+
+        Map<String, String> map = getStdMap(request);
+
+        Auth3DSStep2Request auth3DSStep2Request = request.getData().getAuth3DSStep2Request();
+        map.put(Operations.PARAMETERS.SHOPID.NAME, auth3DSStep2Request.getHeader().getShopId());
+        map.put(Operations.PARAMETERS.OPERATORID.NAME, auth3DSStep2Request.getHeader().getOperatorId());
+        map.put(Operations.PARAMETERS.REQREFNUM, auth3DSStep2Request.getHeader().getReqRefNum());
+        map.put(Operations.PARAMETERS.ORIGINALREQREFNUM.NAME, auth3DSStep2Request.getOriginalReqRefNum());
+        map.put(Operations.PARAMETERS.PARES, auth3DSStep2Request.getPaRes());
 
         return map;
     }
@@ -211,6 +225,7 @@ public class MapBuilder {
         Map<String, String> map = new LinkedHashMap<>();
         map.put(Operations.PARAMETERS.OPERATION, request.getRequest().getOperation());
         map.put(Operations.PARAMETERS.TIMESTAMP, request.getRequest().getTimestamp());
+
         return map;
     }
 }
