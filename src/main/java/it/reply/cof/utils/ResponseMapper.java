@@ -33,34 +33,33 @@ public class ResponseMapper {
     public ConfirmationResponseDto mapConfirmationResponse(BPWXmlResponse response) {
         ConfirmationResponseDto dto = new ConfirmationResponseDto();
 
-        if (response != null) {
-            if (response.getData() != null && response.getData().getAuthorization() != null) {
-                List<Authorization> authorizations = response.getData().getAuthorization();
-                if (authorizations.size() == 1) {
-                    Authorization authorization = authorizations.get(0);
-                    if (authorization != null) {
-                        dto.setPaymentType(authorization.getPaymentType());
-                        dto.setAuthorizationType(authorization.getAuthorizationType());
-                        dto.setTransactionID(authorization.getTransactionId());
-                        dto.setNetwork(authorization.getNetwork());
-                        dto.setOrderId(authorization.getOrderId());
-                        dto.setTransactionAmount(authorization.getTransactionAmount());
-                        dto.setAuthorizedAmount(authorization.getAuthorizedAmount());
-                        dto.setCurrency(authorization.getCurrency());
-                        dto.setAccountedAmount(authorization.getAccountedAmount());
-                        dto.setRefundedAmount(authorization.getRefundedAmount());
-                        dto.setTransactionResult(authorization.getTransactionResult());
-                        dto.setTimestamp(authorization.getTimestamp());
-                        dto.setAuthorizationNumber(authorization.getAuthorizationNumber());
-                        dto.setAcquireBIN(authorization.getAcquirerBin());
-                        dto.setMerchantID(authorization.getMerchantId());
-                        dto.setTransactionStatus(authorization.getTransactionStatus());
-                        dto.setResponseCodeISO(authorization.getResponseCodeIso());
-                        dto.setPanTail(authorization.getPanTail());
-                        dto.setPanExpiryDate(authorization.getPanExpiryDate());
-                        dto.setMAC(authorization.getMac());
-                        dto.setResponseCodeISO(authorization.getResponseCodeIso());
-                    }
+
+        if (response != null && response.getData() != null && response.getData().getAuthorization() != null) {
+            List<Authorization> authorizations = response.getData().getAuthorization();
+            if (authorizations.size() == 1) {
+                Authorization authorization = authorizations.get(0);
+                if (authorization != null) {
+                    dto.setPaymentType(authorization.getPaymentType());
+                    dto.setAuthorizationType(authorization.getAuthorizationType());
+                    dto.setTransactionID(authorization.getTransactionId());
+                    dto.setNetwork(authorization.getNetwork());
+                    dto.setOrderId(authorization.getOrderId());
+                    dto.setTransactionAmount(authorization.getTransactionAmount());
+                    dto.setAuthorizedAmount(authorization.getAuthorizedAmount());
+                    dto.setCurrency(authorization.getCurrency());
+                    dto.setAccountedAmount(authorization.getAccountedAmount());
+                    dto.setRefundedAmount(authorization.getRefundedAmount());
+                    dto.setTransactionResult(authorization.getTransactionResult());
+                    dto.setTimestamp(authorization.getTimestamp());
+                    dto.setAuthorizationNumber(authorization.getAuthorizationNumber());
+                    dto.setAcquireBIN(authorization.getAcquirerBin());
+                    dto.setMerchantID(authorization.getMerchantId());
+                    dto.setTransactionStatus(authorization.getTransactionStatus());
+                    dto.setResponseCodeISO(authorization.getResponseCodeIso());
+                    dto.setPanTail(authorization.getPanTail());
+                    dto.setPanExpiryDate(authorization.getPanExpiryDate());
+                    dto.setMAC(authorization.getMac());
+                    dto.setResponseCodeISO(authorization.getResponseCodeIso());
                 }
             }
         }
@@ -87,7 +86,7 @@ public class ResponseMapper {
                 }
             }
 
-            if (response.getData() != null && response.getData().getAuthorization() != null && response.getData().getAuthorization().size() != 0) {
+            if (response.getData() != null && response.getData().getAuthorization() != null && !response.getData().getAuthorization().isEmpty()) {
                 Authorization authorization = response.getData().getAuthorization().get(0);
                 if (authorization != null) {
                     dto.setPaymentType(authorization.getPaymentType());
@@ -118,52 +117,52 @@ public class ResponseMapper {
 
     public OrderStatusResponseListDto mapOrderStatusResponse(BPWXmlResponse response) {
         OrderStatusResponseListDto dto = new OrderStatusResponseListDto();
-        if (response != null) {
-            if (response.getData() != null && response.getData().getAuthorization() != null) {
-                List<Authorization> authorizationList = response.getData().getAuthorization();
 
-                if (authorizationList.size() != 0) {
-                    PanAliasData commonElements = response.getData().getPanAliasData();
-                    OrderStatusResponseDto dtoElement = new OrderStatusResponseDto();
+        if (response != null && response.getData() != null && response.getData().getAuthorization() != null) {
+            List<Authorization> authorizationList = response.getData().getAuthorization();
 
-                    for (Authorization element : authorizationList) {
-                        dtoElement.setPaymentType(element.getPaymentType());
-                        dtoElement.setAuthorizationType(element.getAuthorizationType());
-                        dtoElement.setTransactionID(element.getTransactionId());
-                        dtoElement.setNetwork(element.getNetwork());
-                        dtoElement.setOrderID(element.getOrderId());
-                        dtoElement.setTransactionAmount(element.getTransactionAmount());
-                        dtoElement.setAuthorizedAmount(element.getAuthorizedAmount());
-                        dtoElement.setRefundedAmount(element.getRefundedAmount());
-                        dtoElement.setTransactionResult(element.getTransactionResult());
-                        dtoElement.setTimestamp(element.getTimestamp());
-                        dtoElement.setAuthorizationNumber(element.getAuthorizationNumber());
-                        dtoElement.setAcquireBIN(element.getAcquirerBin());
-                        dtoElement.setMerchantID(element.getMerchantId());
-                        dtoElement.setTransactionStatus(element.getTransactionStatus());
-                        dtoElement.setResponseCodeISO(element.getResponseCodeIso());
-                        dtoElement.setPanTail(element.getPanTail());
-                        dtoElement.setPanExpiryDate(element.getPanExpiryDate());
-                        dtoElement.setPaymentTypePP(element.getPaymentTypePP());
-                        dtoElement.setRRN(element.getRRN());
-                        dtoElement.setCardType(element.getCardType());
-                        dtoElement.setMAC(element.getMac());
+            if (!authorizationList.isEmpty()) {
+                PanAliasData commonElements = response.getData().getPanAliasData();
+                OrderStatusResponseDto dtoElement = new OrderStatusResponseDto();
 
-                        dto.oSRElements.add(dtoElement);
-                        dtoElement.clearAllIndividualFields();
-                    }
-                    if (commonElements != null) {
-                        dtoElement.setPanAlias(commonElements.getPanAlias());
-                        dtoElement.setPanAliasRev(commonElements.getPanAliasRev());
-                        dtoElement.setPanAliasExpDate(commonElements.getPanAliasExpDate());
-                        dtoElement.setPanAliasTail(commonElements.getPanAliasTail());
-                        dtoElement.setCommonMAC(commonElements.getMac());
+                for (Authorization element : authorizationList) {
+                    dtoElement.setPaymentType(element.getPaymentType());
+                    dtoElement.setAuthorizationType(element.getAuthorizationType());
+                    dtoElement.setTransactionID(element.getTransactionId());
+                    dtoElement.setNetwork(element.getNetwork());
+                    dtoElement.setOrderID(element.getOrderId());
+                    dtoElement.setTransactionAmount(element.getTransactionAmount());
+                    dtoElement.setAuthorizedAmount(element.getAuthorizedAmount());
+                    dtoElement.setRefundedAmount(element.getRefundedAmount());
+                    dtoElement.setTransactionResult(element.getTransactionResult());
+                    dtoElement.setTimestamp(element.getTimestamp());
+                    dtoElement.setAuthorizationNumber(element.getAuthorizationNumber());
+                    dtoElement.setAcquireBIN(element.getAcquirerBin());
+                    dtoElement.setMerchantID(element.getMerchantId());
+                    dtoElement.setTransactionStatus(element.getTransactionStatus());
+                    dtoElement.setResponseCodeISO(element.getResponseCodeIso());
+                    dtoElement.setPanTail(element.getPanTail());
+                    dtoElement.setPanExpiryDate(element.getPanExpiryDate());
+                    dtoElement.setPaymentTypePP(element.getPaymentTypePP());
+                    dtoElement.setRRN(element.getRRN());
+                    dtoElement.setCardType(element.getCardType());
+                    dtoElement.setMAC(element.getMac());
 
-                        dto.oSRCommon = dtoElement;
-                    }
+                    dto.oSRElements.add(dtoElement);
+                    dtoElement.clearAllIndividualFields();
+                }
+                if (commonElements != null) {
+                    dtoElement.setPanAlias(commonElements.getPanAlias());
+                    dtoElement.setPanAliasRev(commonElements.getPanAliasRev());
+                    dtoElement.setPanAliasExpDate(commonElements.getPanAliasExpDate());
+                    dtoElement.setPanAliasTail(commonElements.getPanAliasTail());
+                    dtoElement.setCommonMAC(commonElements.getMac());
+
+                    dto.oSRCommon = dtoElement;
                 }
             }
         }
+
         return dto;
     }
 }

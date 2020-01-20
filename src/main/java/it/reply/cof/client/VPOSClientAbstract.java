@@ -6,8 +6,7 @@ import it.reply.cof.apos.response.BPWXmlResponse;
 import it.reply.cof.apos.utils.AposPaymentClient;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.*;
-import it.reply.cof.dto.response.Auth3DSResponseDto;
-import it.reply.cof.dto.response.RefundResponseDto;
+import it.reply.cof.dto.response.*;
 import it.reply.cof.utils.HTMLGenerator;
 import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.ResponseMapper;
@@ -22,10 +21,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+
+/**
+ * Abstract implementation of VPOSClient interface
+ *
+ * @author Gabriel Raul Marini
+ */
 public abstract class VPOSClientAbstract implements VPOSClient {
 
     private static final String HTML_FILE_PATH = "/src/main/resources/template.html";
     private static final String HTML_DEFAULT_PATH = "/src/main/resources/default.html";
+
     protected String startKey;
     protected String apiResultKey;
     protected AposPaymentClient aposClient;
@@ -77,8 +83,16 @@ public abstract class VPOSClientAbstract implements VPOSClient {
 
     @Override
     public String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException {
-        String path = customTemplate ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
+        String path = customTemplate.booleanValue() ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
         return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey));
+    }
+
+    @Override
+    public void verifyURL(Map<String, String> values, String receivedMac) throws COFException {
+        String calculatedMAc = hmacCalculator.getMac(MapBuilder.getOutcomeMap(values), apiResultKey);
+        if (!receivedMac.equals(calculatedMAc))
+            throw new COFException("Authorization MAC is not valid");
+
     }
 
     @Override
@@ -92,34 +106,44 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         BPWXmlRequest request = requestBuilder.build3DSAuthRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
 
-        Auth3DSResponseDto response = new Auth3DSResponseDto();
-        return response;
+
+        return null;
     }
 
     @Override
-    public void confirmPayment(ConfirmRequestDto dto) {
-        //TODO
+    public ConfirmationResponseDto confirmPayment(ConfirmRequestDto dto) throws COFException {
+        BPWXmlRequest request = requestBuilder.buildConfirmRequest(dto);
+        BPWXmlResponse xmlResponse = aposClient.executeCall(request);
+        //check response MACs validity
+        verifyMacResponse(xmlResponse);
+        return responseMapper.mapConfirmationResponse(xmlResponse);
     }
 
     @Override
     public RefundResponseDto refundPayment(RefundRequestDto dto) throws COFException {
         BPWXmlRequest request = requestBuilder.buildRefundRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
-
         //check response MACs validity
         verifyMacResponse(xmlResponse);
-
         return responseMapper.mapRefundResponseDto(xmlResponse);
     }
 
     @Override
-    public void verifyPayment(VerifyRequestDto dto) {
-        //TODO
+    public VerifyResponseDto verifyPayment(VerifyRequestDto dto) throws COFException {
+        BPWXmlRequest request = requestBuilder.buildVerifyRequest(dto);
+        BPWXmlResponse xmlResponse = aposClient.executeCall(request);
+        //check response MACs validity
+        verifyMacResponse(xmlResponse);
+        return responseMapper.mapVerifyResponse(xmlResponse);
     }
 
     @Override
-    public void getOrderStatus(OrderStatusRequestDto dto) {
-        //TODO
+    public OrderStatusResponseListDto getOrderStatus(OrderStatusRequestDto dto) throws COFException {
+        BPWXmlRequest request = requestBuilder.buildOrderStatusRequest(dto);
+        BPWXmlResponse xmlResponse = aposClient.executeCall(request);
+        //check response MACs validity
+        verifyMacResponse(xmlResponse);
+        return responseMapper.mapOrderStatusResponse(xmlResponse);
     }
 
     private void verifyMacResponse(BPWXmlResponse response) throws COFException {
@@ -146,11 +170,4 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         }
     }
 
-    @Override
-    public void verifyURL(Map<String, String> values, String receivedMac) throws COFException {
-        String calculatedMAc = hmacCalculator.getMac(MapBuilder.getOutcomeMap(values), apiResultKey);
-        if (!receivedMac.equals(calculatedMAc))
-            throw new COFException("Authorization MAC is not valid");
-
-    }
 }
