@@ -105,9 +105,18 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     public Auth3DSResponseDto start3DSAuth(Auth3DSDto dto) throws COFException {
         BPWXmlRequest request = requestBuilder.build3DSAuthRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
+        //check response MACs validity
+        verifyMacResponse(xmlResponse);
+        return responseMapper.auth3DSResponseDto(xmlResponse);
+    }
 
-
-        return null;
+    @Override
+    public Auth3DSStep2ResponseDto start3DSAuthStep2Dto(Auth3DSStep2RequestDto dto) throws COFException{
+        BPWXmlRequest request = requestBuilder.build3DSStep2AuthRequest(dto);
+        BPWXmlResponse xmlResponse = aposClient.executeCall(request);
+        //check response MACs validity
+        verifyMacResponse(xmlResponse);
+        return responseMapper.auth3DSStep2ResponseDto(xmlResponse);
     }
 
     @Override

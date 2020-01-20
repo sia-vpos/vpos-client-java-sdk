@@ -2,10 +2,7 @@ package it.reply.cof.client;
 
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.*;
-import it.reply.cof.dto.response.ConfirmationResponseDto;
-import it.reply.cof.dto.response.OrderStatusResponseListDto;
-import it.reply.cof.dto.response.RefundResponseDto;
-import it.reply.cof.dto.response.VerifyResponseDto;
+import it.reply.cof.dto.response.*;
 import it.reply.cof.utils.exception.COFException;
 
 import java.util.Map;
@@ -55,7 +52,15 @@ public interface VPOSClient {
      * @return the outcome of the operation with the relative additional infos
      * @throws COFException in case of failure (see exception message for more info)
      */
-    Auth3DSDto start3DSAuth(Auth3DSDto dto) throws COFException;
+    Auth3DSResponseDto start3DSAuth(Auth3DSDto dto) throws COFException;
+
+    /**
+     * @param dto data transfer object containing all the required parameters to perform a
+     *            3DS authorization
+     * @return the outcome of the operation with the relative additional infos
+     * @throws COFException in case of failure (see exception message for more info)
+     */
+    Auth3DSStep2ResponseDto start3DSAuthStep2Dto(Auth3DSStep2RequestDto dto) throws COFException;
 
     /**
      * @param dto data transfer object containing all the required parameters to perform a
