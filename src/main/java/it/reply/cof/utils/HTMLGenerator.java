@@ -33,7 +33,7 @@ public class HTMLGenerator {
 
         for (Entry<String, String> entry : params.entrySet()) {
             if (entry.getValue() != null && !entry.getValue().trim().isEmpty()) {
-                String toAppend = INPUT_PATTERN.replace("KEY", entry.getKey()).replace("VALUE", entry.getValue());
+                String toAppend = decodedInputPattern.replace("KEY", entry.getKey()).replace("VALUE", entry.getValue());
                 sb.append(toAppend);
             }
         }
@@ -41,7 +41,7 @@ public class HTMLGenerator {
         return sb.toString();
     }
 
-    public String htmlToBase64(String fileName, Map<String, String> params) throws COFException {
+    public String htmlToBase64(String fileName, String urlApos, Map<String, String> params) throws COFException {
         String html;
 
         try (Scanner sc = new Scanner(new File(fileName))) {
@@ -50,6 +50,7 @@ public class HTMLGenerator {
             throw new COFException("Error while generating HTML base64 encoded file", e.getCause());
         }
 
+        html = html.replace("[APOS_URL]", urlApos);
         html = html.replace("[PARAMETERS]", generateParamsHtml(params));
         return encoder.encodeToString(html.getBytes());
     }

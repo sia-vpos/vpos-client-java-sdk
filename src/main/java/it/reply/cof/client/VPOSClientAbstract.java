@@ -25,7 +25,7 @@ import java.util.Map;
 public abstract class VPOSClientAbstract implements VPOSClient {
 
     private static final String HTML_FILE_PATH = "/src/main/resources/template.html";
-    private static final String HTML_DEFAULT_PATH = "src/main/resources/default.html";
+    private static final String HTML_DEFAULT_PATH = "/src/main/resources/default.html";
     protected String startKey;
     protected String apiResultKey;
     protected AposPaymentClient aposClient;
@@ -66,7 +66,6 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     @Override
     public void injectHtmlTemplate(String base64, Integer delay) throws COFException {
         String html = htmlTool.base64ToHtml(base64, delay);
-        customTemplate = true;
 
         try (FileWriter fileWriter = new FileWriter(filePath.concat(HTML_FILE_PATH))) {
             fileWriter.write(html);
@@ -79,7 +78,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     @Override
     public String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException {
         String path = customTemplate ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
-        return htmlTool.htmlToBase64(filePath, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey));
+        return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey));
     }
 
     @Override
