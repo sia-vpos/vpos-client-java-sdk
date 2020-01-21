@@ -20,6 +20,8 @@ public class Request {
     @XmlElement(name = "MAC")
     private String mac;
 
+    public Request(){}
+
     public Request(String operation, Date reqDate) {
         this.operation = operation;
         SimpleDateFormat format = new SimpleDateFormat(Constants.TIMESTAMP_PATTERN);

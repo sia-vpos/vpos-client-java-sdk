@@ -38,7 +38,7 @@ public final class Encoder {
     }
 
     /**
-     * Calculates the MAC of the string MAPKEY1=MAPVAL1&MAPKEY2=MAPVALUE2...
+     * Calculates the MAC of the generated string from the map following the pattern KEY=VALUE
      *
      * @param valueMap containing all the values from which MAC is calculated
      * @param key      secret shared between merchant and SIA VPos
@@ -54,7 +54,7 @@ public final class Encoder {
         sb.deleteCharAt(0);
 
         Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC string: " +sb.toString());
-
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC: " + hmacCalculator.calculate(sb.toString(), key));
         return hmacCalculator.calculate(sb.toString(), key);
     }
 

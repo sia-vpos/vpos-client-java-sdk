@@ -8,53 +8,55 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Auth3DSStep2Request {
 
-	@XmlElement(name = "Header")
-	private Header header;
+    @XmlElement(name = "Header")
+    private Header header;
 
-	@XmlElement(name = "OriginalReqRefNum")
-	private String originalReqRefNum;
+    @XmlElement(name = "OriginalReqRefNum")
+    private String originalReqRefNum;
 
-	@XmlElement(name = "PaRes")
-	private String paRes;
+    @XmlElement(name = "PaRes")
+    private String paRes;
 
-	@XmlElement(name = "Acquirer")
-	private String Acquirer;
+    @XmlElement(name = "Acquirer")
+    private String Acquirer;
 
+    public Auth3DSStep2Request() {
+    }
 
-	public String getAcquirer() {
-		return Acquirer;
-	}
+    public Auth3DSStep2Request(Date date) {
+        this.header = new Header(date);
+    }
 
-	public void setAcquirer(String acquirer) {
-		Acquirer = acquirer;
-	}
+    public String getAcquirer() {
+        return Acquirer;
+    }
 
-	public Auth3DSStep2Request(Date date) {
-		this.header = new Header(date);
-	}
+    public void setAcquirer(String acquirer) {
+        Acquirer = acquirer;
+    }
 
-	public Header getHeader() {
-		return header;
-	}
+    public Header getHeader() {
+        return header;
+    }
 
-	public void setHeader(Header header) {
-		this.header = header;
-	}
+    public void setHeader(Header header) {
+        this.header = header;
+    }
 
-	public String getOriginalReqRefNum() {
-		return originalReqRefNum;
-	}
+    public String getOriginalReqRefNum() {
+        return originalReqRefNum;
+    }
 
-	public void setOriginalReqRefNum(String originalReqRefNum) {
-		this.originalReqRefNum = originalReqRefNum;
-	}
+    public void setOriginalReqRefNum(String originalReqRefNum) {
+        this.originalReqRefNum = originalReqRefNum;
+    }
 
-	public String getPaRes() {
-		return paRes;
-	}
+    public String getPaRes() {
+        return paRes;
+    }
 
-	public void setPaRes(String paRes) {
-		this.paRes = paRes;
-	}
+    public void setPaRes(String paRes) {
+        this.paRes = paRes;
+    }
 
 }

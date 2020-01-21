@@ -87,15 +87,18 @@ public interface VPOSClient {
     VerifyResponseDto verifyPayment(VerifyRequestDto dto) throws COFException;
 
     /**
-     * @param dto
+     * @param dto data transfer object containing all the required parameters to perform an
+     *            order status request
      * @return the outcome of the operation with the relative additional infos
      * @throws COFException in case of failure (see exception message for more info)
      */
     OrderStatusResponseListDto getOrderStatus(OrderStatusRequestDto dto) throws COFException;
 
     /**
-     * @param proxyName
-     * @param proxyPort
+     * Set a basic proxy configuration
+     *
+     * @param proxyName url of the proxy location
+     * @param proxyPort port on which proxy is enabled
      */
     void setProxy(String proxyName, Integer proxyPort);
 }

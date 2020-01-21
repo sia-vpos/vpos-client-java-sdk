@@ -27,36 +27,29 @@ public class Header {
     }
 
     public Header(){
-
     }
 
     public String getShopId() {
-
         return shopId;
     }
 
     public void setShopId(String shopId) {
-
         this.shopId = shopId;
     }
 
     public String getOperatorId() {
-
         return operatorId;
     }
 
     public void setOperatorId(String operatorId) {
-
         this.operatorId = operatorId;
     }
 
     public String getReqRefNum() {
-
         return reqRefNum;
     }
 
     public void setReqRefNum(String reqRefNum) {
-
         this.reqRefNum = reqRefNum;
     }
 

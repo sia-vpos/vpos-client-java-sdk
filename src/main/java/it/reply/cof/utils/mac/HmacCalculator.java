@@ -66,9 +66,9 @@ public final class HmacCalculator {
     }
 
     private String innerCalculate(String value, String key) throws Exception {
-        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), algorithm.getValue());
+        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(CHARSET.name()), algorithm.getValue());
         mac.init(secretKey);
-        return Hex.encodeHexString(mac.doFinal(value.getBytes(CHARSET)));
+        return Hex.encodeHexString(mac.doFinal(value.getBytes(CHARSET.name())));
     }
 
     /**

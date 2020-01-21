@@ -8,10 +8,10 @@ import it.reply.cof.dto.response.OrderStatusResponseDto;
 import it.reply.cof.utils.exception.COFException;
 
 public class Application {
-    private static final String SHOP_ID = "129281292800104";
-    private static final String PAN_ALIAS = "0000147162817302285";
-    private static final String START_KEY = "CNCuDT5Vyws2v9t--RhDdtCwstaV2tqVeqfE-D8G-S-Ds--C-fFkSBxw-3wWBqBC--U9hwN-H-Mj4ZZHMr--YSHLdU5WKLx-cT-T";
-    private static final String API_RESULT_KEY = "nS-zLHC35Pzu47m-AZtRejrd-xd2SsudbpKmmfGgD-9-dJjRQpm8pPJM84uEZgkgq-CfJ9n--sHNHjKx7--Aw-56jEqLVDe-aT-f";
+    private static final String SHOP_ID = "129281292800109";
+    private static final String PAN_ALIAS = "0000847379064699692";
+    private static final String MAC_KEY_VPOS = "fU-9et-s-Sj8W---E8uhUDu9fEzqr8hH3L95s48r9nq-cq3cBXbp-tZsvGQU--t-nqmtaW-7x-7-C2PdcuFdbHuShQ-pYVWnr-4-";
+    private static final String API_RESULT_KEY = "E-vmE-GHXmx73-Lfg24LztZ-7-yCyVsKn4QXphL5qzf-Kr-Cf-JWpZwZgaZRA5dR9V677xL4uCbc-Ce--8h2-tdrSu--QKjF-nZh";
     private static final String MAC_KEY_REDIRECT = "VnFBty7us-7QubjwHcjFaq4hb5-5n5-VdaymsXfqukzd3nhYhsLvuL5nFs-sCrJT--n9-J7zghhUYpFUw6q4KxCQ-XND6dV—abW";
     private static final String URL_REDIRECT = "https://atpostest.ssb.it/atpos/pagamenti/main";
     private static final String URL_DONE = "http://localhost:8080/payment-gateway/vpos/tokenize";
@@ -22,12 +22,14 @@ public class Application {
     private static final String BASE64HTML = "PGh0bWw+CiAgICA8Ym9keT4KICAgICAgICAKICAgIDwvYm9keT4KPC9odG1sPg==";
 
     public static void main(String[] args) throws COFException {
-        VPOSClient vposClient = new VPOSSimpleClient(URL_WEB_API, START_KEY, API_RESULT_KEY);
+        VPOSClient vposClient = new VPOSSimpleClient(URL_WEB_API, MAC_KEY_VPOS, API_RESULT_KEY);
 
         System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
 
         try{
+
             vposClient.refundPayment(buildRefundTest());
+
         } catch (Exception e){
 
             System.err.println(e.getMessage());
@@ -60,19 +62,20 @@ public class Application {
     private static Auth3DSDto buildAuth3DSTest1() {
         Auth3DSDto dto = new Auth3DSDto();
 
-        dto.setMasterpass(true);
-        dto.setOrderId("0oiujh6rd3tbhberwwww3g4ui777");
-        dto.setPan("0000916743400860385&");
-        dto.setExpDate("2112");
-        dto.setAmount("10");
+        dto.setMasterpass(false);
+        dto.setOrderId("2001215G4HZPQ");
+        dto.setPan(PAN_ALIAS);
+        dto.setExpDate("2102");
+        dto.setAmount("2000");
         dto.setCurrency("978");
-        dto.setExponent("1");
+        dto.setCvv2("111");
         dto.setAccountingMode("D");
         dto.setNetwork("98");
         //dto.setTimestamp();
-        dto.setShopId("129281292800104");
+        dto.setShopId(SHOP_ID);
         dto.setOperatorId("Giammaicol");
-        dto.setOptions("GM");
+        dto.setInPerson("S");
+        dto.setMerchantUrl("http://test.it");
 
         return dto;
     }
