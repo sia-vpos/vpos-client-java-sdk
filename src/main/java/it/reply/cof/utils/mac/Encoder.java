@@ -53,7 +53,7 @@ public final class Encoder {
         //deleting the first &
         sb.deleteCharAt(0);
 
-        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC string: " +sb.toString());
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC string: " + sb.toString());
         Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC: " + hmacCalculator.calculate(sb.toString(), key));
         return hmacCalculator.calculate(sb.toString(), key);
     }
