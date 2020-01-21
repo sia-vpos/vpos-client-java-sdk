@@ -18,6 +18,10 @@ public class RefundRequest extends GeneralRequest {
         super(reqDate);
     }
 
+    public RefundRequest(){
+
+    }
+
     public String getOpDescr() {
         return opDescr;
     }

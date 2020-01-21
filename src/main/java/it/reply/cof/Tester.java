@@ -41,6 +41,7 @@ public class Tester {
         map.put("PANTAIL","0031");
         map.put("PANEXPIRYDATE","2112");
         map.put("NETWORK","02");
+        map.put("PANALIASREV", "");
 
 
 

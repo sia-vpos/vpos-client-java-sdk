@@ -27,7 +27,7 @@ public class Application {
         System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
 
         try{
-            vposClient.verifyPayment(buildVerifyTest());
+            vposClient.refundPayment(buildRefundTest());
         } catch (Exception e){
 
             System.err.println(e.getMessage());
