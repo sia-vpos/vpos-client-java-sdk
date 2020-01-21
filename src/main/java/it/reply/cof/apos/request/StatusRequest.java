@@ -27,6 +27,8 @@ public class StatusRequest {
         this.header = new Header(reqDate);
     }
 
+    public StatusRequest(){}
+
     public Header getHeader() {
         return header;
     }
@@ -65,5 +67,10 @@ public class StatusRequest {
 
     public void setOptions(String options) {
         this.options = options;
+    }
+
+    public String toString(){
+        return "StatusRequest: Header: " + this.getHeader().toString() + " OriginalReqRefNum: " + this.originalReqRefNum + " OrderID: " + this.orderId + " ProductRef: " + this.productRef
+                                + " Options: " + this.options;
     }
 }

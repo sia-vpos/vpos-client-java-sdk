@@ -26,6 +26,10 @@ public class Header {
         this.reqRefNum = format.format(reqDate) + Utils.generateRandomDigits();
     }
 
+    public Header(){
+
+    }
+
     public String getShopId() {
 
         return shopId;
@@ -54,5 +58,9 @@ public class Header {
     public void setReqRefNum(String reqRefNum) {
 
         this.reqRefNum = reqRefNum;
+    }
+
+    public String toString(){
+        return "Header: ShopID: " + this.getShopId() + " OperatorID: " + " ReqRefNum: " + this.getReqRefNum() + " ";
     }
 }

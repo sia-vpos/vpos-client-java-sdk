@@ -165,6 +165,7 @@ public class RequestBuilder {
         request.getRequest().setMac(encoder.getMac(MapBuilder.getVerifyMap(request), key));
         return request;
     }
+
     /**
      * Build the XML request for step 1 of a 3DS authorization
      *
@@ -225,10 +226,15 @@ public class RequestBuilder {
         authorization3DSRequest.setTaxId(dtoRequest.getTaxId());
         authorization3DSRequest.setCreatePanAlias(dtoRequest.getCreatePanAlias());
 
+        Data data = new Data();
+        data.setAuthorizationRequest(authorization3DSRequest);
+        request.setData(data);
+
         request.getRequest().setMac(encoder.getMac(MapBuilder.get3DSAuthMap(request), key));
 
         return request;
     }
+
     /**
      * Build the XML request for step 2 of a 3DS authorization
      *
@@ -250,6 +256,10 @@ public class RequestBuilder {
         auth3DSStep2Request.setOriginalReqRefNum(dtoRequest.getOriginalRefReqNum());
         auth3DSStep2Request.setPaRes(dtoRequest.getPaRes());
         auth3DSStep2Request.setAcquirer(dtoRequest.getAcquirer());
+
+        Data data = new Data();
+        data.setAuth3DSStep2Request(auth3DSStep2Request);
+        request.setData(data);
 
         request.getRequest().setMac(encoder.getMac(MapBuilder.get3DSStep2AuthMap(request), key));
 

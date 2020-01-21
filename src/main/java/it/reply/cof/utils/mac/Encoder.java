@@ -6,6 +6,8 @@ import it.reply.cof.utils.exception.COFException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Utility class used in the context of message integrity check
@@ -50,6 +52,8 @@ public final class Encoder {
             appendField(entry.getKey().toUpperCase(), entry.getValue(), sb);
         //deleting the first &
         sb.deleteCharAt(0);
+
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC string: " +sb.toString());
 
         return hmacCalculator.calculate(sb.toString(), key);
     }

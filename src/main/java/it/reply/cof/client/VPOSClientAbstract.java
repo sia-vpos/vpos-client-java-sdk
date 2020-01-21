@@ -158,6 +158,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     public VerifyResponseDto verifyPayment(VerifyRequestDto dto) throws COFException {
         BPWXmlRequest request = requestBuilder.buildVerifyRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
+
         //check response MACs validity
         verifyMacResponse(xmlResponse);
         return responseMapper.mapVerifyResponse(xmlResponse);
@@ -176,18 +177,19 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         final String NEUTRAL_MAC_VALUE = "NULL";
 
         String responseMac = responseMACCalculator.getBPWXmlResponseMac(response, apiResultKey);
+
         if (!response.getMac().equals(NEUTRAL_MAC_VALUE) && !response.getMac().equals(responseMac))
             throw new COFException("Response MAC is not valid");
 
 
-        if (response.getData().getOperation() != null) {
+        if (response.getData() != null && response.getData().getOperation() != null) {
             String operationMac = responseMACCalculator.getOperationMac(response.getData().getOperation(), apiResultKey);
             if (!response.getData().getOperation().getMac().equals(NEUTRAL_MAC_VALUE) && !response.getData().getOperation().getMac().equals(operationMac))
                 throw new COFException("Operation MAC is not valid");
 
         }
 
-        if (response.getData().getAuthorization() != null) {
+        if (response.getData() != null && response.getData().getAuthorization() != null) {
             for (Authorization authorization : response.getData().getAuthorization()) {
                 String authorizationMac = responseMACCalculator.getAuthorizationMac(authorization, apiResultKey);
                 if (!authorization.getMac().equals(NEUTRAL_MAC_VALUE) && !authorization.getMac().equals(authorizationMac))

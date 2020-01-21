@@ -1,8 +1,12 @@
 package it.reply.cof;
 
+import it.reply.cof.apos.request.RefundRequest;
 import it.reply.cof.client.VPOSClient;
 import it.reply.cof.client.VPOSSimpleClient;
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.dto.request.Auth3DSDto;
+import it.reply.cof.dto.request.RefundRequestDto;
+import it.reply.cof.dto.request.VerifyRequestDto;
 import it.reply.cof.utils.exception.COFException;
 
 public class Application {
@@ -20,17 +24,25 @@ public class Application {
     private static final String BASE64HTML = "PGh0bWw+CiAgICA8Ym9keT4KICAgICAgICAKICAgIDwvYm9keT4KPC9odG1sPg==";
 
     public static void main(String[] args) throws COFException {
-        VPOSClient vposClient = new VPOSSimpleClient(MAC_KEY_VPOS, API_RESULT_KEY);
-
+        VPOSClient vposClient = new VPOSSimpleClient(URL_WEB_API, MAC_KEY_VPOS, API_RESULT_KEY);
 
         System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
+
+        try{
+            vposClient.verifyPayment(buildVerifyTest());
+        } catch (Exception e){
+
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     private static PaymentInfo buildPaymentTest() {
         PaymentInfo paymentInfo = new PaymentInfo();
-        paymentInfo.setAmount("10");
+        paymentInfo.setAmount("10000");
         paymentInfo.setCurrency("978");
-        paymentInfo.setOrderId("s564c564c6as54as654c65as4");
+        paymentInfo.setOrderId("0oiujh6rd3tbhberwwww3g4ui777");
         paymentInfo.setShopId(SHOP_ID);
         paymentInfo.setUrlBack(URL_BACK);
         paymentInfo.setUrlDone(URL_DONE);
@@ -40,4 +52,46 @@ public class Application {
         paymentInfo.addOption("GM");
         return paymentInfo;
     }
+
+   private static RefundRequestDto buildRefundTest(){
+        RefundRequestDto dto = new RefundRequestDto("129281292800104", "a caso", "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777", "10", "978", "1", "jopokokok");
+
+        return dto;
+    }
+
+    private static Auth3DSDto buildAuth3DSTest1() {
+        Auth3DSDto dto = new Auth3DSDto();
+
+        dto.setMasterpass(true);
+        dto.setOrderId("0oiujh6rd3tbhberwwww3g4ui777");
+        dto.setPan("0000916743400860385&");
+        dto.setExpDate("2112");
+        dto.setAmount("10");
+        dto.setCurrency("978");
+        dto.setExponent("1");
+        dto.setAccountingMode("D");
+        dto.setNetwork("98");
+        //dto.setTimestamp();
+        dto.setShopId("129281292800104");
+        dto.setOperatorId("Giammaicol");
+        dto.setOptions("GM");
+
+        return dto;
+    }
+
+    private static VerifyRequestDto buildVerifyTest(){
+        VerifyRequestDto dto = new VerifyRequestDto();
+
+        dto.setOriginalReqRefNum("20200121747989345505071695860709");
+        dto.setShopId("129281292800104");
+        dto.setOperatorId("Giammaicol");
+
+
+        return dto;
+    }
+
+
+
+
+
 }

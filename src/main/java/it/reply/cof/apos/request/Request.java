@@ -56,4 +56,7 @@ public class Request {
         this.mac = mac;
     }
 
+    public String toString(){
+        return "Request: Operation: " + this.operation + " Timestamp: " + this.timestamp + " MAC: " + this.mac + " ";
+    }
 }
