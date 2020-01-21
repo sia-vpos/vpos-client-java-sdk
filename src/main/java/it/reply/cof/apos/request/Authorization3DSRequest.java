@@ -17,7 +17,7 @@ public class Authorization3DSRequest {
     @XmlElement(name = "MasterpassData")
     private MasterpassData masterpassData;
 
-    @XmlElement(name = "OrderId")
+    @XmlElement(name = "OrderID")
     private String orderId;
 
     @XmlElement(name = "PAN")
@@ -88,6 +88,8 @@ public class Authorization3DSRequest {
 
     @XmlElement(name = "MerchantURL")
     private String merchantURL;
+
+    public Authorization3DSRequest(){}
 
     public Authorization3DSRequest(Date date) {
         this.header = new Header(date);

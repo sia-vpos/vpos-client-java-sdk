@@ -26,6 +26,8 @@ public class GeneralRequest {
     @XmlElement(name = "Exponent")
     protected String exponent;
 
+    public GeneralRequest(){}
+
     public GeneralRequest(Date reqDate) {
         this.header = new Header(reqDate);
     }

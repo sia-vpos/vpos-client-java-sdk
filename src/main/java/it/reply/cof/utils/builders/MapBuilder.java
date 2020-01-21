@@ -138,7 +138,7 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.PAN.NAME, authorization3DSRequest.getPan());
         map.put(Operations.PARAMETERS.CVV2.NAME, authorization3DSRequest.getCvv2());
         map.put(Operations.PARAMETERS.EXPDATE.NAME, authorization3DSRequest.getExpDate());
-        map.put(Operations.PARAMETERS.AMOUNT.NAME, authorization3DSRequest.getAcquirer());
+        map.put(Operations.PARAMETERS.AMOUNT.NAME, authorization3DSRequest.getAmount());
         map.put(Operations.PARAMETERS.CURRENCY.NAME, authorization3DSRequest.getCurrency());
         map.put(Operations.PARAMETERS.EXPONENT.NAME, authorization3DSRequest.getExponent());
         map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, authorization3DSRequest.getAccountingMode());
@@ -157,15 +157,18 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.TAXID.NAME, authorization3DSRequest.getTaxId());
         map.put(Operations.PARAMETERS.INPERSON.NAME, authorization3DSRequest.getInPerson());
         map.put(Operations.PARAMETERS.MERCHANTURL.NAME, authorization3DSRequest.getMerchantURL());
-        map.put(Operations.PARAMETERS.SERVICE.NAME, authorization3DSRequest.getData3DS().getService());
-        map.put(Operations.PARAMETERS.XID.NAME, authorization3DSRequest.getData3DS().getXid());
-        map.put(Operations.PARAMETERS.CAVV.NAME, authorization3DSRequest.getData3DS().getCavv());
-        map.put(Operations.PARAMETERS.ECI.NAME, authorization3DSRequest.getData3DS().getEci());
-        map.put(Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpAuthenticationMethod());
-        map.put(Operations.PARAMETERS.PP_CARDENROLLMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpCardEnrollMethod());
-        map.put(Operations.PARAMETERS.PARESSTATUS.NAME, authorization3DSRequest.getData3DS().getParesStatus());
-        map.put(Operations.PARAMETERS.SCENROLLSTATUS.NAME, authorization3DSRequest.getData3DS().getScEnrollStatus());
-        map.put(Operations.PARAMETERS.SIGNATUREVERIFICATION.NAME, authorization3DSRequest.getData3DS().getSignatureVerifytion());
+
+        if(authorization3DSRequest.getData3DS() != null) {
+            map.put(Operations.PARAMETERS.SERVICE.NAME, authorization3DSRequest.getData3DS().getService());
+            map.put(Operations.PARAMETERS.XID.NAME, authorization3DSRequest.getData3DS().getXid());
+            map.put(Operations.PARAMETERS.CAVV.NAME, authorization3DSRequest.getData3DS().getCavv());
+            map.put(Operations.PARAMETERS.ECI.NAME, authorization3DSRequest.getData3DS().getEci());
+            map.put(Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpAuthenticationMethod());
+            map.put(Operations.PARAMETERS.PP_CARDENROLLMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpCardEnrollMethod());
+            map.put(Operations.PARAMETERS.PARESSTATUS.NAME, authorization3DSRequest.getData3DS().getParesStatus());
+            map.put(Operations.PARAMETERS.SCENROLLSTATUS.NAME, authorization3DSRequest.getData3DS().getScEnrollStatus());
+            map.put(Operations.PARAMETERS.SIGNATUREVERIFICATION.NAME, authorization3DSRequest.getData3DS().getSignatureVerifytion());
+        }
 
         return map;
     }

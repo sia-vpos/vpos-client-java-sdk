@@ -46,6 +46,8 @@ public class Data {
     @XmlElement(name = "VBVRedirect")
     private VBVRedirect vbvRedirect;
 
+    public Data(){}
+
     public Authorization3DSRequest getAuthorizationRequest() {
         return authorizationRequest;
     }

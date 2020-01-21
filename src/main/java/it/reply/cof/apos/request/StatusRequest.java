@@ -23,11 +23,12 @@ public class StatusRequest {
     @XmlElement(name = "Options")
     private String options;
 
+    public StatusRequest() {
+    }
+
     public StatusRequest(Date reqDate) {
         this.header = new Header(reqDate);
     }
-
-    public StatusRequest(){}
 
     public Header getHeader() {
         return header;
@@ -69,8 +70,8 @@ public class StatusRequest {
         this.options = options;
     }
 
-    public String toString(){
+    public String toString() {
         return "StatusRequest: Header: " + this.getHeader().toString() + " OriginalReqRefNum: " + this.originalReqRefNum + " OrderID: " + this.orderId + " ProductRef: " + this.productRef
-                                + " Options: " + this.options;
+                + " Options: " + this.options;
     }
 }

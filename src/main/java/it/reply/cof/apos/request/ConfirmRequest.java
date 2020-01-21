@@ -17,6 +17,10 @@ public class ConfirmRequest extends GeneralRequest {
     @XmlElement(name = "Options")
     private String options;
 
+    public ConfirmRequest(){
+        super();
+    }
+
     public ConfirmRequest(Date reqDate) {
         super(reqDate);
     }
