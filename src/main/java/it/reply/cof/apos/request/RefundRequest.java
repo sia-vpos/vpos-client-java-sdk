@@ -14,8 +14,6 @@ public class RefundRequest extends GeneralRequest {
     @XmlElement(name = "Options")
     private String options;
 
-    public RefundRequest(){}
-
     public RefundRequest(Date reqDate) {
         super(reqDate);
     }

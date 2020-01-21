@@ -54,7 +54,7 @@ public class Application {
     }
 
    private static RefundRequestDto buildRefundTest(){
-        RefundRequestDto dto = new RefundRequestDto("129281292800104", "a caso", "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777", "10", "978", "1", "jopokokok");
+        RefundRequestDto dto = new RefundRequestDto("129281292800104", "a caso", "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777", "10", "978", "2", "jopokokok");
 
         return dto;
     }
