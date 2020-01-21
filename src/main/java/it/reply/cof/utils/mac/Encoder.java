@@ -74,7 +74,7 @@ public final class Encoder {
     }
 
     private void appendField(String key, String value, StringBuilder sb) {
-        if (value != null && !value.trim().isEmpty()) {
+        if (value != null) {
             sb.append('&');
             sb.append(key);
             sb.append('=');

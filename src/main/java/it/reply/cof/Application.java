@@ -1,12 +1,10 @@
 package it.reply.cof;
 
-import it.reply.cof.apos.request.RefundRequest;
 import it.reply.cof.client.VPOSClient;
 import it.reply.cof.client.VPOSSimpleClient;
 import it.reply.cof.dto.PaymentInfo;
-import it.reply.cof.dto.request.Auth3DSDto;
-import it.reply.cof.dto.request.RefundRequestDto;
-import it.reply.cof.dto.request.VerifyRequestDto;
+import it.reply.cof.dto.request.*;
+import it.reply.cof.dto.response.OrderStatusResponseDto;
 import it.reply.cof.utils.exception.COFException;
 
 public class Application {
@@ -92,6 +90,22 @@ public class Application {
         return dto;
     }
 
+    private static ConfirmRequestDto buildConfirmTest(){
+        ConfirmRequestDto dto = new ConfirmRequestDto();
+
+
+        return dto;
+    }
+
+    private static OrderStatusRequestDto buildOrderStatusTest(){
+        OrderStatusRequestDto dto = new OrderStatusRequestDto("129281292800104", "Giammaicol",
+                "0oiujh6rd3tbhberwwww3g4ui777", "dedetv435t4ff4f", "");
+
+
+
+
+        return dto;
+    }
 
 
 
