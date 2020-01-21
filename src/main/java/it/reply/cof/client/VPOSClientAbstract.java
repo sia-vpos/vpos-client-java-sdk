@@ -98,7 +98,6 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         String calculatedMAc = hmacCalculator.getMac(MapBuilder.getOutcomeMap(values), apiResultKey);
         if (!receivedMac.equals(calculatedMAc))
             throw new COFException("Authorization MAC is not valid");
-
     }
 
     @Override
