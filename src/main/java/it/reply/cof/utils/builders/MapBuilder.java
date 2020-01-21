@@ -80,6 +80,8 @@ public class MapBuilder {
         Map<String, String> map = getStdMap(request);
 
         StatusRequest verifyRequest = request.getData().getVerifyRequest();
+        map.put(Operations.PARAMETERS.OPERATION, request.getRequest().getOperation());
+        map.put(Operations.PARAMETERS.TIMESTAMP, request.getRequest().getTimestamp());
         map.put(AposConstants.SHOPID, verifyRequest.getHeader().getShopId());
         map.put(Operations.PARAMETERS.OPERATORID.NAME, verifyRequest.getHeader().getOperatorId());
         map.put(Operations.PARAMETERS.REQREFNUM, verifyRequest.getHeader().getReqRefNum());
@@ -107,9 +109,9 @@ public class MapBuilder {
 
         //Get refund request
         GeneralRequest generalRequest = null;
-        if (request.getData().getOperation().equals(Operations.PARAMETERS.REFUND))
+        if (request.getRequest().getOperation() != null && request.getRequest().getOperation().equals(Operations.PARAMETERS.REFUND))
             generalRequest = request.getData().getRefundRequest();
-        else if (request.getData().getOperation().equals(Operations.PARAMETERS.DEFERREDREQUEST))
+        else if (request.getRequest().getOperation().equals(Operations.PARAMETERS.DEFERREDREQUEST))
             generalRequest = request.getData().getConfirmRequest();
 
         map.put(AposConstants.SHOPID, generalRequest.getHeader().getShopId());

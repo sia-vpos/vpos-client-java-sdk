@@ -63,8 +63,9 @@ public class AposPaymentClient {
     public BPWXmlResponse executeCall(BPWXmlRequest input) throws COFException {
 
         try {
-            StringBuilder inputXml = new StringBuilder("DATA=");
+            StringBuilder inputXml = new StringBuilder("data=");
             inputXml.append(parseRequest(input));
+            System.out.println("this is the input XML: \n" + inputXml.toString());
 
             ResteasyClient client = getClientBuilder();
             WebTarget target = client.target(this.urlWebApi);
@@ -101,14 +102,15 @@ public class AposPaymentClient {
     }
 
     private BPWXmlResponse parseResponse(String xmlResponse) throws COFException {
-
+            System.out.println("This is the output XML: \n" + xmlResponse);
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(BPWXmlResponse.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             StringReader reader = new StringReader(xmlResponse);
             return (BPWXmlResponse) unmarshaller.unmarshal(reader);
         } catch (JAXBException e) {
-            throw new COFException(Errors.MALFORMED_RESPONSE, e.getCause());
+            e.printStackTrace();
+            throw new COFException(Errors.MALFORMED_RESPONSE, e);
         }
     }
 

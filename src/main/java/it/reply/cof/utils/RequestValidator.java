@@ -147,7 +147,7 @@ public class RequestValidator {
           field = Operations.PARAMETERS.AMOUNT.NAME;
        } else if (requestDto.getCurrency() == null ||!requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)){
            field = Operations.PARAMETERS.CURRENCY.NAME;
-       } else if (!requestDto.getCurrency().equalsIgnoreCase("EUR") && (requestDto.getExponent() == null || requestDto.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))){
+       } else if (!requestDto.getCurrency().equals("978") && (requestDto.getExponent() == null || requestDto.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))){
            field = Operations.PARAMETERS.EXPONENT.NAME;
        } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)){
           field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME ;

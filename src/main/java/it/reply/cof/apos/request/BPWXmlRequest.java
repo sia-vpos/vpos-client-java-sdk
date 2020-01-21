@@ -42,4 +42,8 @@ public class BPWXmlRequest {
         this.data = data;
     }
 
+    public String toString(){
+        return " Verify: " + this.getData().getVerifyRequest().toString() + " Request: " + this.getRequest().toString() + " Release: " + this.getRelease() ;
+    }
+
 }
