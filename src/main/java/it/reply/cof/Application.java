@@ -4,7 +4,6 @@ import it.reply.cof.client.VPOSClient;
 import it.reply.cof.client.VPOSSimpleClient;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.*;
-import it.reply.cof.dto.response.OrderStatusResponseDto;
 import it.reply.cof.utils.exception.COFException;
 
 public class Application {
@@ -26,10 +25,11 @@ public class Application {
 
         System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
 
-        try{
-          //  vposClient.verifyPayment(buildVerifyTest());
-            vposClient.start3DSAuth(buildAuth3DSTest1());
-        } catch (Exception e){
+        try {
+            //  vposClient.verifyPayment(buildVerifyTest());
+            // vposClient.start3DSAuth(buildAuth3DSTest1());
+            vposClient.getOrderStatus(buildOrderStatusTest());
+        } catch (Exception e) {
 
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -52,7 +52,7 @@ public class Application {
         return paymentInfo;
     }
 
-   private static RefundRequestDto buildRefundTest(){
+    private static RefundRequestDto buildRefundTest() {
         RefundRequestDto dto = new RefundRequestDto("129281292800104", "a caso", "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777", "10", "978", "1", "jopokokok");
 
         return dto;
@@ -61,7 +61,7 @@ public class Application {
     private static Auth3DSDto buildAuth3DSTest1() {
         Auth3DSDto dto = new Auth3DSDto();
         dto.setMasterpass(false);
-        dto.setOrderId("asdasdasdads");
+        dto.setOrderId("dfbdfbdfbdbdfb");
         dto.setPan(PAN_ALIAS);
         dto.setExpDate("2102");
         dto.setAmount("2000");
@@ -72,40 +72,27 @@ public class Application {
         //dto.setTimestamp();
         dto.setShopId(SHOP_ID);
         dto.setOperatorId("Giammaicol");
-        dto.setInPerson("S");
-        dto.setMerchantUrl("http://test.it");
         return dto;
     }
 
-    private static VerifyRequestDto buildVerifyTest(){
+    private static VerifyRequestDto buildVerifyTest() {
         VerifyRequestDto dto = new VerifyRequestDto();
-
         dto.setOriginalReqRefNum("20200121747989345505071695860709");
-        dto.setShopId("129281292800104");
+        dto.setShopId(SHOP_ID);
         dto.setOperatorId("Giammaicol");
-
-
         return dto;
     }
 
-    private static ConfirmRequestDto buildConfirmTest(){
+    private static ConfirmRequestDto buildConfirmTest() {
         ConfirmRequestDto dto = new ConfirmRequestDto();
-
-
         return dto;
     }
 
-    private static OrderStatusRequestDto buildOrderStatusTest(){
-        OrderStatusRequestDto dto = new OrderStatusRequestDto("129281292800104", "Giammaicol",
+    private static OrderStatusRequestDto buildOrderStatusTest() {
+        OrderStatusRequestDto dto = new OrderStatusRequestDto(SHOP_ID, "Giammaicol",
                 "0oiujh6rd3tbhberwwww3g4ui777", "dedetv435t4ff4f", "");
-
-
-
-
         return dto;
     }
-
-
 
 
 }
