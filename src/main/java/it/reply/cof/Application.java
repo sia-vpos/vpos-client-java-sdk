@@ -42,7 +42,7 @@ public class Application {
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setAmount("10000");
         paymentInfo.setCurrency("978");
-        paymentInfo.setOrderId("0oiujh6rd3tbhberwwww3g4ui777");
+        paymentInfo.setOrderId("0oiujdsvnbkj554w3g4ui777");
         paymentInfo.setShopId(SHOP_ID);
         paymentInfo.setUrlBack(URL_BACK);
         paymentInfo.setUrlDone(URL_DONE);
@@ -61,9 +61,8 @@ public class Application {
 
     private static Auth3DSDto buildAuth3DSTest1() {
         Auth3DSDto dto = new Auth3DSDto();
-
         dto.setMasterpass(false);
-        dto.setOrderId("2001215G4HZPQ");
+        dto.setOrderId("asdasdasdads");
         dto.setPan(PAN_ALIAS);
         dto.setExpDate("2102");
         dto.setAmount("2000");
@@ -76,7 +75,6 @@ public class Application {
         dto.setOperatorId("Giammaicol");
         dto.setInPerson("S");
         dto.setMerchantUrl("http://test.it");
-
         return dto;
     }
 

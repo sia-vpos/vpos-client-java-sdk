@@ -2,6 +2,7 @@ package it.reply.cof.utils.builders;
 
 
 import it.reply.cof.apos.request.*;
+import it.reply.cof.apos.response.Operation;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;

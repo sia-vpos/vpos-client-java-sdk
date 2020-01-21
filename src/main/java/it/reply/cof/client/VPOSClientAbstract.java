@@ -61,7 +61,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
      */
     public VPOSClientAbstract(String startKey, String apiResultKey) throws COFException {
         this();
-        this.requestBuilder = new RequestBuilder(startKey);
+        this.requestBuilder = new RequestBuilder(apiResultKey);
         this.hmacCalculator = new Encoder();
         this.responseMACCalculator = new ResponseMACCalculator(hmacCalculator);
         this.startKey = startKey;
@@ -79,7 +79,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
      */
     public VPOSClientAbstract(String startKey, String apiResultKey, MacAlgorithms algorithm) throws COFException {
         this();
-        this.requestBuilder = new RequestBuilder(startKey, algorithm);
+        this.requestBuilder = new RequestBuilder(apiResultKey, algorithm);
         this.hmacCalculator = new Encoder(algorithm);
         this.responseMACCalculator = new ResponseMACCalculator(hmacCalculator);
         this.startKey = startKey;

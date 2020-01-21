@@ -24,6 +24,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AposPaymentClient {
 
@@ -65,7 +67,7 @@ public class AposPaymentClient {
         try {
             StringBuilder inputXml = new StringBuilder("data=");
             inputXml.append(parseRequest(input));
-            System.out.println("this is the input XML: \n" + inputXml.toString());
+            Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "OUTPUT XML: \n" + inputXml.toString());
 
             ResteasyClient client = getClientBuilder();
             WebTarget target = client.target(this.urlWebApi);
@@ -75,7 +77,7 @@ public class AposPaymentClient {
             String xmlResponse = response.readEntity(String.class);
 
             if (org.apache.http.HttpStatus.SC_OK != response.getStatus()) {
-                throw new COFException("VPos call failed with code " + response.getStatus());
+                throw new COFException("VPOS call failed with code " + response.getStatus());
             }
 
             return parseResponse(xmlResponse);
@@ -102,7 +104,7 @@ public class AposPaymentClient {
     }
 
     private BPWXmlResponse parseResponse(String xmlResponse) throws COFException {
-            System.out.println("This is the output XML: \n" + xmlResponse);
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "OUTPUT XML: \n" + xmlResponse);
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(BPWXmlResponse.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -130,7 +132,7 @@ public class AposPaymentClient {
         return restBuilder.build();
     }
 
-    public void setProxy(String proxyName, int proxyPort){
+    public void setProxy(String proxyName, int proxyPort) {
         proxy = true;
         this.proxyName = proxyName;
         this.proxyPort = proxyPort;
