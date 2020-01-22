@@ -34,7 +34,6 @@ public class RequestValidator {
             field = Operations.PARAMETERS.SHOPID.NAME;
         } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-            //TODO check
         } else if (requestDto.getTransactionId() == null || requestDto.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN) {
             field = Operations.PARAMETERS.TRANSACTIONID.NAME;
         } else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
@@ -95,8 +94,8 @@ public class RequestValidator {
         } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
             //TODO regex for refReqNum
-        } else if (requestDto.getOriginalReqRefNum() == null) {
-            field = Operations.PARAMETERS.REQREFNUM;
+        } else if (requestDto.getOriginalReqRefNum() == null || requestDto.getOriginalReqRefNum().matches(Operations.PARAMETERS.REQREFNUM.PATTERN)) {
+            field = Operations.PARAMETERS.REQREFNUM.NAME;
         }
 
         if (!field.isEmpty())

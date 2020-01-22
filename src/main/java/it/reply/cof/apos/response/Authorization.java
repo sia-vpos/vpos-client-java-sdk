@@ -116,16 +116,6 @@ public class Authorization {
 		this.transactionAmount = transactionAmount;
 	}
 
-	public String getAuthorizeAmount() {
-
-		return authorizedAmount;
-	}
-
-	public void setAuthorizeAmount(String authorizeAmount) {
-
-		this.authorizedAmount = authorizeAmount;
-	}
-
 	public String getCurrency() {
 
 		return currency;

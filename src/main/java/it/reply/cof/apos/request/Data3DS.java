@@ -28,7 +28,12 @@ public class Data3DS {
     @XmlElement(name = "SignatureVerifytion")
     private String signatureVerifytion;
 
-    public Data3DS(){}
+
+    public Data3DS(){
+        /*
+    Empty arg constructor
+     */
+    }
 
     public String getService() {
         return service;

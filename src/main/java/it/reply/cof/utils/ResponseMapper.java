@@ -107,7 +107,7 @@ public class ResponseMapper {
                     dto.setNetwork(authorization.getNetwork());
                     dto.setOrderID(authorization.getOrderId());
                     dto.setTransactionAmount(authorization.getTransactionAmount());
-                    dto.setAuthorizatedAmount(authorization.getAuthorizeAmount());
+                    dto.setAuthorizatedAmount(authorization.getAuthorizedAmount());
                     dto.setCurrency(authorization.getCurrency());
                     dto.setExponent(authorization.getExponent());
                     dto.setAccountedAmount(authorization.getAccountedAmount());

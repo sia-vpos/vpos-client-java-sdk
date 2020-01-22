@@ -22,7 +22,7 @@ public class ConfirmationResponseDto {
     private String panTail;
     private String panExpiryDate;
     private String MAC;
-    private String responseCodeIso;
+
 
     public String getPaymentType() {
         return paymentType;
@@ -182,14 +182,6 @@ public class ConfirmationResponseDto {
 
     public void setMAC(String MAC) {
         this.MAC = MAC;
-    }
-
-    public String getResponseCodeIso() {
-        return responseCodeIso;
-    }
-
-    public void setResponseCodeIso(String responseCodeIso) {
-        this.responseCodeIso = responseCodeIso;
     }
 
 }

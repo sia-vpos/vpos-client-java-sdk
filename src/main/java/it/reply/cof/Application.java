@@ -17,6 +17,7 @@ public class Application {
     private static final String URL_BACK = "http://localhost:8080/payment-gateway/vpos/tokenize";
     private static final String URLMS = "https://te.t-frutta.eu/TImooneyWS/app_api/v10/payment/cardData?consumerId=3b350c34-d923-4552-91bf-67bc4f99da92";
     private static final String URL_WEB_API = "https://atpostest.ssb.it/atpos/apibo/apiBOXML.app";
+    private static final String OPERATOR_ID = "John Doe";
 
     private static final String BASE64HTML = "PGh0bWw+CiAgICA8Ym9keT4KICAgICAgICAKICAgIDwvYm9keT4KPC9odG1sPg==";
 
@@ -27,7 +28,7 @@ public class Application {
 
         try {
 
-            //vposClient.confirmPayment(buildConfirmTest());
+            vposClient.confirmPayment(buildConfirmTest());
         } catch (Exception e) {
 
             System.err.println(e.getMessage());
@@ -38,24 +39,25 @@ public class Application {
 
     private static PaymentInfo buildPaymentTest() {
         PaymentInfo paymentInfo = new PaymentInfo();
-        paymentInfo.setAmount("1000");
+        paymentInfo.setAmount("10000");
         paymentInfo.setCurrency("978");
-        paymentInfo.setOrderId("rgetg34t3sfsfe3f");
+        paymentInfo.setOrderId("416454645646");
         paymentInfo.setShopId(SHOP_ID);
         paymentInfo.setUrlBack(URL_BACK);
         paymentInfo.setUrlDone(URL_DONE);
         paymentInfo.setUrlMs(URLMS);
         paymentInfo.setAccountingMode("D");
         paymentInfo.setAuthorMode("D");
-        paymentInfo.addOption("");
+        paymentInfo.addOption("GM");
         return paymentInfo;
     }
 
 
    private static RefundRequestDto buildRefundTest(){
-        RefundRequestDto dto = new RefundRequestDto("129281292800104", "a caso", "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777", "10", "978", "2", "jopokokok");
+       return new RefundRequestDto("129281292800104", "a caso",
+               "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777",
+               "10", "978", "2", "jopokokok");
 
-        return dto;
     }
 
     private static Auth3DSDto buildAuth3DSTest1() {
@@ -69,9 +71,8 @@ public class Application {
         dto.setCvv2("111");
         dto.setAccountingMode("D");
         dto.setNetwork("98");
-        //dto.setTimestamp();
         dto.setShopId(SHOP_ID);
-        dto.setOperatorId("Giammaicol");
+        dto.setOperatorId(OPERATOR_ID);
         return dto;
     }
 
@@ -79,17 +80,17 @@ public class Application {
         VerifyRequestDto dto = new VerifyRequestDto();
         dto.setOriginalReqRefNum("20200121747989345505071695860709");
         dto.setShopId(SHOP_ID);
-        dto.setOperatorId("Giammaicol");
+        dto.setOperatorId(OPERATOR_ID);
         return dto;
     }
 
     private static ConfirmRequestDto buildConfirmTest() {
         ConfirmRequestDto dto = new ConfirmRequestDto();
         dto.setShopId(SHOP_ID);
-        dto.setOperatorId("Giammaicol");
-        dto.setTransactionId("8032112928SL1cm45smv25qt4");
-        dto.setOrderId("0oiujdsvnbkjCIAONE77");
-        dto.setAmount("1000");
+        dto.setOperatorId(OPERATOR_ID);
+        dto.setTransactionId("8032112928SL13com5thq72y4");
+        dto.setOrderId("416454645646");
+        dto.setAmount("10000");
         dto.setCurrency("978");
         dto.setExponent("2");
         dto.setAccountingMode("D");
@@ -99,7 +100,7 @@ public class Application {
     }
 
     private static OrderStatusRequestDto buildOrderStatusTest() {
-        return new OrderStatusRequestDto(SHOP_ID, "Giammaicol",
+        return new OrderStatusRequestDto(SHOP_ID, OPERATOR_ID,
                 "0oiujh6rd3tbhberwwww3g4ui777", "dedetv435t4ff4f", "");
 
     }

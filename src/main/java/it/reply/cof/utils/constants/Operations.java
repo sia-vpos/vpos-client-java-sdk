@@ -18,7 +18,6 @@ public final class Operations {
         public static final String DEFERREDREQUEST = "DEFERREDREQUEST";
         public static final String CONFIRM = "CONFIRM";
         public static final String TIMESTAMP = "TIMESTAMP";
-        public static final String REQREFNUM = "REQREFNUM";
         public static final String PARES = "PARES";
 
         private PARAMETERS() {
@@ -59,6 +58,18 @@ public final class Operations {
             public static final String PATTERN = "[A-Za-z0-9_\\-/:. ]";
 
             private MERCHANTURL(){
+
+            }
+        }
+
+        public static final class REQREFNUM {
+            public static final String NAME = "REQREFNUM";
+            public static final int LEN1 = 8;
+            public static final int LEN2 = 24;
+            public static final String PATTERN = "[20[0-9][0-9](0[1-9]|1[0-2])(0[1-9]|2[0-9]|3[0-1])]{" +
+                    LEN1 + "}" + "\\d{" +LEN2 + "}";
+
+            private REQREFNUM(){
 
             }
         }
@@ -199,8 +210,7 @@ public final class Operations {
 
         public static final class ORIGINALREQREFNUM {
             public static final String NAME ="ORIGINALREQREFNUM";
-            public static final int LEN = 32;
-            public static final String PATTERN = "(20[0-90-9])(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))\\w{" + LEN + "}";
+            public static final String PATTERN = "[20[0-9][0-9](0[1-9]|1[0-2])(0[1-9]|2[0-9]|3[0-1])]{8}\\d{24}";
 
             private ORIGINALREQREFNUM() {
 
@@ -286,7 +296,7 @@ public final class Operations {
         public static final class TRANSACTIONID {
 
             public static final String NAME = "TRANSACTIONID";
-            public static int LEN = 25;
+            public static final int LEN = 25;
 
             private TRANSACTIONID() {
 

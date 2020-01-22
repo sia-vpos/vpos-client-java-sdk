@@ -2,7 +2,6 @@ package it.reply.cof.utils.builders;
 
 
 import it.reply.cof.apos.request.*;
-import it.reply.cof.apos.response.Operation;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
@@ -114,16 +113,16 @@ public class MapBuilder {
             generalRequest = request.getData().getRefundRequest();
         else if (request.getRequest().getOperation().equals(Operations.PARAMETERS.DEFERREDREQUEST))
             generalRequest = request.getData().getConfirmRequest();
-
-        map.put(AposConstants.SHOPID, generalRequest.getHeader().getShopId());
-        map.put(Operations.PARAMETERS.OPERATORID.NAME, generalRequest.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM, generalRequest.getHeader().getReqRefNum());
-        map.put(Operations.PARAMETERS.TRANSACTIONID.NAME, generalRequest.getTransactionId());
-        map.put(Operations.PARAMETERS.ORDERID.NAME, generalRequest.getOrderId());
-        map.put(Operations.PARAMETERS.AMOUNT.NAME, generalRequest.getAmount());
-        map.put(Operations.PARAMETERS.CURRENCY.NAME, generalRequest.getCurrency());
-        map.put(Operations.PARAMETERS.EXPONENT.NAME, generalRequest.getExponent());
-
+        if(generalRequest != null && generalRequest.getHeader() != null) {
+            map.put(AposConstants.SHOPID, generalRequest.getHeader().getShopId());
+            map.put(Operations.PARAMETERS.OPERATORID.NAME, generalRequest.getHeader().getOperatorId());
+            map.put(Operations.PARAMETERS.REQREFNUM, generalRequest.getHeader().getReqRefNum());
+            map.put(Operations.PARAMETERS.TRANSACTIONID.NAME, generalRequest.getTransactionId());
+            map.put(Operations.PARAMETERS.ORDERID.NAME, generalRequest.getOrderId());
+            map.put(Operations.PARAMETERS.AMOUNT.NAME, generalRequest.getAmount());
+            map.put(Operations.PARAMETERS.CURRENCY.NAME, generalRequest.getCurrency());
+            map.put(Operations.PARAMETERS.EXPONENT.NAME, generalRequest.getExponent());
+        }
         return map;
     }
 
