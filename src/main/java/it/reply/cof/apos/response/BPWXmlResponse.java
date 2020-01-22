@@ -60,7 +60,5 @@ public class BPWXmlResponse {
 		this.data = data;
 	}
 
-	public String toString(){
-		return("The current BPWXMlResponse has the following values: " + this.mac + " " + this.result + " " + this.data + " " + this.timestamp);
-	}
+
 }
