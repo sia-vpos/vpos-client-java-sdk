@@ -1,7 +1,7 @@
 package it.reply.cof.client;
 
 import it.reply.cof.apos.utils.AposPaymentClient;
-import it.reply.cof.utils.MacAlgorithms;
+import it.reply.cof.utils.mac.MacAlgorithms;
 import it.reply.cof.utils.exception.COFException;
 
 public class VPosClientWithProxy extends VPOSClientAbstract {

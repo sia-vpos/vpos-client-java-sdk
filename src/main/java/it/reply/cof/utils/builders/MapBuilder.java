@@ -5,6 +5,7 @@ import it.reply.cof.apos.request.*;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
+import it.reply.cof.utils.encryption.AESEncoder;
 import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
 
@@ -12,46 +13,46 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Mainly methods generating maps to be fed at the MAC generating encoder and taking a BPWXmlRequest item as parameter
+ * Useful methods generating maps to be fed during MAC generation operations
  */
 public class MapBuilder {
 
     private MapBuilder() {
     }
 
-    public static Map<String, String> getOutcomeMap(Map<String, String> values){
+    public static Map<String, String> getOutcomeMap(Map<String, String> values) {
         Map<String, String> map = new LinkedHashMap<>();
         map.put(Operations.PARAMETERS.ORDERID.NAME, values.get(Operations.PARAMETERS.ORDERID.NAME));
         map.put(Operations.PARAMETERS.SHOPID.NAME, values.get(Operations.PARAMETERS.SHOPID.NAME));
-        map.put(AposConstants.AUTHNUMBER,values.get(AposConstants.AUTHNUMBER));
+        map.put(AposConstants.AUTHNUMBER, values.get(AposConstants.AUTHNUMBER));
         map.put(Operations.PARAMETERS.AMOUNT.NAME, values.get(Operations.PARAMETERS.AMOUNT.NAME));
         map.put(Operations.PARAMETERS.CURRENCY.NAME, values.get(Operations.PARAMETERS.CURRENCY.NAME));
         map.put(Operations.PARAMETERS.EXPONENT.NAME, values.get(Operations.PARAMETERS.EXPONENT.NAME));
         map.put(Operations.PARAMETERS.TRANSACTIONID.NAME, values.get(Operations.PARAMETERS.TRANSACTIONID.NAME));
         map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, values.get(Operations.PARAMETERS.ACCOUNTINGMODE.NAME));
         map.put(AposConstants.AUTHORMODE, values.get(AposConstants.AUTHORMODE));
-        map.put(AposConstants.RESULT,values.get(AposConstants.RESULT));
+        map.put(AposConstants.RESULT, values.get(AposConstants.RESULT));
         map.put(Operations.CONFIRMATION.TRANSACTIONTYPE, values.get(Operations.CONFIRMATION.TRANSACTIONTYPE));
-        map.put(AposConstants.ISSUERCOUNTRY,values.get(AposConstants.ISSUERCOUNTRY));
-        map.put(AposConstants.AUTHCODE,values.get(AposConstants.AUTHCODE));
-        map.put(AposConstants.PAYERID,values.get(AposConstants.PAYERID));
-        map.put(AposConstants.PAYER,values.get(AposConstants.PAYER));
-        map.put(AposConstants.PAYERSTATUS,values.get(AposConstants.PAYERSTATUS));
-        map.put(AposConstants.HASHPAN,values.get(AposConstants.HASHPAN));
-        map.put(Operations.CONFIRMATION.PANALIASREV,values.get(Operations.CONFIRMATION.PANALIASREV));
-        map.put(Operations.CONFIRMATION.PANALIAS,values.get(Operations.CONFIRMATION.PANALIAS));
-        map.put(Operations.CONFIRMATION.PANALIASEXPDATE,values.get(Operations.CONFIRMATION.PANALIASEXPDATE));
-        map.put(Operations.CONFIRMATION.PANALIASTAIL,values.get(Operations.CONFIRMATION.PANALIASTAIL));
+        map.put(AposConstants.ISSUERCOUNTRY, values.get(AposConstants.ISSUERCOUNTRY));
+        map.put(AposConstants.AUTHCODE, values.get(AposConstants.AUTHCODE));
+        map.put(AposConstants.PAYERID, values.get(AposConstants.PAYERID));
+        map.put(AposConstants.PAYER, values.get(AposConstants.PAYER));
+        map.put(AposConstants.PAYERSTATUS, values.get(AposConstants.PAYERSTATUS));
+        map.put(AposConstants.HASHPAN, values.get(AposConstants.HASHPAN));
+        map.put(Operations.CONFIRMATION.PANALIASREV, values.get(Operations.CONFIRMATION.PANALIASREV));
+        map.put(Operations.CONFIRMATION.PANALIAS, values.get(Operations.CONFIRMATION.PANALIAS));
+        map.put(Operations.CONFIRMATION.PANALIASEXPDATE, values.get(Operations.CONFIRMATION.PANALIASEXPDATE));
+        map.put(Operations.CONFIRMATION.PANALIASTAIL, values.get(Operations.CONFIRMATION.PANALIASTAIL));
 
-        map.put(AposConstants.MASKEDPAN,values.get(AposConstants.MASKEDPAN));
-        map.put(Operations.AUTHORIZATION.PANTAIL,values.get(Operations.AUTHORIZATION.PANTAIL));
-        map.put(Operations.AUTHORIZATION.PANEXPIRYDATE,values.get(Operations.AUTHORIZATION.PANEXPIRYDATE));
+        map.put(AposConstants.MASKEDPAN, values.get(AposConstants.MASKEDPAN));
+        map.put(Operations.AUTHORIZATION.PANTAIL, values.get(Operations.AUTHORIZATION.PANTAIL));
+        map.put(Operations.AUTHORIZATION.PANEXPIRYDATE, values.get(Operations.AUTHORIZATION.PANEXPIRYDATE));
 
-        map.put(AposConstants.ACCOUNTHOLDER,values.get(AposConstants.ACCOUNTHOLDER));
-        map.put(Operations.PARAMETERS.IBAN.NAME,values.get(Operations.PARAMETERS.IBAN.NAME));
-        map.put(AposConstants.ALIASSTR,values.get(AposConstants.ALIASSTR));
-        map.put(Operations.AUTHORIZATION.ACQUIRERBIN,values.get(Operations.AUTHORIZATION.ACQUIRERBIN));
-        map.put(Operations.AUTHORIZATION.MERCHANTID,values.get(Operations.AUTHORIZATION.MERCHANTID));
+        map.put(AposConstants.ACCOUNTHOLDER, values.get(AposConstants.ACCOUNTHOLDER));
+        map.put(Operations.PARAMETERS.IBAN.NAME, values.get(Operations.PARAMETERS.IBAN.NAME));
+        map.put(AposConstants.ALIASSTR, values.get(AposConstants.ALIASSTR));
+        map.put(Operations.AUTHORIZATION.ACQUIRERBIN, values.get(Operations.AUTHORIZATION.ACQUIRERBIN));
+        map.put(Operations.AUTHORIZATION.MERCHANTID, values.get(Operations.AUTHORIZATION.MERCHANTID));
         map.put(Operations.AUTHORIZATION.CARDTYPE, values.get(Operations.AUTHORIZATION.CARDTYPE));
         return map;
     }
@@ -84,7 +85,7 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.TIMESTAMP, request.getRequest().getTimestamp());
         map.put(AposConstants.SHOPID, verifyRequest.getHeader().getShopId());
         map.put(Operations.PARAMETERS.OPERATORID.NAME, verifyRequest.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM, verifyRequest.getHeader().getReqRefNum());
+        map.put(Operations.PARAMETERS.REQREFNUM.NAME, verifyRequest.getHeader().getReqRefNum());
         map.put(Operations.PARAMETERS.ORIGINALREQREFNUM.NAME, verifyRequest.getOriginalReqRefNum());
         map.put(Operations.PARAMETERS.OPTIONS.NAME, verifyRequest.getOptions());
 
@@ -97,7 +98,7 @@ public class MapBuilder {
         StatusRequest statusRequest = request.getData().getOrderStatusRequest();
         map.put(AposConstants.SHOPID, statusRequest.getHeader().getShopId());
         map.put(Operations.PARAMETERS.OPERATORID.NAME, statusRequest.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM, statusRequest.getHeader().getReqRefNum());
+        map.put(Operations.PARAMETERS.REQREFNUM.NAME, statusRequest.getHeader().getReqRefNum());
         map.put(Operations.PARAMETERS.ORDERID.NAME, statusRequest.getOrderId());
         map.put(Operations.PARAMETERS.OPTIONS.NAME, statusRequest.getOptions());
         map.put(Operations.PARAMETERS.PRODUCTREF.NAME, statusRequest.getProductRef());
@@ -116,7 +117,7 @@ public class MapBuilder {
         if(generalRequest != null && generalRequest.getHeader() != null) {
             map.put(AposConstants.SHOPID, generalRequest.getHeader().getShopId());
             map.put(Operations.PARAMETERS.OPERATORID.NAME, generalRequest.getHeader().getOperatorId());
-            map.put(Operations.PARAMETERS.REQREFNUM, generalRequest.getHeader().getReqRefNum());
+            map.put(Operations.PARAMETERS.REQREFNUM.NAME, generalRequest.getHeader().getReqRefNum());
             map.put(Operations.PARAMETERS.TRANSACTIONID.NAME, generalRequest.getTransactionId());
             map.put(Operations.PARAMETERS.ORDERID.NAME, generalRequest.getOrderId());
             map.put(Operations.PARAMETERS.AMOUNT.NAME, generalRequest.getAmount());
@@ -134,7 +135,7 @@ public class MapBuilder {
         map.put(AposConstants.SHOPID, authorization3DSRequest.getHeader().getShopId());
         map.put(Operations.PARAMETERS.ORDERID.NAME, authorization3DSRequest.getOrderId());
         map.put(Operations.PARAMETERS.OPERATORID.NAME, authorization3DSRequest.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM, authorization3DSRequest.getHeader().getReqRefNum());
+        map.put(Operations.PARAMETERS.REQREFNUM.NAME, authorization3DSRequest.getHeader().getReqRefNum());
         map.put(Operations.PARAMETERS.PAN.NAME, authorization3DSRequest.getPan());
         map.put(Operations.PARAMETERS.CVV2.NAME, authorization3DSRequest.getCvv2());
         map.put(Operations.PARAMETERS.EXPDATE.NAME, authorization3DSRequest.getExpDate());
@@ -158,7 +159,7 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.INPERSON.NAME, authorization3DSRequest.getInPerson());
         map.put(Operations.PARAMETERS.MERCHANTURL.NAME, authorization3DSRequest.getMerchantURL());
 
-        if(authorization3DSRequest.getData3DS() != null) {
+        if (authorization3DSRequest.getData3DS() != null) {
             map.put(Operations.PARAMETERS.SERVICE.NAME, authorization3DSRequest.getData3DS().getService());
             map.put(Operations.PARAMETERS.XID.NAME, authorization3DSRequest.getData3DS().getXid());
             map.put(Operations.PARAMETERS.CAVV.NAME, authorization3DSRequest.getData3DS().getCavv());
@@ -173,21 +174,21 @@ public class MapBuilder {
         return map;
     }
 
-    public static Map<String, String> get3DSStep2AuthMap(BPWXmlRequest request){
+    public static Map<String, String> get3DSStep2AuthMap(BPWXmlRequest request) {
 
         Map<String, String> map = getStdMap(request);
 
         Auth3DSStep2Request auth3DSStep2Request = request.getData().getAuth3DSStep2Request();
         map.put(Operations.PARAMETERS.SHOPID.NAME, auth3DSStep2Request.getHeader().getShopId());
         map.put(Operations.PARAMETERS.OPERATORID.NAME, auth3DSStep2Request.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM, auth3DSStep2Request.getHeader().getReqRefNum());
+        map.put(Operations.PARAMETERS.REQREFNUM.NAME, auth3DSStep2Request.getHeader().getReqRefNum());
         map.put(Operations.PARAMETERS.ORIGINALREQREFNUM.NAME, auth3DSStep2Request.getOriginalReqRefNum());
         map.put(Operations.PARAMETERS.PARES, auth3DSStep2Request.getPaRes());
 
         return map;
     }
 
-    public static Map<String, String> getRedirectMap(PaymentInfo info, Encoder encoder, String key) throws COFException {
+    public static Map<String, String> getRedirectMap(PaymentInfo info, Encoder encoder, String macKey, String apiKey) throws COFException {
         Map<String, String> map = new LinkedHashMap<>();
 
         map.put(Operations.PARAMETERS.URLMS.NAME, info.getUrlMs());
@@ -217,8 +218,12 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.USER.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.USER.NAME));
         map.put(Operations.PARAMETERS.PRODUCTREF.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.PRODUCTREF.NAME));
         map.put(Operations.PARAMETERS.ANTIFRAUD.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.ANTIFRAUD.NAME));
-        map.put(Operations.PARAMETERS.DATA3DS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.DATA3DS.NAME));
-        map.put(Operations.PARAMETERS.MAC.NAME, encoder.getMac(map, key));
+
+        //setting data 3DS JSON
+        if (info.getData3DSJson() != null)
+            map.put(Operations.PARAMETERS.DATA3DS.NAME, AESEncoder.encode3DSData(apiKey, info.getData3DSJson().toString()));
+
+        map.put(Operations.PARAMETERS.MAC.NAME, encoder.getMac(map, macKey));
         map.put(Operations.PARAMETERS.URLBACK.NAME, info.getUrlBack());
         //NOT COMPULSORY
         map.put(Operations.PARAMETERS.LANG.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.LANG.NAME));
@@ -231,7 +236,6 @@ public class MapBuilder {
         Map<String, String> map = new LinkedHashMap<>();
         map.put(Operations.PARAMETERS.OPERATION, request.getRequest().getOperation());
         map.put(Operations.PARAMETERS.TIMESTAMP, request.getRequest().getTimestamp());
-
         return map;
     }
 }

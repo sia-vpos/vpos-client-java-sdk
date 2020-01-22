@@ -8,7 +8,7 @@ import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.*;
 import it.reply.cof.dto.response.*;
 import it.reply.cof.utils.HTMLGenerator;
-import it.reply.cof.utils.MacAlgorithms;
+import it.reply.cof.utils.mac.MacAlgorithms;
 import it.reply.cof.utils.ResponseMapper;
 import it.reply.cof.utils.builders.MapBuilder;
 import it.reply.cof.utils.builders.RequestBuilder;
@@ -101,7 +101,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     @Override
     public String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException {
         String path = customTemplate.booleanValue() ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
-        return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey));
+        return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey, apiResultKey));
     }
 
     @Override

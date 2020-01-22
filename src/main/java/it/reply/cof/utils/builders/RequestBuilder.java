@@ -2,7 +2,7 @@ package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
 import it.reply.cof.dto.request.*;
-import it.reply.cof.utils.MacAlgorithms;
+import it.reply.cof.utils.mac.MacAlgorithms;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.exception.COFException;
