@@ -2,7 +2,11 @@ package it.reply.cof.utils;
 
 import java.security.SecureRandom;
 
-
+/**
+ * General purpose utility class
+ *
+ * @author Gabriel Raul Marini
+ */
 public class Utils {
 
     private static final String NUMBERS = "0123456789";
@@ -10,6 +14,9 @@ public class Utils {
     private Utils() {
     }
 
+    /**
+     * @return a string containing a random number with 24 digits
+     */
     public static String generateRandomDigits() {
         StringBuilder rndBuilder = new StringBuilder();
         SecureRandom rng = new SecureRandom();

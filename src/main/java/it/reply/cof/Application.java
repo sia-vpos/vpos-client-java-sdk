@@ -1,7 +1,7 @@
 package it.reply.cof;
 
 import it.reply.cof.client.VPOSClient;
-import it.reply.cof.client.VPOSSimpleClient;
+import it.reply.cof.client.VPosClientWithProxy;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.*;
 import it.reply.cof.utils.exception.COFException;
@@ -19,16 +19,17 @@ public class Application {
     private static final String URL_WEB_API = "https://atpostest.ssb.it/atpos/apibo/apiBOXML.app";
     private static final String OPERATOR_ID = "John Doe";
 
-    private static final String BASE64HTML = "PGh0bWw+CiAgICA8Ym9keT4KICAgICAgICAKICAgIDwvYm9keT4KPC9odG1sPg==";
+    private static final String PROXYNAME = "proxy-dr.reply.it";
+    private static final Integer PROXYPORT = 8080;
 
     public static void main(String[] args) throws COFException {
-        VPOSClient vposClient = new VPOSSimpleClient(URL_WEB_API, MAC_KEY_VPOS, API_RESULT_KEY);
-
+        VPOSClient vposClient = new VPosClientWithProxy(URL_WEB_API, MAC_KEY_VPOS, API_RESULT_KEY, PROXYNAME, PROXYPORT);
         System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
 
         try {
-
-            vposClient.confirmPayment(buildConfirmTest());
+            //vposClient.verifyPayment(buildVerifyTest());
+            vposClient.start3DSAuth(buildAuth3DSTest1());
+            //vposClient.getOrderStatus(buildOrderStatusTest());
         } catch (Exception e) {
 
             System.err.println(e.getMessage());
@@ -47,23 +48,22 @@ public class Application {
         paymentInfo.setUrlDone(URL_DONE);
         paymentInfo.setUrlMs(URLMS);
         paymentInfo.setAccountingMode("D");
-        paymentInfo.setAuthorMode("D");
+        paymentInfo.setAuthorMode("I");
         paymentInfo.addOption("GM");
         return paymentInfo;
     }
 
 
-   private static RefundRequestDto buildRefundTest(){
-       return new RefundRequestDto("129281292800104", "a caso",
-               "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777",
-               "10", "978", "2", "jopokokok");
-
+    private static RefundRequestDto buildRefundTest() {
+        return new RefundRequestDto("129281292800104", "a caso",
+                "8032112928SL11dk36s2gdj34", "ygaedwwdauigougui777",
+                "10", "978", "2", "jopokokok");
     }
 
     private static Auth3DSDto buildAuth3DSTest1() {
         Auth3DSDto dto = new Auth3DSDto();
         dto.setMasterpass(false);
-        dto.setOrderId("dfbdfbdfbdbdfb");
+        dto.setOrderId("dfbdfbdfbd4bdfb");
         dto.setPan(PAN_ALIAS);
         dto.setExpDate("2102");
         dto.setAmount("2000");
@@ -71,8 +71,9 @@ public class Application {
         dto.setCvv2("111");
         dto.setAccountingMode("D");
         dto.setNetwork("98");
+        //dto.setTimestamp();
         dto.setShopId(SHOP_ID);
-        dto.setOperatorId(OPERATOR_ID);
+        dto.setOperatorId("Giammaicol");
         return dto;
     }
 
@@ -80,7 +81,7 @@ public class Application {
         VerifyRequestDto dto = new VerifyRequestDto();
         dto.setOriginalReqRefNum("20200121747989345505071695860709");
         dto.setShopId(SHOP_ID);
-        dto.setOperatorId(OPERATOR_ID);
+        dto.setOperatorId("Giammaicol");
         return dto;
     }
 
@@ -100,9 +101,9 @@ public class Application {
     }
 
     private static OrderStatusRequestDto buildOrderStatusTest() {
-        return new OrderStatusRequestDto(SHOP_ID, OPERATOR_ID,
+        OrderStatusRequestDto dto = new OrderStatusRequestDto(SHOP_ID, "Giammaicol",
                 "0oiujh6rd3tbhberwwww3g4ui777", "dedetv435t4ff4f", "");
-
+        return dto;
     }
 
 

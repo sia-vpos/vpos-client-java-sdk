@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Utility class implementing responses' MAC calculation
  *
  * @author Gabriel Raul Marini
  */
@@ -29,7 +30,6 @@ public class ResponseMACCalculator {
 
     public String getAuthorizationMac(Authorization authorization, String key) throws COFException {
         List<String> valueList = new ArrayList<>();
-
         valueList.add(authorization.getAuthorizationType());
         valueList.add(authorization.getTransactionId());
         valueList.add(authorization.getNetwork());
@@ -51,13 +51,11 @@ public class ResponseMACCalculator {
         valueList.add(authorization.getPaymentTypePP());
         valueList.add(authorization.getRRN());
         valueList.add(authorization.getCardType());
-
         return encoder.getMac(valueList, key);
     }
 
     public String getOperationMac(Operation operation, String key) throws COFException {
         List<String> valueList = new ArrayList<>();
-
         valueList.add(operation.getTransactionId());
         valueList.add(operation.getTimestampReq());
         valueList.add(operation.getTimestampElab());
@@ -66,7 +64,6 @@ public class ResponseMACCalculator {
         valueList.add(operation.getResult());
         valueList.add(operation.getStatus());
         valueList.add(operation.getOpDescr());
-
         return encoder.getMac(valueList, key);
     }
 }

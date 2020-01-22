@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 /**
+ * Utility class used to generate payment initiation HTML document
  *
  * @author Gabriel Raul Marini
  */
@@ -22,23 +23,9 @@ public class HTMLGenerator {
     private final Base64.Decoder decoder;
     private final Base64.Encoder encoder;
 
-    public HTMLGenerator(){
+    public HTMLGenerator() {
         encoder = Base64.getEncoder();
         decoder = Base64.getDecoder();
-    }
-
-    private String generateParamsHtml(Map<String, String> params) {
-        StringBuilder sb = new StringBuilder();
-        String decodedInputPattern = new String(decoder.decode(INPUT_PATTERN));
-
-        for (Entry<String, String> entry : params.entrySet()) {
-            if (entry.getValue() != null && !entry.getValue().trim().isEmpty()) {
-                String toAppend = decodedInputPattern.replace("KEY", entry.getKey()).replace("VALUE", entry.getValue());
-                sb.append(toAppend);
-            }
-        }
-
-        return sb.toString();
     }
 
     public String htmlToBase64(String fileName, String urlApos, Map<String, String> params) throws COFException {
@@ -55,7 +42,7 @@ public class HTMLGenerator {
         return encoder.encodeToString(html.getBytes());
     }
 
-    public String base64ToHtml(String base64, Integer delay){
+    public String base64ToHtml(String base64, Integer delay) {
         String html = new String(decoder.decode(base64.getBytes()));
         String decodedFormPattern = new String(decoder.decode(FORM_PATTERN));
         String decodedScript = new String(decoder.decode(SCRIPT));
@@ -65,6 +52,20 @@ public class HTMLGenerator {
         html = html.replace("[DELAY]", delay.toString());
 
         return html;
+    }
+
+    private String generateParamsHtml(Map<String, String> params) {
+        StringBuilder sb = new StringBuilder();
+        String decodedInputPattern = new String(decoder.decode(INPUT_PATTERN));
+
+        for (Entry<String, String> entry : params.entrySet()) {
+            if (entry.getValue() != null && !entry.getValue().trim().isEmpty()) {
+                String toAppend = decodedInputPattern.replace("KEY", entry.getKey()).replace("VALUE", entry.getValue());
+                sb.append(toAppend);
+            }
+        }
+
+        return sb.toString();
     }
 
 }

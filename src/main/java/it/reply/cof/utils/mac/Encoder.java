@@ -1,6 +1,5 @@
 package it.reply.cof.utils.mac;
 
-import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.exception.COFException;
 
 import java.util.List;
@@ -58,6 +57,14 @@ public final class Encoder {
         return hmacCalculator.calculate(sb.toString(), key);
     }
 
+    /**
+     * Calculates the MAC of the generated string from the map following the pattern VALUE1&VALUE2...
+     *
+     * @param values to be used to generate the MAC string
+     * @param key    secret shared between merchant and SIA VPos
+     * @return the MAC calculated on the input values
+     * @throws COFException in case of failure (more details in exception message)
+     */
     public String getMac(List<String> values, String key) throws COFException {
         StringBuilder sb = new StringBuilder();
 
@@ -69,6 +76,14 @@ public final class Encoder {
         return hmacCalculator.calculate(sb.toString(), key);
     }
 
+    /**
+     * Calculate the MAC of the input string
+     *
+     * @param value from which MAC is calculated
+     * @param key   secret shared between merchant and SIA VPos
+     * @return the MAC of the input string
+     * @throws COFException in case of failure (more details in exception message)
+     */
     public String getMac(String value, String key) throws COFException {
         return hmacCalculator.calculate(value, key);
     }

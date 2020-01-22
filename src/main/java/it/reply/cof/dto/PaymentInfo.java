@@ -1,10 +1,12 @@
 package it.reply.cof.dto;
 
+import it.reply.cof.dto.request.Data3DSJson;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * General purpose data transfer object passed to VPOS client when starting a new operation
+ * Data transfer object passed to VPOS client when starting a payment
  *
  * @author gab.marini
  */
@@ -20,13 +22,14 @@ public class PaymentInfo {
     private String urlMs;
     private String accountingMode;
     private String authorMode;
+    private Data3DSJson data3DSJson;
     private Map<String, String> notCompulsoryFields;
 
-    public PaymentInfo(){
+    public PaymentInfo() {
         notCompulsoryFields = new HashMap<>();
     }
 
-    public void addOption(String option){
+    public void addOption(String option) {
         notCompulsoryFields.put("OPTIONS", option);
     }
 
@@ -118,4 +121,11 @@ public class PaymentInfo {
         this.notCompulsoryFields = notCompulsoryFields;
     }
 
+    public Data3DSJson getData3DSJson() {
+        return data3DSJson;
+    }
+
+    public void setData3DSJson(Data3DSJson data3DSJson) {
+        this.data3DSJson = data3DSJson;
+    }
 }

@@ -1,6 +1,5 @@
 package it.reply.cof.utils.mac;
 
-import it.reply.cof.utils.MacAlgorithms;
 import it.reply.cof.utils.exception.COFException;
 import org.apache.commons.codec.binary.Hex;
 
@@ -11,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Utility class created to perform HMAC integrity check
+ * Utility class used to perform HMAC calculations
  *
  * @author Gabriel Raul Marini
  */
@@ -65,12 +64,6 @@ public final class HmacCalculator {
         return result;
     }
 
-    private String innerCalculate(String value, String key) throws Exception {
-        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(CHARSET.name()), algorithm.getValue());
-        mac.init(secretKey);
-        return Hex.encodeHexString(mac.doFinal(value.getBytes(CHARSET.name())));
-    }
-
     /**
      * @param value on which MAC is calculated
      * @param key   used to calculate the MAC
@@ -96,4 +89,11 @@ public final class HmacCalculator {
     public void setAlgorithm(MacAlgorithms algorithm) {
         this.algorithm = algorithm;
     }
+
+    private String innerCalculate(String value, String key) throws Exception {
+        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(CHARSET.name()), algorithm.getValue());
+        mac.init(secretKey);
+        return Hex.encodeHexString(mac.doFinal(value.getBytes(CHARSET.name())));
+    }
+
 }
