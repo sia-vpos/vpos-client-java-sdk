@@ -1,7 +1,7 @@
 package it.reply.cof.dto.request;
 
 
-public class RefundRequestDto extends RequestDto{
+public class RefundRequestDto extends RequestDto {
 
     private String transactionId;
     private String orderId;
@@ -9,7 +9,6 @@ public class RefundRequestDto extends RequestDto{
     private String currency;
     private String exponent;
     private String opDescr;
-    private String options;
 
     public RefundRequestDto(String shopId, String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr) {
         this.shopId = shopId;
@@ -82,11 +81,4 @@ public class RefundRequestDto extends RequestDto{
         this.opDescr = opDescr;
     }
 
-    public String getOptions() {
-        return options;
-    }
-
-    public void setOptions(String options) {
-        this.options = options;
-    }
 }

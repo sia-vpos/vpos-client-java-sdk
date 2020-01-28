@@ -71,7 +71,7 @@ public class RequestValidator {
         else if (requestDto.getTransactionId() == null || requestDto.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN)
             field = Operations.PARAMETERS.TRANSACTIONID.NAME;
         else if (requestDto.getExponent() == null || !requestDto.getCurrency().equals(Constants.Currency.EUR))
-            field = AposConstants.EXPONENT;
+            field = Operations.PARAMETERS.EXPONENT.NAME;
         else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN))
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
         else if (requestDto.getCloseOrder() == null)

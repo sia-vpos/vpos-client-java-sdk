@@ -30,7 +30,12 @@ public class PaymentInfo {
     }
 
     public void addOption(String option) {
-        notCompulsoryFields.put("OPTIONS", option);
+        String field = notCompulsoryFields.get("OPTIONS");
+        if (field == null) {
+            field = "";
+            field = field.concat(option);
+        }
+        notCompulsoryFields.put("OPTIONS", field);
     }
 
     public String getAmount() {
