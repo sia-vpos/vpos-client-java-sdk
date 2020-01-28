@@ -2,11 +2,11 @@ package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
 import it.reply.cof.dto.request.*;
-import it.reply.cof.utils.mac.MacAlgorithms;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
+import it.reply.cof.utils.mac.MacAlgorithms;
 
 import java.util.Date;
 
@@ -107,6 +107,39 @@ public class RequestBuilder {
         request.setData(data);
 
         request.getRequest().setMac(encoder.getMac(MapBuilder.getConfirmMap(request), key));
+        return request;
+    }
+
+    /**
+     * Build the XML request for accounting operations
+     *
+     * @param dtoRequest object containing the necessary infos to perform the accounting of an existing transaction
+     * @return the XML request
+     * @throws COFException
+     */
+    public BPWXmlRequest buildBookingRequest(BookingRequestDto dtoRequest) throws COFException {
+        Date reqDate = new Date();
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ACCOUNTING, reqDate);
+
+        GeneralRequest bookingRequest = new GeneralRequest(reqDate);
+
+        //HEADER
+        bookingRequest.getHeader().setShopId(dtoRequest.getShopId());
+        bookingRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
+
+        //BOOKING REQUEST
+        bookingRequest.setTransactionId(dtoRequest.getTransactionId());
+        bookingRequest.setOrderId(dtoRequest.getOrderId());
+        bookingRequest.setAmount(dtoRequest.getAmount());
+        bookingRequest.setCurrency(dtoRequest.getCurrency());
+        bookingRequest.setExponent(dtoRequest.getExponent());
+        bookingRequest.setOpDescr(dtoRequest.getOpDescr());
+
+        Data data = new Data();
+        data.setAccounting(bookingRequest);
+        request.setData(data);
+
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getBookingMap(request), key));
         return request;
     }
 
