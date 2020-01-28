@@ -20,7 +20,8 @@ public class Request {
     @XmlElement(name = "MAC")
     private String mac;
 
-    public Request(){}
+    public Request() {
+    }
 
     public Request(String operation, Date reqDate) {
         this.operation = operation;
@@ -29,36 +30,30 @@ public class Request {
     }
 
     public String getOperation() {
-
         return operation;
     }
 
     public void setOperation(String operation) {
-
         this.operation = operation;
     }
 
     public String getTimestamp() {
-
         return timestamp;
     }
 
     public void setTimestamp(String timestamp) {
-
         this.timestamp = timestamp;
     }
 
     public String getMac() {
-
         return mac;
     }
 
     public void setMac(String mac) {
-
         this.mac = mac;
     }
 
-    public String toString(){
+    public String toString() {
         return "Request: Operation: " + this.operation + " Timestamp: " + this.timestamp + " MAC: " + this.mac + " ";
     }
 }

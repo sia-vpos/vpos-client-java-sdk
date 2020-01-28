@@ -13,7 +13,8 @@ public class MasterpassData {
     @XmlElement(name = "PP_CardEnrollMethod")
     private String ppCardEnrollMethod;
 
-    public MasterpassData(){}
+    public MasterpassData() {
+    }
 
     public String getPpAuthenticationMethod() {
         return ppAuthenticationMethod;

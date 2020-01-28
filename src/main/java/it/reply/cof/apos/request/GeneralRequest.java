@@ -26,7 +26,13 @@ public class GeneralRequest {
     @XmlElement(name = "Exponent")
     protected String exponent;
 
-    public GeneralRequest(){
+    @XmlElement(name = "OpDescr")
+    protected String opDescr;
+
+    @XmlElement(name = "Options")
+    protected String options;
+
+    public GeneralRequest() {
 
     }
 
@@ -82,4 +88,19 @@ public class GeneralRequest {
         this.exponent = exponent;
     }
 
+    public String getOpDescr() {
+        return opDescr;
+    }
+
+    public void setOpDescr(String opDescr) {
+        this.opDescr = opDescr;
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
 }
