@@ -8,9 +8,6 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RefundRequest extends GeneralRequest {
 
-    @XmlElement(name = "OpDescr")
-    private String opDescr;
-
     @XmlElement(name = "Options")
     private String options;
 
@@ -18,16 +15,8 @@ public class RefundRequest extends GeneralRequest {
         super(reqDate);
     }
 
-    public RefundRequest(){
+    public RefundRequest() {
 
-    }
-
-    public String getOpDescr() {
-        return opDescr;
-    }
-
-    public void setOpDescr(String opDescr) {
-        this.opDescr = opDescr;
     }
 
     public String getOptions() {

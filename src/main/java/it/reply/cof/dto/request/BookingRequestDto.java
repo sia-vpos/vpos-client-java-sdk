@@ -1,7 +1,6 @@
 package it.reply.cof.dto.request;
 
-
-public class RefundRequestDto extends RequestDto {
+public class BookingRequestDto extends RequestDto {
 
     private String transactionId;
     private String orderId;
@@ -9,29 +8,6 @@ public class RefundRequestDto extends RequestDto {
     private String currency;
     private String exponent;
     private String opDescr;
-
-    public RefundRequestDto(String shopId, String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr) {
-        this.shopId = shopId;
-        this.operatorId = operatorId;
-        this.transactionId = transactionId;
-        this.orderId = orderId;
-        this.amount = amount;
-        this.currency = currency;
-        this.exponent = exponent;
-        this.opDescr = opDescr;
-    }
-
-    public RefundRequestDto(String shopId, String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr, String options) {
-        this.shopId = shopId;
-        this.operatorId = operatorId;
-        this.transactionId = transactionId;
-        this.orderId = orderId;
-        this.amount = amount;
-        this.currency = currency;
-        this.exponent = exponent;
-        this.opDescr = opDescr;
-        this.options = options;
-    }
 
     public String getTransactionId() {
         return transactionId;
@@ -73,6 +49,14 @@ public class RefundRequestDto extends RequestDto {
         this.exponent = exponent;
     }
 
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
+
     public String getOpDescr() {
         return opDescr;
     }
@@ -80,5 +64,4 @@ public class RefundRequestDto extends RequestDto {
     public void setOpDescr(String opDescr) {
         this.opDescr = opDescr;
     }
-
 }

@@ -24,7 +24,12 @@ public class MapBuilder {
         Map<String, String> map = new LinkedHashMap<>();
         map.put(Operations.PARAMETERS.ORDERID.NAME, values.get(Operations.PARAMETERS.ORDERID.NAME));
         map.put(Operations.PARAMETERS.SHOPID.NAME, values.get(Operations.PARAMETERS.SHOPID.NAME));
-        map.put(AposConstants.AUTHNUMBER, values.get(AposConstants.AUTHNUMBER));
+
+        if(values.get(AposConstants.AUTHNUMBER) == null)
+            map.put(AposConstants.AUTHNUMBER, "NULL");
+        else
+            map.put(AposConstants.AUTHNUMBER, values.get(AposConstants.AUTHNUMBER));
+
         map.put(Operations.PARAMETERS.AMOUNT.NAME, values.get(Operations.PARAMETERS.AMOUNT.NAME));
         map.put(Operations.PARAMETERS.CURRENCY.NAME, values.get(Operations.PARAMETERS.CURRENCY.NAME));
         map.put(Operations.PARAMETERS.EXPONENT.NAME, values.get(Operations.PARAMETERS.EXPONENT.NAME));
@@ -59,21 +64,25 @@ public class MapBuilder {
 
     public static Map<String, String> getRefundMap(BPWXmlRequest request) {
         Map<String, String> map = getGeneralMap(request);
-
         RefundRequest refundRequest = request.getData().getRefundRequest();
         map.put(Operations.PARAMETERS.OPDESCR.NAME, refundRequest.getOpDescr());
         map.put(Operations.PARAMETERS.OPTIONS.NAME, refundRequest.getOptions());
-
         return map;
     }
 
     public static Map<String, String> getConfirmMap(BPWXmlRequest request) {
         Map<String, String> map = getGeneralMap(request);
-
         ConfirmRequest confirmRequest = request.getData().getConfirmRequest();
         map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, confirmRequest.getAccountingMode());
         map.put(Operations.PARAMETERS.CLOSEORDER.NAME, confirmRequest.getCloseOrder());
+        return map;
+    }
 
+    public static Map<String, String> getBookingMap(BPWXmlRequest request) {
+        Map<String, String> map = getGeneralMap(request);
+        GeneralRequest bookingRequest = request.getData().getAccounting();
+        map.put(Operations.PARAMETERS.OPDESCR.NAME, bookingRequest.getOpDescr());
+        map.put(Operations.PARAMETERS.OPTIONS.NAME, bookingRequest.getOptions());
         return map;
     }
 
@@ -102,28 +111,6 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.ORDERID.NAME, statusRequest.getOrderId());
         map.put(Operations.PARAMETERS.OPTIONS.NAME, statusRequest.getOptions());
         map.put(Operations.PARAMETERS.PRODUCTREF.NAME, statusRequest.getProductRef());
-        return map;
-    }
-
-    private static Map<String, String> getGeneralMap(BPWXmlRequest request) {
-        Map<String, String> map = getStdMap(request);
-
-        //Get refund request
-        GeneralRequest generalRequest = null;
-        if (request.getRequest().getOperation() != null && request.getRequest().getOperation().equals(Operations.PARAMETERS.REFUND))
-            generalRequest = request.getData().getRefundRequest();
-        else if (request.getRequest().getOperation().equals(Operations.PARAMETERS.DEFERREDREQUEST))
-            generalRequest = request.getData().getConfirmRequest();
-        if(generalRequest != null && generalRequest.getHeader() != null) {
-            map.put(AposConstants.SHOPID, generalRequest.getHeader().getShopId());
-            map.put(Operations.PARAMETERS.OPERATORID.NAME, generalRequest.getHeader().getOperatorId());
-            map.put(Operations.PARAMETERS.REQREFNUM.NAME, generalRequest.getHeader().getReqRefNum());
-            map.put(Operations.PARAMETERS.TRANSACTIONID.NAME, generalRequest.getTransactionId());
-            map.put(Operations.PARAMETERS.ORDERID.NAME, generalRequest.getOrderId());
-            map.put(Operations.PARAMETERS.AMOUNT.NAME, generalRequest.getAmount());
-            map.put(Operations.PARAMETERS.CURRENCY.NAME, generalRequest.getCurrency());
-            map.put(Operations.PARAMETERS.EXPONENT.NAME, generalRequest.getExponent());
-        }
         return map;
     }
 
@@ -229,6 +216,31 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.LANG.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.LANG.NAME));
         map.put(Operations.PARAMETERS.EMAIL.SHOPNAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.EMAIL.SHOPNAME));
 
+        return map;
+    }
+
+    private static Map<String, String> getGeneralMap(BPWXmlRequest request) {
+        Map<String, String> map = getStdMap(request);
+
+        //Get refund request
+        GeneralRequest generalRequest = null;
+        if (request.getRequest().getOperation() != null && request.getRequest().getOperation().equals(Operations.PARAMETERS.REFUND))
+            generalRequest = request.getData().getRefundRequest();
+        else if (request.getRequest().getOperation().equals(Operations.PARAMETERS.DEFERREDREQUEST))
+            generalRequest = request.getData().getConfirmRequest();
+        else
+            generalRequest = request.getData().getAccounting();
+
+        if(generalRequest != null && generalRequest.getHeader() != null) {
+            map.put(AposConstants.SHOPID, generalRequest.getHeader().getShopId());
+            map.put(Operations.PARAMETERS.OPERATORID.NAME, generalRequest.getHeader().getOperatorId());
+            map.put(Operations.PARAMETERS.REQREFNUM.NAME, generalRequest.getHeader().getReqRefNum());
+            map.put(Operations.PARAMETERS.TRANSACTIONID.NAME, generalRequest.getTransactionId());
+            map.put(Operations.PARAMETERS.ORDERID.NAME, generalRequest.getOrderId());
+            map.put(Operations.PARAMETERS.AMOUNT.NAME, generalRequest.getAmount());
+            map.put(Operations.PARAMETERS.CURRENCY.NAME, generalRequest.getCurrency());
+            map.put(Operations.PARAMETERS.EXPONENT.NAME, generalRequest.getExponent());
+        }
         return map;
     }
 

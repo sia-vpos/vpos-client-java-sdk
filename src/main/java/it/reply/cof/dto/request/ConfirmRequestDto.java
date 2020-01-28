@@ -1,6 +1,6 @@
 package it.reply.cof.dto.request;
 
-public class ConfirmRequestDto extends RequestDto{
+public class ConfirmRequestDto extends RequestDto {
 
     private String transactionId;
     private String orderId;
@@ -69,14 +69,6 @@ public class ConfirmRequestDto extends RequestDto{
         this.closeOrder = closeOrder;
     }
 
-    public String getRelease() {
-        return release;
-    }
-
-    public void setRelease(String release) {
-        this.release = release;
-    }
-
     public String getOptions() {
         return options;
     }
@@ -85,11 +77,4 @@ public class ConfirmRequestDto extends RequestDto{
         this.options = options;
     }
 
-    public String getMac() {
-        return mac;
-    }
-
-    public void setMac(String mac) {
-        this.mac = mac;
-    }
 }

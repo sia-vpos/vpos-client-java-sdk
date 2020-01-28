@@ -52,4 +52,8 @@ public final class AESEncoder {
             throw new COFException(e.getMessage(), e.getCause());
         }
     }
+
+    public static void main(String args[]) throws COFException {
+        System.out.println(AESEncoder.encode3DSData("aaaaaaaaaaaaaaaa", "ciao"));
+    }
 }

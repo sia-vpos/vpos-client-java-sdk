@@ -290,4 +290,27 @@ public class ResponseMapper {
         return dto;
 
     }
+
+    public BookingResponseDto bookingResponseDto(BPWXmlResponse response){
+        BookingResponseDto dto = new BookingResponseDto();
+
+        if(response != null && response.getData() != null && response.getData().getOperation() != null){
+            Operation operation = response.getData().getOperation();
+
+            dto.setTransactionID(operation.getTransactionId());
+            dto.setTimestampReq(operation.getTimestampReq());
+            dto.setTimestampElab(operation.getTimestampElab());
+            dto.setSrcType(operation.getSrcType());
+            dto.setAmount(operation.getAmount());
+            dto.setResult(operation.getResult());
+            dto.setStatus(operation.getStatus());
+            dto.setOpDesc(operation.getOpDescr());
+            dto.setMAC(operation.getMac());
+
+                if(response.getData().getAuthorization() != null && response.getData().getAuthorization().size() == 1)
+                    dto.setAuthorization(response.getData().getAuthorization().get(0));
+
+        }
+        return dto;
+    }
 }

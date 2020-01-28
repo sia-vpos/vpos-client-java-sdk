@@ -145,6 +145,16 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     @Override
+    public ConfirmationResponseDto confirmTransaction(BookingRequestDto dto) throws COFException {
+        BPWXmlRequest request = requestBuilder.buildBookingRequest(dto);
+        BPWXmlResponse xmlResponse = aposClient.executeCall(request);
+        //check response MACs validity
+        verifyMacResponse(xmlResponse);
+        //TODO MAPPER
+        return null;
+    }
+
+    @Override
     public RefundResponseDto refundPayment(RefundRequestDto dto) throws COFException {
         BPWXmlRequest request = requestBuilder.buildRefundRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
@@ -176,7 +186,6 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         final String NEUTRAL_MAC_VALUE = "NULL";
 
         String responseMac = responseMACCalculator.getBPWXmlResponseMac(response, apiResultKey);
-
         if (!response.getMac().equals(NEUTRAL_MAC_VALUE) && !response.getMac().equals(responseMac))
             throw new COFException("Response MAC is not valid");
 

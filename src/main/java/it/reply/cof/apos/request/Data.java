@@ -37,6 +37,9 @@ public class Data {
     @XmlElement(name = "Verify")
     private Operation verifyResponse;
 
+    @XmlElement(name = "Accounting")
+    private GeneralRequest accounting;
+
     @XmlElement(name = "DeferredRequest")
     private ConfirmRequest confirmRequest;
 
@@ -47,7 +50,7 @@ public class Data {
     private VBVRedirect vbvRedirect;
 
 
-    public Data(){
+    public Data() {
         /*
     Empty arg constructor
      */
@@ -142,4 +145,11 @@ public class Data {
         this.verifyResponse = verifyResponse;
     }
 
+    public GeneralRequest getAccounting() {
+        return accounting;
+    }
+
+    public void setAccounting(GeneralRequest accounting) {
+        this.accounting = accounting;
+    }
 }

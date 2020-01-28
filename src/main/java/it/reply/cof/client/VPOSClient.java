@@ -70,6 +70,8 @@ public interface VPOSClient {
      */
     ConfirmationResponseDto confirmPayment(ConfirmRequestDto dto) throws COFException;
 
+    ConfirmationResponseDto confirmTransaction(BookingRequestDto dto) throws COFException;
+
     /**
      * @param dto data transfer object containing all the required parameters to perform a
      *            payment refund
