@@ -12,6 +12,7 @@ public final class Operations {
         public static final String AUTHORIZATION3DSSTEP1 = "AUTHORIZATION3DSSTEP1";
         public static final String AUTHORIZATION3DSSTEP2 = "AUTHORIZATION3DSSTEP2";
         public static final String IBANAUTHORIZATION = "IBANAUTHORIZATION";
+        public static final String ACCOUNTING = "ACCOUNTING";
         public static final String REFUND = "REFUND";
         public static final String ORDERSTATUS = "ORDERSTATUS";
         public static final String VERIFY = "VERIFY";
