@@ -105,6 +105,27 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     @Override
+    public String tokenize(String SHOP_ID, String URL_BACK, String URL_DONE, String URLMS, String urlApos) throws COFException {
+        PaymentInfo paymentInfo = new PaymentInfo();
+        paymentInfo.setAmount("10");
+        paymentInfo.setCurrency("978");
+        paymentInfo.setOrderId("Virtualizza Carta");
+        paymentInfo.setShopId(SHOP_ID);
+        paymentInfo.setUrlBack(URL_BACK);
+        paymentInfo.setUrlDone(URL_DONE);
+        paymentInfo.setUrlMs(URLMS);
+        paymentInfo.setAccountingMode("D");
+        paymentInfo.setAuthorMode("I");
+        paymentInfo.addOption("GM");
+        String path = customTemplate.booleanValue() ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
+        return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey, apiResultKey));
+    }
+
+
+
+
+
+    @Override
     public void verifyURL(Map<String, String> values, String receivedMac) throws COFException {
         String calculatedMAc = hmacCalculator.getMac(MapBuilder.getOutcomeMap(values), apiResultKey);
         if (!receivedMac.equals(calculatedMAc))

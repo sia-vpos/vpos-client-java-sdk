@@ -37,6 +37,8 @@ public interface VPOSClient {
      */
     String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException;
 
+    String tokenize(String SHOP_ID, String URL_BACK, String URL_DONE, String URLMS, String urlApos) throws COFException;
+
     /**
      * Validate the result of a payment initiation verifying the integrity of the data contained in URMLS/URLDONE
      *

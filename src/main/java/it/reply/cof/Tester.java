@@ -3,6 +3,7 @@ package it.reply.cof;
 import it.reply.cof.client.VPOSClient;
 import it.reply.cof.client.VPOSSimpleClient;
 import it.reply.cof.utils.exception.COFException;
+import it.reply.cof.utils.mac.Encoder;
 
 import java.nio.charset.Charset;
 import java.util.HashMap;
@@ -53,6 +54,8 @@ public class Tester {
             throw new COFException(e.getMessage());
         } */
 
-        System.out.println(Charset.defaultCharset());
+
+       Encoder encoder = new Encoder();
+       System.out.println("finally: " + "4a9f0be8275fc626625d6a218246a7c0b017ef79d16900959a8668222e4d94d5".equals(encoder.getMac("chiave=prova", "chiave")));
     }
 }

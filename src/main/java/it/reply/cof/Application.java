@@ -24,12 +24,14 @@ public class Application {
 
     public static void main(String[] args) throws COFException {
         VPOSClient vposClient = new VPosClientWithProxy(URL_WEB_API, MAC_KEY_VPOS, API_RESULT_KEY, PROXYNAME, PROXYPORT);
-        System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
+       // System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
 
         try {
             //vposClient.verifyPayment(buildVerifyTest());
-            vposClient.start3DSAuth(buildAuth3DSTest1());
+            //vposClient.start3DSAuth(buildAuth3DSTest1());
             //vposClient.getOrderStatus(buildOrderStatusTest());
+            System.out.println("Token: ");
+           System.out.println("Bih: "+vposClient.tokenize(SHOP_ID, URL_BACK, URL_DONE, URLMS, URL_REDIRECT));
         } catch (Exception e) {
 
             System.err.println(e.getMessage());
@@ -40,9 +42,9 @@ public class Application {
 
     private static PaymentInfo buildPaymentTest() {
         PaymentInfo paymentInfo = new PaymentInfo();
-        paymentInfo.setAmount("10000");
+        paymentInfo.setAmount("10");
         paymentInfo.setCurrency("978");
-        paymentInfo.setOrderId("416454645646");
+        paymentInfo.setOrderId("Virtualizza Carta");
         paymentInfo.setShopId(SHOP_ID);
         paymentInfo.setUrlBack(URL_BACK);
         paymentInfo.setUrlDone(URL_DONE);
