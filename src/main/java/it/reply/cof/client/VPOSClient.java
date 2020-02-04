@@ -37,7 +37,18 @@ public interface VPOSClient {
      */
     String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException;
 
-    String tokenize(String SHOP_ID, String URL_BACK, String URL_DONE, String URLMS, String urlApos) throws COFException;
+    /**
+     * Tokenize a credit card
+     *
+     * @param shopId  identifier of the merchant
+     * @param urlBack redirect url in case of payment failure
+     * @param urlDone redirect url in case of success
+     * @param urlms   endpoint of merchant backend
+     * @param urlApos endpoint of SIA VPOS systems
+     * @return the base64 format of the HTML document
+     * @throws COFException in case of failure (see exception message for more info)
+     */
+    String tokenize(String shopId, String urlBack, String urlDone, String urlms, String urlApos) throws COFException;
 
     /**
      * Validate the result of a payment initiation verifying the integrity of the data contained in URMLS/URLDONE

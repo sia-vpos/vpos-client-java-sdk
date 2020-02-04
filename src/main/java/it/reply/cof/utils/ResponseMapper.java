@@ -40,7 +40,6 @@ public class ResponseMapper {
     public ConfirmationResponseDto mapConfirmationResponse(BPWXmlResponse response) {
         ConfirmationResponseDto dto = new ConfirmationResponseDto();
 
-
         if (response != null && response.getData() != null && response.getData().getAuthorization() != null) {
             List<Authorization> authorizations = response.getData().getAuthorization();
             if (authorizations.size() == 1) {
