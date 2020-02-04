@@ -8,7 +8,7 @@ import it.reply.cof.utils.exception.COFException;
 import java.util.Map;
 
 /**
- * Client interface used to perform common requests and validate returned results from SIA.
+ * Client interface used to perform common requests to SIA VPOS.
  * Different implementations are provided to offer a full spectre of tools fitting security and
  * and common scenarios requirements.
  *
@@ -27,12 +27,12 @@ public interface VPOSClient {
 
     /**
      * Create an HTML document ready to use for payment initiation. The method returns
-     * the custom template with an embedded hidden form containing all the payment parameters in case of
+     * the custom template with an hidden form containing all the payment parameters in case of
      * precedent HTML injection. Default template is returned otherwise.
      *
      * @param paymentInfo data transfer object containing all the payment parameters
      * @param urlApos     VPOS redirect base path
-     * @return the base64 encoded HTML document
+     * @return the base64 format of the HTML document
      * @throws COFException in case of failure (see exception message for more info)
      */
     String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException;
@@ -68,8 +68,6 @@ public interface VPOSClient {
      * @return the outcome of the operation with the relative additional infos
      * @throws COFException in case of failure (see exception message for more info)
      */
-    ConfirmationResponseDto confirmPayment(ConfirmRequestDto dto) throws COFException;
-
     ConfirmationResponseDto confirmTransaction(BookingRequestDto dto) throws COFException;
 
     /**

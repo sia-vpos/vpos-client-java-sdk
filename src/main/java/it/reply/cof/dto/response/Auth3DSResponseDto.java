@@ -1,7 +1,5 @@
 package it.reply.cof.dto.response;
 
-import it.reply.cof.apos.response.PanAliasData;
-import it.reply.cof.apos.response.VBVRedirect;
 import it.reply.cof.dto.request.Auth3DSDto;
 
 public class Auth3DSResponseDto extends Auth3DSDto {
@@ -17,7 +15,7 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     private String exponent;
     private String accountedAmount;
     private String refundedAmount;
-   private String transactionResult;
+    private String transactionResult;
     private String timestamp;
     private String authorizationNumber;
     private String acquireBIN;
@@ -110,12 +108,12 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         this.transactionID = transactionID;
     }
 
-     
+
     public String getNetwork() {
         return network;
     }
 
-     
+
     public void setNetwork(String network) {
         this.network = network;
     }
@@ -144,11 +142,11 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         this.authorizedAmount = authorizedAmount;
     }
 
-     
+
     public String getCurrency() {
         return currency;
     }
-    
+
     public void setCurrency(String currency) {
         this.currency = currency;
     }
@@ -156,7 +154,7 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     public String getExponent() {
         return exponent;
     }
-    
+
     public void setExponent(String exponent) {
         this.exponent = exponent;
     }
@@ -177,12 +175,12 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         this.refundedAmount = refundedAmount;
     }
 
-     
+
     public String getTimestamp() {
         return timestamp;
     }
 
-     
+
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
@@ -267,11 +265,11 @@ public class Auth3DSResponseDto extends Auth3DSDto {
         CardType = cardType;
     }
 
-    public String getMAC(){
+    public String getMAC() {
         return this.MAC;
     }
 
-    public void setMAC(String MAC){
+    public void setMAC(String MAC) {
         this.MAC = MAC;
     }
 
@@ -283,10 +281,6 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     public void setTransactionResult(String transactionResult) {
         this.transactionResult = transactionResult;
     }
-
-
-
-
 
 
 }

@@ -1,6 +1,5 @@
 package it.reply.cof.dto.response;
 
-import it.reply.cof.apos.response.Authorization;
 import it.reply.cof.dto.request.Auth3DSStep2RequestDto;
 
 public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {

@@ -32,8 +32,6 @@ public class RefundResponseDto {
     private String responseCodedIso;
     private String authorizationMAC;
 
-
-
     public String getTransactionID() {
         return transactionID;
     }

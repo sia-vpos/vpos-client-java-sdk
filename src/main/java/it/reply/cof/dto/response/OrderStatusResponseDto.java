@@ -237,8 +237,8 @@ public class OrderStatusResponseDto {
         this.commonMAC = commonMAC;
     }
 
-    public void clearAllIndividualFields(){
-        
+    public void clearAllIndividualFields() {
+
         this.setPaymentType(null);
         this.setAuthorizationType(null);
         this.setTransactionID(null);

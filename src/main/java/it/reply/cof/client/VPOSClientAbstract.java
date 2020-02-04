@@ -8,12 +8,12 @@ import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.*;
 import it.reply.cof.dto.response.*;
 import it.reply.cof.utils.HTMLGenerator;
-import it.reply.cof.utils.mac.MacAlgorithms;
 import it.reply.cof.utils.ResponseMapper;
 import it.reply.cof.utils.builders.MapBuilder;
 import it.reply.cof.utils.builders.RequestBuilder;
 import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
+import it.reply.cof.utils.mac.MacAlgorithms;
 import it.reply.cof.utils.mac.ResponseMACCalculator;
 
 import java.io.File;
@@ -127,21 +127,12 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     @Override
-    public Auth3DSStep2ResponseDto start3DSAuthStep2Dto(Auth3DSStep2RequestDto dto) throws COFException{
+    public Auth3DSStep2ResponseDto start3DSAuthStep2Dto(Auth3DSStep2RequestDto dto) throws COFException {
         BPWXmlRequest request = requestBuilder.build3DSStep2AuthRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
         //check response MACs validity
         verifyMacResponse(xmlResponse);
         return responseMapper.auth3DSStep2ResponseDto(xmlResponse);
-    }
-
-    @Override
-    public ConfirmationResponseDto confirmPayment(ConfirmRequestDto dto) throws COFException {
-        BPWXmlRequest request = requestBuilder.buildConfirmRequest(dto);
-        BPWXmlResponse xmlResponse = aposClient.executeCall(request);
-        //check response MACs validity
-        verifyMacResponse(xmlResponse);
-        return responseMapper.mapConfirmationResponse(xmlResponse);
     }
 
     @Override

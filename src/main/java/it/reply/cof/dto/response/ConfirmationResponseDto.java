@@ -23,7 +23,6 @@ public class ConfirmationResponseDto {
     private String panExpiryDate;
     private String MAC;
 
-
     public String getPaymentType() {
         return paymentType;
     }

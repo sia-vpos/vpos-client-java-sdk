@@ -7,8 +7,6 @@ public class VerifyResponseDto {
     private String transactionID;
     private String MAC;
 
-
-
     public String getOperation() {
         return operation;
     }
