@@ -3,7 +3,9 @@ package it.reply.cof;
 import it.reply.cof.client.VPOSClient;
 import it.reply.cof.client.VPOSSimpleClient;
 import it.reply.cof.utils.exception.COFException;
+import it.reply.cof.utils.mac.Encoder;
 
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public class Tester {
     private static final String BASE64HTML = "PGh0bWw+CiAgICA8Ym9keT4KICAgICAgICAKICAgIDwvYm9keT4KPC9odG1sPg==";
 
     public static void main(String[] args) throws COFException {
-        VPOSClient vposClient = new VPOSSimpleClient(URL_WEB_API, START_KEY, API_RESULT_KEY);
+      /*  VPOSClient vposClient = new VPOSSimpleClient(URL_WEB_API, START_KEY, API_RESULT_KEY);
         Map<String, String> map = new HashMap<>();
         map.put("ORDERID","0oiujh6rd3tbhberwwww3g4ui777");
         map.put("SHOPID","129281292800104");
@@ -50,6 +52,10 @@ public class Tester {
         }catch(Exception e){
             System.out.println("Thees ees: " + e.getMessage());
             throw new COFException(e.getMessage());
-        }
+        } */
+
+
+       Encoder encoder = new Encoder();
+       System.out.println("finally: " + "4a9f0be8275fc626625d6a218246a7c0b017ef79d16900959a8668222e4d94d5".equals(encoder.getMac("chiave=prova", "chiave")));
     }
 }

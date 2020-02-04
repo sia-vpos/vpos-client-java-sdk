@@ -18,6 +18,12 @@ public class BPWXmlRequest {
     @XmlElement(name = "Data")
     private Data data;
 
+    public BPWXmlRequest(){
+        /*
+        no args constructor
+         */
+    }
+
     public String getRelease() {
         return release;
     }
@@ -42,8 +48,5 @@ public class BPWXmlRequest {
         this.data = data;
     }
 
-    public String toString(){
-        return " Verify: " + this.getData().getVerifyRequest().toString() + " Request: " + this.getRequest().toString() + " Release: " + this.getRelease() ;
-    }
 
 }

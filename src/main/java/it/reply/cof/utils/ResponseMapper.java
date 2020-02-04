@@ -13,7 +13,7 @@ public class ResponseMapper {
     /**
      * Maps a Verify Response to its dto
      * @param response contains all the relevant information
-     * @return
+     * @return dto populated with values obtained from the response XML
      */
     public VerifyResponseDto mapVerifyResponse(BPWXmlResponse response) {
         VerifyResponseDto dto = new VerifyResponseDto();
@@ -35,7 +35,7 @@ public class ResponseMapper {
     /**
      * Maps a Confirmation Response to its dto
      * @param response contains all the relevant information
-     * @return
+     * @return dto populated with values obtained from the response XML
      */
     public ConfirmationResponseDto mapConfirmationResponse(BPWXmlResponse response) {
         ConfirmationResponseDto dto = new ConfirmationResponseDto();
@@ -77,7 +77,7 @@ public class ResponseMapper {
     /**
      * Maps a Refund Response to its dto
      * @param response contains all the relevant information
-     * @return
+     * @return dto populated with values obtained from the response XML
      */
     public RefundResponseDto mapRefundResponseDto(BPWXmlResponse response) {
         RefundResponseDto dto = new RefundResponseDto();
@@ -130,7 +130,7 @@ public class ResponseMapper {
     /**
      * Maps an Order Status Response to its dto
      * @param response contains all the relevant information
-     * @return
+     * @return dto populated with values obtained from the response XML
      */
     public OrderStatusResponseListDto mapOrderStatusResponse(BPWXmlResponse response) {
         OrderStatusResponseListDto dto = new OrderStatusResponseListDto();
@@ -186,7 +186,7 @@ public class ResponseMapper {
     /**
      * Maps the Step 1 Response of a 3D Secure authorization to its dto
      * @param response contains all the relevant information
-     * @return
+     * @return dto populated with values obtained from the response XML
      */
     public Auth3DSResponseDto auth3DSResponseDto(BPWXmlResponse response){
         Auth3DSResponseDto dto = new Auth3DSResponseDto();
@@ -245,7 +245,7 @@ public class ResponseMapper {
     /**
      * Maps the Step 1 Response of a 3D Secure authorization to its dto
      * @param response contains all the relevant information
-     * @return
+     * @return dto populated with values obtained from the response XML
      */
     public Auth3DSStep2ResponseDto auth3DSStep2ResponseDto(BPWXmlResponse response) {
         Auth3DSStep2ResponseDto dto = new Auth3DSStep2ResponseDto();
@@ -289,5 +289,28 @@ public class ResponseMapper {
 
         return dto;
 
+    }
+
+    public BookingResponseDto bookingResponseDto(BPWXmlResponse response){
+        BookingResponseDto dto = new BookingResponseDto();
+
+        if(response != null && response.getData() != null && response.getData().getOperation() != null){
+            Operation operation = response.getData().getOperation();
+
+            dto.setTransactionID(operation.getTransactionId());
+            dto.setTimestampReq(operation.getTimestampReq());
+            dto.setTimestampElab(operation.getTimestampElab());
+            dto.setSrcType(operation.getSrcType());
+            dto.setAmount(operation.getAmount());
+            dto.setResult(operation.getResult());
+            dto.setStatus(operation.getStatus());
+            dto.setOpDesc(operation.getOpDescr());
+            dto.setMAC(operation.getMac());
+
+                if(response.getData().getAuthorization() != null && response.getData().getAuthorization().size() == 1)
+                    dto.setAuthorization(response.getData().getAuthorization().get(0));
+
+        }
+        return dto;
     }
 }

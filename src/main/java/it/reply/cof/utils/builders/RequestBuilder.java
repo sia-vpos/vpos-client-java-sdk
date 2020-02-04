@@ -1,6 +1,7 @@
 package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
+import it.reply.cof.apos.response.Operation;
 import it.reply.cof.dto.request.*;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
@@ -312,5 +313,6 @@ public class RequestBuilder {
         request.setRequest(new Request(operation, date));
         return request;
     }
+
 
 }
