@@ -9,6 +9,9 @@ import it.reply.cof.utils.encryption.AESEncoder;
 import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -25,7 +28,7 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.ORDERID.NAME, values.get(Operations.PARAMETERS.ORDERID.NAME));
         map.put(Operations.PARAMETERS.SHOPID.NAME, values.get(Operations.PARAMETERS.SHOPID.NAME));
 
-        if(values.get(AposConstants.AUTHNUMBER) == null)
+        if (values.get(AposConstants.AUTHNUMBER) == null)
             map.put(AposConstants.AUTHNUMBER, "NULL");
         else
             map.put(AposConstants.AUTHNUMBER, values.get(AposConstants.AUTHNUMBER));
@@ -161,7 +164,7 @@ public class MapBuilder {
         return map;
     }
 
-    public static Map<String, String> get3DSStep2AuthMap(BPWXmlRequest request) {
+    public static Map<String, String> get3DSStep2AuthMap(BPWXmlRequest request) throws COFException {
 
         Map<String, String> map = getStdMap(request);
 
@@ -170,7 +173,13 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.OPERATORID.NAME, auth3DSStep2Request.getHeader().getOperatorId());
         map.put(Operations.PARAMETERS.REQREFNUM.NAME, auth3DSStep2Request.getHeader().getReqRefNum());
         map.put(Operations.PARAMETERS.ORIGINALREQREFNUM.NAME, auth3DSStep2Request.getOriginalReqRefNum());
-        map.put(Operations.PARAMETERS.PARES, auth3DSStep2Request.getPaRes());
+
+        try {
+            String decodedPares = URLDecoder.decode(auth3DSStep2Request.getPaRes(), StandardCharsets.UTF_8.toString());
+            map.put(Operations.PARAMETERS.PARES, decodedPares);
+        } catch (UnsupportedEncodingException e) {
+            throw new COFException(e.getMessage(), e);
+        }
 
         return map;
     }
@@ -231,7 +240,7 @@ public class MapBuilder {
         else
             generalRequest = request.getData().getAccounting();
 
-        if(generalRequest != null && generalRequest.getHeader() != null) {
+        if (generalRequest != null && generalRequest.getHeader() != null) {
             map.put(AposConstants.SHOPID, generalRequest.getHeader().getShopId());
             map.put(Operations.PARAMETERS.OPERATORID.NAME, generalRequest.getHeader().getOperatorId());
             map.put(Operations.PARAMETERS.REQREFNUM.NAME, generalRequest.getHeader().getReqRefNum());

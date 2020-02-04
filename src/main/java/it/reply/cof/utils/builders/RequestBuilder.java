@@ -8,6 +8,9 @@ import it.reply.cof.utils.exception.COFException;
 import it.reply.cof.utils.mac.Encoder;
 import it.reply.cof.utils.mac.MacAlgorithms;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -287,7 +290,11 @@ public class RequestBuilder {
 
         //AUTH3DS STEP2 REQUEST
         auth3DSStep2Request.setOriginalReqRefNum(dtoRequest.getOriginalRefReqNum());
-        auth3DSStep2Request.setPaRes(dtoRequest.getPaRes());
+        try {
+            auth3DSStep2Request.setPaRes(URLEncoder.encode(dtoRequest.getPaRes(), StandardCharsets.UTF_8.toString()));
+        } catch (UnsupportedEncodingException e) {
+            throw new COFException(e.getMessage(), e);
+        }
         auth3DSStep2Request.setAcquirer(dtoRequest.getAcquirer());
 
         Data data = new Data();
