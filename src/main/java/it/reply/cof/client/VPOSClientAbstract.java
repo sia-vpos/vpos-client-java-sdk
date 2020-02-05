@@ -116,7 +116,8 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         paymentInfo.setUrlMs(urlms);
         paymentInfo.setAccountingMode("D");
         paymentInfo.setAuthorMode("I");
-        paymentInfo.addOption("GM");
+        paymentInfo.addOption(PaymentInfo.OptionName.G);
+        paymentInfo.addOption(PaymentInfo.OptionName.M);
         String path = customTemplate.booleanValue() ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
         return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey, apiResultKey));
     }

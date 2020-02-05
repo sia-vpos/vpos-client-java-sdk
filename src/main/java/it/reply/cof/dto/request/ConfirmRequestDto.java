@@ -9,9 +9,7 @@ public class ConfirmRequestDto extends RequestDto {
     private String exponent;
     private String accountingMode;
     private String closeOrder;
-    private String release;
     private String options;
-    private String mac;
 
     public String getTransactionId() {
         return transactionId;

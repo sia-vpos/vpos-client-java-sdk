@@ -5,7 +5,6 @@ import it.reply.cof.client.VPOSSimpleClient;
 import it.reply.cof.dto.PaymentInfo;
 import it.reply.cof.dto.request.*;
 import it.reply.cof.utils.Utils;
-import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.exception.COFException;
 
 public class Application {
@@ -53,7 +52,8 @@ public class Application {
         paymentInfo.setUrlMs(URLMS);
         paymentInfo.setAccountingMode("I");
         paymentInfo.setAuthorMode("I");
-        paymentInfo.addOption("GM");
+        paymentInfo.addOption(PaymentInfo.OptionName.G);
+        paymentInfo.addOption(PaymentInfo.OptionName.M);
         return paymentInfo;
     }
 

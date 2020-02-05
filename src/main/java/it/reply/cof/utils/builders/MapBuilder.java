@@ -3,6 +3,7 @@ package it.reply.cof.utils.builders;
 
 import it.reply.cof.apos.request.*;
 import it.reply.cof.dto.PaymentInfo;
+import it.reply.cof.dto.PaymentInfo.FieldName;
 import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.encryption.AESEncoder;
@@ -196,24 +197,24 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.EXPONENT.NAME, info.getExponent());
         map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, info.getAccountingMode());
         map.put(AposConstants.AUTHORMODE, info.getAuthorMode());
-        map.put(Operations.PARAMETERS.OPTIONS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.OPTIONS.NAME));
-        map.put(Operations.PARAMETERS.NAME.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.NAME.NAME));
-        map.put(Operations.PARAMETERS.SURNAME.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.SURNAME.NAME));
-        map.put(Operations.PARAMETERS.TAXID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.TAXID.NAME));
-        map.put(Operations.PARAMETERS.LOCKCARD.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.LOCKCARD.NAME));
-        map.put(Operations.PARAMETERS.COMMIS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.COMMIS.NAME));
-        map.put(Operations.PARAMETERS.ORDDESCR.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.ORDDESCR.NAME));
-        map.put(Operations.PARAMETERS.VSID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.VSID.NAME));
-        map.put(Operations.PARAMETERS.OPDESCR.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.OPDESCR.NAME));
-        map.put(Operations.PARAMETERS.REMAININGDURATION.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.REMAININGDURATION.NAME));
-        map.put(Operations.PARAMETERS.USERID.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.USERID.NAME));
-        map.put(Operations.PARAMETERS.BP_POSTEPAY.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.BP_POSTEPAY.NAME));
-        map.put(Operations.PARAMETERS.BP_CARDS.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.BP_CARDS.NAME));
-        map.put(Operations.PARAMETERS.PHONENUMBER.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.PHONENUMBER.NAME));
-        map.put(Operations.PARAMETERS.CAUSATION.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.CAUSATION.NAME));
-        map.put(Operations.PARAMETERS.USER.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.USER.NAME));
-        map.put(Operations.PARAMETERS.PRODUCTREF.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.PRODUCTREF.NAME));
-        map.put(Operations.PARAMETERS.ANTIFRAUD.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.ANTIFRAUD.NAME));
+        map.put(Operations.PARAMETERS.OPTIONS.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.OPTIONS.NAME)));
+        map.put(Operations.PARAMETERS.NAME.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.NAME.NAME)));
+        map.put(Operations.PARAMETERS.SURNAME.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.SURNAME.NAME)));
+        map.put(Operations.PARAMETERS.TAXID.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.TAXID.NAME)));
+        map.put(Operations.PARAMETERS.LOCKCARD.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.LOCKCARD.NAME)));
+        map.put(Operations.PARAMETERS.COMMIS.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.COMMIS.NAME)));
+        map.put(Operations.PARAMETERS.ORDDESCR.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.ORDDESCR.NAME)));
+        map.put(Operations.PARAMETERS.VSID.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.VSID.NAME)));
+        map.put(Operations.PARAMETERS.OPDESCR.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.OPDESCR.NAME)));
+        map.put(Operations.PARAMETERS.REMAININGDURATION.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.REMAININGDURATION.NAME)));
+        map.put(Operations.PARAMETERS.USERID.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.USERID.NAME)));
+        map.put(Operations.PARAMETERS.BP_POSTEPAY.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.BP_POSTEPAY.NAME)));
+        map.put(Operations.PARAMETERS.BP_CARDS.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.BP_CARDS.NAME)));
+        map.put(Operations.PARAMETERS.PHONENUMBER.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.PHONENUMBER.NAME)));
+        map.put(Operations.PARAMETERS.CAUSATION.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.CAUSATION.NAME)));
+        map.put(Operations.PARAMETERS.USER.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.USER.NAME)));
+        map.put(Operations.PARAMETERS.PRODUCTREF.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.PRODUCTREF.NAME)));
+        map.put(Operations.PARAMETERS.ANTIFRAUD.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.ANTIFRAUD.NAME)));
 
         //setting data 3DS JSON
         if (info.getData3DSJson() != null)
@@ -222,8 +223,8 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.MAC.NAME, encoder.getMac(map, macKey));
         map.put(Operations.PARAMETERS.URLBACK.NAME, info.getUrlBack());
         //NOT COMPULSORY
-        map.put(Operations.PARAMETERS.LANG.NAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.LANG.NAME));
-        map.put(Operations.PARAMETERS.EMAIL.SHOPNAME, info.getNotCompulsoryFields().get(Operations.PARAMETERS.EMAIL.SHOPNAME));
+        map.put(Operations.PARAMETERS.LANG.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.LANG.NAME)));
+        map.put(Operations.PARAMETERS.EMAIL.SHOPNAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.EMAIL.SHOPNAME)));
 
         return map;
     }

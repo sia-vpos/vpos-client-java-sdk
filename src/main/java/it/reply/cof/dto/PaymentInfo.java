@@ -23,19 +23,19 @@ public class PaymentInfo {
     private String accountingMode;
     private String authorMode;
     private Data3DSJson data3DSJson;
-    private Map<String, String> notCompulsoryFields;
+    private Map<FieldName, String> notCompulsoryFields;
 
     public PaymentInfo() {
         notCompulsoryFields = new HashMap<>();
     }
 
-    public void addOption(String option) {
-        String field = notCompulsoryFields.get("OPTIONS");
+    public void addOption(OptionName option) {
+        String field = notCompulsoryFields.get(FieldName.OPTIONS);
         if (field == null) {
             field = "";
-            field = field.concat(option);
+            field = field.concat(option.toString());
         }
-        notCompulsoryFields.put("OPTIONS", field);
+        notCompulsoryFields.put(FieldName.OPTIONS, field);
     }
 
     public String getAmount() {
@@ -118,11 +118,11 @@ public class PaymentInfo {
         this.authorMode = authorMode;
     }
 
-    public Map<String, String> getNotCompulsoryFields() {
+    public Map<FieldName, String> getNotCompulsoryFields() {
         return notCompulsoryFields;
     }
 
-    public void setNotCompulsoryFields(Map<String, String> notCompulsoryFields) {
+    public void setNotCompulsoryFields(Map<FieldName, String> notCompulsoryFields) {
         this.notCompulsoryFields = notCompulsoryFields;
     }
 
@@ -133,4 +133,33 @@ public class PaymentInfo {
     public void setData3DSJson(Data3DSJson data3DSJson) {
         this.data3DSJson = data3DSJson;
     }
+
+    public enum FieldName {
+        LANG,
+        SHOPEMAIL,
+        OPTIONS,
+        LOCKCARD,
+        COMMIS,
+        EMAIL,
+        ORDDESCR,
+        VSID,
+        OPDESCR,
+        REMAININGDURATION,
+        USERID,
+        BP_POSTEPAY,
+        BP_CARDS,
+        PHONENUMBER,
+        CAUSATION,
+        USER,
+        NAME,
+        SURNAME,
+        TAXID,
+        PRODUCTREF,
+        ANTIFRAUD
+    }
+
+    public enum OptionName {
+        B, D, F, G, H, I, L, M, N, O, P, Q, R, V, W, X
+    }
+
 }
