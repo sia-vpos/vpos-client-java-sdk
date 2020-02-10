@@ -30,7 +30,6 @@ public class RefundResponseDto {
     private String merchantID;
     private String transactionStatus;
     private String responseCodedIso;
-    private String authorizationMAC;
 
     public String getTransactionID() {
         return transactionID;
@@ -254,14 +253,6 @@ public class RefundResponseDto {
 
     public void setResponseCodedIso(String responseCodedIso) {
         this.responseCodedIso = responseCodedIso;
-    }
-
-    public String getAuthorizationMAC() {
-        return authorizationMAC;
-    }
-
-    public void setAuthorizationMAC(String authorizationMAC) {
-        this.authorizationMAC = authorizationMAC;
     }
 
 }

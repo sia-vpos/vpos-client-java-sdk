@@ -1,7 +1,6 @@
 package it.reply.cof.utils;
 
 
-
 import it.reply.cof.apos.request.Data;
 import it.reply.cof.apos.response.*;
 import it.reply.cof.dto.response.*;
@@ -12,6 +11,7 @@ public class ResponseMapper {
 
     /**
      * Maps a Verify Response to its dto
+     *
      * @param response contains all the relevant information
      * @return dto populated with values obtained from the response XML
      */
@@ -25,7 +25,6 @@ public class ResponseMapper {
                 if (data.getOperation() != null) {
                     dto.setResult(data.getOperation().getResult());
                     dto.setTransactionID(data.getOperation().getTransactionId());
-                    dto.setMAC(data.getOperation().getMac());
                 }
             }
         }
@@ -34,6 +33,7 @@ public class ResponseMapper {
 
     /**
      * Maps a Confirmation Response to its dto
+     *
      * @param response contains all the relevant information
      * @return dto populated with values obtained from the response XML
      */
@@ -64,7 +64,6 @@ public class ResponseMapper {
                     dto.setResponseCodeISO(authorization.getResponseCodeIso());
                     dto.setPanTail(authorization.getPanTail());
                     dto.setPanExpiryDate(authorization.getPanExpiryDate());
-                    dto.setMAC(authorization.getMac());
                     dto.setResponseCodeISO(authorization.getResponseCodeIso());
                 }
             }
@@ -75,6 +74,7 @@ public class ResponseMapper {
 
     /**
      * Maps a Refund Response to its dto
+     *
      * @param response contains all the relevant information
      * @return dto populated with values obtained from the response XML
      */
@@ -118,7 +118,6 @@ public class ResponseMapper {
                     dto.setMerchantID(authorization.getMerchantId());
                     dto.setTransactionStatus(authorization.getTransactionStatus());
                     dto.setResponseCodedIso(authorization.getResponseCodeIso());
-                    dto.setAuthorizationMAC(authorization.getMac());
                 }
             }
 
@@ -128,6 +127,7 @@ public class ResponseMapper {
 
     /**
      * Maps an Order Status Response to its dto
+     *
      * @param response contains all the relevant information
      * @return dto populated with values obtained from the response XML
      */
@@ -160,9 +160,8 @@ public class ResponseMapper {
                     dtoElement.setPanTail(element.getPanTail());
                     dtoElement.setPanExpiryDate(element.getPanExpiryDate());
                     dtoElement.setPaymentTypePP(element.getPaymentTypePP());
-                    dtoElement.setRRN(element.getRRN());
+                    dtoElement.setrRN(element.getRRN());
                     dtoElement.setCardType(element.getCardType());
-                    dtoElement.setMAC(element.getMac());
 
                     dto.oSRElements.add(dtoElement);
                     dtoElement.clearAllIndividualFields();
@@ -173,7 +172,6 @@ public class ResponseMapper {
                     dtoElement.setPanAliasExpDate(commonElements.getPanAliasExpDate());
                     dtoElement.setPanAliasTail(commonElements.getPanAliasTail());
                     dtoElement.setCommonMAC(commonElements.getMac());
-
                     dto.oSRCommon = dtoElement;
                 }
             }
@@ -184,19 +182,19 @@ public class ResponseMapper {
 
     /**
      * Maps the Step 1 Response of a 3D Secure authorization to its dto
+     *
      * @param response contains all the relevant information
      * @return dto populated with values obtained from the response XML
      */
-    public Auth3DSResponseDto auth3DSResponseDto(BPWXmlResponse response){
+    public Auth3DSResponseDto auth3DSResponseDto(BPWXmlResponse response) {
         Auth3DSResponseDto dto = new Auth3DSResponseDto();
 
-        if (response != null && response.getData() != null && response.getData().getAuthorization() != null){
+        if (response != null && response.getData() != null && response.getData().getAuthorization() != null) {
             Authorization authorization = response.getData().getAuthorization().get(0);
             PanAliasData panAliasData = response.getData().getPanAliasData();
             VBVRedirect vbvRedirect = response.getData().getVbvRedirect();
 
-            if(authorization != null) {
-
+            if (authorization != null) {
                 dto.setPaymentType(authorization.getPaymentType());
                 dto.setAuthorizationType(authorization.getAuthorizationType());
                 dto.setTransactionID(authorization.getTransactionId());
@@ -218,24 +216,21 @@ public class ResponseMapper {
                 dto.setPanTail(authorization.getPanTail());
                 dto.setPanExpiryDate(authorization.getPanExpiryDate());
                 dto.setPaymentTypePP(authorization.getPaymentTypePP());
-                dto.setRRN(authorization.getRRN());
+                dto.setrRN(authorization.getRRN());
                 dto.setCardType(authorization.getCardType());
-                dto.setMAC(authorization.getMac());
-
             }
 
-            if(vbvRedirect != null) {
+            if (vbvRedirect != null) {
                 dto.setPaReq(vbvRedirect.getPaReq());
                 dto.setAcsURL(vbvRedirect.getAcsURL());
             }
-            if(panAliasData != null) {
+
+            if (panAliasData != null) {
                 dto.setPanAlias(panAliasData.getPanAlias());
                 dto.setPanAliasRev(panAliasData.getPanAliasRev());
                 dto.setPanAliasExpDate(panAliasData.getPanAliasExpDate());
                 dto.setPanAliasTail(panAliasData.getPanAliasTail());
-
             }
-
         }
 
         return dto;
@@ -243,6 +238,7 @@ public class ResponseMapper {
 
     /**
      * Maps the Step 1 Response of a 3D Secure authorization to its dto
+     *
      * @param response contains all the relevant information
      * @return dto populated with values obtained from the response XML
      */
@@ -253,7 +249,7 @@ public class ResponseMapper {
             Authorization authorization = response.getData().getAuthorization().get(0);
             PanAliasData panAliasData = response.getData().getPanAliasData();
 
-            if(authorization != null) {
+            if (authorization != null) {
                 dto.setPaymentType(authorization.getPaymentType());
                 dto.setAuthorizationType(authorization.getAuthorizationType());
                 dto.setTransactionID(authorization.getTransactionId());
@@ -273,27 +269,23 @@ public class ResponseMapper {
                 dto.setResponseCodeIso(authorization.getResponseCodeIso());
                 dto.setPanTail(authorization.getPanTail());
                 dto.setPanExpiryDate(authorization.getPanExpiryDate());
-                dto.setMAC(authorization.getMac());
             }
 
-            if(panAliasData != null) {
+            if (panAliasData != null) {
                 dto.setPanAlias(panAliasData.getPanAlias());
                 dto.setPanAliasRev(panAliasData.getPanAliasRev());
                 dto.setPanAliasExpDate(panAliasData.getPanAliasExpDate());
                 dto.setPanAliasTail(panAliasData.getPanAliasTail());
-
-
             }
         }
 
         return dto;
-
     }
 
-    public BookingResponseDto bookingResponseDto(BPWXmlResponse response){
+    public BookingResponseDto bookingResponseDto(BPWXmlResponse response) {
         BookingResponseDto dto = new BookingResponseDto();
 
-        if(response != null && response.getData() != null && response.getData().getOperation() != null){
+        if (response != null && response.getData() != null && response.getData().getOperation() != null) {
             Operation operation = response.getData().getOperation();
 
             dto.setTransactionID(operation.getTransactionId());
@@ -304,10 +296,9 @@ public class ResponseMapper {
             dto.setResult(operation.getResult());
             dto.setStatus(operation.getStatus());
             dto.setOpDesc(operation.getOpDescr());
-            dto.setMAC(operation.getMac());
 
-                if(response.getData().getAuthorization() != null && response.getData().getAuthorization().size() == 1)
-                    dto.setAuthorization(response.getData().getAuthorization().get(0));
+            if (response.getData().getAuthorization() != null && response.getData().getAuthorization().size() == 1)
+                dto.setAuthorization(response.getData().getAuthorization().get(0));
 
         }
         return dto;

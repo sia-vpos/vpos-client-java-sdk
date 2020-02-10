@@ -15,7 +15,7 @@ public class Authorization {
 	private String transactionId;
 	@XmlElement(name = "Network")
 	private String network;
-	@XmlElement(name = "OrderId")
+	@XmlElement(name = "OrderID")
 	private String orderId;
 	@XmlElement(name = "TransactionAmount")
 	private String transactionAmount;

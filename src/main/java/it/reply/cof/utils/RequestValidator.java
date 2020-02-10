@@ -1,7 +1,6 @@
 package it.reply.cof.utils;
 
 import it.reply.cof.dto.request.*;
-import it.reply.cof.utils.constants.AposConstants;
 import it.reply.cof.utils.constants.Constants;
 import it.reply.cof.utils.constants.Operations;
 import it.reply.cof.utils.exception.COFException;
@@ -70,7 +69,7 @@ public class RequestValidator {
             field = Operations.PARAMETERS.ORDERID.NAME;
         else if (requestDto.getTransactionId() == null || requestDto.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN)
             field = Operations.PARAMETERS.TRANSACTIONID.NAME;
-        else if (requestDto.getExponent() == null || !requestDto.getCurrency().equals(Constants.Currency.EUR))
+        else if (requestDto.getExponent() == null || !requestDto.getCurrency().equals(Constants.Currency.EUR.getValue()))
             field = Operations.PARAMETERS.EXPONENT.NAME;
         else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN))
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
@@ -80,6 +79,7 @@ public class RequestValidator {
         if (!field.isEmpty())
             throw new COFException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
     }
+
     /**
      * Method used to validate a Verify request.
      *
@@ -93,7 +93,6 @@ public class RequestValidator {
             field = Operations.PARAMETERS.SHOPID.NAME;
         } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-            //TODO regex for refReqNum
         } else if (requestDto.getOriginalReqRefNum() == null || requestDto.getOriginalReqRefNum().matches(Operations.PARAMETERS.REQREFNUM.PATTERN)) {
             field = Operations.PARAMETERS.REQREFNUM.NAME;
         }
@@ -132,7 +131,7 @@ public class RequestValidator {
      * @param requestDto request to validate
      * @throws COFException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateAuth3DSStep1Request (Auth3DSDto requestDto) throws COFException{
+    public static void validateAuth3DSStep1Request(Auth3DSDto requestDto) throws COFException {
         String field = "";
 
         if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
@@ -187,7 +186,7 @@ public class RequestValidator {
             field = Operations.PARAMETERS.XID.NAME;
         } else if (requestDto.getCavv() != null && !requestDto.getCavv().matches(Operations.PARAMETERS.CAVV.PATTERN)) {
             field = Operations.PARAMETERS.CAVV.NAME;
-        } else if ((requestDto.getParesStatus() == "Y" || requestDto.getParesStatus() == "A") && (requestDto.getEci() != null && !requestDto.getEci().matches(Operations.PARAMETERS.ECI.PATTERN))) {
+        } else if ((requestDto.getParesStatus().equals("Y") || requestDto.getParesStatus().equals("A") && (requestDto.getEci() != null && !requestDto.getEci().matches(Operations.PARAMETERS.ECI.PATTERN)))) {
             field = Operations.PARAMETERS.ECI.NAME;
         } else if (requestDto.getPpAuthenticateMethod() != null && !requestDto.getPpAuthenticateMethod().matches(Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.PATTERN)) {
             field = Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.NAME;
@@ -212,7 +211,7 @@ public class RequestValidator {
      * @param requestDto request to validate
      * @throws COFException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateAuth3DSStep2Request(Auth3DSStep2RequestDto requestDto) throws COFException{
+    public static void validateAuth3DSStep2Request(Auth3DSStep2RequestDto requestDto) throws COFException {
         String field = "";
 
         if (requestDto.getOriginalRefReqNum() == null || requestDto.getOriginalRefReqNum().matches(Operations.PARAMETERS.ORIGINALREQREFNUM.PATTERN)) {

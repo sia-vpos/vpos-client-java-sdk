@@ -1,8 +1,6 @@
 package it.reply.cof.dto.response;
 
-import it.reply.cof.dto.request.Auth3DSStep2RequestDto;
-
-public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {
+public class Auth3DSStep2ResponseDto {
 
     private String paymentType;
     private String authorizationType;
@@ -23,11 +21,10 @@ public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {
     private String responseCodeIso;
     private String panTail;
     private String panExpiryDate;
-    private String MAC;
-    private String PanAlias;
-    private String PanAliasRev;
-    private String PanAliasExpDate;
-    private String PanAliasTail;
+    private String panAlias;
+    private String panAliasRev;
+    private String panAliasExpDate;
+    private String panAliasTail;
 
     public String getPaymentType() {
         return paymentType;
@@ -181,44 +178,36 @@ public class Auth3DSStep2ResponseDto extends Auth3DSStep2RequestDto {
         this.panExpiryDate = panExpiryDate;
     }
 
-    public String getMAC() {
-        return MAC;
-    }
-
-    public void setMAC(String MAC) {
-        this.MAC = MAC;
-    }
-
     public String getPanAlias() {
-        return PanAlias;
+        return panAlias;
     }
 
     public void setPanAlias(String panAlias) {
-        PanAlias = panAlias;
+        this.panAlias = panAlias;
     }
 
     public String getPanAliasRev() {
-        return PanAliasRev;
+        return panAliasRev;
     }
 
     public void setPanAliasRev(String panAliasRev) {
-        PanAliasRev = panAliasRev;
+        panAliasRev = panAliasRev;
     }
 
     public String getPanAliasExpDate() {
-        return PanAliasExpDate;
+        return panAliasExpDate;
     }
 
     public void setPanAliasExpDate(String panAliasExpDate) {
-        PanAliasExpDate = panAliasExpDate;
+        this.panAliasExpDate = panAliasExpDate;
     }
 
     public String getPanAliasTail() {
-        return PanAliasTail;
+        return panAliasTail;
     }
 
     public void setPanAliasTail(String panAliasTail) {
-        PanAliasTail = panAliasTail;
+        this.panAliasTail = panAliasTail;
     }
 
 

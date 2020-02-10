@@ -146,7 +146,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     @Override
-    public Auth3DSStep2ResponseDto start3DSAuthStep2Dto(Auth3DSStep2RequestDto dto) throws COFException {
+    public Auth3DSStep2ResponseDto start3DSAuthStep2(Auth3DSStep2RequestDto dto) throws COFException {
         BPWXmlRequest request = requestBuilder.build3DSStep2AuthRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
         //check response MACs validity
@@ -174,7 +174,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
     }
 
     @Override
-    public VerifyResponseDto verifyPayment(VerifyRequestDto dto) throws COFException {
+    public VerifyResponseDto verifyRequest(VerifyRequestDto dto) throws COFException {
         BPWXmlRequest request = requestBuilder.buildVerifyRequest(dto);
         BPWXmlResponse xmlResponse = aposClient.executeCall(request);
         //check response MACs validity

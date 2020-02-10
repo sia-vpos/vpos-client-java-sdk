@@ -5,8 +5,10 @@ import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -70,7 +72,7 @@ public final class HmacCalculator {
      * @return the MAC of the string value
      * @throws COFException with relative description in case of failure
      */
-    public String calculateWith512(String value, String key) throws Exception {
+    public String calculateWith512(String value, String key) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
         algorithm = MacAlgorithms.HMAC_SHA_512;
         mac = Mac.getInstance(MacAlgorithms.HMAC_SHA_512.getValue());
         return innerCalculate(value, key);
@@ -90,7 +92,7 @@ public final class HmacCalculator {
         this.algorithm = algorithm;
     }
 
-    private String innerCalculate(String value, String key) throws Exception {
+    private String innerCalculate(String value, String key) throws InvalidKeyException, UnsupportedEncodingException {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(CHARSET.name()), algorithm.getValue());
         mac.init(secretKey);
         return Hex.encodeHexString(mac.doFinal(value.getBytes(CHARSET.name())));

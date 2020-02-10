@@ -21,7 +21,6 @@ public class ConfirmationResponseDto {
     private String responseCodeISO;
     private String panTail;
     private String panExpiryDate;
-    private String MAC;
 
     public String getPaymentType() {
         return paymentType;
@@ -173,14 +172,6 @@ public class ConfirmationResponseDto {
 
     public void setPanExpiryDate(String panExpiryDate) {
         this.panExpiryDate = panExpiryDate;
-    }
-
-    public String getMAC() {
-        return MAC;
-    }
-
-    public void setMAC(String MAC) {
-        this.MAC = MAC;
     }
 
 }

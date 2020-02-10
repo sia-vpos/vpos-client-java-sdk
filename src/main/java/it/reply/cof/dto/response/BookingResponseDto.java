@@ -12,7 +12,6 @@ public class BookingResponseDto {
     private String result;
     private String status;
     private String opDesc;
-    private String MAC;
     private Authorization authorization;
 
     public String getTransactionID() {
@@ -77,14 +76,6 @@ public class BookingResponseDto {
 
     public void setOpDesc(String opDesc) {
         this.opDesc = opDesc;
-    }
-
-    public String getMAC() {
-        return MAC;
-    }
-
-    public void setMAC(String MAC) {
-        this.MAC = MAC;
     }
 
     public Authorization getAuthorization() {

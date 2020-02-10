@@ -30,7 +30,7 @@ public final class Operations {
             public static final String NAME = "CREATEPANALIAS";
             public static final String PATTERN = "S";
 
-            private CREATEPANALIAS(){
+            private CREATEPANALIAS() {
 
             }
 
@@ -40,26 +40,26 @@ public final class Operations {
             public static final String NAME = "INPERSON";
             public static final String PATTERN = "([S]|[N]){1}";
 
-            private INPERSON(){
+            private INPERSON() {
 
             }
         }
 
         public static final class SERVICE {
-           public static final String NAME = "SERVICE";
-           public static final String PATTERN = "[SV47]{4}";
+            public static final String NAME = "SERVICE";
+            public static final String PATTERN = "[SV47]{4}";
 
-           private SERVICE(){
+            private SERVICE() {
 
             }
         }
 
 
         public static final class MERCHANTURL {
-            public static final String NAME ="MERCHANTURL";
+            public static final String NAME = "MERCHANTURL";
             public static final String PATTERN = "[A-Za-z0-9_\\-/:. ]";
 
-            private MERCHANTURL(){
+            private MERCHANTURL() {
 
             }
         }
@@ -69,9 +69,9 @@ public final class Operations {
             public static final int LEN1 = 8;
             public static final int LEN2 = 24;
             public static final String PATTERN = "[20[0-9][0-9](0[1-9]|1[0-2])(0[1-9]|2[0-9]|3[0-1])]{" +
-                    LEN1 + "}" + "\\d{" +LEN2 + "}";
+                    LEN1 + "}" + "\\d{" + LEN2 + "}";
 
-            private REQREFNUM(){
+            private REQREFNUM() {
 
             }
         }
@@ -91,7 +91,7 @@ public final class Operations {
             public static final String NAME = "XID";
             public static final String PATTERN = "{40}";
 
-            private XID(){
+            private XID() {
 
             }
         }
@@ -100,7 +100,7 @@ public final class Operations {
             public static final String NAME = "CAVV";
             public static final String PATTERN = "{40}";
 
-            private CAVV(){
+            private CAVV() {
 
             }
         }
@@ -109,7 +109,7 @@ public final class Operations {
             public static final String NAME = "ECI";
             public static final String PATTERN = "([01]|[02]|[05]|[07]){2}";
 
-            private ECI(){
+            private ECI() {
 
             }
         }
@@ -117,10 +117,12 @@ public final class Operations {
 
         public static final class CLOSEORDER {
             public static final String NAME = "CLOSEORDER";
+
+            private CLOSEORDER() {
+            }
         }
 
         public static final class AMOUNT {
-
             public static final String NAME = "AMOUNT";
             public static final int MIN_LEN = 2;
             public static final int MAX_LEN = 8;
@@ -136,7 +138,7 @@ public final class Operations {
             public static final String NAME = "ACQUIRER";
             public static final String PATTERN = "[A-Za-z0-9]{5}";
 
-            private ACQUIRER(){
+            private ACQUIRER() {
 
             }
         }
@@ -145,25 +147,25 @@ public final class Operations {
             public static final String NAME = "IPADDRESS";
             public static final String PATTERN = "^(?=.*[^\\.]$)((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.?){4}$";
 
-            private IPADDRESS(){
+            private IPADDRESS() {
 
             }
         }
 
         public static final class PP_AUTHENTICATEMETHOD {
-           public static final String NAME = "PP_AUTHENTICATEMETHOD";
-           public static final String PATTERN = "([MERCHANT ONLY]|[3DS]|[NO AUTHENTICATION]){3,20}";
+            public static final String NAME = "PP_AUTHENTICATEMETHOD";
+            public static final String PATTERN = "([MERCHANT ONLY]|[3DS]|[NO AUTHENTICATION]){3,20}";
 
-           private PP_AUTHENTICATEMETHOD(){
+            private PP_AUTHENTICATEMETHOD() {
 
-           }
+            }
         }
 
         public static final class PP_CARDENROLLMETHOD {
             public static final String NAME = "PP_CARDENROLLMETHOD";
             public static final String PATTERN = "([Manual]|[Direct Provisioned]|[3DS Manual]|[NFC Tap]){6,20}";
 
-            private PP_CARDENROLLMETHOD(){
+            private PP_CARDENROLLMETHOD() {
 
             }
 
@@ -173,12 +175,11 @@ public final class Operations {
             public static final String NAME = "SCENROLLSTATUS";
             public static final String PATTERN = "([Y]|[N]|[U]){1}";
 
-            private SCENROLLSTATUS(){
+            private SCENROLLSTATUS() {
 
             }
 
         }
-
 
 
         public static final class CURRENCY {
@@ -198,28 +199,27 @@ public final class Operations {
         public static final class PARESSTATUS {
             public static final String NAME = "PARESSTATUS";
             public static final String PATTERN = "([Y]|[N]|[A]|[U]){1}";
+
+            private PARESSTATUS() {
+            }
         }
 
         public static final class SIGNATUREVERIFICATION {
             public static final String NAME = "SIGNATUREVERIFICATION";
             public static final int LEN = 1;
-            public static final String PATTERN = "([Y]|[N]){" + LEN +  "}";
+            public static final String PATTERN = "([Y]|[N]){" + LEN + "}";
 
-            private SIGNATUREVERIFICATION(){
-
+            private SIGNATUREVERIFICATION() {
             }
         }
 
         public static final class ORIGINALREQREFNUM {
-            public static final String NAME ="ORIGINALREQREFNUM";
+            public static final String NAME = "ORIGINALREQREFNUM";
             public static final String PATTERN = "[20[0-9][0-9](0[1-9]|1[0-2])(0[1-9]|2[0-9]|3[0-1])]{8}\\d{24}";
 
             private ORIGINALREQREFNUM() {
-
-
             }
         }
-
 
 
         public static final class EXPONENT {
@@ -232,52 +232,57 @@ public final class Operations {
             public static final int DEFAULT = 2;
 
             private EXPONENT() {
-
             }
 
         } // Only if Currency is different from 978 (Euro)
 
 
-        public static final class COMMIS{
+        public static final class COMMIS {
             public static final String NAME = "COMMIS";
         }
 
-        public static final class VSID{
+        public static final class VSID {
             public static final String NAME = "VSID";
         }
 
 
-        public static final class REMAININGDURATION{
+        public static final class REMAININGDURATION {
             public static final String NAME = "REMAININGDURATION";
+
+            private REMAININGDURATION() {
+            }
         }
 
 
-        public static final class BP_POSTEPAY{
+        public static final class BP_POSTEPAY {
             public static final String NAME = "BP_POSTEPAY";
         }
 
 
-        public static final class BP_CARDS{
+        public static final class BP_CARDS {
             public static final String NAME = "BP_CARDS";
+
+            private BP_CARDS() {
+            }
         }
 
 
-        public static final class PHONENUMBER{
+        public static final class PHONENUMBER {
             public static final String NAME = "PHONENUMBER";
         }
 
 
-        public static final class CAUSATION{
+        public static final class CAUSATION {
             public static final String NAME = "CAUSATION";
         }
 
 
-        public static final class USER{
+        public static final class USER {
             public static final String NAME = "USER";
         }
 
 
-        public static final class DATA3DS{
+        public static final class DATA3DS {
             public static final String NAME = "3DSDATA";
         }
 

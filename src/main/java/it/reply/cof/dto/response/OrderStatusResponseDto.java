@@ -20,9 +20,8 @@ public class OrderStatusResponseDto {
     private String panTail;
     private String panExpiryDate;
     private String paymentTypePP;
-    private String RRN;
+    private String rRN;
     private String cardType;
-    private String MAC;
     private String panAlias;
     private String panAliasRev;
     private String panAliasExpDate;
@@ -173,12 +172,12 @@ public class OrderStatusResponseDto {
         this.paymentTypePP = paymentTypePP;
     }
 
-    public String getRRN() {
-        return RRN;
+    public String getrRN() {
+        return rRN;
     }
 
-    public void setRRN(String RRN) {
-        this.RRN = RRN;
+    public void setrRN(String rRN) {
+        this.rRN = rRN;
     }
 
     public String getCardType() {
@@ -187,14 +186,6 @@ public class OrderStatusResponseDto {
 
     public void setCardType(String cardType) {
         this.cardType = cardType;
-    }
-
-    public String getMAC() {
-        return MAC;
-    }
-
-    public void setMAC(String MAC) {
-        this.MAC = MAC;
     }
 
     public String getPanAlias() {
@@ -238,7 +229,6 @@ public class OrderStatusResponseDto {
     }
 
     public void clearAllIndividualFields() {
-
         this.setPaymentType(null);
         this.setAuthorizationType(null);
         this.setTransactionID(null);
@@ -257,10 +247,8 @@ public class OrderStatusResponseDto {
         this.setPanTail(null);
         this.setPanExpiryDate(null);
         this.setPaymentTypePP(null);
-        this.setRRN(null);
+        this.setrRN(null);
         this.setCardType(null);
-        this.setMAC(null);
-
     }
 
 }

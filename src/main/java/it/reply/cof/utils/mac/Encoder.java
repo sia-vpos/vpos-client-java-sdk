@@ -52,8 +52,6 @@ public final class Encoder {
         //deleting the first &
         sb.deleteCharAt(0);
 
-        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC string: " + sb.toString());
-        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "MAC: " + hmacCalculator.calculate(sb.toString(), key));
         return hmacCalculator.calculate(sb.toString(), key);
     }
 
@@ -73,6 +71,7 @@ public final class Encoder {
         }
 
         sb.deleteCharAt(0);
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "\n" + sb.toString() + "\n");
         return hmacCalculator.calculate(sb.toString(), key);
     }
 
@@ -100,7 +99,7 @@ public final class Encoder {
     private void appendField(String value, StringBuilder sb) {
         if (value != null && !value.trim().isEmpty()) {
             sb.append("&");
-            sb.append(value);
+            sb.append(value.trim());
         }
     }
 }

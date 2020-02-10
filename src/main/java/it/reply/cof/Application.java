@@ -30,8 +30,8 @@ public class Application {
         try {
 //            vposClient.verifyPayment(buildVerifyTest());
 //            vposClient.start3DSAuth(buildAuth3DS());
-            vposClient.start3DSAuthStep2Dto(buildAuth3DSStep2());
-//            vposClient.getOrderStatus(buildOrderStatusTest());
+//            vposClient.start3DSAuthStep2(buildAuth3DSStep2());
+            vposClient.getOrderStatus(buildOrderStatusTest());
 //            vposClient.refundPayment(buildRefundTest());
 //            vposClient.confirmPayment(buildConfirmTest());
             vposClient.confirmTransaction(buildBookingTest());
@@ -115,9 +115,8 @@ public class Application {
     }
 
     private static OrderStatusRequestDto buildOrderStatusTest() {
-        OrderStatusRequestDto dto = new OrderStatusRequestDto(SHOP_ID, "Giammaicol",
-                "054829546191", null, null);
-        return dto;
+        return new OrderStatusRequestDto(SHOP_ID, "operator",
+                "042221867378323197573301", null, null);
     }
 
     private static BookingRequestDto buildBookingTest() {

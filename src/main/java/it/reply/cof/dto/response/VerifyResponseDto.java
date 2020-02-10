@@ -5,7 +5,6 @@ public class VerifyResponseDto {
     private String operation;
     private String result;
     private String transactionID;
-    private String MAC;
 
     public String getOperation() {
         return operation;
@@ -29,14 +28,6 @@ public class VerifyResponseDto {
 
     public void setTransactionID(String transactionID) {
         this.transactionID = transactionID;
-    }
-
-    public String getMAC() {
-        return MAC;
-    }
-
-    public void setMAC(String MAC) {
-        this.MAC = MAC;
     }
 
 }

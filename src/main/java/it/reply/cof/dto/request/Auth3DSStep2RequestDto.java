@@ -4,7 +4,7 @@ public class Auth3DSStep2RequestDto extends RequestDto {
 
     private String originalRefReqNum;
     private String paRes;
-    private String Acquirer;
+    private String acquirer;
 
     public String getOriginalRefReqNum() {
         return originalRefReqNum;
@@ -23,10 +23,10 @@ public class Auth3DSStep2RequestDto extends RequestDto {
     }
 
     public String getAcquirer() {
-        return Acquirer;
+        return acquirer;
     }
 
     public void setAcquirer(String acquirer) {
-        Acquirer = acquirer;
+        this.acquirer = acquirer;
     }
 }

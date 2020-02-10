@@ -1,8 +1,6 @@
 package it.reply.cof.dto.response;
 
-import it.reply.cof.dto.request.Auth3DSDto;
-
-public class Auth3DSResponseDto extends Auth3DSDto {
+public class Auth3DSResponseDto {
     private String paymentType;
     private String authorizationType;
     private String transactionID;
@@ -23,64 +21,62 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     private String responseCodeIso;
     private String panTail;
     private String panExpiryDate;
-    private String PaymentTypePP;
-    private String RRN;
-    private String CardType;
-    private String MAC;
-    private String PaReq;
-    private String AcsURL;
-    private String PanAlias;
-    private String PanAliasRev;
-    private String PanAliasExpDate;
-    private String PanAliasTail;
-
+    private String paymentTypePP;
+    private String rRN;
+    private String cardType;
+    private String paReq;
+    private String acsURL;
+    private String panAlias;
+    private String panAliasRev;
+    private String panAliasExpDate;
+    private String panAliasTail;
 
     public String getPaReq() {
-        return PaReq;
+        return paReq;
     }
 
     public void setPaReq(String paReq) {
-        PaReq = paReq;
+        this.paReq = paReq;
     }
 
     public String getAcsURL() {
-        return AcsURL;
+        return acsURL;
     }
 
     public void setAcsURL(String acsURL) {
-        AcsURL = acsURL;
+        this.acsURL = acsURL;
     }
 
     public String getPanAlias() {
-        return PanAlias;
+        return panAlias;
     }
 
     public void setPanAlias(String panAlias) {
-        PanAlias = panAlias;
+        this.panAlias = panAlias;
     }
 
     public String getPanAliasRev() {
-        return PanAliasRev;
+        return panAliasRev;
     }
 
     public void setPanAliasRev(String panAliasRev) {
-        PanAliasRev = panAliasRev;
+        this.panAliasRev = panAliasRev;
     }
 
     public String getPanAliasExpDate() {
-        return PanAliasExpDate;
+        return panAliasExpDate;
     }
 
     public void setPanAliasExpDate(String panAliasExpDate) {
-        PanAliasExpDate = panAliasExpDate;
+        this.panAliasExpDate = panAliasExpDate;
     }
 
     public String getPanAliasTail() {
-        return PanAliasTail;
+        return panAliasTail;
     }
 
     public void setPanAliasTail(String panAliasTail) {
-        PanAliasTail = panAliasTail;
+        this.panAliasTail = panAliasTail;
     }
 
     public String getPaymentType() {
@@ -241,37 +237,28 @@ public class Auth3DSResponseDto extends Auth3DSDto {
     }
 
     public String getPaymentTypePP() {
-        return PaymentTypePP;
+        return paymentTypePP;
     }
 
     public void setPaymentTypePP(String paymentTypePP) {
-        PaymentTypePP = paymentTypePP;
+        this.paymentTypePP = paymentTypePP;
     }
 
-    public String getRRN() {
-        return RRN;
+    public String getrRN() {
+        return rRN;
     }
 
-    public void setRRN(String RRN) {
-        this.RRN = RRN;
+    public void setrRN(String rRN) {
+        this.rRN = rRN;
     }
 
     public String getCardType() {
-        return CardType;
+        return cardType;
     }
 
     public void setCardType(String cardType) {
-        CardType = cardType;
+        this.cardType = cardType;
     }
-
-    public String getMAC() {
-        return this.MAC;
-    }
-
-    public void setMAC(String MAC) {
-        this.MAC = MAC;
-    }
-
 
     public String getTransactionResult() {
         return transactionResult;

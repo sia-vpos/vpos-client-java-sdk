@@ -73,7 +73,7 @@ public interface VPOSClient {
      * @return the outcome of the operation with the relative additional infos
      * @throws COFException in case of failure (see exception message for more info)
      */
-    Auth3DSStep2ResponseDto start3DSAuthStep2Dto(Auth3DSStep2RequestDto dto) throws COFException;
+    Auth3DSStep2ResponseDto start3DSAuthStep2(Auth3DSStep2RequestDto dto) throws COFException;
 
     /**
      * @param dto data transfer object containing all the required parameters to perform a
@@ -93,11 +93,11 @@ public interface VPOSClient {
 
     /**
      * @param dto data transfer object containing all the required parameters to perform a
-     *            verify payment operation
+     *            verify request
      * @return the outcome of the operation with the relative additional infos
      * @throws COFException in case of failure (see exception message for more info)
      */
-    VerifyResponseDto verifyPayment(VerifyRequestDto dto) throws COFException;
+    VerifyResponseDto verifyRequest(VerifyRequestDto dto) throws COFException;
 
     /**
      * @param dto data transfer object containing all the required parameters to perform an
