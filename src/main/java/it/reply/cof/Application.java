@@ -51,7 +51,7 @@ public class Application {
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setAmount("10000");
         paymentInfo.setCurrency("978");
-        paymentInfo.setOrderId(Utils.generateRandomDigits().substring(0, 12));
+        paymentInfo.setOrderId(Utils.generateRandomDigits(12));
         paymentInfo.setShopId(SHOP_ID);
         paymentInfo.setUrlBack(URL_BACK);
         paymentInfo.setUrlDone(URL_DONE);
@@ -73,7 +73,7 @@ public class Application {
     private static Auth3DSDto buildAuth3DS() {
         Auth3DSDto dto = new Auth3DSDto();
         dto.setMasterpass(false);
-        dto.setOrderId(Utils.generateRandomDigits().substring(0, 12));
+        dto.setOrderId(Utils.generateRandomDigits(12));
         dto.setPan(PAN_ALIAS);
         dto.setExpDate("2112");
         dto.setAmount("2000");
@@ -136,5 +136,7 @@ public class Application {
         dto.setExponent("2");
         return dto;
     }
+
+
 
 }

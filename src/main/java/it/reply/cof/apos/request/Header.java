@@ -23,7 +23,7 @@ public class Header {
 
     public Header(Date reqDate) {
         SimpleDateFormat format = new SimpleDateFormat(Constants.REFNUM_PATTERN);
-        this.reqRefNum = format.format(reqDate) + Utils.generateRandomDigits();
+        this.reqRefNum = format.format(reqDate) + Utils.generateRandomDigits(24);
     }
 
     public Header(){

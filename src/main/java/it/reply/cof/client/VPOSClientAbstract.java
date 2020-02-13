@@ -110,7 +110,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setAmount("10");
         paymentInfo.setCurrency("978");
-        paymentInfo.setOrderId(Utils.generateRandomDigits().substring(0, 16));
+        paymentInfo.setOrderId(String.valueOf(System.currentTimeMillis()).concat(Utils.generateRandomDigits(37)));
         paymentInfo.setShopId(shopId);
         paymentInfo.setUrlBack(urlBack);
         paymentInfo.setUrlDone(urlDone);
