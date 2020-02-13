@@ -36,7 +36,7 @@ public class Application {
 //            vposClient.confirmPayment(buildConfirmTest());
 //            vposClient.confirmTransaction(buildBookingTest());
             injectHtmlTemplate(vposClient);
-            System.out.println(vposClient.tokenize(SHOP_ID,  ));
+            System.out.println(vposClient.tokenize(SHOP_ID, URL_BACK, URL_DONE, URLMS, URL_REDIRECT));
         } catch (Exception e) {
             e.printStackTrace();
         }
