@@ -67,7 +67,8 @@ public final class Encoder {
         StringBuilder sb = new StringBuilder();
 
         for (String value : values) {
-            appendField(value, sb);
+            if (value != null)
+                appendField(value.trim(), sb);
         }
 
         sb.deleteCharAt(0);
