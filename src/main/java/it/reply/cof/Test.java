@@ -67,7 +67,7 @@ public class Test {
     private static Auth3DSDto buildAuth3DS() {
         Auth3DSDto dto = new Auth3DSDto();
         dto.setMasterpass(false);
-        dto.setOrderId(Utils.generateRandomDigits().substring(0, 12));
+        dto.setOrderId(Utils.generateRandomDigits(24));
         dto.setPan("5255900260000031");
         dto.setExpDate("2112");
         dto.setAmount("2000");
