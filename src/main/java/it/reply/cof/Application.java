@@ -8,6 +8,7 @@ import it.reply.cof.utils.Utils;
 import it.reply.cof.utils.exception.COFException;
 
 public class Application {
+    public static final String BASE64TEMPLATE = "PGh0bWw+Cgo8Ym9keT4KICAgIDxzdHlsZT4KICAgICAgICBib2R5IHsKICAgICAgICAgICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKCdodHRwczovL2kuZ2lwaHkuY29tL21lZGlhLzNvRWpJNlNJSUhCZFJ4WEk0MC9naXBoeS53ZWJwJyk7CiAgICAgICAgICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7CiAgICAgICAgICAgIGJhY2tncm91bmQtYXR0YWNobWVudDogZml4ZWQ7CiAgICAgICAgICAgIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjsKICAgICAgICB9CiAgICA8L3N0eWxlPgo8L2JvZHk+Cgo8L2h0bWw+";
     private static final String SHOP_ID = "129281292800109";
     private static final String PAN_ALIAS = "0000409500729966732";
     private static final String MAC_KEY_VPOS = "fU-9et-s-Sj8W---E8uhUDu9fEzqr8hH3L95s48r9nq-cq3cBXbp-tZsvGQU--t-nqmtaW-7x-7-C2PdcuFdbHuShQ-pYVWnr-4-";
@@ -26,19 +27,24 @@ public class Application {
     public static void main(String[] args) throws COFException {
         VPOSClient vposClient = new VPOSSimpleClient(URL_WEB_API, MAC_KEY_VPOS, API_RESULT_KEY);
 
-        System.out.println(vposClient.getHtmlPaymentDocument(buildPaymentTest(), URL_REDIRECT));
         try {
 //            vposClient.verifyPayment(buildVerifyTest());
 //            vposClient.start3DSAuth(buildAuth3DS());
 //            vposClient.start3DSAuthStep2(buildAuth3DSStep2());
-            vposClient.getOrderStatus(buildOrderStatusTest());
+//            vposClient.getOrderStatus(buildOrderStatusTest());
 //            vposClient.refundPayment(buildRefundTest());
 //            vposClient.confirmPayment(buildConfirmTest());
-            vposClient.confirmTransaction(buildBookingTest());
+//            vposClient.confirmTransaction(buildBookingTest());
+            injectHtmlTemplate(vposClient);
+            System.out.println(vposClient.tokenize(SHOP_ID,  ));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    private static void injectHtmlTemplate(VPOSClient client) throws COFException {
+        client.injectHtmlTemplate(BASE64TEMPLATE, 5000);
     }
 
     private static PaymentInfo buildPaymentTest() {

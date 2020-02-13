@@ -18,10 +18,7 @@ public class BPWXmlRequest {
     @XmlElement(name = "Data")
     private Data data;
 
-    public BPWXmlRequest(){
-        /*
-        no args constructor
-         */
+    public BPWXmlRequest() {
     }
 
     public String getRelease() {
@@ -47,6 +44,4 @@ public class BPWXmlRequest {
     public void setData(Data data) {
         this.data = data;
     }
-
-
 }

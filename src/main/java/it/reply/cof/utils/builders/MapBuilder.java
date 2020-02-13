@@ -222,10 +222,10 @@ public class MapBuilder {
 
         map.put(Operations.PARAMETERS.MAC.NAME, encoder.getMac(map, macKey));
         map.put(Operations.PARAMETERS.URLBACK.NAME, info.getUrlBack());
+
         //NOT COMPULSORY
         map.put(Operations.PARAMETERS.LANG.NAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.LANG.NAME)));
         map.put(Operations.PARAMETERS.EMAIL.SHOPNAME, info.getNotCompulsoryFields().get(FieldName.valueOf(Operations.PARAMETERS.EMAIL.SHOPNAME)));
-
         return map;
     }
 

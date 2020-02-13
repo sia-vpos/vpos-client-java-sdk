@@ -7,14 +7,13 @@ import java.io.File;
 import java.security.KeyStore;
 
 /**
- * CLient implementation enabled to perform VPOS calls through a defined gateway
+ * CLient implementation able to perform VPOS calls through a defined gateway
  *
  * @author Gabriel Raul Marini
  */
 public class VPOSClientSSL extends VPOSClientAbstract {
 
     /**
-     *
      * @param url
      * @param startKey
      * @param apiResultKey

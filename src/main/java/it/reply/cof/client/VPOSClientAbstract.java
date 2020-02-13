@@ -9,6 +9,7 @@ import it.reply.cof.dto.request.*;
 import it.reply.cof.dto.response.*;
 import it.reply.cof.utils.HTMLGenerator;
 import it.reply.cof.utils.ResponseMapper;
+import it.reply.cof.utils.Utils;
 import it.reply.cof.utils.builders.MapBuilder;
 import it.reply.cof.utils.builders.RequestBuilder;
 import it.reply.cof.utils.exception.COFException;
@@ -100,7 +101,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
 
     @Override
     public String getHtmlPaymentDocument(PaymentInfo paymentInfo, String urlApos) throws COFException {
-        String path = customTemplate.booleanValue() ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
+        String path = customTemplate ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
         return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey, apiResultKey));
     }
 
@@ -109,7 +110,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setAmount("10");
         paymentInfo.setCurrency("978");
-        paymentInfo.setOrderId("Virtualizza Carta");
+        paymentInfo.setOrderId(Utils.generateRandomDigits().substring(0, 16));
         paymentInfo.setShopId(shopId);
         paymentInfo.setUrlBack(urlBack);
         paymentInfo.setUrlDone(urlDone);
@@ -118,8 +119,7 @@ public abstract class VPOSClientAbstract implements VPOSClient {
         paymentInfo.setAuthorMode("I");
         paymentInfo.addOption(PaymentInfo.OptionName.G);
         paymentInfo.addOption(PaymentInfo.OptionName.M);
-        String path = customTemplate.booleanValue() ? filePath.concat(HTML_FILE_PATH) : filePath.concat(HTML_DEFAULT_PATH);
-        return htmlTool.htmlToBase64(path, urlApos, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, startKey, apiResultKey));
+        return getHtmlPaymentDocument(paymentInfo, urlApos);
     }
 
 
