@@ -2,9 +2,10 @@ package eu.sia.vpos.client.utils.builders;
 
 import eu.sia.vpos.client.request.*;
 import eu.sia.vpos.client.request.RefundRequest;
+
 import eu.sia.vpos.client.request.xml.*;
-import eu.sia.vpos.client.utils.constants.AposConstants;
 import eu.sia.vpos.client.utils.constants.Operations;
+import eu.sia.vpos.client.utils.constants.VPosConstants;
 import eu.sia.vpos.client.utils.encryption.AESEncoder;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 import eu.sia.vpos.client.utils.mac.Encoder;
@@ -56,14 +57,14 @@ public class RequestBuilder {
      * @return the XML request
      * @throws VPosClientException
      */
-    public BPWXmlRequest buildRefundRequest(RefundRequest dtoRequest) throws VPosClientException {
+    public BPWXmlRequest buildRefundRequest(RefundRequest dtoRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.REFUND, reqDate);
 
         eu.sia.vpos.client.request.xml.RefundRequest refund = new eu.sia.vpos.client.request.xml.RefundRequest(reqDate);
         //HEADER
         refund.getHeader().setOperatorId(dtoRequest.getOperatorId());
-        refund.getHeader().setShopId(dtoRequest.getShopId());
+        refund.getHeader().setShopId(shopId);
 
         refund.setAmount(dtoRequest.getAmount());
         refund.setCurrency(dtoRequest.getCurrency());
@@ -82,38 +83,7 @@ public class RequestBuilder {
     }
 
 
-    /**
-     * Build the XML request for CONFIRM operations
-     *
-     * @param dtoRequest object containing the necessary infos to perform a CONFIRM payment
-     * @return the XML request
-     * @throws VPosClientException
-     */
-    public BPWXmlRequest buildConfirmRequest(ConfirmRequestDto dtoRequest) throws VPosClientException {
-        Date reqDate = new Date();
-        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.DEFERREDREQUEST, reqDate);
 
-        ConfirmRequest confirm = new ConfirmRequest(reqDate);
-        //HEADER
-        confirm.getHeader().setShopId(dtoRequest.getShopId());
-        confirm.getHeader().setOperatorId(dtoRequest.getOperatorId());
-
-        //CONFIRM REQUEST
-        confirm.setTransactionId(dtoRequest.getTransactionId());
-        confirm.setOrderId(dtoRequest.getOrderId());
-        confirm.setAmount(dtoRequest.getAmount());
-        confirm.setCurrency(dtoRequest.getCurrency());
-        confirm.setExponent(dtoRequest.getExponent());
-        confirm.setAccountingMode(dtoRequest.getAccountingMode());
-        confirm.setCloseOrder(dtoRequest.getCloseOrder());
-
-        Data data = new Data();
-        data.setConfirmRequest(confirm);
-        request.setData(data);
-
-        request.getRequest().setMac(encoder.getMac(MapBuilder.getConfirmMap(request), key));
-        return request;
-    }
 
     /**
      * Build the XML request for accounting operations
@@ -122,14 +92,14 @@ public class RequestBuilder {
      * @return the XML request
      * @throws VPosClientException
      */
-    public BPWXmlRequest buildBookingRequest(CaptureRequest dtoRequest) throws VPosClientException {
+    public BPWXmlRequest buildBookingRequest(CaptureRequest dtoRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ACCOUNTING, reqDate);
 
         GeneralRequest bookingRequest = new GeneralRequest(reqDate);
 
         //HEADER
-        bookingRequest.getHeader().setShopId(dtoRequest.getShopId());
+        bookingRequest.getHeader().setShopId(shopId);
         bookingRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
 
         //BOOKING REQUEST
@@ -155,13 +125,13 @@ public class RequestBuilder {
      * @return the xml request
      * @throws VPosClientException
      */
-    public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequest dtoRequest) throws VPosClientException {
+    public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequest dtoRequest,String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ORDERSTATUS, reqDate);
 
         StatusRequest status = new StatusRequest(reqDate);
         //HEADER
-        status.getHeader().setShopId(dtoRequest.getShopId());
+        status.getHeader().setShopId(shopId);
         status.getHeader().setOperatorId(dtoRequest.getOperatorId());
 
         //ORDER STATUS REQUEST
@@ -177,145 +147,15 @@ public class RequestBuilder {
 
     }
 
-    /**
-     * Build the XML request for Verify operation
-     *
-     * @param dtoRequest object containing the necessary infos to perform a Verify request
-     * @return the xml request
-     * @throws VPosClientException
-     */
-    public BPWXmlRequest buildVerifyRequest(VerifyRequestDto dtoRequest) throws VPosClientException {
-        Date reqDate = new Date();
-        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.VERIFY, reqDate);
 
-        StatusRequest statusRequest = new StatusRequest(reqDate);
-        //HEADER
-        statusRequest.getHeader().setShopId(dtoRequest.getShopId());
-        statusRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
-
-        //VERIFY REQUEST
-        statusRequest.setOriginalReqRefNum(dtoRequest.getOriginalReqRefNum());
-        statusRequest.setOptions(dtoRequest.getOptions());
-
-        Data data = new Data();
-        data.setVerifyRequest(statusRequest);
-        request.setData(data);
-        request.getRequest().setMac(encoder.getMac(MapBuilder.getVerifyMap(request), key));
-        return request;
-    }
-
-    /**
-     * Build the XML request for step 1 of a 3DS authorization
-     *
-     * @param dtoRequest object containing the necessary infos to perform the step 1 of a 3DS authorization
-     * @return the XML request
-     * @throws VPosClientException
-     */
-    public BPWXmlRequest build3DSAuthRequest(Auth3DSDto dtoRequest) throws VPosClientException {
-        Date reqDate = new Date();
-        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DSSTEP1, reqDate);
-
-        Authorization3DSRequest authorization3DSRequest = new Authorization3DSRequest(reqDate);
-        //HEADER
-        authorization3DSRequest.getHeader().setShopId(dtoRequest.getShopId());
-        authorization3DSRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
-
-        if (dtoRequest.isMasterpass()) {
-            //3DS DATA
-            Data3DS data3DS = new Data3DS();
-            data3DS.setService(dtoRequest.getService());
-            data3DS.setEci(dtoRequest.getEci());
-            data3DS.setXid(dtoRequest.getxId());
-            data3DS.setCavv(dtoRequest.getCavv());
-            data3DS.setParesStatus(dtoRequest.getParesStatus());
-            data3DS.setScEnrollStatus(dtoRequest.getScenRollStatus());
-            data3DS.setSignatureVerifytion(dtoRequest.getSignatureVerification());
-            authorization3DSRequest.setData3DS(data3DS);
-
-            // MASTERPASS DATA
-            MasterpassData masterpassData = new MasterpassData();
-            masterpassData.setPpAuthenticationMethod(dtoRequest.getPpAuthenticateMethod());
-            masterpassData.setPpCardEnrollMethod(dtoRequest.getCardEnrollMethod());
-            authorization3DSRequest.setMasterpassData(masterpassData);
-        }
-
-        //AUTH 3DS REQUEST
-        authorization3DSRequest.setOrderId(dtoRequest.getOrderId());
-        authorization3DSRequest.setPan(dtoRequest.getPan());
-        authorization3DSRequest.setCvv2(dtoRequest.getCvv2());
-        authorization3DSRequest.setExpDate(dtoRequest.getExpDate());
-        authorization3DSRequest.setAmount(dtoRequest.getAmount());
-        authorization3DSRequest.setCurrency(dtoRequest.getCurrency());
-        authorization3DSRequest.setExponent(dtoRequest.getExponent());
-        authorization3DSRequest.setAccountingMode(dtoRequest.getAccountingMode());
-        authorization3DSRequest.setNetwork(dtoRequest.getNetwork());
-        authorization3DSRequest.setEmailCH(dtoRequest.getEmailCh());
-        authorization3DSRequest.setUserId(dtoRequest.getUserId());
-        authorization3DSRequest.setAcquirer(dtoRequest.getAcquirer());
-        authorization3DSRequest.setIpAddress(dtoRequest.getIpAddress());
-        authorization3DSRequest.setUsrAuthFlag(dtoRequest.getUsrAuthFlag());
-        authorization3DSRequest.setOpDescr(dtoRequest.getOpDescr());
-        authorization3DSRequest.setAntifraud(dtoRequest.getAntifraud());
-        authorization3DSRequest.setInPerson(dtoRequest.getInPerson());
-        authorization3DSRequest.setMerchantURL(dtoRequest.getMerchantUrl());
-        authorization3DSRequest.setProductRef(dtoRequest.getProductRef());
-        authorization3DSRequest.setName(dtoRequest.getName());
-        authorization3DSRequest.setSurname(dtoRequest.getSurname());
-        authorization3DSRequest.setTaxId(dtoRequest.getTaxId());
-        authorization3DSRequest.setCreatePanAlias(dtoRequest.getCreatePanAlias());
-
-        Data data = new Data();
-        data.setAuthorizationRequest(authorization3DSRequest);
-        request.setData(data);
-
-        request.getRequest().setMac(encoder.getMac(MapBuilder.get3DSAuthMap(request), key));
-
-        return request;
-    }
-
-    /**
-     * Build the XML request for step 2 of a 3DS authorization
-     *
-     * @param dtoRequest object containing the necessary infos to perform the step 2 of a 3DS authorization
-     * @return the XML request
-     * @throws VPosClientException
-     */
-    public BPWXmlRequest build3DSStep2AuthRequest(Auth3DSStep2RequestDto dtoRequest) throws VPosClientException {
-        Date reqDate = new Date();
-        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DSSTEP2, reqDate);
-
-        Auth3DSStep2Request auth3DSStep2Request = new Auth3DSStep2Request(reqDate);
-
-        //HEADER
-        auth3DSStep2Request.getHeader().setOperatorId(dtoRequest.getOperatorId());
-        auth3DSStep2Request.getHeader().setShopId(dtoRequest.getShopId());
-
-        //AUTH3DS STEP2 REQUEST
-        auth3DSStep2Request.setOriginalReqRefNum(dtoRequest.getOriginalRefReqNum());
-        try {
-            auth3DSStep2Request.setPaRes(URLEncoder.encode(dtoRequest.getPaRes(), StandardCharsets.UTF_8.toString()));
-        } catch (UnsupportedEncodingException e) {
-            throw new VPosClientException(e.getMessage(), e);
-        }
-        auth3DSStep2Request.setAcquirer(dtoRequest.getAcquirer());
-
-        Data data = new Data();
-        data.setAuth3DSStep2Request(auth3DSStep2Request);
-        request.setData(data);
-
-        request.getRequest().setMac(encoder.getMac(MapBuilder.get3DSStep2AuthMap(request), key));
-
-        return request;
-    }
-
-    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request dtoRequest) throws VPosClientException {
+    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request dtoRequest, String shopId) throws VPosClientException, UnsupportedEncodingException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP0, reqDate);
         Auth3DS2AuthorizationStep0Request auth3DSStep0 = new Auth3DS2AuthorizationStep0Request(reqDate);
 
         //Header
         auth3DSStep0.getHeader().setOperatorId(dtoRequest.getOperatorId());
-        auth3DSStep0.getHeader().setShopId(dtoRequest.getShopId());
+        auth3DSStep0.getHeader().setShopId(shopId);
 
         //
         auth3DSStep0.setOrderId(dtoRequest.getOrderId());
@@ -352,17 +192,18 @@ public class RequestBuilder {
         data.setAuth3DS2AuthorizationStep0Request(auth3DSStep0);
         request.setData(data);
         request.getRequest().setMac(encoder.getMac(MapBuilder.getThreeDS2Authorize0Map(request), key));
+        auth3DSStep0.setThreeDSData(auth3DSStep0.getThreeDSData());
         return request;
     }
 
-    public BPWXmlRequest buildThreeDS2Authorize1(ThreeDSAuthorization1Request dtoRequest) throws VPosClientException {
+    public BPWXmlRequest buildThreeDS2Authorize1(ThreeDSAuthorization1Request dtoRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP1, reqDate);
         Auth3DS2AuthorizationStep1Request auth3DSStep1 = new Auth3DS2AuthorizationStep1Request(reqDate);
 
         //Header
         auth3DSStep1.getHeader().setOperatorId(dtoRequest.getOperatorId());
-        auth3DSStep1.getHeader().setShopId(dtoRequest.getShopId());
+        auth3DSStep1.getHeader().setShopId(shopId);
 
         auth3DSStep1.setThreeDSMtdComplInd(dtoRequest.getThreeDSMtdComplInd());
         auth3DSStep1.setThreeDSTransID(dtoRequest.getThreeDSTransId());
@@ -374,14 +215,14 @@ public class RequestBuilder {
         return request;
     }
 
-    public BPWXmlRequest buildThreeDS2Authorize2(ThreeDSAuthorization2Request requestDto) throws VPosClientException {
+    public BPWXmlRequest buildThreeDS2Authorize2(ThreeDSAuthorization2Request requestDto, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP2, reqDate);
         Auth3DS2AuthorizationStep2Request auth3DSStep2 = new Auth3DS2AuthorizationStep2Request(reqDate);
 
         //Header
         auth3DSStep2.getHeader().setOperatorId(requestDto.getOperatorId());
-        auth3DSStep2.getHeader().setShopId(requestDto.getShopId());
+        auth3DSStep2.getHeader().setShopId(shopId);
 
         auth3DSStep2.setThreeDSTransID(requestDto.getThreeDSTransId());
 
@@ -394,7 +235,7 @@ public class RequestBuilder {
 
     private BPWXmlRequest getBPWXmlRequest(String operation, Date date) {
         BPWXmlRequest request = new BPWXmlRequest();
-        request.setRelease(AposConstants.RELEASE);
+        request.setRelease(VPosConstants.RELEASE);
         request.setRequest(new Request(operation, date));
         return request;
     }

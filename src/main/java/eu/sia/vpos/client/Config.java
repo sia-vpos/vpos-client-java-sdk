@@ -24,7 +24,7 @@ public interface Config {
 
     void setProxyHost(String proxyHost);
 
-    int getProxyPort();
+    Integer getProxyPort();
 
     void setProxyPort(int proxyPort);
 

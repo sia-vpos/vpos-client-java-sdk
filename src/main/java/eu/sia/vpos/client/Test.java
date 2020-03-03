@@ -1,13 +1,14 @@
 package eu.sia.vpos.client;
-
-import eu.sia.vpos.client.impl.VPOSClient;
+/*
 import eu.sia.vpos.client.request.PaymentInfo;
 import eu.sia.vpos.client.request.*;
+import eu.sia.vpos.client.request.old.Auth3DSDto;
+import eu.sia.vpos.client.request.old.Auth3DSStep2RequestDto;
+import eu.sia.vpos.client.request.old.ConfirmRequestDto;
+import eu.sia.vpos.client.request.old.VerifyRequestDto;
 import eu.sia.vpos.client.utils.Utils;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
-import eu.sia.vpos.dto.request.*;
 import eu.sia.vpos.client.impl.old.VPOSSimpleClient;
-import it.reply.cof.dto.request.*;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -143,4 +144,4 @@ public class Test {
         return dto;
     }
 
-}
+}*/

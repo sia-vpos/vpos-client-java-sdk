@@ -99,7 +99,7 @@ public class VPosConfig implements Config {
         return this;
     }
 
-    public int getProxyPort() {
+    public Integer getProxyPort() {
         return proxyPort;
     }
 

@@ -6,7 +6,6 @@ public class OrderStatusRequest extends RequestDto {
     private String productRef;
 
     public OrderStatusRequest(String shopId, String operatorId, String orderId, String productRef, String options) {
-        setShopId(shopId);
         setOperatorId(operatorId);
         this.orderId = orderId;
         this.productRef = productRef;

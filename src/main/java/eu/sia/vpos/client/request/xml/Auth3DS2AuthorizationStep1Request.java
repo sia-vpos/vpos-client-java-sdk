@@ -17,6 +17,9 @@ public class Auth3DS2AuthorizationStep1Request {
     @XmlElement(name = "ThreeDSMtdComplInd")
     private String threeDSMtdComplInd;
 
+    public Auth3DS2AuthorizationStep1Request(){
+
+    }
     public Auth3DS2AuthorizationStep1Request(Date date){
         this.header = new Header(date);
 

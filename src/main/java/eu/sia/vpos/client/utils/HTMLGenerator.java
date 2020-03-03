@@ -2,6 +2,7 @@ package eu.sia.vpos.client.utils;
 
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 
+import javax.ws.rs.POST;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
@@ -19,7 +20,7 @@ public class HTMLGenerator {
     private static final String FORM_PATTERN = "PGZvcm0gYWN0aW9uPSJbQVBPU19VUkxdIiBtZXRob2Q9IlBPU1QiPjxpbnB1dCBuYW1lPSJQQUdFIiB0eXBlPSJoaWRkZW4iIHZhbHVlPSJMQU5EIj5bUEFSQU1FVEVSU108aW5wdXQgaWQ9InN1Ym1pdCIgc3R5bGU9ImRpc3BsYXk6IG5vbmU7IiB0eXBlPXN1Ym1pdCAgdmFsdWU9Ii4iPjwvZm9ybT4=";
     private static final String INPUT_PATTERN = "<input type=\"hidden\" name=\"KEY\" value=\"VALUE\">";
     private static final String SCRIPT = "PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPndpbmRvdy5vbmxvYWQgPSBmdW5jdGlvbigpe3NldFRpbWVvdXQoZnVuY3Rpb24oKXtkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnc3VibWl0JykuY2xpY2soKTt9LCBbREVMQVldKTt9PC9zY3JpcHQ+";
-    private static final String TEMPLATE = "<div onload=\"fun = function(){setTimeout(function(){document.getElementById('submit').click();}, [DELAY]);}\"><form action=\"[APOS_URL]\" method=\"POST\"><input name=\"PAGE\" type=\"hidden\" value=\"LAND\">[PARAMETERS]<input id=\"submit\" style=\"display: none;\" type=submit  value=\".\"></form></div>";
+    private static final String TEMPLATE = " <div><form id=\"myForm\"action=\"[APOS_URL]\" method=\"POST\"><input name=\"PAGE\" type=\"hidden\" value=\"LAND\">[PARAMETERS]</form><script>document.getElementById('myForm').submit();</script></div>";
     private final Base64.Decoder decoder;
     private final Base64.Encoder encoder;
 
@@ -28,14 +29,11 @@ public class HTMLGenerator {
         decoder = Base64.getDecoder();
     }
 
-    public String buildHtmlPaymentDiv(Integer delay, String urlApos, Map<String, String> params) {
+    public String buildHtmlPaymentDiv(String urlApos, Map<String, String> params) {
         String html= TEMPLATE;
-        if(delay == null){
-            delay = 500;
-        }
+
         html = html.replace("[APOS_URL]", urlApos);
         html = html.replace("[PARAMETERS]", generateParamsHtml(params));
-        html = html.replace("[DELAY]", String.valueOf(delay));
         return html;
     }
 

@@ -95,6 +95,9 @@ public class Auth3DS2AuthorizationStep0Request {
     @XmlElement(name = "Options")
     private String options;
 
+    public Auth3DS2AuthorizationStep0Request(){
+
+    }
 
     public Auth3DS2AuthorizationStep0Request(Date date){
         this.header = new Header(date);

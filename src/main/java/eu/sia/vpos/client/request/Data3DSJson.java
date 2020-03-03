@@ -3,6 +3,16 @@ package eu.sia.vpos.client.request;
 import java.lang.reflect.Field;
 
 public class Data3DSJson {
+    private String browserAcceptHeader;
+    private String browserIP;
+    private String browserJavaEnabled;
+    private String browserLanguage;
+    private String browserColorDepth;
+    private String browserScreenHeight;
+    private String browserScreenWidth;
+    private String browserTZ;
+    private String browserUserAgent;
+
     private String threeDSRequestorChallengeInd;
     private String addrMatch;
     private String chAccAgeInd;
@@ -39,6 +49,80 @@ public class Data3DSJson {
     private String deliveryTimeframe;
     private String preOrderDate;
     private String preOrderPurchaseInd;
+
+
+    public String getBrowserAcceptHeader() {
+        return browserAcceptHeader;
+    }
+
+    public void setBrowserAcceptHeader(String browserAcceptHeader) {
+        this.browserAcceptHeader = browserAcceptHeader;
+    }
+
+
+    public String getBrowserJavaEnabled() {
+        return browserJavaEnabled;
+    }
+
+    public void setBrowserJavaEnabled(String browserJavaEnabled) {
+        this.browserJavaEnabled = browserJavaEnabled;
+    }
+
+    public String getBrowserLanguage() {
+        return browserLanguage;
+    }
+
+    public void setBrowserLanguage(String browserLanguage) {
+        this.browserLanguage = browserLanguage;
+    }
+
+    public String getBrowserColorDepth() {
+        return browserColorDepth;
+    }
+
+    public void setBrowserColorDepth(String browserColorDepth) {
+        this.browserColorDepth = browserColorDepth;
+    }
+
+    public String getBrowserScreenHeight() {
+        return browserScreenHeight;
+    }
+
+    public void setBrowserScreenHeight(String browserScreenHeight) {
+        this.browserScreenHeight = browserScreenHeight;
+    }
+
+    public String getBrowserScreenWidth() {
+        return browserScreenWidth;
+    }
+
+    public void setBrowserScreenWidth(String browserScreenWidth) {
+        this.browserScreenWidth = browserScreenWidth;
+    }
+
+    public String getBrowserIP() {
+        return browserIP;
+    }
+
+    public void setBrowserIP(String browserIP) {
+        this.browserIP = browserIP;
+    }
+
+    public String getBrowserTZ() {
+        return browserTZ;
+    }
+
+    public void setBrowserTZ(String browserTZ) {
+        this.browserTZ = browserTZ;
+    }
+
+    public String getBrowserUserAgent() {
+        return browserUserAgent;
+    }
+
+    public void setBrowserUserAgent(String browserUserAgent) {
+        this.browserUserAgent = browserUserAgent;
+    }
 
     public String getThreeDSRequestorChallengeInd() {
         return threeDSRequestorChallengeInd;

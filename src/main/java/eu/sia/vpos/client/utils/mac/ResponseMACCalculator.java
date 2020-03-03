@@ -1,8 +1,6 @@
 package eu.sia.vpos.client.utils.mac;
 
-import eu.sia.vpos.client.response.xml.Authorization;
-import eu.sia.vpos.client.response.xml.BPWXmlResponse;
-import eu.sia.vpos.client.response.xml.Operation;
+import eu.sia.vpos.client.response.xml.*;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 
 import java.util.ArrayList;
@@ -64,6 +62,22 @@ public class ResponseMACCalculator {
         valueList.add(operation.getResult());
         valueList.add(operation.getStatus());
         valueList.add(operation.getOpDescr());
+        return encoder.getMac(valueList, key);
+    }
+
+    public String getThreeDSMethodMac(ThreeDSMethod threeDSMethod, String key) throws VPosClientException {
+        List<String> valueList = new ArrayList<>();
+        valueList.add(threeDSMethod.getThreeDSTransId());
+        valueList.add(threeDSMethod.getThreeDSMethodData());
+        valueList.add(threeDSMethod.getThreeDSMethodUrl());
+        return encoder.getMac(valueList, key);
+    }
+
+    public String getThreeDSChallengeMac(ThreeDSChallenge threeDSChallenge, String key) throws VPosClientException {
+        List<String> valueList = new ArrayList<>();
+        valueList.add(threeDSChallenge.getThreeDSTransId());
+        valueList.add(threeDSChallenge.getCreq());
+        valueList.add(threeDSChallenge.getAcsUrl());
         return encoder.getMac(valueList, key);
     }
 }

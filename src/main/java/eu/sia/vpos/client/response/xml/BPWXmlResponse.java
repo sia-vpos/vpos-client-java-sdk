@@ -11,54 +11,54 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BPWXmlResponse {
 
-	@XmlElement(name = "Timestamp")
-	private String timestamp;
-	@XmlElement(name = "Result")
-	private String result;
-	@XmlElement(name = "MAC")
-	private String mac;
-	@XmlElement(name = "Data")
-	private Data data;
+    @XmlElement(name = "Timestamp")
+    private String timestamp;
+    @XmlElement(name = "Result")
+    private String result;
+    @XmlElement(name = "MAC")
+    private String mac;
+    @XmlElement(name = "Data")
+    private Data data;
 
-	public String getTimestamp() {
+    public String getTimestamp() {
 
-		return timestamp;
-	}
+        return timestamp;
+    }
 
-	public void setTimestamp(String timestamp) {
+    public void setTimestamp(String timestamp) {
 
-		this.timestamp = timestamp;
-	}
+        this.timestamp = timestamp;
+    }
 
-	public String getResult() {
+    public String getResult() {
 
-		return result;
-	}
+        return result;
+    }
 
-	public void setResult(String result) {
+    public void setResult(String result) {
 
-		this.result = result;
-	}
+        this.result = result;
+    }
 
-	public String getMac() {
+    public String getMac() {
 
-		return mac;
-	}
+        return mac;
+    }
 
-	public void setMac(String mac) {
+    public void setMac(String mac) {
 
-		this.mac = mac;
-	}
+        this.mac = mac;
+    }
 
-	public Data getData() {
+    public Data getData() {
 
-		return data;
-	}
+        return data;
+    }
 
-	public void setData(Data data) {
+    public void setData(Data data) {
 
-		this.data = data;
-	}
+        this.data = data;
+    }
 
 
 }

@@ -4,8 +4,6 @@ import eu.sia.vpos.client.request.*;
 import eu.sia.vpos.client.utils.constants.Constants;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
-import eu.sia.vpos.dto.request.*;
-import it.reply.cof.dto.request.*;
 
 /**
  * Utility class used to validate requests.
@@ -31,9 +29,7 @@ public class RequestValidator {
     public static void validateRefundRequest(RefundRequest requestDto) throws VPosClientException {
         String field = "";
 
-        if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
-            field = Operations.PARAMETERS.SHOPID.NAME;
-        } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
         } else if (requestDto.getTransactionId() == null || requestDto.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN) {
             field = Operations.PARAMETERS.TRANSACTIONID.NAME;
@@ -56,12 +52,10 @@ public class RequestValidator {
      * @param requestDto request to validate
      * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateConfirmRequest(ConfirmRequestDto requestDto) throws VPosClientException {
+    public static void validateCaptureRequest(CaptureRequest requestDto) throws VPosClientException {
         String field = "";
 
-        if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN))
-            field = Operations.PARAMETERS.SHOPID.NAME;
-        else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN))
+        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN))
             field = Operations.PARAMETERS.OPERATORID.NAME;
         else if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN))
             field = Operations.PARAMETERS.AMOUNT.NAME;
@@ -71,37 +65,14 @@ public class RequestValidator {
             field = Operations.PARAMETERS.ORDERID.NAME;
         else if (requestDto.getTransactionId() == null || requestDto.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN)
             field = Operations.PARAMETERS.TRANSACTIONID.NAME;
-        else if (requestDto.getExponent() == null || !requestDto.getCurrency().equals(Constants.Currency.EUR.getValue()))
+        else if (requestDto.getExponent() == null && !requestDto.getCurrency().equals(Constants.Currency.EUR.getValue()))
             field = Operations.PARAMETERS.EXPONENT.NAME;
-        else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN))
-            field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
-        else if (requestDto.getCloseOrder() == null)
-            field = Operations.PARAMETERS.CLOSEORDER.NAME;
+
 
         if (!field.isEmpty())
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
     }
 
-    /**
-     * Method used to validate a Verify request.
-     *
-     * @param requestDto request to validate
-     * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
-     */
-    public static void validateVerifyRequest(VerifyRequestDto requestDto) throws VPosClientException {
-        String field = "";
-
-        if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
-            field = Operations.PARAMETERS.SHOPID.NAME;
-        } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
-            field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getOriginalReqRefNum() == null || requestDto.getOriginalReqRefNum().matches(Operations.PARAMETERS.REQREFNUM.PATTERN)) {
-            field = Operations.PARAMETERS.REQREFNUM.NAME;
-        }
-
-        if (!field.isEmpty())
-            throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
-    }
 
     /**
      * Method used to validate the Order Status request.
@@ -111,9 +82,7 @@ public class RequestValidator {
      */
     public static void validateOrderStatusRequest(OrderStatusRequest requestDto) throws VPosClientException {
         String field = "";
-        if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
-            field = Operations.PARAMETERS.SHOPID.NAME;
-        } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
         } else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
@@ -133,11 +102,13 @@ public class RequestValidator {
      * @param requestDto request to validate
      * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateAuth3DSStep1Request(Auth3DSDto requestDto) throws VPosClientException {
+    public static void validateThreeDSAuthorization0Request(ThreeDSAuthorization0Request requestDto) throws VPosClientException {
         String field = "";
 
         if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
+        } else if (requestDto.getOperatorId() == null) {
+            field = Operations.PARAMETERS.OPERATORID.NAME;
         } else if (requestDto.getPan() == null || !requestDto.getPan().matches(Operations.PARAMETERS.PAN.PATTERNGENERIC)) {
             field = Operations.PARAMETERS.PAN.NAME;
         } else if (requestDto.getCvv2() != null && !requestDto.getCvv2().matches(Operations.PARAMETERS.CVV2.PATTERN)) {
@@ -148,7 +119,7 @@ public class RequestValidator {
             field = Operations.PARAMETERS.AMOUNT.NAME;
         } else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
             field = Operations.PARAMETERS.CURRENCY.NAME;
-        } else if (!requestDto.getCurrency().equalsIgnoreCase("EUR") && (requestDto.getExponent() == null || requestDto.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
+        } else if (!requestDto.getCurrency().equalsIgnoreCase("978") && (requestDto.getExponent() == null || requestDto.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
             field = Operations.PARAMETERS.EXPONENT.NAME;
         } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
@@ -178,28 +149,10 @@ public class RequestValidator {
             field = Operations.PARAMETERS.TAXID.NAME;
         } else if (requestDto.getCreatePanAlias() != null && !requestDto.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
             field = Operations.PARAMETERS.CREATEPANALIAS.NAME;
-        } else if (requestDto.getInPerson() != null && !requestDto.getInPerson().matches(Operations.PARAMETERS.INPERSON.PATTERN)) {
-            field = Operations.PARAMETERS.INPERSON.NAME;
-        } else if (requestDto.getMerchantUrl() != null && !requestDto.getMerchantUrl().matches(Operations.PARAMETERS.MERCHANTURL.PATTERN)) {
-            field = Operations.PARAMETERS.MERCHANTURL.NAME;
-        } else if (requestDto.isMasterpass() && (requestDto.getService() != null && !requestDto.getService().matches(Operations.PARAMETERS.SERVICE.PATTERN))) {
-            field = Operations.PARAMETERS.SERVICE.NAME;
-        } else if (requestDto.getxId() != null && !requestDto.getxId().matches(Operations.PARAMETERS.XID.PATTERN)) {
-            field = Operations.PARAMETERS.XID.NAME;
-        } else if (requestDto.getCavv() != null && !requestDto.getCavv().matches(Operations.PARAMETERS.CAVV.PATTERN)) {
-            field = Operations.PARAMETERS.CAVV.NAME;
-        } else if ((requestDto.getParesStatus().equals("Y") || requestDto.getParesStatus().equals("A") && (requestDto.getEci() != null && !requestDto.getEci().matches(Operations.PARAMETERS.ECI.PATTERN)))) {
-            field = Operations.PARAMETERS.ECI.NAME;
-        } else if (requestDto.getPpAuthenticateMethod() != null && !requestDto.getPpAuthenticateMethod().matches(Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.PATTERN)) {
-            field = Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.NAME;
-        } else if (requestDto.getCardEnrollMethod() != null && !requestDto.getCardEnrollMethod().matches(Operations.PARAMETERS.PP_CARDENROLLMETHOD.PATTERN)) {
-            field = Operations.PARAMETERS.PP_CARDENROLLMETHOD.NAME;
-        } else if (requestDto.getParesStatus() != null && !requestDto.getParesStatus().matches(Operations.PARAMETERS.PARESSTATUS.PATTERN)) {
-            field = Operations.PARAMETERS.PARESSTATUS.NAME;
-        } else if (requestDto.getScenRollStatus() != null && !requestDto.getScenRollStatus().matches(Operations.PARAMETERS.SCENROLLSTATUS.PATTERN)) {
-            field = Operations.PARAMETERS.SCENROLLSTATUS.NAME;
-        } else if (requestDto.getSignatureVerification() != null && !requestDto.getSignatureVerification().matches(Operations.PARAMETERS.SIGNATUREVERIFICATION.PATTERN)) {
-            field = Operations.PARAMETERS.SIGNATUREVERIFICATION.NAME;
+        } else if (requestDto.getThreeDSData() == null) {
+            field = Operations.PARAMETERS.THREEDSDATA.NAME;
+        } else if (requestDto.getNotifyUrl() == null) {
+            field = Operations.PARAMETERS.NOTIFURL.NAME;
         }
 
         if (!field.isEmpty())
@@ -207,25 +160,30 @@ public class RequestValidator {
 
     }
 
-    /**
-     * Method used to validate the second step of a 3D Secure authorization.
-     *
-     * @param requestDto request to validate
-     * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
-     */
-    public static void validateAuth3DSStep2Request(Auth3DSStep2RequestDto requestDto) throws VPosClientException {
+    public static void validateThreeDSAuthorization1Request(ThreeDSAuthorization1Request requestDto) throws VPosClientException {
         String field = "";
-
-        if (requestDto.getOriginalRefReqNum() == null || requestDto.getOriginalRefReqNum().matches(Operations.PARAMETERS.ORIGINALREQREFNUM.PATTERN)) {
-            field = Operations.PARAMETERS.ORIGINALREQREFNUM.NAME;
-        } else if (requestDto.getAcquirer() != null && !requestDto.getAcquirer().matches(Operations.PARAMETERS.ACQUIRER.PATTERN)) {
-            field = Operations.PARAMETERS.ACQUIRER.NAME;
-        } else if (requestDto.getOptions() != null && !requestDto.getOptions().matches(Operations.PARAMETERS.OPTIONS.PATTERN)) {
-            field = Operations.PARAMETERS.OPTIONS.NAME;
+        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+            field = Operations.PARAMETERS.OPERATORID.NAME;
+        } else if (requestDto.getThreeDSMtdComplInd() == null) {
+            field = Operations.PARAMETERS.THREEDSMTDCOMPLIND.NAME;
+        } else if (requestDto.getThreeDSTransId() == null) {
+            field = Operations.PARAMETERS.THREEDSTRANSID.NAME;
         }
 
         if (!field.isEmpty())
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
-
     }
+
+    public static void validateThreeDSAuthorization2Request(ThreeDSAuthorization2Request requestDto) throws VPosClientException {
+        String field = "";
+        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+            field = Operations.PARAMETERS.OPERATORID.NAME;
+        } else if (requestDto.getThreeDSTransId() == null) {
+            field = Operations.PARAMETERS.THREEDSTRANSID.NAME;
+        }
+
+        if (!field.isEmpty())
+            throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
+    }
+
 }

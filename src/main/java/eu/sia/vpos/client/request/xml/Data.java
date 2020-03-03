@@ -68,12 +68,12 @@ public class Data {
      */
     }
 
-    public void setAuth3DS2AuthorizationStep0Request(Auth3DS2AuthorizationStep0Request auth3DS2AuthorizationStep0Request) {
-        this.auth3DS2AuthorizationStep0Request = auth3DS2AuthorizationStep0Request;
-    }
-
     public Auth3DS2AuthorizationStep0Request getAuth3DS2AuthorizationStep0Request() {
         return auth3DS2AuthorizationStep0Request;
+    }
+
+    public void setAuth3DS2AuthorizationStep0Request(Auth3DS2AuthorizationStep0Request auth3DS2AuthorizationStep0Request) {
+        this.auth3DS2AuthorizationStep0Request = auth3DS2AuthorizationStep0Request;
     }
 
     public Auth3DS2AuthorizationStep1Request getAuth3DS2AuthorizationStep1Request() {

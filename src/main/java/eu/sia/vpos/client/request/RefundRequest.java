@@ -10,8 +10,10 @@ public class RefundRequest extends RequestDto {
     private String exponent;
     private String opDescr;
 
-    public RefundRequest(String shopId, String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr) {
-        this.shopId = shopId;
+    public RefundRequest(){
+    }
+
+    public RefundRequest( String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr) {
         this.operatorId = operatorId;
         this.transactionId = transactionId;
         this.orderId = orderId;
@@ -21,8 +23,7 @@ public class RefundRequest extends RequestDto {
         this.opDescr = opDescr;
     }
 
-    public RefundRequest(String shopId, String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr, String options) {
-        this.shopId = shopId;
+    public RefundRequest( String operatorId, String transactionId, String orderId, String amount, String currency, String exponent, String opDescr, String options) {
         this.operatorId = operatorId;
         this.transactionId = transactionId;
         this.orderId = orderId;

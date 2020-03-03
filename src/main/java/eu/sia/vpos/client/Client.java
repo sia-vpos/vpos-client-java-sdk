@@ -7,6 +7,7 @@ import eu.sia.vpos.client.response.*;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 
 //import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -17,7 +18,7 @@ public interface Client {
 	
     //AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException;
 
-    ThreeDSAuthorization0Response threeDSAuthorize0(ThreeDSAuthorization0Request threeDSAuthorization0Request) throws VPosClientException;
+    ThreeDSAuthorization0Response threeDSAuthorize0(ThreeDSAuthorization0Request threeDSAuthorization0Request) throws VPosClientException, UnsupportedEncodingException;
 
     ThreeDSAuthorization1Response threeDSAuthorize1(ThreeDSAuthorization1Request threeDSAuthorization1Request) throws VPosClientException;
 

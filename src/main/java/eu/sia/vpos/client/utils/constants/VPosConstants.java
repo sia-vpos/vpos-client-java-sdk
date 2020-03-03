@@ -1,6 +1,6 @@
 package eu.sia.vpos.client.utils.constants;
 
-public final class AposConstants {
+public final class VPosConstants {
 
     public static final String RELEASE = "02";
     public static final String MAC = "MAC";
@@ -33,7 +33,7 @@ public final class AposConstants {
     public static final String AUTHCODE = "AUTHCODE";
     public static final String AUTHNUMBER = "AUTHNUMBER";
 
-    private AposConstants() {
+    private VPosConstants() {
 
     }
 }

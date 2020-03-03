@@ -23,7 +23,6 @@ public class PaymentInfo {
     private String accountingMode;
     private String authorMode;
     private String urlApos;
-    private Integer delay;
     private Data3DSJson data3DSJson;
     private Map<FieldName, String> notCompulsoryFields;
 
@@ -126,14 +125,6 @@ public class PaymentInfo {
 
     public void setUrlApos(String urlApos) {
         this.urlApos = urlApos;
-    }
-
-    public Integer getDelay() {
-        return delay;
-    }
-
-    public void setDelay(Integer delay) {
-        this.delay = delay;
     }
 
     public Map<FieldName, String> getNotCompulsoryFields() {
