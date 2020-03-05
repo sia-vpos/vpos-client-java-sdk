@@ -11,14 +11,15 @@ import eu.sia.vpos.client.response.xml.BPWXmlResponse;
 import eu.sia.vpos.client.utils.HTMLGenerator;
 import eu.sia.vpos.client.utils.RequestValidator;
 import eu.sia.vpos.client.utils.ResponseMapper;
+import eu.sia.vpos.client.utils.Utils;
 import eu.sia.vpos.client.utils.builders.MapBuilder;
 import eu.sia.vpos.client.utils.builders.RequestBuilder;
+import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 import eu.sia.vpos.client.utils.mac.Encoder;
 import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 import eu.sia.vpos.client.utils.mac.ResponseMACCalculator;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public class VPosClient implements Client {
@@ -34,32 +35,52 @@ public class VPosClient implements Client {
     private String redirectKey;
     private String redirectUrl;
     private String apiResultKey;
+    private MacAlgorithms algorithm;
 
 
     public VPosClient(Config config) throws VPosClientException {
+        this.config = config;
+        validateConfig();
         this.htmlTool = new HTMLGenerator();
         this.responseMapper = new ResponseMapper();
-        this.config = config;
         this.redirectKey = config.getRedirectKey();
-        this.redirectUrl= "https://atpostest.ssb.it/atpos/pagamenti/main";
+        this.redirectUrl = config.getRedirectUrl();
         this.apiResultKey = config.getApiKey();
+
         if (config.getAlgorithm() == null) {
-            this.requestBuilder = new RequestBuilder(apiResultKey, MacAlgorithms.HMAC_SHA_256);
-            this.hmacCalculator = new Encoder(MacAlgorithms.HMAC_SHA_256);
+            this.algorithm = MacAlgorithms.HMAC_SHA_256;
         } else {
-            this.requestBuilder = new RequestBuilder(apiResultKey, config.getAlgorithm());
-            this.hmacCalculator = new Encoder(config.getAlgorithm());
+            this.algorithm = config.getAlgorithm();
         }
+        this.requestBuilder = new RequestBuilder(apiResultKey, this.algorithm);
+        this.hmacCalculator = new Encoder(this.algorithm);
+
         this.responseMACCalculator = new ResponseMACCalculator(hmacCalculator);
         initPaymentClient();
 
     }
 
-    private void initPaymentClient(){
-        if (config.getProxyHost() == null || config.getProxyPort() == null) {
-            this.vPosPaymentClient = new VPosPaymentClient(config.getUrl());
-        }else{
-            this.vPosPaymentClient = new VPosPaymentClient(config.getUrl(),config.getProxyHost(),config.getProxyPort());
+    private void validateConfig() throws VPosClientException {
+        String field = "";
+        if (this.config.getShopID() == null || !this.config.getShopID().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
+            field = Operations.PARAMETERS.SHOPID.NAME;
+        } else if (this.config.getApiKey() == null) {
+            field = "Api Key";
+        } else if (this.config.getUrl() == null) {
+            field = "Api Url";
+        } else if (this.config.getRedirectKey() == null) {
+            field = "Redirect Key";
+        } else if (this.config.getRedirectUrl() == null) {
+            field = "Redirect Url";
+        }
+        if (!field.isEmpty())
+            throw new VPosClientException("Invalid or missing configuration param: " + field);
+    }
+
+    private void initPaymentClient() {
+        this.vPosPaymentClient = new VPosPaymentClient(config.getUrl());
+        if (config.getProxyHost() != null && config.getProxyPort() == null) {
+            this.vPosPaymentClient.setProxy(config.getProxyHost(), config.getProxyPort(), config.getProxyUsername(), config.getProxyPassword());
         }
     }
 
@@ -67,10 +88,11 @@ public class VPosClient implements Client {
     /*@Override
     public AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException {
         return null;
+
     }
     */
     @Override
-    public ThreeDSAuthorization0Response threeDSAuthorize0(ThreeDSAuthorization0Request threeDSAuthorization0Request) throws VPosClientException, UnsupportedEncodingException {
+    public ThreeDSAuthorization0Response threeDSAuthorize0(ThreeDSAuthorization0Request threeDSAuthorization0Request) throws VPosClientException {
         RequestValidator.validateThreeDSAuthorization0Request(threeDSAuthorization0Request);
         BPWXmlRequest request = requestBuilder.buildThreeDS2Authorize0(threeDSAuthorization0Request, config.getShopID());
         BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);
@@ -134,12 +156,11 @@ public class VPosClient implements Client {
     }
 
     @Override
-    public boolean verifyMAC(Map<String, String> params) throws VPosClientException {
+    public boolean verifyMAC(String url) throws VPosClientException {
+        Map<String, String> params = Utils.splitQuery(url);
         String calculatedMAc = hmacCalculator.getMac(MapBuilder.getOutcomeMap(params), apiResultKey);
-        String receivedMac= params.get("MAC");
-        if (!receivedMac.equals(calculatedMAc))
-            throw new VPosClientException("Authorization MAC is not valid");
-        return false;
+        String receivedMac = params.get("MAC");
+        return receivedMac.equals(calculatedMAc);
     }
 
     /*

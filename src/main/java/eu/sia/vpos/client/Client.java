@@ -31,7 +31,7 @@ public interface Client {
 
     OrderStatusResponse getOrderStatus(OrderStatusRequest orderStatusRequest) throws VPosClientException;
 
-    boolean verifyMAC(Map<String, String> params) throws VPosClientException;
+    boolean verifyMAC(String url) throws VPosClientException;
 
     //boolean verifyMAC(HttpServletRequest httpServletRequest) throws VPosClientException;
 

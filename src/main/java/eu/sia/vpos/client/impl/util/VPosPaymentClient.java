@@ -4,26 +4,25 @@ import eu.sia.vpos.client.request.xml.BPWXmlRequest;
 import eu.sia.vpos.client.response.xml.BPWXmlResponse;
 import eu.sia.vpos.client.utils.constants.Errors;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
-import org.apache.http.ssl.SSLContexts;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.http.*;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
-import javax.net.ssl.SSLContext;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.security.*;
-import java.security.cert.CertificateException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,33 +33,18 @@ public class VPosPaymentClient {
 
     private String proxyName;
     private Integer proxyPort;
+    private String proxyUser;
+    private String proxyPass;
     private String urlWebApi;
-    private String ppp;
-    private File kFile;
-    private KeyStore ks;
 
-    public VPosPaymentClient() {
-        this("https://atpostest.ssb.it/atpos/apibo/apiBOXML.app");
-    }
+
+
 
     public VPosPaymentClient(String urlWebApi) {
         this.urlWebApi = urlWebApi;
+        this.proxy = false;
     }
 
-    public VPosPaymentClient(String urlWebApi, String proxyName, Integer port) {
-        this(urlWebApi);
-        this.proxy = true;
-        this.proxyName = proxyName;
-        this.proxyPort = port;
-    }
-
-    public VPosPaymentClient(String urlWebApi, String ppp, KeyStore ks, File kFile) {
-        this(urlWebApi);
-        this.ssl = true;
-        this.ppp = ppp;
-        this.ks = ks;
-        this.kFile = kFile;
-    }
 
     public BPWXmlResponse executeCall(BPWXmlRequest input) throws VPosClientException {
 
@@ -68,16 +52,16 @@ public class VPosPaymentClient {
             StringBuilder inputXml = new StringBuilder("data=");
             inputXml.append(parseRequest(input));
             Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "OUTPUT XML: \n" + inputXml.toString());
+            RestTemplate template = createRestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            ResteasyClient client = getClientBuilder();
-            WebTarget target = client.target(this.urlWebApi);
-            Invocation.Builder builder = target.request();
-            Entity<String> entity = Entity.entity(inputXml.toString(), MediaType.APPLICATION_FORM_URLENCODED);
-            Response response = builder.post(entity);
-            String xmlResponse = response.readEntity(String.class);
+            HttpEntity<String> entity = new HttpEntity<>(inputXml.toString(), headers);
+            ResponseEntity<String> responseEntity = template.exchange(this.urlWebApi, HttpMethod.POST, entity, String.class);
 
-            if (org.apache.http.HttpStatus.SC_OK != response.getStatus()) {
-                throw new VPosClientException("VPOS call failed with code " + response.getStatus());
+            String xmlResponse = responseEntity.getBody();
+            if (HttpStatus.OK != responseEntity.getStatusCode()) {
+                throw new VPosClientException("VPOS call failed with code " + responseEntity.getStatusCode().value());
             }
 
             return parseResponse(xmlResponse);
@@ -116,26 +100,36 @@ public class VPosPaymentClient {
         }
     }
 
-    private ResteasyClient getClientBuilder() throws UnrecoverableKeyException, NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException, KeyManagementException {
-        ResteasyClientBuilder restBuilder = new ResteasyClientBuilder();
 
-        if (proxy)
-            restBuilder.defaultProxy(proxyName, proxyPort);
+    private RestTemplate createRestTemplate() {
 
-        if (ssl) {
-            SSLContext sslcontext = SSLContexts.custom().setProtocol("TLS")
-                    .loadKeyMaterial(ks, ppp.toCharArray())
-                    .loadTrustMaterial(kFile, ppp.toCharArray()).build();
-            restBuilder.sslContext(sslcontext);
+        HttpClientBuilder clientBuilder = HttpClientBuilder.create();
+        if (proxy) {
+            HttpHost myProxy = new HttpHost(proxyName, proxyPort);
+            if (proxyUser != null && proxyPass != null) {
+                CredentialsProvider credsProvider = new BasicCredentialsProvider();
+                credsProvider.setCredentials(
+                        new AuthScope(proxyName, proxyPort),
+                        new UsernamePasswordCredentials(proxyUser, proxyPass));
+                clientBuilder.setProxy(myProxy).setDefaultCredentialsProvider(credsProvider).disableCookieManagement();
+            } else
+                clientBuilder.setProxy(myProxy);
+
         }
+        HttpClient httpClient = clientBuilder.build();
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        factory.setConnectTimeout(3000);
+        factory.setHttpClient(httpClient);
 
-        return restBuilder.build();
+        return new RestTemplate(factory);
     }
 
-    public void setProxy(String proxyName, int proxyPort) {
-        proxy = true;
+    public void setProxy(String proxyName, Integer port, String proxyUser, String proxyPass) {
+        this.proxy = true;
         this.proxyName = proxyName;
-        this.proxyPort = proxyPort;
+        this.proxyPort = port;
+        this.proxyUser = proxyUser;
+        this.proxyPass = proxyPass;
     }
 
 }

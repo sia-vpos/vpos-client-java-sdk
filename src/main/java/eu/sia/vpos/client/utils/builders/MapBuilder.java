@@ -253,7 +253,7 @@ public class MapBuilder {
         return map;
     }
 
-    public static Map<String, String> getThreeDS2Authorize0Map(BPWXmlRequest request) throws UnsupportedEncodingException {
+    public static Map<String, String> getThreeDS2Authorize0Map(BPWXmlRequest request) {
         Map<String, String> map = getStdMap(request);
         Auth3DS2AuthorizationStep0Request authorization3DSRequest = request.getData().getAuth3DS2AuthorizationStep0Request();
 

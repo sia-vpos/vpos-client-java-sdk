@@ -12,8 +12,6 @@ import eu.sia.vpos.client.utils.mac.Encoder;
 import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -148,7 +146,7 @@ public class RequestBuilder {
     }
 
 
-    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request dtoRequest, String shopId) throws VPosClientException, UnsupportedEncodingException {
+    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request dtoRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP0, reqDate);
         Auth3DS2AuthorizationStep0Request auth3DSStep0 = new Auth3DS2AuthorizationStep0Request(reqDate);

@@ -16,6 +16,10 @@ public interface Config {
 
     void setRedirectKey(String redirectKey);
 
+    String getRedirectUrl();
+
+    void setRedirectUrl(String redirectUrl);
+
     String getApiKey();
 
     void setApiKey(String apiKey);

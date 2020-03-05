@@ -11,6 +11,8 @@ public class VPosConfig implements Config {
 
     private String redirectKey;
 
+    private String redirectUrl;
+
     private String apiKey;
 
     private String proxyHost;
@@ -40,11 +42,6 @@ public class VPosConfig implements Config {
         this.url = url;
     }
 
-    public VPosConfig withUrl(String url) {
-        this.url = url;
-        return this;
-    }
-
     public String getShopID() {
         return shopID;
     }
@@ -52,12 +49,6 @@ public class VPosConfig implements Config {
     public void setShopID(String shopID) {
         this.shopID = shopID;
     }
-
-    public VPosConfig withShopID(String shopID) {
-        this.shopID = shopID;
-        return this;
-    }
-
 
     public String getRedirectKey() {
         return redirectKey;
@@ -67,11 +58,14 @@ public class VPosConfig implements Config {
         this.redirectKey = redirectKey;
     }
 
-    public VPosConfig withRedirectKey(String redirectKey) {
-        this.redirectKey = redirectKey;
-        return this;
+    @Override
+    public String getRedirectUrl() {
+        return redirectUrl;
     }
 
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
 
     public String getApiKey() {
         return apiKey;
@@ -79,11 +73,6 @@ public class VPosConfig implements Config {
 
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
-    }
-
-    public VPosConfig withApiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
     }
 
     public String getProxyHost() {
@@ -94,22 +83,12 @@ public class VPosConfig implements Config {
         this.proxyHost = proxyHost;
     }
 
-    public VPosConfig withProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-        return this;
-    }
-
     public Integer getProxyPort() {
         return proxyPort;
     }
 
     public void setProxyPort(int proxyPort) {
         this.proxyPort = proxyPort;
-    }
-
-    public VPosConfig withProxyPort(int proxyPort) {
-        this.proxyPort = proxyPort;
-        return this;
     }
 
     public String getProxyUsername() {
@@ -120,22 +99,12 @@ public class VPosConfig implements Config {
         this.proxyUsername = proxyUsername;
     }
 
-    public VPosConfig withProxyUsername(String proxyUsername) {
-        this.proxyUsername = proxyUsername;
-        return this;
-    }
-
     public String getProxyPassword() {
         return proxyPassword;
     }
 
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
-    }
-
-    public VPosConfig withProxyPassword(String proxyPassword) {
-        this.proxyPassword = proxyPassword;
-        return this;
     }
 
     public MacAlgorithms getAlgorithm() {

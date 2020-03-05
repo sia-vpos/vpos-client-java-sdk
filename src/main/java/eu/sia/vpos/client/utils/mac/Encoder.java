@@ -98,7 +98,7 @@ public final class Encoder {
     }
 
     private void appendField(String value, StringBuilder sb) {
-        if (value != null && !value.trim().isEmpty()) {
+        if (value != null /*&& !value.trim().isEmpty()*/) {
             sb.append("&");
             sb.append(value.trim());
         }
