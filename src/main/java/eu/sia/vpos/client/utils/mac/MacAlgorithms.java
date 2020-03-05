@@ -10,6 +10,15 @@ public enum MacAlgorithms {
 
     private String value;
 
+    public static boolean parse(String field) {
+        boolean notPresent = true;
+        for (MacAlgorithms type : MacAlgorithms.values()) {
+            if (field != null && field.equals(type.getValue())) {
+                notPresent = false;
+            }
+        }
+        return notPresent;
+    }
     private MacAlgorithms(String value) {
         this.value = value;
     }

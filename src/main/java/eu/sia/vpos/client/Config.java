@@ -4,9 +4,9 @@ import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 
 public interface Config {
 
-    String getUrl();
+    String getApiUrl();
 
-    void setUrl(String url);
+    void setApiUrl(String apiUrl);
 
     String getShopID();
 
@@ -40,7 +40,7 @@ public interface Config {
 
     void setProxyPassword(String proxyPassword);
 
-    MacAlgorithms getAlgorithm();
+    String getAlgorithm();
 
-    void setAlgorithm(MacAlgorithms algorithm);
+    void setAlgorithm(String algorithm);
 }

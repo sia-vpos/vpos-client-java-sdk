@@ -20,6 +20,7 @@ import eu.sia.vpos.client.utils.mac.Encoder;
 import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 import eu.sia.vpos.client.utils.mac.ResponseMACCalculator;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public class VPosClient implements Client {
@@ -50,7 +51,7 @@ public class VPosClient implements Client {
         if (config.getAlgorithm() == null) {
             this.algorithm = MacAlgorithms.HMAC_SHA_256;
         } else {
-            this.algorithm = config.getAlgorithm();
+            this.algorithm = MacAlgorithms.valueOf(config.getAlgorithm());
         }
         this.requestBuilder = new RequestBuilder(apiResultKey, this.algorithm);
         this.hmacCalculator = new Encoder(this.algorithm);
@@ -66,7 +67,7 @@ public class VPosClient implements Client {
             field = Operations.PARAMETERS.SHOPID.NAME;
         } else if (this.config.getApiKey() == null) {
             field = "Api Key";
-        } else if (this.config.getUrl() == null) {
+        } else if (this.config.getApiUrl() == null) {
             field = "Api Url";
         } else if (this.config.getRedirectKey() == null) {
             field = "Redirect Key";
@@ -78,7 +79,7 @@ public class VPosClient implements Client {
     }
 
     private void initPaymentClient() {
-        this.vPosPaymentClient = new VPosPaymentClient(config.getUrl());
+        this.vPosPaymentClient = new VPosPaymentClient(config.getApiUrl());
         if (config.getProxyHost() != null && config.getProxyPort() == null) {
             this.vPosPaymentClient.setProxy(config.getProxyHost(), config.getProxyPort(), config.getProxyUsername(), config.getProxyPassword());
         }
@@ -163,12 +164,11 @@ public class VPosClient implements Client {
         return receivedMac.equals(calculatedMAc);
     }
 
-    /*
+
     @Override
     public boolean verifyMAC(HttpServletRequest httpServletRequest) throws VPosClientException {
-        // TODO: put here MAC parameters verify code against "MAC" parameter
-        return false;
-    }*/
+        return verifyMAC(httpServletRequest.getRequestURL().toString());
+    }
 
     @Override
     public String buildHTMLRedirectFragment(PaymentInfo paymentInfo) throws VPosClientException {

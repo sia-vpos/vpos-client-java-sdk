@@ -1,6 +1,8 @@
 package eu.sia.vpos.client.impl;
 
 import eu.sia.vpos.client.Config;
+import eu.sia.vpos.client.utils.constants.ConfigConstants;
+import eu.sia.vpos.client.utils.constants.Constants;
 import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 
 import java.util.Properties;
@@ -23,23 +25,41 @@ public class VPosConfig implements Config {
 
     private String proxyPassword;
 
-    private String url;
+    private String apiUrl;
 
-    private MacAlgorithms algorithm;
+    private String algorithm;
 
     public VPosConfig() {
     }
 
     public VPosConfig(Properties properties) {
-        // TODO: loads from properties file
+        this.shopID = properties.getProperty(ConfigConstants.SHOPID);
+        this.apiUrl = properties.getProperty(ConfigConstants.APIURL);
+        this.apiKey = properties.getProperty(ConfigConstants.APIRESULTKEY);
+        this.redirectUrl = properties.getProperty(ConfigConstants.REDIRECTURL);
+        this.redirectKey = properties.getProperty(ConfigConstants.REDIRECTKEY);
+        this.proxyHost = properties.getProperty(ConfigConstants.PROXYHOST);
+        String port = properties.getProperty(ConfigConstants.PROXYPORT);
+        if(port != null){
+            this.proxyPort = Integer.parseInt(port);
+        }
+        this.proxyPassword = properties.getProperty(ConfigConstants.PROXYPASS);
+        this.proxyUsername = properties.getProperty(ConfigConstants.PROXYUSERNAME);
+        String alg=properties.getProperty(ConfigConstants.MACALG, Constants.DEFAULT_ALG);
+        if(MacAlgorithms.parse(alg))
+            this.algorithm = alg;
+        else{
+            this.algorithm = Constants.DEFAULT_ALG;
+        }
+
     }
 
-    public String getUrl() {
-        return url;
+    public String getApiUrl() {
+        return apiUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setApiUrl(String apiUrl) {
+        this.apiUrl = apiUrl;
     }
 
     public String getShopID() {
@@ -107,11 +127,15 @@ public class VPosConfig implements Config {
         this.proxyPassword = proxyPassword;
     }
 
-    public MacAlgorithms getAlgorithm() {
-        return algorithm;
+    public String getAlgorithm() {
+        return this.algorithm;
     }
 
-    public void setAlgorithm(MacAlgorithms algorithm) {
-        this.algorithm = algorithm;
+    public void setAlgorithm(String algorithm) {
+        if(MacAlgorithms.parse(algorithm))
+            this.algorithm = algorithm;
+        else{
+            this.algorithm = Constants.DEFAULT_ALG;
+        }
     }
 }

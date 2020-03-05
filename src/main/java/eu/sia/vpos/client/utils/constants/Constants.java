@@ -17,6 +17,7 @@ public class Constants {
     public static final String ALIAS_NETWORK = "98";
     public static final String EXP_DATE_FORMAT = "yyMM";
     public static final String INVALID_PID = "0";
+    public static final String DEFAULT_ALG= "HMAC_SHA_256";
 
     private Constants() {
 

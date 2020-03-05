@@ -7,6 +7,7 @@ import eu.sia.vpos.client.response.*;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 
 //import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public interface Client {
 
     boolean verifyMAC(String url) throws VPosClientException;
 
-    //boolean verifyMAC(HttpServletRequest httpServletRequest) throws VPosClientException;
+    boolean verifyMAC(HttpServletRequest httpServletRequest) throws VPosClientException;
 
     String buildHTMLRedirectFragment(PaymentInfo PaymentInfo) throws VPosClientException;
 }
