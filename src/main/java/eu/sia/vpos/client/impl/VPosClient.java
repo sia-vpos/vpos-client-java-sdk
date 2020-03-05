@@ -14,6 +14,7 @@ import eu.sia.vpos.client.utils.ResponseMapper;
 import eu.sia.vpos.client.utils.Utils;
 import eu.sia.vpos.client.utils.builders.MapBuilder;
 import eu.sia.vpos.client.utils.builders.RequestBuilder;
+import eu.sia.vpos.client.utils.constants.ConfigConstants;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 import eu.sia.vpos.client.utils.mac.Encoder;
@@ -21,6 +22,8 @@ import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 import eu.sia.vpos.client.utils.mac.ResponseMACCalculator;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class VPosClient implements Client {
@@ -36,7 +39,6 @@ public class VPosClient implements Client {
     private String redirectKey;
     private String redirectUrl;
     private String apiResultKey;
-    private MacAlgorithms algorithm;
 
 
     public VPosClient(Config config) throws VPosClientException {
@@ -48,13 +50,14 @@ public class VPosClient implements Client {
         this.redirectUrl = config.getRedirectUrl();
         this.apiResultKey = config.getApiKey();
 
+        MacAlgorithms algorithm;
         if (config.getAlgorithm() == null) {
-            this.algorithm = MacAlgorithms.HMAC_SHA_256;
+            algorithm = MacAlgorithms.HMAC_SHA_256;
         } else {
-            this.algorithm = MacAlgorithms.valueOf(config.getAlgorithm());
+            algorithm = MacAlgorithms.valueOf(config.getAlgorithm());
         }
-        this.requestBuilder = new RequestBuilder(apiResultKey, this.algorithm);
-        this.hmacCalculator = new Encoder(this.algorithm);
+        this.requestBuilder = new RequestBuilder(apiResultKey, algorithm);
+        this.hmacCalculator = new Encoder(algorithm);
 
         this.responseMACCalculator = new ResponseMACCalculator(hmacCalculator);
         initPaymentClient();
@@ -62,20 +65,27 @@ public class VPosClient implements Client {
     }
 
     private void validateConfig() throws VPosClientException {
-        String field = "";
+        List<String> fields = new ArrayList<>();
         if (this.config.getShopID() == null || !this.config.getShopID().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
-            field = Operations.PARAMETERS.SHOPID.NAME;
+            fields.add(Operations.PARAMETERS.SHOPID.NAME);
         } else if (this.config.getApiKey() == null) {
-            field = "Api Key";
+            fields.add(ConfigConstants.APIRESULTKEY);
         } else if (this.config.getApiUrl() == null) {
-            field = "Api Url";
+            fields.add(ConfigConstants.APIURL);
         } else if (this.config.getRedirectKey() == null) {
-            field = "Redirect Key";
+            fields.add(ConfigConstants.REDIRECTKEY);
         } else if (this.config.getRedirectUrl() == null) {
-            field = "Redirect Url";
+            fields.add(ConfigConstants.REDIRECTURL);
         }
-        if (!field.isEmpty())
-            throw new VPosClientException("Invalid or missing configuration param: " + field);
+        if (!fields.isEmpty()){
+            StringBuilder sb= new StringBuilder();
+            sb.append("Invalid or missing configuration params: ");
+            for(String field : fields){
+                sb.append(field);
+                sb.append(" ");
+            }
+            throw new VPosClientException("Invalid or missing configuration param: " + sb.toString());
+        }
     }
 
     private void initPaymentClient() {
