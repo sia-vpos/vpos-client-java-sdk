@@ -15,14 +15,13 @@ import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import javax.net.ssl.SSLContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +30,7 @@ public class VPosPaymentClient {
     private boolean proxy;
     private boolean ssl;
 
+    private SSLContext sslContext;
     private String proxyName;
     private Integer proxyPort;
     private String proxyUser;
@@ -38,11 +38,10 @@ public class VPosPaymentClient {
     private String urlWebApi;
 
 
-
-
     public VPosPaymentClient(String urlWebApi) {
         this.urlWebApi = urlWebApi;
         this.proxy = false;
+        this.ssl = false;
     }
 
 
@@ -116,10 +115,14 @@ public class VPosPaymentClient {
                 clientBuilder.setProxy(myProxy);
 
         }
+        if (ssl) {
+            clientBuilder.setSSLContext(sslContext);
+        }
         HttpClient httpClient = clientBuilder.build();
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
         factory.setConnectTimeout(3000);
         factory.setHttpClient(httpClient);
+
 
         return new RestTemplate(factory);
     }
@@ -130,6 +133,11 @@ public class VPosPaymentClient {
         this.proxyPort = port;
         this.proxyUser = proxyUser;
         this.proxyPass = proxyPass;
+    }
+
+    public void setSslContext(SSLContext context) {
+        this.sslContext = context;
+        this.ssl = true;
     }
 
 }

@@ -5,6 +5,7 @@ import eu.sia.vpos.client.utils.constants.ConfigConstants;
 import eu.sia.vpos.client.utils.constants.Constants;
 import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 
+import javax.net.ssl.SSLContext;
 import java.util.Properties;
 
 public class VPosConfig implements Config {
@@ -28,6 +29,8 @@ public class VPosConfig implements Config {
     private String apiUrl;
 
     private String algorithm;
+
+    private SSLContext sslContext;
 
     public VPosConfig() {
     }
@@ -137,5 +140,13 @@ public class VPosConfig implements Config {
         else{
             this.algorithm = Constants.DEFAULT_ALG;
         }
+    }
+
+    public SSLContext getSslContext() {
+        return sslContext;
+    }
+
+    public void setSslContext(SSLContext sslContext) {
+        this.sslContext = sslContext;
     }
 }

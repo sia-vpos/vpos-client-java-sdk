@@ -1,6 +1,6 @@
 package eu.sia.vpos.client;
 
-import eu.sia.vpos.client.utils.mac.MacAlgorithms;
+import javax.net.ssl.SSLContext;
 
 public interface Config {
 
@@ -43,4 +43,8 @@ public interface Config {
     String getAlgorithm();
 
     void setAlgorithm(String algorithm);
+
+    SSLContext getSslContext();
+
+    void setSslContext(SSLContext sslContext);
 }

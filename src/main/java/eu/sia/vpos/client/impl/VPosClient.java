@@ -41,6 +41,7 @@ public class VPosClient implements Client {
     private String apiResultKey;
 
 
+
     public VPosClient(Config config) throws VPosClientException {
         this.config = config;
         validateConfig();
@@ -93,6 +94,8 @@ public class VPosClient implements Client {
         if (config.getProxyHost() != null && config.getProxyPort() == null) {
             this.vPosPaymentClient.setProxy(config.getProxyHost(), config.getProxyPort(), config.getProxyUsername(), config.getProxyPassword());
         }
+        if(config.getSslContext()!=null)
+            this.vPosPaymentClient.setSslContext(config.getSslContext());
     }
 
 
