@@ -1,6 +1,8 @@
 package eu.sia.vpos.client.utils;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import eu.sia.vpos.client.request.*;
+import eu.sia.vpos.client.response.xml.Operation;
 import eu.sia.vpos.client.utils.constants.Constants;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
@@ -184,6 +186,33 @@ public class RequestValidator {
 
         if (!field.isEmpty())
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
+    }
+
+    public static void validateHTMLRedirectFragmentRequest(PaymentInfo requestDto)throws VPosClientException{
+        String field = "";
+
+        if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
+            field = Operations.PARAMETERS.AMOUNT.NAME;
+        } else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
+            field = Operations.PARAMETERS.CURRENCY.NAME;
+        } else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
+            field = Operations.PARAMETERS.ORDERID.NAME;
+        } else if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)){
+            field = Operations.PARAMETERS.SHOPID.NAME;
+        }else if (requestDto.getUrlBack() == null) {
+            field = Operations.PARAMETERS.URLBACK;
+        } else if (requestDto.getUrlDone() == null ) {
+            field = Operations.PARAMETERS.URLDONE;
+        } else if (requestDto.getUrlMs() == null ){
+            field = Operations.PARAMETERS.URLMS;
+        } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
+            field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
+        }else if (requestDto.getAuthorMode() == null || !requestDto.getAuthorMode().matches(Operations.PARAMETERS.AUTHORMODE.PATTERN)) {
+            field = Operations.PARAMETERS.AUTHORMODE.NAME;
+        }
+        if (!field.isEmpty())
+            throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
+
     }
 
 }

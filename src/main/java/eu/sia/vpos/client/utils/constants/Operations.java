@@ -25,6 +25,9 @@ public final class Operations {
         public static final String CONFIRM = "CONFIRM";
         public static final String TIMESTAMP = "TIMESTAMP";
         public static final String PARES = "PARES";
+        public static final String URLBACK = "URLBACK";
+        public static final String URLMS = "URLMS";
+        public static final String URLDONE = "URLDONE";
 
         private PARAMETERS() {
 
@@ -419,6 +422,18 @@ public final class Operations {
             public static final boolean MANDATORY = true;
 
             private ACCOUNTINGMODE() {
+
+            }
+        }
+
+        public static final class AUTHORMODE {
+
+            public static final String NAME = "AUTHORMODE";
+            public static final int LEN = 1;
+            public static final String PATTERN = "[DI]{" + LEN + "}";
+            public static final boolean MANDATORY = true;
+
+            private AUTHORMODE() {
 
             }
         }

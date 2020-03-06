@@ -185,6 +185,7 @@ public class VPosClient implements Client {
 
     @Override
     public String buildHTMLRedirectFragment(PaymentInfo paymentInfo) throws VPosClientException {
+        RequestValidator.validateHTMLRedirectFragmentRequest(paymentInfo);
         return htmlTool.buildHtmlPaymentDiv(redirectUrl, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, redirectKey, apiResultKey));
     }
 
