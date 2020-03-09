@@ -106,8 +106,7 @@ public class VPosClient implements Client {
         BPWXmlRequest request = requestBuilder.buildOnlineAuthorizationRequest(authorizationRequest, config.getShopID());
         BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);
         verifyMacResponse(xmlResponse);
-        // TODO:response mapping
-        return null;
+        return responseMapper.authorizationResponse(xmlResponse);
 
     }
 

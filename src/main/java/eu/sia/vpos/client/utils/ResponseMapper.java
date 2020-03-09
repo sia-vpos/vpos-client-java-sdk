@@ -184,4 +184,40 @@ public class ResponseMapper {
         }
         return dto;
     }
+
+    public AuthorizationResponse authorizationResponse(BPWXmlResponse response) {
+        AuthorizationResponse authorizationResponse = new AuthorizationResponse();
+        authorizationResponse.setResult(response.getResult());
+
+        if (response.getData() != null && response.getData().getAuthorization() != null) {
+            Authorization auth = response.getData().getAuthorization().get(0);
+            authorizationResponse.setPaymentType(auth.getPaymentType());
+            authorizationResponse.setAuthorizationType(auth.getAuthorizationType());
+            authorizationResponse.setTransactionId(auth.getTransactionId());
+            authorizationResponse.setNetwork(auth.getNetwork());
+            authorizationResponse.setOrderId(auth.getOrderId());
+            authorizationResponse.setTransactionAmount(auth.getTransactionAmount());
+            authorizationResponse.setAuthorizedAmount(auth.getAuthorizedAmount());
+            authorizationResponse.setCurrency(auth.getCurrency());
+            authorizationResponse.setExponent(auth.getExponent());
+            authorizationResponse.setAccountedAmount(auth.getAccountedAmount());
+            authorizationResponse.setRefundedAmount(auth.getRefundedAmount());
+            authorizationResponse.setTransactionResult(auth.getTransactionResult());
+            authorizationResponse.setTimestamp(auth.getTimestamp());
+            authorizationResponse.setAuthorizationNumber(auth.getAuthorizationNumber());
+            authorizationResponse.setAcquirerBin(auth.getAcquirerBin());
+            authorizationResponse.setMerchantId(auth.getMerchantId());
+            authorizationResponse.setTransactionStatus(auth.getTransactionStatus());
+            authorizationResponse.setResponseCodeIso(auth.getResponseCodeIso());
+            authorizationResponse.setPanTail(auth.getPanTail());
+            authorizationResponse.setPanExpiryDate(auth.getPanExpiryDate());
+            authorizationResponse.setPaymentTypePP(auth.getPaymentTypePP());
+            authorizationResponse.setRRN(auth.getRRN());
+            authorizationResponse.setCardType(auth.getCardType());
+            return authorizationResponse;
+        }
+        return authorizationResponse;
+
+    }
 }
+    
