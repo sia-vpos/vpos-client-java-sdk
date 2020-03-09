@@ -12,6 +12,8 @@ import eu.sia.vpos.client.utils.mac.Encoder;
 import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -145,6 +147,46 @@ public class RequestBuilder {
 
     }
 
+    public BPWXmlRequest buildOnlineAuthorizationRequest(AuthorizationRequest dtoRequest, String shopId) throws VPosClientException {
+        Date reqDate = new Date();
+        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ONLINEAUTHORIZATION, reqDate);
+        OnlineAuthorizationRequest authRequest = new OnlineAuthorizationRequest(reqDate);
+
+        //Header
+        authRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
+        authRequest.getHeader().setShopId(shopId);
+
+        //
+        authRequest.setOrderId(dtoRequest.getOrderId());
+        authRequest.setPan(dtoRequest.getPan());
+        authRequest.setCvv2(dtoRequest.getCvv2());
+        authRequest.setExpDate(dtoRequest.getExpDate());
+        authRequest.setAmount(dtoRequest.getAmount());
+        authRequest.setCurrency(dtoRequest.getCurrency());
+        authRequest.setExponent(dtoRequest.getExponent());
+        authRequest.setAccountingMode(dtoRequest.getAccountingMode());
+        authRequest.setNetwork(dtoRequest.getNetwork());
+        authRequest.setEmailCH(dtoRequest.getEmailCh());
+        authRequest.setUserId(dtoRequest.getUserId());
+        authRequest.setAcquirer(dtoRequest.getAcquirer());
+        authRequest.setUsrAuthFlag(dtoRequest.getUsrAuthFlag());
+        authRequest.setIpAddress(dtoRequest.getIpAddress());
+        authRequest.setOpDescr(dtoRequest.getOpDescr());
+        authRequest.setCreatePanAlias(dtoRequest.getCreatePanAlias());
+        authRequest.setAntiFraud(dtoRequest.getAntiFraud());
+        authRequest.setProductRef(dtoRequest.getProductRef());
+        authRequest.setName(dtoRequest.getName());
+        authRequest.setSurname(dtoRequest.getSurname());
+        authRequest.setTaxId(dtoRequest.getTaxId());
+        Data data = new Data();
+        data.setOnlineAuthorizationRequest(authRequest);
+
+        request.setData(data);
+        request.getRequest().setMac(encoder.getMac(MapBuilder.getOnlineAuthorizationMap(request), key));
+
+        return request;
+    }
+
 
     public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request dtoRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
@@ -180,6 +222,9 @@ public class RequestBuilder {
         auth3DSStep0.setTaxId(dtoRequest.getTaxId());
         auth3DSStep0.setCreatePanAlias(dtoRequest.getCreatePanAlias());
         //3DSDATAJSON
+        //System.out.println("URL ENCODED: "+URLEncoder.encode(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()), StandardCharsets.UTF_8.toString()));
+        //System.out.println("NORMAL : "+AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()));
+
         auth3DSStep0.setThreeDSData(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()));
         auth3DSStep0.setCprof(dtoRequest.getcProf());
         auth3DSStep0.setThreeDSMtdNotifyUrl(dtoRequest.getThreeDSMtdNotifyUrl());
@@ -190,7 +235,11 @@ public class RequestBuilder {
         data.setAuth3DS2AuthorizationStep0Request(auth3DSStep0);
         request.setData(data);
         request.getRequest().setMac(encoder.getMac(MapBuilder.getThreeDS2Authorize0Map(request), key));
-        auth3DSStep0.setThreeDSData(auth3DSStep0.getThreeDSData());
+        try {
+            request.getData().getAuth3DS2AuthorizationStep0Request().setThreeDSData(URLEncoder.encode(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()), StandardCharsets.UTF_8.toString()));
+        } catch (UnsupportedEncodingException e) {
+            throw new VPosClientException("Error while building authorization request");
+        }
         return request;
     }
 

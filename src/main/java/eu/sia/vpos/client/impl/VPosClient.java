@@ -22,6 +22,7 @@ import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 import eu.sia.vpos.client.utils.mac.ResponseMACCalculator;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -99,14 +100,20 @@ public class VPosClient implements Client {
     }
 
 
-    /*@Override
+    @Override
     public AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException {
+        RequestValidator.validateAuthorizationRequest(authorizationRequest);
+        BPWXmlRequest request = requestBuilder.buildOnlineAuthorizationRequest(authorizationRequest, config.getShopID());
+        BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);
+        verifyMacResponse(xmlResponse);
+        // TODO:response mapping
         return null;
 
     }
-    */
+
     @Override
     public ThreeDSAuthorization0Response threeDSAuthorize0(ThreeDSAuthorization0Request threeDSAuthorization0Request) throws VPosClientException {
+
         RequestValidator.validateThreeDSAuthorization0Request(threeDSAuthorization0Request);
         BPWXmlRequest request = requestBuilder.buildThreeDS2Authorize0(threeDSAuthorization0Request, config.getShopID());
         BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);

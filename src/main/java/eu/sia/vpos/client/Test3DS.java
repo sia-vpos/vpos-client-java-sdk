@@ -11,9 +11,9 @@ import java.util.Random;
 
 public class Test3DS {
 
-    private static final String SHOP_ID = "129281292800109";
-    private static final String MAC_KEY_VPOS = "fU-9et-s-Sj8W---E8uhUDu9fEzqr8hH3L95s48r9nq-cq3cBXbp-tZsvGQU--t-nqmtaW-7x-7-C2PdcuFdbHuShQ-pYVWnr-4-";
-    private static final String API_RESULT_KEY = "E-vmE-GHXmx73-Lfg24LztZ-7-yCyVsKn4QXphL5qzf-Kr-Cf-JWpZwZgaZRA5dR9V677xL4uCbc-Ce--8h2-tdrSu--QKjF-nZh";
+    private static final String SHOP_ID = "129281292800013";
+    private static final String MAC_KEY_VPOS = "qJS-dSZx7DG-dyetrvTyS-a4CGLkBkCxY-n-SuCb-sdUbhgv5Ghea7tuXap-m4cC-RM-q-a8JGRPA-zV-dSLwnpGs4VkkrNU-Jqz";
+    private static final String API_RESULT_KEY = "dnC8ybnbPaBSNYHsN5vq-pcaf5QXV2YHpFStxjGfY3wftC-7-PZkL5dbhP--em-DV24-YeCKMKr-ENZ-nE3JHMvqeyYDKJ3wK8b2";
     private static final String URL_REDIRECT = "https://atpostest.ssb.it/atpos/pagamenti/main";
     private static final String URL_DONE = "http://localhost:8080/payment-gateway/vpos/tokenize";
     private static final String URL_BACK = "http://localhost:8080/payment-gateway/vpos/tokenize";
@@ -22,7 +22,7 @@ public class Test3DS {
     private static final String OPERATOR_ID = "John Doe";
     private static final String PROXYNAME = "proxy-dr.reply.it";
     private static final Integer PROXYPORT = 8080;
-    private static final String jsonString = "{\"browserAcceptHeader\":\"1024\",\"browserIP\":\"1.12.123.255\",\"browserJavaEnabled\":\"true\",\"browserLanguage\":\"it\",\"browserColorDepth\":\"16\",\"browserScreenHeight\":\"100\",\"browserScreenWidth\":\"100\",\"browserTZ\":\"-60\",\"browserUserAgent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0\",\"addrMatch\":\"N\",\"chAccAgeInd\":\"04\",\"chAccChange\":\"20190211\",\"chAccChangeInd\":\"03\",\"chAccDate\":\"20190210\",\"chAccPwChange\":\"20190214\",\"chAccPwChangeInd\":\"04\",\"nbPurchaseAccount\":\"1000\",\"txnActivityDay\":\"100\",\"txnActivityYear\":\"100\",\"shipAddressUsage\":\"20181220\",\"shipAddressUsageInd\":\"03\",\"shipNameIndicator\":\"01\",\"billAddrCity\":\"billAddrCity\",\"billAddrCountry\":\"004\",\"billAddrLine1\":\"billAddrLine1\",\"billAddrLine2\":\"billAddrLine2\",\"billAddrLine3\":\"billAddrLine3\",\"billAddrPostCode\":\"billAddrPostCode\",\"billAddrState\":\"11\",\"homePhone\":\"39-321818198\",\"mobilePhone\":\"33-312\",\"shipAddrCity\":\"zio\",\"shipAddrCountry\":\"008\",\"shipAddrLine1\":\"shipAddrLine1\",\"shipAddrLine2\":\"shipAddrLine2\",\"shipAddrLine3\":\"shipAddrLine3\",\"shipAddrPostCode\":\"shipAddrPostCode\",\"shipAddrState\":\"222\",\"workPhone\":\"39-0321818198\",\"deliveryEmailAddress\":\"a-b@example.com\",\"deliveryTimeframe\":\"02\",\"preOrderDate\":\"20181220\",\"preOrderPurchaseInd\":\"01\",\"reorderItemsInd\":\"02\",\"shipIndicator\":\"01\"}";
+    private static final String jsonString = "{\"browserAcceptHeader\":\"1024\",\"browserIP\":\"1.12.123.255\",\"browserJavaEnabled\":\"true\",\"browserLanguage\":\"it\",\"browserColorDepth\":\"16\",\"browserScreenHeight\":\"100\",\"browserScreenWidth\":\"100\",\"browserTZ\":\"-60\",\"browserUserAgent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 firefox/47.0\",\"addrmatch\":\"n\",\"chaccageind\":\"04\",\"chaccchange\":\"20190211\",\"chaccchangeind\":\"03\",\"chaccdate\":\"20190210\",\"chaccpwchange\":\"20190214\",\"chaccpwchangeind\":\"04\",\"nbpurchaseaccount\":\"1000\",\"txnactivityday\":\"100\",\"txnactivityyear\":\"100\",\"shipaddressusage\":\"20181220\",\"shipaddressusageind\":\"03\",\"shipnameindicator\":\"01\",\"billaddrcity\":\"billaddrcity\",\"billaddrcountry\":\"004\",\"billaddrline1\":\"billaddrline1\",\"billaddrline2\":\"billaddrline2\",\"billaddrline3\":\"billaddrline3\",\"billaddrpostcode\":\"billaddrpostcode\",\"billaddrstate\":\"11\",\"homephone\":\"39-321818198\",\"mobilephone\":\"33-312\",\"shipaddrcity\":\"zio\",\"shipaddrcountry\":\"008\",\"shipaddrline1\":\"shipaddrline1\",\"shipaddrline2\":\"shipaddrline2\",\"shipaddrline3\":\"shipaddrline3\",\"shipaddrpostcode\":\"shipaddrpostcode\",\"shipaddrstate\":\"222\",\"workphone\":\"39-0321818198\",\"deliveryemailaddress\":\"a-b@example.com\",\"deliveryTimeframe\":\"02\",\"preOrderDate\":\"20181220\",\"preOrderPurchaseInd\":\"01\",\"reorderItemsInd\":\"02\",\"shipIndicator\":\"01\"}";
 
     public static void main(String[] args) {
         VPosConfig config = new VPosConfig();
@@ -42,8 +42,9 @@ public class Test3DS {
 
 
             //client.threeDSAuthorize0(build3DSRequest());
+            client.authorize(buildAuthorizationRequest());
             //System.out.println(client.buildHTMLRedirectFragment(buildPaymentTest()));
-            client.getOrderStatus(buildOrderStatusRequest("12345676912345649849"));
+            //client.getOrderStatus(buildOrderStatusRequest("12345676912345649849"));
             //client.capture(buildCaptureRequest("12345676912345649938"));
             //client.refund(buildRefundRequest("8032112928SL21gibxxw3ue54", "12345676912345649938", "50"));
             //boolean b=client.verifyMAC("http://localhost:8080/payment-gateway/vpos/tokenize?ORDERID=12345676912345649229&SHOPID=129281292800109&AUTHNUMBER=NULL&AMOUNT=10000&CURRENCY=978&TRANSACTIONID=8032112928SL11m99f7dkliz4&ACCOUNTINGMODE=D&AUTHORMODE=D&RESULT=00&TRANSACTIONTYPE=TT01&PANTAIL=0027&PANEXPIRYDATE=2112&NETWORK=01&MAC=97561492b40f189ea617cb992cf8a8fab825674a45ccb45407257442394bc39e");
@@ -58,16 +59,17 @@ public class Test3DS {
         ThreeDSAuthorization0Request request3DS0 = new ThreeDSAuthorization0Request();
         request3DS0.setAmount("6600");
         request3DS0.setAccountingMode("I");
-        request3DS0.setPan("5342230500001234");
+        request3DS0.setPan("4118830900940017");
         request3DS0.setExpDate("2112");
-        request3DS0.setCvv2("100");
+        request3DS0.setCvv2("111");
         request3DS0.setCurrency("978");
 
-        request3DS0.setNetwork("02");
+        request3DS0.setNetwork("93");
         request3DS0.setEmailCh("asdas@fgd.id");
-        request3DS0.setOrderId("API232043111089");
+        request3DS0.setOrderId("API232043111428");
         request3DS0.setOperatorId("John Doe");
-        request3DS0.setNameCh("Mario");
+        request3DS0.setExponent("02");
+        //request3DS0.setNameCh("Mario");
         request3DS0.setNotifyUrl("https://atpostest.ssb.it/atpos/apibo/en/3ds-notification.html");
         request3DS0.setThreeDSMtdNotifyUrl("https://atpostest.ssb.it/atpos/apibo/en/3ds-notification.html");
         Gson g = new Gson();
@@ -90,7 +92,7 @@ public class Test3DS {
         paymentInfo.setUrlMs(URLMS);
         paymentInfo.setAccountingMode("D");
         paymentInfo.setAuthorMode("I");
-        paymentInfo.addOption(PaymentInfo.OptionName.G);
+        //paymentInfo.addOption(PaymentInfo.OptionName.G);
         paymentInfo.addOption(PaymentInfo.OptionName.M);
         return paymentInfo;
     }
@@ -114,6 +116,23 @@ public class Test3DS {
         RefundRequest req = new RefundRequest("Giammaicol",
                 transactionId, orderId,
                 amount, "978", null, null);
+        return req;
+    }
+
+    private static AuthorizationRequest buildAuthorizationRequest(){
+        AuthorizationRequest req = new AuthorizationRequest();
+        Random rand = new Random();
+
+        req.setOrderId("12345676912345649" + rand.nextInt(1000));
+        req.setOperatorId("OPERATOR");
+        req.setPan("4598250000000027");
+        req.setCvv2("111");
+        req.setAmount("6000");
+        req.setExpDate("2112");
+        req.setCurrency("978");
+        req.setAccountingMode("I");
+        req.setNetwork("93");
+        req.setEmailCh("dsdsd@gmail.it");
         return req;
     }
 }

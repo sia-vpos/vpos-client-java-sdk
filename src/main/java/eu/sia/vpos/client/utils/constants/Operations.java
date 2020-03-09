@@ -11,6 +11,8 @@ public final class Operations {
         public static final String OPERATION = "OPERATION";
         public static final String AUTHORIZATION3DSSTEP1 = "AUTHORIZATION3DSSTEP1";
         public static final String AUTHORIZATION3DSSTEP2 = "AUTHORIZATION3DSSTEP2";
+        public static final String ONLINEAUTHORIZATION = "AUTHORIZATION";
+
         public static final String AUTHORIZATION3DS2STEP0 = "THREEDSAUTHORIZATION0";
         public static final String AUTHORIZATION3DS2STEP1 = "THREEDSAUTHORIZATION1";
         public static final String AUTHORIZATION3DS2STEP2 = "THREEDSAUTHORIZATION2";
@@ -25,9 +27,6 @@ public final class Operations {
         public static final String CONFIRM = "CONFIRM";
         public static final String TIMESTAMP = "TIMESTAMP";
         public static final String PARES = "PARES";
-        public static final String URLBACK = "URLBACK";
-        public static final String URLMS = "URLMS";
-        public static final String URLDONE = "URLDONE";
 
         private PARAMETERS() {
 

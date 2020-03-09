@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public interface Client {
 	
-    //AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException;
+    AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException;
 
     ThreeDSAuthorization0Response threeDSAuthorize0(ThreeDSAuthorization0Request threeDSAuthorization0Request) throws VPosClientException, UnsupportedEncodingException;
 

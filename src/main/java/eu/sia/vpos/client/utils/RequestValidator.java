@@ -1,8 +1,6 @@
 package eu.sia.vpos.client.utils;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import eu.sia.vpos.client.request.*;
-import eu.sia.vpos.client.response.xml.Operation;
 import eu.sia.vpos.client.utils.constants.Constants;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
@@ -188,7 +186,7 @@ public class RequestValidator {
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
     }
 
-    public static void validateHTMLRedirectFragmentRequest(PaymentInfo requestDto)throws VPosClientException{
+    public static void validateHTMLRedirectFragmentRequest(PaymentInfo requestDto) throws VPosClientException {
         String field = "";
 
         if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
@@ -197,17 +195,17 @@ public class RequestValidator {
             field = Operations.PARAMETERS.CURRENCY.NAME;
         } else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
-        } else if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)){
+        } else if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
             field = Operations.PARAMETERS.SHOPID.NAME;
-        }else if (requestDto.getUrlBack() == null) {
-            field = Operations.PARAMETERS.URLBACK;
-        } else if (requestDto.getUrlDone() == null ) {
-            field = Operations.PARAMETERS.URLDONE;
-        } else if (requestDto.getUrlMs() == null ){
-            field = Operations.PARAMETERS.URLMS;
+        } else if (requestDto.getUrlBack() == null) {
+            field = Operations.PARAMETERS.URLBACK.NAME;
+        } else if (requestDto.getUrlDone() == null) {
+            field = Operations.PARAMETERS.URLDONE.NAME;
+        } else if (requestDto.getUrlMs() == null) {
+            field = Operations.PARAMETERS.URLMS.NAME;
         } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
-        }else if (requestDto.getAuthorMode() == null || !requestDto.getAuthorMode().matches(Operations.PARAMETERS.AUTHORMODE.PATTERN)) {
+        } else if (requestDto.getAuthorMode() == null || !requestDto.getAuthorMode().matches(Operations.PARAMETERS.AUTHORMODE.PATTERN)) {
             field = Operations.PARAMETERS.AUTHORMODE.NAME;
         }
         if (!field.isEmpty())
@@ -215,4 +213,56 @@ public class RequestValidator {
 
     }
 
+    public static void validateAuthorizationRequest(AuthorizationRequest requestDto) throws VPosClientException {
+        String field = "";
+
+        if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
+            field = Operations.PARAMETERS.ORDERID.NAME;
+        } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+            field = Operations.PARAMETERS.OPERATORID.NAME;
+        } else if (requestDto.getPan() == null || !requestDto.getPan().matches(Operations.PARAMETERS.PAN.PATTERNGENERIC)) {
+            field = Operations.PARAMETERS.PAN.NAME;
+        } else if (requestDto.getCvv2() != null && !requestDto.getCvv2().matches(Operations.PARAMETERS.CVV2.PATTERN)) {
+            field = Operations.PARAMETERS.CVV2.NAME;
+        } else if (requestDto.getExpDate() == null || !requestDto.getExpDate().matches(Operations.PARAMETERS.EXPDATE.PATTERN)) {
+            field = Operations.PARAMETERS.EXPDATE.NAME;
+        } else if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
+            field = Operations.PARAMETERS.AMOUNT.NAME;
+        } else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
+            field = Operations.PARAMETERS.CURRENCY.NAME;
+        } else if (!requestDto.getCurrency().equalsIgnoreCase("978") && (requestDto.getExponent() == null || requestDto.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
+            field = Operations.PARAMETERS.EXPONENT.NAME;
+        } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
+            field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
+        } else if (requestDto.getNetwork() == null || !requestDto.getNetwork().matches(Operations.PARAMETERS.NETWORK.PATTERN)) {
+            field = Operations.PARAMETERS.NETWORK.NAME;
+        } else if (requestDto.getEmailCh() != null && !requestDto.getEmailCh().matches(Operations.PARAMETERS.EMAIL.PATTERN)) {
+            field = Operations.PARAMETERS.EMAIL.NAMECH;
+        }else if (requestDto.getUserId() != null && !requestDto.getUserId().matches(Operations.PARAMETERS.USERID.PATTERN)) {
+            field = Operations.PARAMETERS.USERID.NAME;
+        } else if (requestDto.getAcquirer() != null && !requestDto.getAcquirer().matches(Operations.PARAMETERS.ACQUIRER.PATTERN)) {
+            field = Operations.PARAMETERS.ACQUIRER.NAME;
+        } else if (requestDto.getIpAddress() != null && !requestDto.getIpAddress().matches(Operations.PARAMETERS.IPADDRESS.PATTERN)) {
+            field = Operations.PARAMETERS.IPADDRESS.NAME;
+        } else if (requestDto.getUsrAuthFlag() != null && !requestDto.getUsrAuthFlag().matches(Operations.PARAMETERS.USRAUTHFLAG.PATTERN)) {
+            field = Operations.PARAMETERS.USRAUTHFLAG.NAME;
+        } else if (requestDto.getOpDescr() != null && !requestDto.getOpDescr().matches(Operations.PARAMETERS.OPDESCR.PATTERN)) {
+            field = Operations.PARAMETERS.OPDESCR.PATTERN;
+        } else if (requestDto.getAntiFraud() != null && !requestDto.getAntiFraud().matches(Operations.PARAMETERS.ANTIFRAUD.PATTERN)) {
+            field = Operations.PARAMETERS.ANTIFRAUD.NAME;
+        } else if (requestDto.getProductRef() != null && !requestDto.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
+            field = Operations.PARAMETERS.PRODUCTREF.NAME;
+        } else if (requestDto.getName() != null && !requestDto.getName().matches(Operations.PARAMETERS.NAME.PATTERN)) {
+            field = Operations.PARAMETERS.NAME.NAME;
+        } else if (requestDto.getSurname() != null && !requestDto.getSurname().matches(Operations.PARAMETERS.SURNAME.PATTERN)) {
+            field = Operations.PARAMETERS.SURNAME.NAME;
+        } else if (requestDto.getTaxId() != null && !requestDto.getTaxId().matches(Operations.PARAMETERS.TAXID.PATTERN)) {
+            field = Operations.PARAMETERS.TAXID.NAME;
+        } else if (requestDto.getCreatePanAlias() != null && !requestDto.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
+            field = Operations.PARAMETERS.CREATEPANALIAS.NAME;
+        }
+
+        if (!field.isEmpty())
+            throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
+    }
 }

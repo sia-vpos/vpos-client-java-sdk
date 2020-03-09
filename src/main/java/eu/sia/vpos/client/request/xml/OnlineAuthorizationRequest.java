@@ -6,8 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Auth3DS2AuthorizationStep0Request {
-
+public class OnlineAuthorizationRequest {
     @XmlElement(name = "Header")
     private Header header;
 
@@ -19,9 +18,6 @@ public class Auth3DS2AuthorizationStep0Request {
 
     @XmlElement(name = "CVV2")
     private String cvv2;
-
-    @XmlElement(name = "CreatePanAlias")
-    private String createPanAlias;
 
     @XmlElement(name = "ExpDate")
     private String expDate;
@@ -44,23 +40,23 @@ public class Auth3DS2AuthorizationStep0Request {
     @XmlElement(name = "EmailCH")
     private String emailCH;
 
-    @XmlElement(name = "NameCH")
-    private String nameCH;
-
     @XmlElement(name = "UserId")
     private String userId;
 
     @XmlElement(name = "Acquirer")
     private String acquirer;
 
-    @XmlElement(name = "OpDescr")
-    private String opDescr;
-
     @XmlElement(name = "IpAddress")
     private String ipAddress;
 
     @XmlElement(name = "UsrAuthFlag")
     private String usrAuthFlag;
+
+    @XmlElement(name = "OpDescr")
+    private String opDescr;
+
+    @XmlElement(name = "Options")
+    private String options;
 
     @XmlElement(name = "Antifraud")
     private String antifraud;
@@ -77,29 +73,15 @@ public class Auth3DS2AuthorizationStep0Request {
     @XmlElement(name = "TaxId")
     private String taxId;
 
-    @XmlElement(name = "ThreeDSData")
-    private String threeDSData;
+    @XmlElement(name = "CreatePanAlias")
+    private String createPanAlias;
 
-    @XmlElement(name = "NotifUrl")
-    private String notifyUrl;
+    @XmlElement(name = "AntiFraud")
+    private String antiFraud;
 
-    @XmlElement(name = "ChallengeWinSize")
-    private String challengeWinSize;
+    public OnlineAuthorizationRequest(){}
 
-    @XmlElement(name = "CProf")
-    private String cProf;
-
-    @XmlElement(name = "ThreeDSMtdNotifUrl")
-    private String threeDSMtdNotifyUrl;
-
-    @XmlElement(name = "Options")
-    private String options;
-
-    public Auth3DS2AuthorizationStep0Request(){
-
-    }
-
-    public Auth3DS2AuthorizationStep0Request(Date date){
+    public OnlineAuthorizationRequest(Date date){
         this.header = new Header(date);
     }
 
@@ -133,14 +115,6 @@ public class Auth3DS2AuthorizationStep0Request {
 
     public void setCvv2(String cvv2) {
         this.cvv2 = cvv2;
-    }
-
-    public String getCreatePanAlias() {
-        return createPanAlias;
-    }
-
-    public void setCreatePanAlias(String createPanAlias) {
-        this.createPanAlias = createPanAlias;
     }
 
     public String getExpDate() {
@@ -199,14 +173,6 @@ public class Auth3DS2AuthorizationStep0Request {
         this.emailCH = emailCH;
     }
 
-    public String getNameCH() {
-        return nameCH;
-    }
-
-    public void setNameCH(String nameCH) {
-        this.nameCH = nameCH;
-    }
-
     public String getUserId() {
         return userId;
     }
@@ -223,14 +189,6 @@ public class Auth3DS2AuthorizationStep0Request {
         this.acquirer = acquirer;
     }
 
-    public String getOpDescr() {
-        return opDescr;
-    }
-
-    public void setOpDescr(String opDescr) {
-        this.opDescr = opDescr;
-    }
-
     public String getIpAddress() {
         return ipAddress;
     }
@@ -245,6 +203,22 @@ public class Auth3DS2AuthorizationStep0Request {
 
     public void setUsrAuthFlag(String usrAuthFlag) {
         this.usrAuthFlag = usrAuthFlag;
+    }
+
+    public String getOpDescr() {
+        return opDescr;
+    }
+
+    public void setOpDescr(String opDescr) {
+        this.opDescr = opDescr;
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
     }
 
     public String getAntifraud() {
@@ -287,51 +261,19 @@ public class Auth3DS2AuthorizationStep0Request {
         this.taxId = taxId;
     }
 
-    public String getThreeDSData() {
-        return threeDSData;
+    public String getCreatePanAlias() {
+        return createPanAlias;
     }
 
-    public void setThreeDSData(String threeDSData) {
-        this.threeDSData = threeDSData;
+    public void setCreatePanAlias(String createPanAlias) {
+        this.createPanAlias = createPanAlias;
     }
 
-    public String getNotifyUrl() {
-        return notifyUrl;
+    public String getAntiFraud() {
+        return antiFraud;
     }
 
-    public void setNotifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl;
-    }
-
-    public String getChallengeWinSize() {
-        return challengeWinSize;
-    }
-
-    public void setChallengeWinSize(String challengeWinSize) {
-        this.challengeWinSize = challengeWinSize;
-    }
-
-    public String getCprof() {
-        return cProf;
-    }
-
-    public void setCprof(String cProf) {
-        this.cProf = cProf;
-    }
-
-    public String getThreeDSMtdNotifyUrl() {
-        return threeDSMtdNotifyUrl;
-    }
-
-    public void setThreeDSMtdNotifyUrl(String threeDSMtdNotifyUrl) {
-        this.threeDSMtdNotifyUrl = threeDSMtdNotifyUrl;
-    }
-
-    public String getOptions() {
-        return options;
-    }
-
-    public void setOptions(String options) {
-        this.options = options;
+    public void setAntiFraud(String antiFraud) {
+        this.antiFraud = antiFraud;
     }
 }

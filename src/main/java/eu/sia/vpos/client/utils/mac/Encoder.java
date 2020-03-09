@@ -51,7 +51,7 @@ public final class Encoder {
             appendField(entry.getKey().toUpperCase(), entry.getValue(), sb);
         //deleting the first &
         sb.deleteCharAt(0);
-
+        System.out.println("STRING FOR MAC: "+sb.toString());
         return hmacCalculator.calculate(sb.toString(), key);
     }
 

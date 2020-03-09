@@ -117,52 +117,7 @@ public class MapBuilder {
         return map;
     }
 
-    public static Map<String, String> get3DSAuthMap(BPWXmlRequest request) {
-        Map<String, String> map = getStdMap(request);
 
-        Authorization3DSRequest authorization3DSRequest = request.getData().getAuthorizationRequest();
-
-        map.put(VPosConstants.SHOPID, authorization3DSRequest.getHeader().getShopId());
-        map.put(Operations.PARAMETERS.ORDERID.NAME, authorization3DSRequest.getOrderId());
-        map.put(Operations.PARAMETERS.OPERATORID.NAME, authorization3DSRequest.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM.NAME, authorization3DSRequest.getHeader().getReqRefNum());
-        map.put(Operations.PARAMETERS.PAN.NAME, authorization3DSRequest.getPan());
-        map.put(Operations.PARAMETERS.CVV2.NAME, authorization3DSRequest.getCvv2());
-        map.put(Operations.PARAMETERS.EXPDATE.NAME, authorization3DSRequest.getExpDate());
-        map.put(Operations.PARAMETERS.AMOUNT.NAME, authorization3DSRequest.getAmount());
-        map.put(Operations.PARAMETERS.CURRENCY.NAME, authorization3DSRequest.getCurrency());
-        map.put(Operations.PARAMETERS.EXPONENT.NAME, authorization3DSRequest.getExponent());
-        map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, authorization3DSRequest.getAccountingMode());
-        map.put(Operations.PARAMETERS.NETWORK.NAME, authorization3DSRequest.getNetwork());
-        map.put(Operations.PARAMETERS.EMAIL.NAMECH, authorization3DSRequest.getEmailCH());
-        map.put(Operations.PARAMETERS.USERID.NAME, authorization3DSRequest.getUserId());
-        map.put(Operations.PARAMETERS.ACQUIRER.NAME, authorization3DSRequest.getAcquirer());
-        map.put(Operations.PARAMETERS.IPADDRESS.NAME, authorization3DSRequest.getIpAddress());
-        map.put(Operations.PARAMETERS.OPDESCR.NAME, authorization3DSRequest.getOpDescr());
-        map.put(Operations.PARAMETERS.USRAUTHFLAG.NAME, authorization3DSRequest.getUsrAuthFlag());
-        map.put(Operations.PARAMETERS.OPTIONS.NAME, authorization3DSRequest.getOptions());
-        map.put(Operations.PARAMETERS.ANTIFRAUD.NAME, authorization3DSRequest.getAntifraud());
-        map.put(Operations.PARAMETERS.PRODUCTREF.NAME, authorization3DSRequest.getProductRef());
-        map.put(Operations.PARAMETERS.NAME.NAME, authorization3DSRequest.getName());
-        map.put(Operations.PARAMETERS.SURNAME.NAME, authorization3DSRequest.getSurname());
-        map.put(Operations.PARAMETERS.TAXID.NAME, authorization3DSRequest.getTaxId());
-        map.put(Operations.PARAMETERS.INPERSON.NAME, authorization3DSRequest.getInPerson());
-        map.put(Operations.PARAMETERS.MERCHANTURL.NAME, authorization3DSRequest.getMerchantURL());
-
-        if (authorization3DSRequest.getData3DS() != null) {
-            map.put(Operations.PARAMETERS.SERVICE.NAME, authorization3DSRequest.getData3DS().getService());
-            map.put(Operations.PARAMETERS.XID.NAME, authorization3DSRequest.getData3DS().getXid());
-            map.put(Operations.PARAMETERS.CAVV.NAME, authorization3DSRequest.getData3DS().getCavv());
-            map.put(Operations.PARAMETERS.ECI.NAME, authorization3DSRequest.getData3DS().getEci());
-            map.put(Operations.PARAMETERS.PP_AUTHENTICATEMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpAuthenticationMethod());
-            map.put(Operations.PARAMETERS.PP_CARDENROLLMETHOD.NAME, authorization3DSRequest.getMasterpassData().getPpCardEnrollMethod());
-            map.put(Operations.PARAMETERS.PARESSTATUS.NAME, authorization3DSRequest.getData3DS().getParesStatus());
-            map.put(Operations.PARAMETERS.SCENROLLSTATUS.NAME, authorization3DSRequest.getData3DS().getScEnrollStatus());
-            map.put(Operations.PARAMETERS.SIGNATUREVERIFICATION.NAME, authorization3DSRequest.getData3DS().getSignatureVerifytion());
-        }
-
-        return map;
-    }
 
     public static Map<String, String> get3DSStep2AuthMap(BPWXmlRequest request) throws VPosClientException {
 
@@ -251,6 +206,37 @@ public class MapBuilder {
             map.put(Operations.PARAMETERS.EXPONENT.NAME, generalRequest.getExponent());
         }
         return map;
+    }
+
+    public static Map<String, String> getOnlineAuthorizationMap(BPWXmlRequest request) {
+        Map<String, String> map = getStdMap(request);
+        OnlineAuthorizationRequest authorizationRequest = request.getData().getOnlineAuthorizationRequest();
+        map.put(VPosConstants.SHOPID, authorizationRequest.getHeader().getShopId());
+        map.put(Operations.PARAMETERS.ORDERID.NAME, authorizationRequest.getOrderId());
+        map.put(Operations.PARAMETERS.OPERATORID.NAME, authorizationRequest.getHeader().getOperatorId());
+        map.put(Operations.PARAMETERS.REQREFNUM.NAME, authorizationRequest.getHeader().getReqRefNum());
+        map.put(Operations.PARAMETERS.PAN.NAME, authorizationRequest.getPan());
+        map.put(Operations.PARAMETERS.CVV2.NAME, authorizationRequest.getCvv2());
+        map.put(Operations.PARAMETERS.EXPDATE.NAME, authorizationRequest.getExpDate());
+        map.put(Operations.PARAMETERS.AMOUNT.NAME, authorizationRequest.getAmount());
+        map.put(Operations.PARAMETERS.CURRENCY.NAME, authorizationRequest.getCurrency());
+        map.put(Operations.PARAMETERS.EXPONENT.NAME, authorizationRequest.getExponent());
+        map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, authorizationRequest.getAccountingMode());
+        map.put(Operations.PARAMETERS.NETWORK.NAME, authorizationRequest.getNetwork());
+        map.put(Operations.PARAMETERS.EMAIL.NAMECH, authorizationRequest.getEmailCH());
+        map.put(Operations.PARAMETERS.USERID.NAME, authorizationRequest.getUserId());
+        map.put(Operations.PARAMETERS.ACQUIRER.NAME, authorizationRequest.getAcquirer());
+        map.put(Operations.PARAMETERS.IPADDRESS.NAME, authorizationRequest.getIpAddress());
+        map.put(Operations.PARAMETERS.OPDESCR.NAME, authorizationRequest.getOpDescr());
+        map.put(Operations.PARAMETERS.USRAUTHFLAG.NAME, authorizationRequest.getUsrAuthFlag());
+        map.put(Operations.PARAMETERS.OPTIONS.NAME, authorizationRequest.getOptions());
+        map.put(Operations.PARAMETERS.ANTIFRAUD.NAME, authorizationRequest.getAntifraud());
+        map.put(Operations.PARAMETERS.PRODUCTREF.NAME, authorizationRequest.getProductRef());
+        map.put(Operations.PARAMETERS.NAME.NAME, authorizationRequest.getName());
+        map.put(Operations.PARAMETERS.SURNAME.NAME, authorizationRequest.getSurname());
+        map.put(Operations.PARAMETERS.TAXID.NAME, authorizationRequest.getTaxId());
+        return map;
+
     }
 
     public static Map<String, String> getThreeDS2Authorize0Map(BPWXmlRequest request) {

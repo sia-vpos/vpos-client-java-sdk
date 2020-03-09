@@ -1,5 +1,6 @@
 package eu.sia.vpos.client.request.xml;
 
+import eu.sia.vpos.client.request.AuthorizationRequest;
 import eu.sia.vpos.client.response.xml.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,7 +21,10 @@ public class Data {
     private Auth3DS2AuthorizationStep2Request auth3DS2AuthorizationStep2Request;
 
     @XmlElement(name = "AuthorizationRequest")
-    private Authorization3DSRequest authorizationRequest;
+    private OnlineAuthorizationRequest onlineAuthorizationRequest;
+
+    /*@XmlElement(name = "AuthorizationRequest")
+    private Authorization3DSRequest authorizationRequest;*/
 
     @XmlElement(name = "Authorization")
     private List<Authorization> authorization;
@@ -92,12 +96,12 @@ public class Data {
         this.auth3DS2AuthorizationStep2Request = auth3DS2AuthorizationStep2Request;
     }
 
-    public Authorization3DSRequest getAuthorizationRequest() {
-        return authorizationRequest;
+    public OnlineAuthorizationRequest getOnlineAuthorizationRequest() {
+        return onlineAuthorizationRequest;
     }
 
-    public void setAuthorizationRequest(Authorization3DSRequest authorizationRequest) {
-        this.authorizationRequest = authorizationRequest;
+    public void setOnlineAuthorizationRequest(OnlineAuthorizationRequest onlineAuthorizationRequest) {
+        this.onlineAuthorizationRequest = onlineAuthorizationRequest;
     }
 
     public List<Authorization> getAuthorization() {
