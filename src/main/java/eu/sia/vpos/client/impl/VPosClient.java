@@ -114,10 +114,10 @@ public class VPosClient implements Client {
         RequestValidator.validateThreeDSAuthorization0Request(threeDSAuthorization0Request);
         BPWXmlRequest request = requestBuilder.buildThreeDS2Authorize0(threeDSAuthorization0Request, config.getShopID());
         BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);
-        //TO DO Verify MAC-Response
+        //Verify MAC-Response
         verifyMacResponse(xmlResponse);
-        //TO DO Response Mapping
-        return null;
+        //Response Mapping
+        return responseMapper.threeDSAuthorization0Response(xmlResponse);
     }
 
     @Override
@@ -125,10 +125,10 @@ public class VPosClient implements Client {
         RequestValidator.validateThreeDSAuthorization1Request(threeDSAuthorization1Request);
         BPWXmlRequest request = requestBuilder.buildThreeDS2Authorize1(threeDSAuthorization1Request, config.getShopID());
         BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);
-        //TO DO Verify MAC-Response
+        // Verify MAC-Response
         verifyMacResponse(xmlResponse);
-        //TO DO Response Mapping
-        return null;
+        // Response Mapping
+        return responseMapper.threeDSAuthorization1Response(xmlResponse);
     }
 
 

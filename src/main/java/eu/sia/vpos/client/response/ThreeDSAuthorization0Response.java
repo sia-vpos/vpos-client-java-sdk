@@ -1,11 +1,9 @@
 package eu.sia.vpos.client.response;
 
 
-
-import javax.xml.bind.annotation.XmlElement;
-
 public class ThreeDSAuthorization0Response {
 
+    private String result;
     private String paymentType;
     private String authorizationType;
     private String transactionId;
@@ -38,9 +36,13 @@ public class ThreeDSAuthorization0Response {
     private String threeDSMethodUrl;
 
 
+    public String getResult() {
+        return result;
+    }
 
-
-
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public String getPaymentType() {
         return paymentType;

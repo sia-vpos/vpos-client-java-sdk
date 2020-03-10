@@ -145,6 +145,7 @@ public class ResponseMapper {
 
     public ThreeDSAuthorization0Response threeDSAuthorization0Response(BPWXmlResponse response) {
         ThreeDSAuthorization0Response dto = new ThreeDSAuthorization0Response();
+        dto.setResult(response.getResult());
         if (response == null || response.getData() == null) {
             return dto;
         }
@@ -158,6 +159,44 @@ public class ResponseMapper {
             dto.setThreeDSTransId(response.getData().getThreeDSMethod().getThreeDSTransId());
             dto.setThreeDSMethodData(response.getData().getThreeDSMethod().getThreeDSMethodData());
             dto.setThreeDSMethodUrl(response.getData().getThreeDSMethod().getThreeDSMethodUrl());
+        }
+        if (response.getData().getAuthorization() != null) {
+            Authorization authorization = response.getData().getAuthorization().get(0);
+            if (authorization != null) {
+                dto.setPaymentType(authorization.getPaymentType());
+                dto.setAuthorizationType(authorization.getAuthorizationType());
+                dto.setTransactionId(authorization.getTransactionId());
+                dto.setNetwork(authorization.getNetwork());
+                dto.setOrderId(authorization.getOrderId());
+                dto.setTransactionAmount(authorization.getTransactionAmount());
+                dto.setAuthorizedAmount(authorization.getAuthorizedAmount());
+                dto.setCurrency(authorization.getCurrency());
+                dto.setAccountedAmount(authorization.getAccountedAmount());
+                dto.setRefundedAmount(authorization.getRefundedAmount());
+                dto.setTransactionResult(authorization.getTransactionResult());
+                dto.setTimestamp(authorization.getTimestamp());
+                dto.setAuthorizationNumber(authorization.getAuthorizationNumber());
+                dto.setTransactionStatus(authorization.getTransactionStatus());
+                dto.setResponseCodeIso(authorization.getResponseCodeIso());
+                dto.setPanTail(authorization.getPanTail());
+                dto.setPanExpiryDate(authorization.getPanExpiryDate());
+            }
+
+        }
+        return dto;
+    }
+
+    public ThreeDSAuthorization1Response threeDSAuthorization1Response(BPWXmlResponse response) {
+        ThreeDSAuthorization1Response dto = new ThreeDSAuthorization1Response();
+        dto.setResult(response.getResult());
+        if (response == null || response.getData() == null) {
+            return dto;
+        }
+        if (response.getData().getThreeDSchallenge() != null) {
+            dto.setCreq(response.getData().getThreeDSchallenge().getCreq());
+            dto.setAcsUrl(response.getData().getThreeDSchallenge().getAcsUrl());
+            dto.setThreeDSTransId(response.getData().getThreeDSchallenge().getThreeDSTransId());
+
         }
         if (response.getData().getAuthorization() != null) {
             Authorization authorization = response.getData().getAuthorization().get(0);
