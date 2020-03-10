@@ -13,6 +13,8 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.net.ssl.SSLContext;
@@ -48,14 +50,40 @@ public class VPosPaymentClient {
     public BPWXmlResponse executeCall(BPWXmlRequest input) throws VPosClientException {
 
         try {
-            StringBuilder inputXml = new StringBuilder("data=");
+            StringBuilder inputXml = new StringBuilder();
             inputXml.append(parseRequest(input));
+            MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
+            map.add("data", inputXml.toString());
             Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "OUTPUT XML: \n" + inputXml.toString());
             RestTemplate template = createRestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-            HttpEntity<String> entity = new HttpEntity<>(inputXml.toString(), headers);
+            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
+            ResponseEntity<String> responseEntity = template.exchange(this.urlWebApi, HttpMethod.POST, entity, String.class);
+
+            String xmlResponse = responseEntity.getBody();
+            if (HttpStatus.OK != responseEntity.getStatusCode()) {
+                throw new VPosClientException("VPOS call failed with code " + responseEntity.getStatusCode().value());
+            }
+
+            return parseResponse(xmlResponse);
+
+        } catch (VPosClientException pe) {
+            throw pe;
+        } catch (Exception e) {
+            throw new VPosClientException(e.getMessage(), e.getCause());
+        }
+    }
+
+    public BPWXmlResponse executeCall(MultiValueMap<String,String> params) throws VPosClientException {
+
+        try {
+            RestTemplate template = createRestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
             ResponseEntity<String> responseEntity = template.exchange(this.urlWebApi, HttpMethod.POST, entity, String.class);
 
             String xmlResponse = responseEntity.getBody();

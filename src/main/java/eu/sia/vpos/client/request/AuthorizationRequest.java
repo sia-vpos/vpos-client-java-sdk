@@ -18,7 +18,6 @@ public class AuthorizationRequest extends RequestDto {
     private String ipAddress;
     private String usrAuthFlag;
     private String opDescr;
-    private String options;
     private String antiFraud;
     private String productRef;
     private String name;
@@ -151,16 +150,6 @@ public class AuthorizationRequest extends RequestDto {
 
     public void setOpDescr(String opDescr) {
         this.opDescr = opDescr;
-    }
-
-    @Override
-    public String getOptions() {
-        return options;
-    }
-
-    @Override
-    public void setOptions(String options) {
-        this.options = options;
     }
 
     public String getAntiFraud() {

@@ -22,7 +22,6 @@ import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 import eu.sia.vpos.client.utils.mac.ResponseMACCalculator;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +39,6 @@ public class VPosClient implements Client {
     private String redirectKey;
     private String redirectUrl;
     private String apiResultKey;
-
 
 
     public VPosClient(Config config) throws VPosClientException {
@@ -79,10 +77,10 @@ public class VPosClient implements Client {
         } else if (this.config.getRedirectUrl() == null) {
             fields.add(ConfigConstants.REDIRECTURL);
         }
-        if (!fields.isEmpty()){
-            StringBuilder sb= new StringBuilder();
+        if (!fields.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
             sb.append("Invalid or missing configuration params: ");
-            for(String field : fields){
+            for (String field : fields) {
                 sb.append(field);
                 sb.append(" ");
             }
@@ -95,7 +93,7 @@ public class VPosClient implements Client {
         if (config.getProxyHost() != null && config.getProxyPort() == null) {
             this.vPosPaymentClient.setProxy(config.getProxyHost(), config.getProxyPort(), config.getProxyUsername(), config.getProxyPassword());
         }
-        if(config.getSslContext()!=null)
+        if (config.getSslContext() != null)
             this.vPosPaymentClient.setSslContext(config.getSslContext());
     }
 
