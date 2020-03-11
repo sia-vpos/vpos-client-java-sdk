@@ -137,10 +137,10 @@ public class VPosClient implements Client {
         RequestValidator.validateThreeDSAuthorization2Request(threeDSAuthorization2Request);
         BPWXmlRequest request = requestBuilder.buildThreeDS2Authorize2(threeDSAuthorization2Request, config.getShopID());
         BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);
-        //TO DO Verify MAC-Response
+        // Verify MAC-Response
         verifyMacResponse(xmlResponse);
-        //TO DO Response Mapping
-        return null;
+        // Response Mapping
+        return responseMapper.threeDSAuthorization2Response(xmlResponse);
     }
 
     @Override

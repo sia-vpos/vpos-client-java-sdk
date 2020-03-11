@@ -31,6 +31,12 @@ public class ThreeDSAuthorization1Response {
     private String creq;
     private String acsUrl;
 
+    //Pan Alias Data
+    private String panAlias;
+    private String panAliasExpDate;
+    private String panAliasRev;
+    private String panAliasTail;
+
     public String getResult() {
         return result;
     }
@@ -245,5 +251,37 @@ public class ThreeDSAuthorization1Response {
 
     public void setAcsUrl(String acsUrl) {
         this.acsUrl = acsUrl;
+    }
+
+    public String getPanAlias() {
+        return panAlias;
+    }
+
+    public void setPanAlias(String panAlias) {
+        this.panAlias = panAlias;
+    }
+
+    public String getPanAliasExpDate() {
+        return panAliasExpDate;
+    }
+
+    public void setPanAliasExpDate(String panAliasExpDate) {
+        this.panAliasExpDate = panAliasExpDate;
+    }
+
+    public String getPanAliasRev() {
+        return panAliasRev;
+    }
+
+    public void setPanAliasRev(String panAliasRev) {
+        this.panAliasRev = panAliasRev;
+    }
+
+    public String getPanAliasTail() {
+        return panAliasTail;
+    }
+
+    public void setPanAliasTail(String panAliasTail) {
+        this.panAliasTail = panAliasTail;
     }
 }

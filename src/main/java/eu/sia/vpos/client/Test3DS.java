@@ -22,7 +22,54 @@ public class Test3DS {
     private static final String OPERATOR_ID = "John Doe";
     private static final String PROXYNAME = "proxy-dr.reply.it";
     private static final Integer PROXYPORT = 8080;
-    private static final String jsonString = "{\"browserAcceptHeader\":\"1024\",\"browserIP\":\"1.12.123.255\",\"browserJavaEnabled\":\"true\",\"browserLanguage\":\"it\",\"browserColorDepth\":\"16\",\"browserScreenHeight\":\"100\",\"browserScreenWidth\":\"100\",\"browserTZ\":\"-60\",\"browserUserAgent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 firefox/47.0\",\"addrmatch\":\"n\",\"chaccageind\":\"04\",\"chaccchange\":\"20190211\",\"chaccchangeind\":\"03\",\"chaccdate\":\"20190210\",\"chaccpwchange\":\"20190214\",\"chaccpwchangeind\":\"04\",\"nbpurchaseaccount\":\"1000\",\"txnactivityday\":\"100\",\"txnactivityyear\":\"100\",\"shipaddressusage\":\"20181220\",\"shipaddressusageind\":\"03\",\"shipnameindicator\":\"01\",\"billaddrcity\":\"billaddrcity\",\"billaddrcountry\":\"004\",\"billaddrline1\":\"billaddrline1\",\"billaddrline2\":\"billaddrline2\",\"billaddrline3\":\"billaddrline3\",\"billaddrpostcode\":\"billaddrpostcode\",\"billaddrstate\":\"11\",\"homephone\":\"39-321818198\",\"mobilephone\":\"33-312\",\"shipaddrcity\":\"zio\",\"shipaddrcountry\":\"008\",\"shipaddrline1\":\"shipaddrline1\",\"shipaddrline2\":\"shipaddrline2\",\"shipaddrline3\":\"shipaddrline3\",\"shipaddrpostcode\":\"shipaddrpostcode\",\"shipaddrstate\":\"222\",\"workphone\":\"39-0321818198\",\"deliveryemailaddress\":\"a-b@example.com\",\"deliveryTimeframe\":\"02\",\"preOrderDate\":\"20181220\",\"preOrderPurchaseInd\":\"01\",\"reorderItemsInd\":\"02\",\"shipIndicator\":\"01\"}";
+    private static final String jsonString = "{\n" +
+            "\"addrMatch\":\"N\",\n" +
+            "\"chAccAgeInd\":\"04\",\n" +
+            "\"chAccChange\":\"20190211\",\n" +
+            "\"chAccChangeInd\":\"03\",\n" +
+            "\"chAccDate\":\"20190210\",\n" +
+            "\"chAccPwChange\":\"20190214\",\n" +
+            "\"chAccPwChangeInd\":\"04\",\n" +
+            "\"nbPurchaseAccount\":\"1000\",\n" +
+            "\"txnActivityDay\":\"100\",\n" +
+            "\"txnActivityYear\":\"100\",\n" +
+            "\"shipAddressUsage\":\"20181220\",\n" +
+            "\"shipAddressUsageInd\":\"03\",\n" +
+            "\"shipNameIndicator\":\"01\",\n" +
+            "\"billAddrCity\":\"billAddrCity\",\n" +
+            "\"billAddrCountry\":\"004\",\n" +
+            "\"billAddrLine1\":\"billAddrLine1\",\n" +
+            "\"billAddrLine2\":\"billAddrLine2\",\n" +
+            "\"billAddrLine3\":\"billAddrLine3\",\n" +
+            "\"billAddrPostCode\":\"billAddrPostCode\",\n" +
+            "\"billAddrState\":\"11\",\n" +
+            "\"homePhone\":\"039-321818198111\",\n" +
+            "\"mobilePhone\":\"33-312\",\n" +
+            "\"shipAddrCity\":\"zio\",\n" +
+            "\"shipAddrCountry\":\"008\",\n" +
+            "\"shipAddrLine1\":\"shipAddrLine1\",\n" +
+            "\"shipAddrLine2\":\"shipAddrLine2\",\n" +
+            "\"shipAddrLine3\":\"shipAddrLine3\",\n" +
+            "\"shipAddrPostCode\":\"shipAddrPostCode\",\n" +
+            "\"shipAddrState\":\"222\",\n" +
+            "\"workPhone\":\"39-0321818198\",\n" +
+            "\"deliveryEmailAddress\":\"a-b@example.com\",\n" +
+            "\"deliveryTimeframe\":\"02\",\n" +
+            "\"preOrderDate\":\"20181220\",\n" +
+            "\"preOrderPurchaseInd\":\"01\",\n" +
+            "\"reorderItemsInd\":\"02\",\n" +
+            "\"shipIndicator\":\"01\",\n" +
+            "\"browserAcceptHeader\":\"text/html,application/xhtml+xml,application/xml;\",\n" +
+            "\"browserIP\":\"10.42.195.152\",\n" +
+            "\"browserJavaEnabled\":\"true\",\n" +
+            "\"browserLanguage\":\"it-IT\",\n" +
+            "\"browserColorDepth\":\"16\",\n" +
+            "\"browserScreenHeight\":\"1024\",\n" +
+            "\"browserScreenWidth\":\"1920\",\n" +
+            "\"browserTZ\":\"-120\",\n" +
+            "\"browserUserAgent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0\"\n" +
+            "}\n" +
+            " \n";
 
     public static void main(String[] args) {
         VPosConfig config = new VPosConfig();
@@ -42,7 +89,8 @@ public class Test3DS {
 
 
             //client.threeDSAuthorize0(build3DSRequest());
-            client.authorize(buildAuthorizationRequest());
+            //client.authorize(buildAuthorizationRequest());
+            client.threeDSAuthorize1(buildThreeDSAuthorizationRequest1());
             //System.out.println(client.buildHTMLRedirectFragment(buildPaymentTest()));
             //client.getOrderStatus(buildOrderStatusRequest("12345676912345649849"));
             //client.capture(buildCaptureRequest("12345676912345649938"));
@@ -61,15 +109,17 @@ public class Test3DS {
         request3DS0.setAccountingMode("I");
         request3DS0.setPan("4118830900940017");
         request3DS0.setExpDate("2112");
-        request3DS0.setCvv2("111");
+        request3DS0.setCvv2("142");
         request3DS0.setCurrency("978");
 
-        request3DS0.setNetwork("93");
+        request3DS0.setNetwork("01");
         request3DS0.setEmailCh("asdas@fgd.id");
         request3DS0.setOrderId("API232043111428");
         request3DS0.setOperatorId("John Doe");
         request3DS0.setExponent("02");
-        //request3DS0.setNameCh("Mario");
+        request3DS0.setName("Mario");
+        request3DS0.setSurname("Rossi");
+        request3DS0.setNameCh("Mario");
         request3DS0.setNotifyUrl("https://atpostest.ssb.it/atpos/apibo/en/3ds-notification.html");
         request3DS0.setThreeDSMtdNotifyUrl("https://atpostest.ssb.it/atpos/apibo/en/3ds-notification.html");
         Gson g = new Gson();
@@ -133,6 +183,14 @@ public class Test3DS {
         req.setAccountingMode("I");
         req.setNetwork("93");
         req.setEmailCh("dsdsd@gmail.it");
+        return req;
+    }
+
+    private static ThreeDSAuthorization1Request buildThreeDSAuthorizationRequest1(){
+        ThreeDSAuthorization1Request req = new ThreeDSAuthorization1Request();
+        req.setOperatorId("operatorID");
+        req.setThreeDSMtdComplInd("N");
+        req.setThreeDSTransId("a73801c1-b7be-4628-9d08-8621613fef80");
         return req;
     }
 }

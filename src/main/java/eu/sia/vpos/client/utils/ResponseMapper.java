@@ -183,6 +183,13 @@ public class ResponseMapper {
             }
 
         }
+        if (response.getData().getPanAliasData() != null) {
+            PanAliasData pan= response.getData().getPanAliasData();
+            dto.setPanAlias(pan.getPanAlias());
+            dto.setPanAliasExpDate(pan.getPanAliasExpDate());
+            dto.setPanAliasRev(pan.getPanAliasRev());
+            dto.setPanAliasTail(pan.getPanAliasTail());
+        }
         return dto;
     }
 
@@ -221,6 +228,53 @@ public class ResponseMapper {
             }
 
         }
+        if (response.getData().getPanAliasData() != null) {
+            PanAliasData pan= response.getData().getPanAliasData();
+            dto.setPanAlias(pan.getPanAlias());
+            dto.setPanAliasExpDate(pan.getPanAliasExpDate());
+            dto.setPanAliasRev(pan.getPanAliasRev());
+            dto.setPanAliasTail(pan.getPanAliasTail());
+        }
+        return dto;
+    }
+
+    public ThreeDSAuthorization2Response threeDSAuthorization2Response(BPWXmlResponse response){
+        ThreeDSAuthorization2Response dto = new ThreeDSAuthorization2Response();
+        dto.setResult(response.getResult());
+        if (response == null || response.getData() == null) {
+            return dto;
+        }
+        if (response.getData().getAuthorization() != null) {
+            Authorization authorization = response.getData().getAuthorization().get(0);
+            if (authorization != null) {
+                dto.setPaymentType(authorization.getPaymentType());
+                dto.setAuthorizationType(authorization.getAuthorizationType());
+                dto.setTransactionId(authorization.getTransactionId());
+                dto.setNetwork(authorization.getNetwork());
+                dto.setOrderId(authorization.getOrderId());
+                dto.setTransactionAmount(authorization.getTransactionAmount());
+                dto.setAuthorizedAmount(authorization.getAuthorizedAmount());
+                dto.setCurrency(authorization.getCurrency());
+                dto.setAccountedAmount(authorization.getAccountedAmount());
+                dto.setRefundedAmount(authorization.getRefundedAmount());
+                dto.setTransactionResult(authorization.getTransactionResult());
+                dto.setTimestamp(authorization.getTimestamp());
+                dto.setAuthorizationNumber(authorization.getAuthorizationNumber());
+                dto.setTransactionStatus(authorization.getTransactionStatus());
+                dto.setResponseCodeIso(authorization.getResponseCodeIso());
+                dto.setPanTail(authorization.getPanTail());
+                dto.setPanExpiryDate(authorization.getPanExpiryDate());
+            }
+
+        }
+        if (response.getData().getPanAliasData() != null) {
+            PanAliasData pan= response.getData().getPanAliasData();
+            dto.setPanAlias(pan.getPanAlias());
+            dto.setPanAliasExpDate(pan.getPanAliasExpDate());
+            dto.setPanAliasRev(pan.getPanAliasRev());
+            dto.setPanAliasTail(pan.getPanAliasTail());
+        }
+
         return dto;
     }
 

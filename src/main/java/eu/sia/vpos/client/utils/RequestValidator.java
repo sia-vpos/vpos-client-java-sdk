@@ -164,7 +164,7 @@ public class RequestValidator {
         String field = "";
         if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getThreeDSMtdComplInd() == null) {
+        } else if (requestDto.getThreeDSMtdComplInd() == null||!requestDto.getThreeDSMtdComplInd().matches(Operations.PARAMETERS.THREEDSMTDCOMPLIND.PATTERN)) {
             field = Operations.PARAMETERS.THREEDSMTDCOMPLIND.NAME;
         } else if (requestDto.getThreeDSTransId() == null) {
             field = Operations.PARAMETERS.THREEDSTRANSID.NAME;

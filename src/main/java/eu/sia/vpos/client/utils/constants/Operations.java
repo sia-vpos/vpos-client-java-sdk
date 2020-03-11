@@ -314,6 +314,9 @@ public final class Operations {
 
         public static final class THREEDSMTDCOMPLIND{
             public static final String NAME = "THREEDSMTDCOMPLIND";
+            public static final int LEN = 1;
+            public static final String PATTERN = "[NY]{" + LEN + "}";
+
 
         }
 
