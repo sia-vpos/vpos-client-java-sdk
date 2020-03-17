@@ -219,6 +219,18 @@ public final class Operations {
             }
         }
 
+        public static final class TRECURR{
+            public static final String NAME = "TRECURR";
+        }
+
+        public static final class CRECURR{
+            public static final String NAME = "CRECURR";
+        }
+
+        public static final class TOKEN{
+            public static final String NAME = "TOKEN";
+        }
+
         public static final class ORIGINALREQREFNUM {
             public static final String NAME = "ORIGINALREQREFNUM";
             public static final String PATTERN = "[20[0-9][0-9](0[1-9]|1[0-2])(0[1-9]|2[0-9]|3[0-1])]{8}\\d{24}";
@@ -357,7 +369,7 @@ public final class Operations {
 
             public static final String NAME = "SHOPID";
             public static final int LEN = 15;
-            public static final String PATTERN = "[0-9]{" + LEN + "}";
+            public static final String PATTERN = "[0-9A-Za-z]{" + LEN + "}";
             public static final boolean MANDATORY = true;
 
             private SHOPID() {

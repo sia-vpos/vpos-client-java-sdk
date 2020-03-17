@@ -164,7 +164,13 @@ public class PaymentInfo {
         SURNAME,
         TAXID,
         PRODUCTREF,
-        ANTIFRAUD
+        ANTIFRAUD,
+        TRECURR,
+        CRECURR,
+        TOKEN,
+        EXPDATE,
+        NETWORK,
+        IBAN
     }
 
     public enum OptionName {

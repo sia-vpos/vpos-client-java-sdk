@@ -49,6 +49,8 @@ public class Data3DSJson {
     private String deliveryTimeframe;
     private String preOrderDate;
     private String preOrderPurchaseInd;
+    private String reorderItemsInd;
+    private String shipIndicator;
 
 
     public String getBrowserAcceptHeader() {
@@ -410,6 +412,22 @@ public class Data3DSJson {
 
     public void setPreOrderPurchaseInd(String preOrderPurchaseInd) {
         this.preOrderPurchaseInd = preOrderPurchaseInd;
+    }
+
+    public String getReorderItemsInd() {
+        return reorderItemsInd;
+    }
+
+    public void setReorderItemsInd(String reorderItemsInd) {
+        this.reorderItemsInd = reorderItemsInd;
+    }
+
+    public String getShipIndicator() {
+        return shipIndicator;
+    }
+
+    public void setShipIndicator(String shipIndicator) {
+        this.shipIndicator = shipIndicator;
     }
 
     /**

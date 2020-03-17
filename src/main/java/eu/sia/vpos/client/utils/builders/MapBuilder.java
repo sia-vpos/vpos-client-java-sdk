@@ -3,6 +3,7 @@ package eu.sia.vpos.client.utils.builders;
 
 import eu.sia.vpos.client.request.PaymentInfo;
 import eu.sia.vpos.client.request.xml.*;
+import eu.sia.vpos.client.response.xml.Operation;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.constants.VPosConstants;
 import eu.sia.vpos.client.utils.encryption.AESEncoder;
@@ -174,7 +175,15 @@ public class MapBuilder {
         if (info.getData3DSJson() != null)
             map.put(Operations.PARAMETERS.DATA3DS.NAME, AESEncoder.encode3DSData(apiKey, info.getData3DSJson().toString()));
 
+        map.put(Operations.PARAMETERS.TRECURR.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.TRECURR.NAME)));
+        map.put(Operations.PARAMETERS.CRECURR.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.CRECURR.NAME)));
+        map.put(Operations.PARAMETERS.TOKEN.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.TOKEN.NAME)));
+
+        map.put(Operations.PARAMETERS.EXPDATE.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.EXPDATE.NAME)));
+        map.put(Operations.PARAMETERS.NETWORK.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.NETWORK.NAME)));
+        map.put(Operations.PARAMETERS.IBAN.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.IBAN.NAME)));
         map.put(Operations.PARAMETERS.MAC.NAME, encoder.getMac(map, macKey));
+
         map.put(Operations.PARAMETERS.URLBACK.NAME, info.getUrlBack());
 
         //NOT COMPULSORY
