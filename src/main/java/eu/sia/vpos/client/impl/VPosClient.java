@@ -97,7 +97,6 @@ public class VPosClient implements Client {
             this.vPosPaymentClient.setSslContext(config.getSslContext());
     }
 
-
     @Override
     public AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException {
         RequestValidator.validateAuthorizationRequest(authorizationRequest);
@@ -130,7 +129,6 @@ public class VPosClient implements Client {
         // Response Mapping
         return responseMapper.threeDSAuthorization1Response(xmlResponse);
     }
-
 
     @Override
     public ThreeDSAuthorization2Response threeDSAuthorize2(ThreeDSAuthorization2Request threeDSAuthorization2Request) throws VPosClientException {
@@ -180,7 +178,6 @@ public class VPosClient implements Client {
         String receivedMac = params.get("MAC");
         return receivedMac.equals(calculatedMAc);
     }
-
 
     @Override
     public boolean verifyMAC(HttpServletRequest httpServletRequest) throws VPosClientException {

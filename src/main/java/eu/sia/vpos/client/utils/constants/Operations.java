@@ -624,6 +624,7 @@ public final class Operations {
 
         public static final class NAME {
 
+            public static final String NAMECH = "NAMECH";
             public static final String NAME = "NAME";
             public static final int MIN_LEN = 1;
             public static final int MAX_LEN = 40;

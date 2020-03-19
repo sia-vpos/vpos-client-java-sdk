@@ -21,49 +21,30 @@ public class ResponseMapper {
     public RefundResponse mapRefundResponseDto(BPWXmlResponse response) {
         RefundResponse dto = new RefundResponse();
 
-        if (response != null) {
-            if (response.getData() != null && response.getData().getOperation() != null) {
+
+        if (response != null && response.getData() != null && response.getData().getOperation() != null) {
                 Operation operation = response.getData().getOperation();
-                if (operation != null) {
-                    dto.setTransactionID(operation.getTransactionId());
-                    dto.setTimestampReq(operation.getTimestampReq());
-                    dto.setTimestampElab(operation.getTimestampElab());
-                    dto.setSrcType(operation.getSrcType());
-                    dto.setAmount(operation.getAmount());
-                    dto.setResult(operation.getResult());
-                    dto.setStatus(operation.getStatus());
-                    dto.setOpDescr(operation.getOpDescr());
-                    dto.setOperationMAC(operation.getMac());
-                }
-            }
 
-            if (response.getData() != null && response.getData().getAuthorization() != null && !response.getData().getAuthorization().isEmpty()) {
-                Authorization authorization = response.getData().getAuthorization().get(0);
-                if (authorization != null) {
-                    dto.setPaymentType(authorization.getPaymentType());
-                    dto.setAuthorizationType(authorization.getAuthorizationType());
-                    dto.setTransactionID(authorization.getTransactionId());
-                    dto.setNetwork(authorization.getNetwork());
-                    dto.setOrderID(authorization.getOrderId());
-                    dto.setTransactionAmount(authorization.getTransactionAmount());
-                    dto.setAuthorizatedAmount(authorization.getAuthorizedAmount());
-                    dto.setCurrency(authorization.getCurrency());
-                    dto.setExponent(authorization.getExponent());
-                    dto.setAccountedAmount(authorization.getAccountedAmount());
-                    dto.setRefundedAmount(authorization.getRefundedAmount());
-                    dto.setTransactionResult(authorization.getTransactionResult());
-                    dto.setTimestamp(authorization.getTimestamp());
-                    dto.setAuthorizationNumber(authorization.getAuthorizationNumber());
-                    dto.setAcquireBIN(authorization.getAcquirerBin());
-                    dto.setMerchantID(authorization.getMerchantId());
-                    dto.setTransactionStatus(authorization.getTransactionStatus());
-                    dto.setResponseCodedIso(authorization.getResponseCodeIso());
-                }
+                dto.setTransactionID(operation.getTransactionId());
+                dto.setTimestampReq(operation.getTimestampReq());
+                dto.setTimestampElab(operation.getTimestampElab());
+                dto.setSrcType(operation.getSrcType());
+                dto.setAmount(operation.getAmount());
+                dto.setResult(operation.getResult());
+                dto.setStatus(operation.getStatus());
+                dto.setOpDescr(operation.getOpDescr());
+                if (operation.getAuthorization() != null)
+                    dto.setAuthorization(response.getData().getOperation().getAuthorization());
+        }else {
+            if(response != null){
+                dto.setResult(response.getResult());
+                dto.setTimestampReq(response.getTimestamp());
             }
-
         }
         return dto;
+
     }
+
 
     /**
      * Maps an Order Status Response to its dto
@@ -126,7 +107,6 @@ public class ResponseMapper {
 
         if (response != null && response.getData() != null && response.getData().getOperation() != null) {
             Operation operation = response.getData().getOperation();
-
             dto.setTransactionID(operation.getTransactionId());
             dto.setTimestampReq(operation.getTimestampReq());
             dto.setTimestampElab(operation.getTimestampElab());
@@ -136,9 +116,14 @@ public class ResponseMapper {
             dto.setStatus(operation.getStatus());
             dto.setOpDesc(operation.getOpDescr());
 
-            if (response.getData().getAuthorization() != null && response.getData().getAuthorization().size() == 1)
-                dto.setAuthorization(response.getData().getAuthorization().get(0));
+            if (response.getData().getOperation().getAuthorization() != null)
+                dto.setAuthorization(response.getData().getOperation().getAuthorization());
 
+        }else {
+            if(response != null){
+                dto.setResult(response.getResult());
+                dto.setTimestampReq(response.getTimestamp());
+            }
         }
         return dto;
     }
@@ -184,7 +169,7 @@ public class ResponseMapper {
 
         }
         if (response.getData().getPanAliasData() != null) {
-            PanAliasData pan= response.getData().getPanAliasData();
+            PanAliasData pan = response.getData().getPanAliasData();
             dto.setPanAlias(pan.getPanAlias());
             dto.setPanAliasExpDate(pan.getPanAliasExpDate());
             dto.setPanAliasRev(pan.getPanAliasRev());
@@ -229,7 +214,7 @@ public class ResponseMapper {
 
         }
         if (response.getData().getPanAliasData() != null) {
-            PanAliasData pan= response.getData().getPanAliasData();
+            PanAliasData pan = response.getData().getPanAliasData();
             dto.setPanAlias(pan.getPanAlias());
             dto.setPanAliasExpDate(pan.getPanAliasExpDate());
             dto.setPanAliasRev(pan.getPanAliasRev());
@@ -238,7 +223,7 @@ public class ResponseMapper {
         return dto;
     }
 
-    public ThreeDSAuthorization2Response threeDSAuthorization2Response(BPWXmlResponse response){
+    public ThreeDSAuthorization2Response threeDSAuthorization2Response(BPWXmlResponse response) {
         ThreeDSAuthorization2Response dto = new ThreeDSAuthorization2Response();
         dto.setResult(response.getResult());
         if (response == null || response.getData() == null) {
@@ -268,7 +253,7 @@ public class ResponseMapper {
 
         }
         if (response.getData().getPanAliasData() != null) {
-            PanAliasData pan= response.getData().getPanAliasData();
+            PanAliasData pan = response.getData().getPanAliasData();
             dto.setPanAlias(pan.getPanAlias());
             dto.setPanAliasExpDate(pan.getPanAliasExpDate());
             dto.setPanAliasRev(pan.getPanAliasRev());

@@ -235,11 +235,11 @@ public class RequestBuilder {
         data.setAuth3DS2AuthorizationStep0Request(auth3DSStep0);
         request.setData(data);
         request.getRequest().setMac(encoder.getMac(MapBuilder.getThreeDS2Authorize0Map(request), key));
-        try {
+        /*try {
             request.getData().getAuth3DS2AuthorizationStep0Request().setThreeDSData(URLEncoder.encode(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()), StandardCharsets.UTF_8.toString()));
         } catch (UnsupportedEncodingException e) {
             throw new VPosClientException("Error while building authorization request");
-        }
+        }*/
         return request;
     }
 

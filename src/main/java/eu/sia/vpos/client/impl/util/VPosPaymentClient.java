@@ -1,5 +1,6 @@
 package eu.sia.vpos.client.impl.util;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import eu.sia.vpos.client.request.xml.BPWXmlRequest;
 import eu.sia.vpos.client.response.xml.BPWXmlResponse;
 import eu.sia.vpos.client.utils.constants.Errors;
@@ -22,8 +23,16 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.util.StreamReaderDelegate;
+import java.io.FileInputStream;
+import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -117,9 +126,13 @@ public class VPosPaymentClient {
     private BPWXmlResponse parseResponse(String xmlResponse) throws VPosClientException {
         Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "OUTPUT XML: \n" + xmlResponse);
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(BPWXmlResponse.class);
-            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            StringReader reader = new StringReader(xmlResponse);
+            JAXBContext jc = JAXBContext.newInstance(BPWXmlResponse.class);
+
+            //XMLInputFactory xif = XMLInputFactory.newInstance();
+            Reader reader = new StringReader(xmlResponse);
+            //XMLStreamReader xsr = xif.createXMLStreamReader( reader);
+            //xsr = new MyStreamReaderDelegate(xsr);
+            Unmarshaller unmarshaller = jc.createUnmarshaller();
             return (BPWXmlResponse) unmarshaller.unmarshal(reader);
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -148,7 +161,7 @@ public class VPosPaymentClient {
         }
         HttpClient httpClient = clientBuilder.build();
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setConnectTimeout(3000);
+        factory.setConnectTimeout(50000);
         factory.setHttpClient(httpClient);
 
 
@@ -168,4 +181,22 @@ public class VPosPaymentClient {
         this.ssl = true;
     }
 
+    private static class MyStreamReaderDelegate extends StreamReaderDelegate {
+
+        public MyStreamReaderDelegate(XMLStreamReader xsr) {
+            super(xsr);
+        }
+
+        @Override
+        public String getAttributeLocalName(int index) {
+            return super.getAttributeLocalName(index).toLowerCase();
+        }
+
+        @Override
+        public String getLocalName() {
+            return super.getLocalName().toLowerCase();
+        }
+
+    }
 }
+

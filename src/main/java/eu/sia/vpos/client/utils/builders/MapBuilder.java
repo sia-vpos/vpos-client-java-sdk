@@ -277,6 +277,7 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.SURNAME.NAME, authorization3DSRequest.getSurname());
         map.put(Operations.PARAMETERS.TAXID.NAME, authorization3DSRequest.getTaxId());
         map.put(Operations.PARAMETERS.THREEDSDATA.NAME, authorization3DSRequest.getThreeDSData());
+        map.put(Operations.PARAMETERS.NAME.NAMECH, authorization3DSRequest.getNameCH());
         map.put(Operations.PARAMETERS.NOTIFURL.NAME, authorization3DSRequest.getNotifyUrl());
         map.put(Operations.PARAMETERS.THREEDSMTDNOTIFURL.NAME, authorization3DSRequest.getThreeDSMtdNotifyUrl());
         map.put(Operations.PARAMETERS.CHALLENGEWINSIZE.NAME, authorization3DSRequest.getChallengeWinSize());
