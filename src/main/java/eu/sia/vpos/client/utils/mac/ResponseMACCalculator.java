@@ -73,6 +73,18 @@ public class ResponseMACCalculator {
         return encoder.getMac(valueList, key);
     }
 
+    public String getPanAliasDataMac(PanAliasData panAliasData, String key) throws VPosClientException {
+        List<String> valueList = new ArrayList<>();
+        if(panAliasData.getPanAliasRev() == null)
+            valueList.add("&");
+        else
+            valueList.add(panAliasData.getPanAliasRev());
+        valueList.add(panAliasData.getPanAlias());
+        valueList.add(panAliasData.getPanAliasExpDate());
+        valueList.add(panAliasData.getPanAliasTail());
+        return encoder.getMac(valueList, key);
+    }
+
     public String getThreeDSChallengeMac(ThreeDSChallenge threeDSChallenge, String key) throws VPosClientException {
         List<String> valueList = new ArrayList<>();
         valueList.add(threeDSChallenge.getThreeDSTransId());

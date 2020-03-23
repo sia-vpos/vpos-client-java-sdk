@@ -1,8 +1,7 @@
 package eu.sia.vpos.client.utils.builders;
 
-import eu.sia.vpos.client.request.*;
 import eu.sia.vpos.client.request.RefundRequest;
-
+import eu.sia.vpos.client.request.*;
 import eu.sia.vpos.client.request.xml.*;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.constants.VPosConstants;
@@ -11,9 +10,6 @@ import eu.sia.vpos.client.utils.exception.VPosClientException;
 import eu.sia.vpos.client.utils.mac.Encoder;
 import eu.sia.vpos.client.utils.mac.MacAlgorithms;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -82,9 +78,6 @@ public class RequestBuilder {
         return request;
     }
 
-
-
-
     /**
      * Build the XML request for accounting operations
      *
@@ -125,7 +118,7 @@ public class RequestBuilder {
      * @return the xml request
      * @throws VPosClientException
      */
-    public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequest dtoRequest,String shopId) throws VPosClientException {
+    public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequest dtoRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ORDERSTATUS, reqDate);
 
@@ -187,7 +180,6 @@ public class RequestBuilder {
         return request;
     }
 
-
     public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request dtoRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP0, reqDate);
@@ -225,7 +217,7 @@ public class RequestBuilder {
         //System.out.println("URL ENCODED: "+URLEncoder.encode(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()), StandardCharsets.UTF_8.toString()));
         //System.out.println("NORMAL : "+AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()));
 
-        auth3DSStep0.setThreeDSData(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()));
+        auth3DSStep0.setThreeDSData(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(), dtoRequest.getThreeDSData().toString()));
         auth3DSStep0.setCprof(dtoRequest.getcProf());
         auth3DSStep0.setThreeDSMtdNotifyUrl(dtoRequest.getThreeDSMtdNotifyUrl());
         auth3DSStep0.setChallengeWinSize(dtoRequest.getChallengeWinSize());

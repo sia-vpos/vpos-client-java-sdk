@@ -40,7 +40,12 @@ public class VPosClient implements Client {
     private String redirectUrl;
     private String apiResultKey;
 
-
+    /**
+     * Instantiate a VPosClient object enabled to perform VPOSClient operations
+     *
+     * @param config It is a config object used to configure the VPosClient
+     * @throws VPosClientException in case of instantiation failure (see exception message for more infos)
+     */
     public VPosClient(Config config) throws VPosClientException {
         this.config = config;
         validateConfig();
@@ -96,6 +101,7 @@ public class VPosClient implements Client {
         if (config.getSslContext() != null)
             this.vPosPaymentClient.setSslContext(config.getSslContext());
     }
+
 
     @Override
     public AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException {
@@ -212,6 +218,13 @@ public class VPosClient implements Client {
                     throw new VPosClientException("Authorization MAC is not valid");
             }
         }
+
+        if (response.getData() != null && response.getData().getPanAliasData() != null) {
+            String panAliasDataMAc = responseMACCalculator.getPanAliasDataMac(response.getData().getPanAliasData(), config.getApiKey());
+            if (!response.getData().getPanAliasData().getMac().equals(NEUTRAL_MAC_VALUE) && !response.getData().getPanAliasData().getMac().equals(panAliasDataMAc))
+                throw new VPosClientException("PanAliasDAta MAC is not valid");
+        }
+
 
         if (response.getData() != null && response.getData().getThreeDSMethod() != null) {
             String threeDSMethodMac = responseMACCalculator.getThreeDSMethodMac(response.getData().getThreeDSMethod(), config.getApiKey());
