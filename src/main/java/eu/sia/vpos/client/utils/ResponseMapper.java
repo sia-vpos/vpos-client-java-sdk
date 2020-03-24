@@ -45,7 +45,6 @@ public class ResponseMapper {
 
     }
 
-
     /**
      * Maps an Order Status Response to its dto
      *
@@ -66,29 +65,29 @@ public class ResponseMapper {
             List<Authorization> authorizationList = response.getData().getAuthorization();
 
             for (Authorization element : authorizationList) {
-                AuthorizationResponse dtoElement = new AuthorizationResponse();
+                AuthorizationResponse authElement = new AuthorizationResponse();
 
-                dtoElement.setPaymentType(element.getPaymentType());
-                dtoElement.setAuthorizationType(element.getAuthorizationType());
-                dtoElement.setTransactionId(element.getTransactionId());
-                dtoElement.setNetwork(element.getNetwork());
-                dtoElement.setOrderId(element.getOrderId());
-                dtoElement.setTransactionAmount(element.getTransactionAmount());
-                dtoElement.setAuthorizedAmount(element.getAuthorizedAmount());
-                dtoElement.setRefundedAmount(element.getRefundedAmount());
-                dtoElement.setTransactionResult(element.getTransactionResult());
-                dtoElement.setTimestamp(element.getTimestamp());
-                dtoElement.setAuthorizationNumber(element.getAuthorizationNumber());
-                dtoElement.setAcquirerBin(element.getAcquirerBin());
-                dtoElement.setMerchantId(element.getMerchantId());
-                dtoElement.setTransactionStatus(element.getTransactionStatus());
-                dtoElement.setResponseCodeIso(element.getResponseCodeIso());
-                dtoElement.setPanTail(element.getPanTail());
-                dtoElement.setPanExpiryDate(element.getPanExpiryDate());
-                dtoElement.setPaymentTypePP(element.getPaymentTypePP());
-                dtoElement.setRRN(element.getRRN());
-                dtoElement.setCardType(element.getCardType());
-                dto.getAuthorizations().add(dtoElement);
+                authElement.setPaymentType(element.getPaymentType());
+                authElement.setAuthorizationType(element.getAuthorizationType());
+                authElement.setTransactionId(element.getTransactionId());
+                authElement.setNetwork(element.getNetwork());
+                authElement.setOrderId(element.getOrderId());
+                authElement.setTransactionAmount(element.getTransactionAmount());
+                authElement.setAuthorizedAmount(element.getAuthorizedAmount());
+                authElement.setRefundedAmount(element.getRefundedAmount());
+                authElement.setTransactionResult(element.getTransactionResult());
+                authElement.setTimestamp(element.getTimestamp());
+                authElement.setAuthorizationNumber(element.getAuthorizationNumber());
+                authElement.setAcquirerBin(element.getAcquirerBin());
+                authElement.setMerchantId(element.getMerchantId());
+                authElement.setTransactionStatus(element.getTransactionStatus());
+                authElement.setResponseCodeIso(element.getResponseCodeIso());
+                authElement.setPanTail(element.getPanTail());
+                authElement.setPanExpiryDate(element.getPanExpiryDate());
+                authElement.setPaymentTypePP(element.getPaymentTypePP());
+                authElement.setRRN(element.getRRN());
+                authElement.setCardType(element.getCardType());
+                dto.getAuthorizations().add(authElement);
                 //dtoElement.clearAllIndividualFields();
             }
         }
@@ -102,7 +101,6 @@ public class ResponseMapper {
 
         return dto;
     }
-
 
     public CaptureResponse bookingResponseDto(BPWXmlResponse response) {
         CaptureResponse dto = new CaptureResponse();

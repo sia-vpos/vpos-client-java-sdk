@@ -1,6 +1,5 @@
 package eu.sia.vpos.client.request.xml;
 
-import eu.sia.vpos.client.request.AuthorizationRequest;
 import eu.sia.vpos.client.response.xml.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -23,9 +22,6 @@ public class Data {
     @XmlElement(name = "AuthorizationRequest")
     private OnlineAuthorizationRequest onlineAuthorizationRequest;
 
-    /*@XmlElement(name = "AuthorizationRequest")
-    private Authorization3DSRequest authorizationRequest;*/
-
     @XmlElement(name = "Authorization")
     private List<Authorization> authorization;
 
@@ -38,23 +34,11 @@ public class Data {
     @XmlElement(name = "OrderStatus")
     private StatusRequest orderStatusRequest;
 
-    @XmlElement(name = "VerifyRequest")
-    private StatusRequest verifyRequest;
-
     @XmlElement(name = "Refund")
     private RefundRequest refundRequest;
 
-    @XmlElement(name = "Verify")
-    private Operation verifyResponse;
-
     @XmlElement(name = "Accounting")
     private GeneralRequest accounting;
-
-    @XmlElement(name = "DeferredRequest")
-    private ConfirmRequest confirmRequest;
-
-    @XmlElement(name = "Authorization3DS")
-    private Auth3DSStep2Request auth3DSStep2Request;
 
     @XmlElement(name = "VBVRedirect")
     private VBVRedirect vbvRedirect;
@@ -129,14 +113,6 @@ public class Data {
         this.panAliasData = panAliasData;
     }
 
-    public ConfirmRequest getConfirmRequest() {
-        return confirmRequest;
-    }
-
-    public void setConfirmRequest(ConfirmRequest confirmRequest) {
-        this.confirmRequest = confirmRequest;
-    }
-
     public StatusRequest getOrderStatusRequest() {
         return orderStatusRequest;
     }
@@ -145,13 +121,6 @@ public class Data {
         this.orderStatusRequest = orderStatus;
     }
 
-    public StatusRequest getVerifyRequest() {
-        return verifyRequest;
-    }
-
-    public void setVerifyRequest(StatusRequest verifyRequest) {
-        this.verifyRequest = verifyRequest;
-    }
 
     public RefundRequest getRefundRequest() {
         return refundRequest;
@@ -161,28 +130,12 @@ public class Data {
         this.refundRequest = refundRequest;
     }
 
-    public Auth3DSStep2Request getAuth3DSStep2Request() {
-        return auth3DSStep2Request;
-    }
-
-    public void setAuth3DSStep2Request(Auth3DSStep2Request auth3dsStep2Request) {
-        auth3DSStep2Request = auth3dsStep2Request;
-    }
-
     public VBVRedirect getVbvRedirect() {
         return vbvRedirect;
     }
 
     public void setVbvRedirect(VBVRedirect vbvRedirect) {
         this.vbvRedirect = vbvRedirect;
-    }
-
-    public Operation getVerifyResponse() {
-        return verifyResponse;
-    }
-
-    public void setVerifyResponse(Operation verifyResponse) {
-        this.verifyResponse = verifyResponse;
     }
 
     public GeneralRequest getAccounting() {

@@ -13,11 +13,11 @@ public class Auth3DS2AuthorizationStep2Request {
     @XmlElement(name = "ThreeDSTransID")
     private String threeDSTransID;
 
-    public Auth3DS2AuthorizationStep2Request(){
+    public Auth3DS2AuthorizationStep2Request() {
 
     }
 
-    public Auth3DS2AuthorizationStep2Request(Date date){
+    public Auth3DS2AuthorizationStep2Request(Date date) {
         this.header = new Header(date);
 
     }

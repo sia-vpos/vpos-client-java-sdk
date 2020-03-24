@@ -73,7 +73,6 @@ public class RequestValidator {
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
     }
 
-
     /**
      * Method used to validate the Order Status request.
      *

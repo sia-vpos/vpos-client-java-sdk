@@ -3,16 +3,12 @@ package eu.sia.vpos.client.utils.builders;
 
 import eu.sia.vpos.client.request.PaymentInfo;
 import eu.sia.vpos.client.request.xml.*;
-import eu.sia.vpos.client.response.xml.Operation;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.constants.VPosConstants;
 import eu.sia.vpos.client.utils.encryption.AESEncoder;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 import eu.sia.vpos.client.utils.mac.Encoder;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -74,14 +70,6 @@ public class MapBuilder {
         return map;
     }
 
-    public static Map<String, String> getConfirmMap(BPWXmlRequest request) {
-        Map<String, String> map = getGeneralMap(request);
-        ConfirmRequest confirmRequest = request.getData().getConfirmRequest();
-        map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, confirmRequest.getAccountingMode());
-        map.put(Operations.PARAMETERS.CLOSEORDER.NAME, confirmRequest.getCloseOrder());
-        return map;
-    }
-
     public static Map<String, String> getBookingMap(BPWXmlRequest request) {
         Map<String, String> map = getGeneralMap(request);
         GeneralRequest bookingRequest = request.getData().getAccounting();
@@ -90,20 +78,6 @@ public class MapBuilder {
         return map;
     }
 
-    public static Map<String, String> getVerifyMap(BPWXmlRequest request) {
-        Map<String, String> map = getStdMap(request);
-
-        StatusRequest verifyRequest = request.getData().getVerifyRequest();
-        map.put(Operations.PARAMETERS.OPERATION, request.getRequest().getOperation());
-        map.put(Operations.PARAMETERS.TIMESTAMP, request.getRequest().getTimestamp());
-        map.put(VPosConstants.SHOPID, verifyRequest.getHeader().getShopId());
-        map.put(Operations.PARAMETERS.OPERATORID.NAME, verifyRequest.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM.NAME, verifyRequest.getHeader().getReqRefNum());
-        map.put(Operations.PARAMETERS.ORIGINALREQREFNUM.NAME, verifyRequest.getOriginalReqRefNum());
-        map.put(Operations.PARAMETERS.OPTIONS.NAME, verifyRequest.getOptions());
-
-        return map;
-    }
 
     public static Map<String, String> getOrderStatusMap(BPWXmlRequest request) {
         Map<String, String> map = getStdMap(request);
@@ -118,27 +92,6 @@ public class MapBuilder {
         return map;
     }
 
-
-
-    public static Map<String, String> get3DSStep2AuthMap(BPWXmlRequest request) throws VPosClientException {
-
-        Map<String, String> map = getStdMap(request);
-
-        Auth3DSStep2Request auth3DSStep2Request = request.getData().getAuth3DSStep2Request();
-        map.put(Operations.PARAMETERS.SHOPID.NAME, auth3DSStep2Request.getHeader().getShopId());
-        map.put(Operations.PARAMETERS.OPERATORID.NAME, auth3DSStep2Request.getHeader().getOperatorId());
-        map.put(Operations.PARAMETERS.REQREFNUM.NAME, auth3DSStep2Request.getHeader().getReqRefNum());
-        map.put(Operations.PARAMETERS.ORIGINALREQREFNUM.NAME, auth3DSStep2Request.getOriginalReqRefNum());
-
-        try {
-            String decodedPares = URLDecoder.decode(auth3DSStep2Request.getPaRes(), StandardCharsets.UTF_8.toString());
-            map.put(Operations.PARAMETERS.PARES, decodedPares);
-        } catch (UnsupportedEncodingException e) {
-            throw new VPosClientException(e.getMessage(), e);
-        }
-
-        return map;
-    }
 
     public static Map<String, String> getRedirectMap(PaymentInfo info, Encoder encoder, String macKey, String apiKey) throws VPosClientException {
         Map<String, String> map = new LinkedHashMap<>();
@@ -199,8 +152,6 @@ public class MapBuilder {
         GeneralRequest generalRequest = null;
         if (request.getRequest().getOperation() != null && request.getRequest().getOperation().equals(Operations.PARAMETERS.REFUND))
             generalRequest = request.getData().getRefundRequest();
-        else if (request.getRequest().getOperation().equals(Operations.PARAMETERS.DEFERREDREQUEST))
-            generalRequest = request.getData().getConfirmRequest();
         else
             generalRequest = request.getData().getAccounting();
 
