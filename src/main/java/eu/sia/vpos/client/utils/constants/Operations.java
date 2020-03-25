@@ -202,6 +202,7 @@ public final class Operations {
 
         }
 
+
         public static final class PARESSTATUS {
             public static final String NAME = "PARESSTATUS";
             public static final String PATTERN = "([Y]|[N]|[A]|[U]){1}";
@@ -471,6 +472,9 @@ public final class Operations {
             public static final int LEN = 2;
             public static final String PATTERN = "[0-9]{" + LEN + "}";
             public static final boolean MANDATORY = false; // CONDITIONAL
+            public static final String VISA = "01";
+            public static final String MASTERCARD = "02";
+            public static final String JIFFY = "91";
 
             private NETWORK() {
 
@@ -548,10 +552,15 @@ public final class Operations {
             public static final String NAME = "OPTIONS";
             public static final String PATTERN = "[A-Za-z]*";
             public static final boolean MANDATORY = true;
+            public static final String D = "D";
             public static final String G = "G";
             public static final String H = "H";
             public static final String M = "M";
             public static final String N = "N";
+            public static final String B = "B";
+            public static final String F = "F";
+            public static final String O = "O";
+            public static final String V = "V";
 
             private OPTIONS() {
 
@@ -639,6 +648,7 @@ public final class Operations {
         public static final class SURNAME {
 
             public static final String NAME = "SURNAME";
+            public static final String NAMECH = "SURNAMECH";
             public static final int MIN_LEN = 1;
             public static final int MAX_LEN = 40;
             public static final String PATTERN = ".{" + MIN_LEN + "," + MAX_LEN + "}";

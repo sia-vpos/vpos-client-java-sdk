@@ -102,7 +102,6 @@ public class VPosClient implements Client {
             this.vPosPaymentClient.setSslContext(config.getSslContext());
     }
 
-
     @Override
     public AuthorizationResponse authorize(AuthorizationRequest authorizationRequest) throws VPosClientException {
         RequestValidator.validateAuthorizationRequest(authorizationRequest);
@@ -193,7 +192,8 @@ public class VPosClient implements Client {
     @Override
     public String buildHTMLRedirectFragment(PaymentInfo paymentInfo) throws VPosClientException {
         RequestValidator.validateHTMLRedirectFragmentRequest(paymentInfo);
-        return htmlTool.buildHtmlPaymentDiv(redirectUrl, MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, redirectKey, apiResultKey));
+        Map<String,String> map = MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, redirectKey, apiResultKey);
+        return htmlTool.buildHtmlPaymentDiv(redirectUrl, map);
     }
 
     private void verifyMacResponse(BPWXmlResponse response) throws VPosClientException {

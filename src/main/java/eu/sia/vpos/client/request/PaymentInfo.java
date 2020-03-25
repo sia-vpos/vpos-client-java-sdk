@@ -23,6 +23,7 @@ public class PaymentInfo {
     private String accountingMode;
     private String authorMode;
     private String urlApos;
+
     private Data3DSJson data3DSJson;
     private Map<FieldName, String> notCompulsoryFields;
 
@@ -170,7 +171,9 @@ public class PaymentInfo {
         TOKEN,
         EXPDATE,
         NETWORK,
-        IBAN
+        IBAN,
+        NAMECH,
+        SURNAMECH
     }
 
     public enum OptionName {
