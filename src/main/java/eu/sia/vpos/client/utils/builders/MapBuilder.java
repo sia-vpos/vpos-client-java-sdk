@@ -3,6 +3,7 @@ package eu.sia.vpos.client.utils.builders;
 
 import eu.sia.vpos.client.request.PaymentInfo;
 import eu.sia.vpos.client.request.xml.*;
+import eu.sia.vpos.client.response.xml.Operation;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.constants.VPosConstants;
 import eu.sia.vpos.client.utils.encryption.AESEncoder;
@@ -32,7 +33,7 @@ public class MapBuilder {
 
         map.put(Operations.PARAMETERS.AMOUNT.NAME, values.get(Operations.PARAMETERS.AMOUNT.NAME));
         map.put(Operations.PARAMETERS.CURRENCY.NAME, values.get(Operations.PARAMETERS.CURRENCY.NAME));
-        map.put(Operations.PARAMETERS.EXPONENT.NAME, values.get(Operations.PARAMETERS.EXPONENT.NAME));
+        //map.put(Operations.PARAMETERS.EXPONENT.NAME, values.get(Operations.PARAMETERS.EXPONENT.NAME));
         map.put(Operations.PARAMETERS.TRANSACTIONID.NAME, values.get(Operations.PARAMETERS.TRANSACTIONID.NAME));
         map.put(Operations.PARAMETERS.ACCOUNTINGMODE.NAME, values.get(Operations.PARAMETERS.ACCOUNTINGMODE.NAME));
         map.put(VPosConstants.AUTHORMODE, values.get(VPosConstants.AUTHORMODE));
@@ -49,6 +50,9 @@ public class MapBuilder {
         map.put(Operations.CONFIRMATION.PANALIASEXPDATE, values.get(Operations.CONFIRMATION.PANALIASEXPDATE));
         map.put(Operations.CONFIRMATION.PANALIASTAIL, values.get(Operations.CONFIRMATION.PANALIASTAIL));
 
+        map.put(Operations.PARAMETERS.TRECURR.NAME, values.get(Operations.PARAMETERS.TRECURR.NAME));
+        map.put(Operations.PARAMETERS.CRECURR.NAME, values.get(Operations.PARAMETERS.CRECURR.NAME));
+
         map.put(VPosConstants.MASKEDPAN, values.get(VPosConstants.MASKEDPAN));
         map.put(Operations.AUTHORIZATION.PANTAIL, values.get(Operations.AUTHORIZATION.PANTAIL));
         map.put(Operations.AUTHORIZATION.PANEXPIRYDATE, values.get(Operations.AUTHORIZATION.PANEXPIRYDATE));
@@ -59,6 +63,7 @@ public class MapBuilder {
         map.put(Operations.AUTHORIZATION.ACQUIRERBIN, values.get(Operations.AUTHORIZATION.ACQUIRERBIN));
         map.put(Operations.AUTHORIZATION.MERCHANTID, values.get(Operations.AUTHORIZATION.MERCHANTID));
         map.put(Operations.AUTHORIZATION.CARDTYPE, values.get(Operations.AUTHORIZATION.CARDTYPE));
+        map.put(VPosConstants.CHINFO, values.get(VPosConstants.CHINFO));
         return map;
     }
 

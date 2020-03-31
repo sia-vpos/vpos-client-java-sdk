@@ -114,22 +114,22 @@ public class RequestBuilder {
     /**
      * Build the XML request for ORDERSTATUS operation
      *
-     * @param dtoRequest object containing the necessary infos to perform an ORDERSTATUS request
+     * @param statusRequest object containing the necessary infos to perform an ORDERSTATUS request
      * @return the xml request
      * @throws VPosClientException
      */
-    public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequest dtoRequest, String shopId) throws VPosClientException {
+    public BPWXmlRequest buildOrderStatusRequest(OrderStatusRequest statusRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ORDERSTATUS, reqDate);
 
         StatusRequest status = new StatusRequest(reqDate);
         //HEADER
         status.getHeader().setShopId(shopId);
-        status.getHeader().setOperatorId(dtoRequest.getOperatorId());
+        status.getHeader().setOperatorId(statusRequest.getOperatorId());
 
         //ORDER STATUS REQUEST
-        status.setOrderId(dtoRequest.getOrderId());
-        status.setProductRef(dtoRequest.getProductRef());
+        status.setOrderId(statusRequest.getOrderId());
+        status.setProductRef(statusRequest.getProductRef());
 
         Data data = new Data();
         data.setOrderStatusRequest(status);
@@ -140,88 +140,102 @@ public class RequestBuilder {
 
     }
 
-    public BPWXmlRequest buildOnlineAuthorizationRequest(AuthorizationRequest dtoRequest, String shopId) throws VPosClientException {
+    /**
+     * Build the XML request for AUTHORIZATION operation
+     *
+     * @param request object containing the necessary infos to perform an AUTHORIZATION request
+     * @return the xml request
+     * @throws VPosClientException
+     */
+    public BPWXmlRequest buildOnlineAuthorizationRequest(AuthorizationRequest request, String shopId) throws VPosClientException {
         Date reqDate = new Date();
-        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.ONLINEAUTHORIZATION, reqDate);
+        BPWXmlRequest bpwXmlRequest = getBPWXmlRequest(Operations.PARAMETERS.ONLINEAUTHORIZATION, reqDate);
         OnlineAuthorizationRequest authRequest = new OnlineAuthorizationRequest(reqDate);
 
         //Header
-        authRequest.getHeader().setOperatorId(dtoRequest.getOperatorId());
+        authRequest.getHeader().setOperatorId(request.getOperatorId());
         authRequest.getHeader().setShopId(shopId);
 
         //
-        authRequest.setOrderId(dtoRequest.getOrderId());
-        authRequest.setPan(dtoRequest.getPan());
-        authRequest.setCvv2(dtoRequest.getCvv2());
-        authRequest.setExpDate(dtoRequest.getExpDate());
-        authRequest.setAmount(dtoRequest.getAmount());
-        authRequest.setCurrency(dtoRequest.getCurrency());
-        authRequest.setExponent(dtoRequest.getExponent());
-        authRequest.setAccountingMode(dtoRequest.getAccountingMode());
-        authRequest.setNetwork(dtoRequest.getNetwork());
-        authRequest.setEmailCH(dtoRequest.getEmailCh());
-        authRequest.setUserId(dtoRequest.getUserId());
-        authRequest.setAcquirer(dtoRequest.getAcquirer());
-        authRequest.setUsrAuthFlag(dtoRequest.getUsrAuthFlag());
-        authRequest.setIpAddress(dtoRequest.getIpAddress());
-        authRequest.setOpDescr(dtoRequest.getOpDescr());
-        authRequest.setCreatePanAlias(dtoRequest.getCreatePanAlias());
-        authRequest.setAntiFraud(dtoRequest.getAntiFraud());
-        authRequest.setProductRef(dtoRequest.getProductRef());
-        authRequest.setName(dtoRequest.getName());
-        authRequest.setSurname(dtoRequest.getSurname());
-        authRequest.setTaxId(dtoRequest.getTaxId());
+        authRequest.setOrderId(request.getOrderId());
+        authRequest.setPan(request.getPan());
+        authRequest.setCvv2(request.getCvv2());
+        authRequest.setExpDate(request.getExpDate());
+        authRequest.setAmount(request.getAmount());
+        authRequest.setCurrency(request.getCurrency());
+        authRequest.setExponent(request.getExponent());
+        authRequest.setAccountingMode(request.getAccountingMode());
+        authRequest.setNetwork(request.getNetwork());
+        authRequest.setEmailCH(request.getEmailCh());
+        authRequest.setUserId(request.getUserId());
+        authRequest.setAcquirer(request.getAcquirer());
+        authRequest.setUsrAuthFlag(request.getUsrAuthFlag());
+        authRequest.setIpAddress(request.getIpAddress());
+        authRequest.setOpDescr(request.getOpDescr());
+        authRequest.setCreatePanAlias(request.getCreatePanAlias());
+        authRequest.setAntiFraud(request.getAntiFraud());
+        authRequest.setProductRef(request.getProductRef());
+        authRequest.setName(request.getName());
+        authRequest.setSurname(request.getSurname());
+        authRequest.setTaxId(request.getTaxId());
         Data data = new Data();
         data.setOnlineAuthorizationRequest(authRequest);
 
-        request.setData(data);
-        request.getRequest().setMac(encoder.getMac(MapBuilder.getOnlineAuthorizationMap(request), key));
+        bpwXmlRequest.setData(data);
+        bpwXmlRequest.getRequest().setMac(encoder.getMac(MapBuilder.getOnlineAuthorizationMap(bpwXmlRequest), key));
 
-        return request;
+        return bpwXmlRequest;
     }
 
-    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request dtoRequest, String shopId) throws VPosClientException {
+    /**
+     * Build the XML request for ThreeDSAuthorization step 0 operation
+     *
+     * @param authRequest object containing the necessary infos to perform a ThreeDS2Authorize0 request
+     * @return the xml request
+     * @throws VPosClientException
+     */
+    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request authRequest, String shopId) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP0, reqDate);
         Auth3DS2AuthorizationStep0Request auth3DSStep0 = new Auth3DS2AuthorizationStep0Request(reqDate);
 
         //Header
-        auth3DSStep0.getHeader().setOperatorId(dtoRequest.getOperatorId());
+        auth3DSStep0.getHeader().setOperatorId(authRequest.getOperatorId());
         auth3DSStep0.getHeader().setShopId(shopId);
 
         //
-        auth3DSStep0.setOrderId(dtoRequest.getOrderId());
-        auth3DSStep0.setPan(dtoRequest.getPan());
-        auth3DSStep0.setCvv2(dtoRequest.getCvv2());
-        auth3DSStep0.setExpDate(dtoRequest.getExpDate());
-        auth3DSStep0.setAmount(dtoRequest.getAmount());
-        auth3DSStep0.setCurrency(dtoRequest.getCurrency());
-        auth3DSStep0.setExponent(dtoRequest.getExponent());
-        auth3DSStep0.setAccountingMode(dtoRequest.getAccountingMode());
-        auth3DSStep0.setNetwork(dtoRequest.getNetwork());
-        auth3DSStep0.setEmailCH(dtoRequest.getEmailCh());
-        auth3DSStep0.setNameCH(dtoRequest.getNameCh());
-        auth3DSStep0.setUserId(dtoRequest.getUserId());
-        auth3DSStep0.setAcquirer(dtoRequest.getAcquirer());
-        auth3DSStep0.setIpAddress(dtoRequest.getIpAddress());
-        auth3DSStep0.setUsrAuthFlag(dtoRequest.getUsrAuthFlag());
-        auth3DSStep0.setOpDescr(dtoRequest.getOpDescr());
-        auth3DSStep0.setAntifraud(dtoRequest.getAntifraud());
-        auth3DSStep0.setNotifyUrl(dtoRequest.getNotifyUrl());
-        auth3DSStep0.setProductRef(dtoRequest.getProductRef());
-        auth3DSStep0.setName(dtoRequest.getName());
-        auth3DSStep0.setSurname(dtoRequest.getSurname());
-        auth3DSStep0.setTaxId(dtoRequest.getTaxId());
-        auth3DSStep0.setCreatePanAlias(dtoRequest.getCreatePanAlias());
+        auth3DSStep0.setOrderId(authRequest.getOrderId());
+        auth3DSStep0.setPan(authRequest.getPan());
+        auth3DSStep0.setCvv2(authRequest.getCvv2());
+        auth3DSStep0.setExpDate(authRequest.getExpDate());
+        auth3DSStep0.setAmount(authRequest.getAmount());
+        auth3DSStep0.setCurrency(authRequest.getCurrency());
+        auth3DSStep0.setExponent(authRequest.getExponent());
+        auth3DSStep0.setAccountingMode(authRequest.getAccountingMode());
+        auth3DSStep0.setNetwork(authRequest.getNetwork());
+        auth3DSStep0.setEmailCH(authRequest.getEmailCh());
+        auth3DSStep0.setNameCH(authRequest.getNameCh());
+        auth3DSStep0.setUserId(authRequest.getUserId());
+        auth3DSStep0.setAcquirer(authRequest.getAcquirer());
+        auth3DSStep0.setIpAddress(authRequest.getIpAddress());
+        auth3DSStep0.setUsrAuthFlag(authRequest.getUsrAuthFlag());
+        auth3DSStep0.setOpDescr(authRequest.getOpDescr());
+        auth3DSStep0.setAntifraud(authRequest.getAntifraud());
+        auth3DSStep0.setNotifyUrl(authRequest.getNotifyUrl());
+        auth3DSStep0.setProductRef(authRequest.getProductRef());
+        auth3DSStep0.setName(authRequest.getName());
+        auth3DSStep0.setSurname(authRequest.getSurname());
+        auth3DSStep0.setTaxId(authRequest.getTaxId());
+        auth3DSStep0.setCreatePanAlias(authRequest.getCreatePanAlias());
         //3DSDATAJSON
         //System.out.println("URL ENCODED: "+URLEncoder.encode(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()), StandardCharsets.UTF_8.toString()));
         //System.out.println("NORMAL : "+AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()));
 
-        auth3DSStep0.setThreeDSData(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(), dtoRequest.getThreeDSData().toString()));
-        auth3DSStep0.setCprof(dtoRequest.getcProf());
-        auth3DSStep0.setThreeDSMtdNotifyUrl(dtoRequest.getThreeDSMtdNotifyUrl());
-        auth3DSStep0.setChallengeWinSize(dtoRequest.getChallengeWinSize());
-        auth3DSStep0.setOptions(dtoRequest.getOptions());
+        auth3DSStep0.setThreeDSData(AESEncoder.encode3DSData(authRequest.getMerchantKey(), authRequest.getThreeDSData().toString()));
+        auth3DSStep0.setCprof(authRequest.getcProf());
+        auth3DSStep0.setThreeDSMtdNotifyUrl(authRequest.getThreeDSMtdNotifyUrl());
+        auth3DSStep0.setChallengeWinSize(authRequest.getChallengeWinSize());
+        auth3DSStep0.setOptions(authRequest.getOptions());
 
         Data data = new Data();
         data.setAuth3DS2AuthorizationStep0Request(auth3DSStep0);
@@ -235,41 +249,55 @@ public class RequestBuilder {
         return request;
     }
 
-    public BPWXmlRequest buildThreeDS2Authorize1(ThreeDSAuthorization1Request dtoRequest, String shopId) throws VPosClientException {
+    /**
+     * Build the XML request for ThreeDSAuthorization step 1 operation
+     *
+     * @param request object containing the necessary infos to perform a ThreeDS2Authorize1 request
+     * @return the xml request
+     * @throws VPosClientException
+     */
+    public BPWXmlRequest buildThreeDS2Authorize1(ThreeDSAuthorization1Request request, String shopId) throws VPosClientException {
         Date reqDate = new Date();
-        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP1, reqDate);
+        BPWXmlRequest bpwXmlRequest = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP1, reqDate);
         Auth3DS2AuthorizationStep1Request auth3DSStep1 = new Auth3DS2AuthorizationStep1Request(reqDate);
 
         //Header
-        auth3DSStep1.getHeader().setOperatorId(dtoRequest.getOperatorId());
+        auth3DSStep1.getHeader().setOperatorId(request.getOperatorId());
         auth3DSStep1.getHeader().setShopId(shopId);
 
-        auth3DSStep1.setThreeDSMtdComplInd(dtoRequest.getThreeDSMtdComplInd());
-        auth3DSStep1.setThreeDSTransID(dtoRequest.getThreeDSTransId());
+        auth3DSStep1.setThreeDSMtdComplInd(request.getThreeDSMtdComplInd());
+        auth3DSStep1.setThreeDSTransID(request.getThreeDSTransId());
 
         Data data = new Data();
         data.setAuth3DS2AuthorizationStep1Request(auth3DSStep1);
-        request.setData(data);
-        request.getRequest().setMac(encoder.getMac(MapBuilder.getThreeDS2Authorize1Map(request), key));
-        return request;
+        bpwXmlRequest.setData(data);
+        bpwXmlRequest.getRequest().setMac(encoder.getMac(MapBuilder.getThreeDS2Authorize1Map(bpwXmlRequest), key));
+        return bpwXmlRequest;
     }
 
-    public BPWXmlRequest buildThreeDS2Authorize2(ThreeDSAuthorization2Request requestDto, String shopId) throws VPosClientException {
+    /**
+     * Build the XML request for ThreeDSAuthorization step 2 operation
+     *
+     * @param request object containing the necessary infos to perform a ThreeDS2Authorize2 request
+     * @return the xml request
+     * @throws VPosClientException
+     */
+    public BPWXmlRequest buildThreeDS2Authorize2(ThreeDSAuthorization2Request request, String shopId) throws VPosClientException {
         Date reqDate = new Date();
-        BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP2, reqDate);
+        BPWXmlRequest bpwXmlRequest = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP2, reqDate);
         Auth3DS2AuthorizationStep2Request auth3DSStep2 = new Auth3DS2AuthorizationStep2Request(reqDate);
 
         //Header
-        auth3DSStep2.getHeader().setOperatorId(requestDto.getOperatorId());
+        auth3DSStep2.getHeader().setOperatorId(request.getOperatorId());
         auth3DSStep2.getHeader().setShopId(shopId);
 
-        auth3DSStep2.setThreeDSTransID(requestDto.getThreeDSTransId());
+        auth3DSStep2.setThreeDSTransID(request.getThreeDSTransId());
 
         Data data = new Data();
         data.setAuth3DS2AuthorizationStep2Request(auth3DSStep2);
-        request.setData(data);
-        request.getRequest().setMac(encoder.getMac(MapBuilder.getThreeDS2Authorize2Map(request), key));
-        return request;
+        bpwXmlRequest.setData(data);
+        bpwXmlRequest.getRequest().setMac(encoder.getMac(MapBuilder.getThreeDS2Authorize2Map(bpwXmlRequest), key));
+        return bpwXmlRequest;
     }
 
     private BPWXmlRequest getBPWXmlRequest(String operation, Date date) {

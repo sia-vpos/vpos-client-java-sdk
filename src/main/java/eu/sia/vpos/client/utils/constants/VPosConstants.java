@@ -32,6 +32,7 @@ public final class VPosConstants {
     public static final String ISSUERCOUNTRY = "ISSUERCOUNTRY";
     public static final String AUTHCODE = "AUTHCODE";
     public static final String AUTHNUMBER = "AUTHNUMBER";
+    public static final String CHINFO = "CHINFO";
 
     private VPosConstants() {
 

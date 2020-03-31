@@ -23,22 +23,22 @@ public class RequestValidator {
     /**
      * Method used to validate the Refund request.
      *
-     * @param requestDto request to validate
+     * @param request request to validate
      * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateRefundRequest(RefundRequest requestDto) throws VPosClientException {
+    public static void validateRefundRequest(RefundRequest request) throws VPosClientException {
         String field = "";
 
-        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+        if (request.getOperatorId() == null || !request.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getTransactionId() == null || requestDto.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN) {
+        } else if (request.getTransactionId() == null || request.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN) {
             field = Operations.PARAMETERS.TRANSACTIONID.NAME;
-        } else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
+        } else if (request.getOrderId() == null || !request.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
-        } else if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
+        } else if (request.getAmount() == null || !request.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
             field = Operations.PARAMETERS.AMOUNT.NAME;
 
-        } else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
+        } else if (request.getCurrency() == null || !request.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
             field = Operations.PARAMETERS.CURRENCY.NAME;
         }
 
@@ -47,25 +47,25 @@ public class RequestValidator {
     }
 
     /**
-     * Method used to validate the Confirm request.
+     * Method used to validate the Capture request.
      *
-     * @param requestDto request to validate
+     * @param request request to validate
      * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateCaptureRequest(CaptureRequest requestDto) throws VPosClientException {
+    public static void validateCaptureRequest(CaptureRequest request) throws VPosClientException {
         String field = "";
 
-        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN))
+        if (request.getOperatorId() == null || !request.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN))
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        else if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN))
+        else if (request.getAmount() == null || !request.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN))
             field = Operations.PARAMETERS.AMOUNT.NAME;
-        else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN))
+        else if (request.getCurrency() == null || !request.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN))
             field = Operations.PARAMETERS.CURRENCY.NAME;
-        else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN))
+        else if (request.getOrderId() == null || !request.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN))
             field = Operations.PARAMETERS.ORDERID.NAME;
-        else if (requestDto.getTransactionId() == null || requestDto.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN)
+        else if (request.getTransactionId() == null || request.getTransactionId().length() != Operations.PARAMETERS.TRANSACTIONID.LEN)
             field = Operations.PARAMETERS.TRANSACTIONID.NAME;
-        else if (requestDto.getExponent() == null && !requestDto.getCurrency().equals(Constants.Currency.EUR.getValue()))
+        else if (request.getExponent() == null && !request.getCurrency().equals(Constants.Currency.EUR.getValue()))
             field = Operations.PARAMETERS.EXPONENT.NAME;
 
 
@@ -76,18 +76,18 @@ public class RequestValidator {
     /**
      * Method used to validate the Order Status request.
      *
-     * @param requestDto request to validate
+     * @param request request to validate
      * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateOrderStatusRequest(OrderStatusRequest requestDto) throws VPosClientException {
+    public static void validateOrderStatusRequest(OrderStatusRequest request) throws VPosClientException {
         String field = "";
-        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+        if (request.getOperatorId() == null || !request.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
+        } else if (request.getOrderId() == null || !request.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
-        } else if (requestDto.getProductRef() != null && requestDto.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
+        } else if (request.getProductRef() != null && request.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
             field = Operations.PARAMETERS.PRODUCTREF.NAME;
-        } else if (requestDto.getOptions() != null && requestDto.getOptions().matches(Operations.PARAMETERS.OPTIONS.PATTERN)) {
+        } else if (request.getOptions() != null && request.getOptions().matches(Operations.PARAMETERS.OPTIONS.PATTERN)) {
             field = Operations.PARAMETERS.OPTIONS.NAME;
         }
 
@@ -96,61 +96,61 @@ public class RequestValidator {
     }
 
     /**
-     * Method used to validate the first step of a 3D Secure authorization.
+     * Method used to validate the step 0 of a 3D Secure authorization.
      *
-     * @param requestDto request to validate
+     * @param request request to validate
      * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
      */
-    public static void validateThreeDSAuthorization0Request(ThreeDSAuthorization0Request requestDto) throws VPosClientException {
+    public static void validateThreeDSAuthorization0Request(ThreeDSAuthorization0Request request) throws VPosClientException {
         String field = "";
 
-        if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
+        if (request.getOrderId() == null || !request.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
-        } else if (requestDto.getOperatorId() == null) {
+        } else if (request.getOperatorId() == null) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getPan() == null || !requestDto.getPan().matches(Operations.PARAMETERS.PAN.PATTERNGENERIC)) {
+        } else if (request.getPan() == null || !request.getPan().matches(Operations.PARAMETERS.PAN.PATTERNGENERIC)) {
             field = Operations.PARAMETERS.PAN.NAME;
-        } else if (requestDto.getCvv2() != null && !requestDto.getCvv2().matches(Operations.PARAMETERS.CVV2.PATTERN)) {
+        } else if (request.getCvv2() != null && !request.getCvv2().matches(Operations.PARAMETERS.CVV2.PATTERN)) {
             field = Operations.PARAMETERS.CVV2.NAME;
-        } else if (requestDto.getExpDate() == null || !requestDto.getExpDate().matches(Operations.PARAMETERS.EXPDATE.PATTERN)) {
+        } else if (request.getExpDate() == null || !request.getExpDate().matches(Operations.PARAMETERS.EXPDATE.PATTERN)) {
             field = Operations.PARAMETERS.EXPDATE.NAME;
-        } else if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
+        } else if (request.getAmount() == null || !request.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
             field = Operations.PARAMETERS.AMOUNT.NAME;
-        } else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
+        } else if (request.getCurrency() == null || !request.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
             field = Operations.PARAMETERS.CURRENCY.NAME;
-        } else if (!requestDto.getCurrency().equalsIgnoreCase("978") && (requestDto.getExponent() == null || requestDto.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
+        } else if (!request.getCurrency().equalsIgnoreCase("978") && (request.getExponent() == null || request.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
             field = Operations.PARAMETERS.EXPONENT.NAME;
-        } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
+        } else if (request.getAccountingMode() == null || !request.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
-        } else if (requestDto.getNetwork() == null || !requestDto.getNetwork().matches(Operations.PARAMETERS.NETWORK.PATTERN)) {
+        } else if (request.getNetwork() == null || !request.getNetwork().matches(Operations.PARAMETERS.NETWORK.PATTERN)) {
             field = Operations.PARAMETERS.NETWORK.NAME;
-        } else if (requestDto.getEmailCh() != null && !requestDto.getEmailCh().matches(Operations.PARAMETERS.EMAIL.PATTERN)) {
+        } else if (request.getEmailCh() != null && !request.getEmailCh().matches(Operations.PARAMETERS.EMAIL.PATTERN)) {
             field = Operations.PARAMETERS.EMAIL.NAMECH;
-        } else if (requestDto.getUserId() != null && !requestDto.getUserId().matches(Operations.PARAMETERS.USERID.PATTERN)) {
+        } else if (request.getUserId() != null && !request.getUserId().matches(Operations.PARAMETERS.USERID.PATTERN)) {
             field = Operations.PARAMETERS.USERID.NAME;
-        } else if (requestDto.getAcquirer() != null && !requestDto.getAcquirer().matches(Operations.PARAMETERS.ACQUIRER.PATTERN)) {
+        } else if (request.getAcquirer() != null && !request.getAcquirer().matches(Operations.PARAMETERS.ACQUIRER.PATTERN)) {
             field = Operations.PARAMETERS.ACQUIRER.NAME;
-        } else if (requestDto.getIpAddress() != null && !requestDto.getIpAddress().matches(Operations.PARAMETERS.IPADDRESS.PATTERN)) {
+        } else if (request.getIpAddress() != null && !request.getIpAddress().matches(Operations.PARAMETERS.IPADDRESS.PATTERN)) {
             field = Operations.PARAMETERS.IPADDRESS.NAME;
-        } else if (requestDto.getUsrAuthFlag() != null && !requestDto.getUsrAuthFlag().matches(Operations.PARAMETERS.USRAUTHFLAG.PATTERN)) {
+        } else if (request.getUsrAuthFlag() != null && !request.getUsrAuthFlag().matches(Operations.PARAMETERS.USRAUTHFLAG.PATTERN)) {
             field = Operations.PARAMETERS.USRAUTHFLAG.NAME;
-        } else if (requestDto.getOpDescr() != null && !requestDto.getOpDescr().matches(Operations.PARAMETERS.OPDESCR.PATTERN)) {
+        } else if (request.getOpDescr() != null && !request.getOpDescr().matches(Operations.PARAMETERS.OPDESCR.PATTERN)) {
             field = Operations.PARAMETERS.OPDESCR.PATTERN;
-        } else if (requestDto.getAntifraud() != null && !requestDto.getAntifraud().matches(Operations.PARAMETERS.ANTIFRAUD.PATTERN)) {
+        } else if (request.getAntifraud() != null && !request.getAntifraud().matches(Operations.PARAMETERS.ANTIFRAUD.PATTERN)) {
             field = Operations.PARAMETERS.ANTIFRAUD.NAME;
-        } else if (requestDto.getProductRef() != null && !requestDto.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
+        } else if (request.getProductRef() != null && !request.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
             field = Operations.PARAMETERS.PRODUCTREF.NAME;
-        } else if (requestDto.getName() != null && !requestDto.getName().matches(Operations.PARAMETERS.NAME.PATTERN)) {
+        } else if (request.getName() != null && !request.getName().matches(Operations.PARAMETERS.NAME.PATTERN)) {
             field = Operations.PARAMETERS.NAME.NAME;
-        } else if (requestDto.getSurname() != null && !requestDto.getSurname().matches(Operations.PARAMETERS.SURNAME.PATTERN)) {
+        } else if (request.getSurname() != null && !request.getSurname().matches(Operations.PARAMETERS.SURNAME.PATTERN)) {
             field = Operations.PARAMETERS.SURNAME.NAME;
-        } else if (requestDto.getTaxId() != null && !requestDto.getTaxId().matches(Operations.PARAMETERS.TAXID.PATTERN)) {
+        } else if (request.getTaxId() != null && !request.getTaxId().matches(Operations.PARAMETERS.TAXID.PATTERN)) {
             field = Operations.PARAMETERS.TAXID.NAME;
-        } else if (requestDto.getCreatePanAlias() != null && !requestDto.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
+        } else if (request.getCreatePanAlias() != null && !request.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
             field = Operations.PARAMETERS.CREATEPANALIAS.NAME;
-        } else if (requestDto.getThreeDSData() == null) {
+        } else if (request.getThreeDSData() == null) {
             field = Operations.PARAMETERS.THREEDSDATA.NAME;
-        } else if (requestDto.getNotifyUrl() == null) {
+        } else if (request.getNotifyUrl() == null) {
             field = Operations.PARAMETERS.NOTIFURL.NAME;
         }
 
@@ -159,13 +159,19 @@ public class RequestValidator {
 
     }
 
-    public static void validateThreeDSAuthorization1Request(ThreeDSAuthorization1Request requestDto) throws VPosClientException {
+    /**
+     * Method used to validate the step 1 of a 3D Secure authorization.
+     *
+     * @param request request to validate
+     * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
+     */
+    public static void validateThreeDSAuthorization1Request(ThreeDSAuthorization1Request request) throws VPosClientException {
         String field = "";
-        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+        if (request.getOperatorId() == null || !request.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getThreeDSMtdComplInd() == null||!requestDto.getThreeDSMtdComplInd().matches(Operations.PARAMETERS.THREEDSMTDCOMPLIND.PATTERN)) {
+        } else if (request.getThreeDSMtdComplInd() == null||!request.getThreeDSMtdComplInd().matches(Operations.PARAMETERS.THREEDSMTDCOMPLIND.PATTERN)) {
             field = Operations.PARAMETERS.THREEDSMTDCOMPLIND.NAME;
-        } else if (requestDto.getThreeDSTransId() == null) {
+        } else if (request.getThreeDSTransId() == null) {
             field = Operations.PARAMETERS.THREEDSTRANSID.NAME;
         }
 
@@ -173,11 +179,17 @@ public class RequestValidator {
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
     }
 
-    public static void validateThreeDSAuthorization2Request(ThreeDSAuthorization2Request requestDto) throws VPosClientException {
+    /**
+     * Method used to validate the step 2 of a 3D Secure authorization.
+     *
+     * @param request request to validate
+     * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
+     */
+    public static void validateThreeDSAuthorization2Request(ThreeDSAuthorization2Request request) throws VPosClientException {
         String field = "";
-        if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+        if (request.getOperatorId() == null || !request.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getThreeDSTransId() == null) {
+        } else if (request.getThreeDSTransId() == null) {
             field = Operations.PARAMETERS.THREEDSTRANSID.NAME;
         }
 
@@ -185,26 +197,32 @@ public class RequestValidator {
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
     }
 
-    public static void validateHTMLRedirectFragmentRequest(PaymentInfo requestDto) throws VPosClientException {
+    /**
+     * Method used to validate a redirect payment request.
+     *
+     * @param request request to validate
+     * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
+     */
+    public static void validateHTMLRedirectFragmentRequest(PaymentInfo request) throws VPosClientException {
         String field = "";
 
-        if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
+        if (request.getAmount() == null || !request.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
             field = Operations.PARAMETERS.AMOUNT.NAME;
-        } else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
+        } else if (request.getCurrency() == null || !request.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
             field = Operations.PARAMETERS.CURRENCY.NAME;
-        } else if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
+        } else if (request.getOrderId() == null || !request.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
-        } else if (requestDto.getShopId() == null || !requestDto.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
+        } else if (request.getShopId() == null || !request.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
             field = Operations.PARAMETERS.SHOPID.NAME;
-        } else if (requestDto.getUrlBack() == null) {
+        } else if (request.getUrlBack() == null) {
             field = Operations.PARAMETERS.URLBACK.NAME;
-        } else if (requestDto.getUrlDone() == null) {
+        } else if (request.getUrlDone() == null) {
             field = Operations.PARAMETERS.URLDONE.NAME;
-        } else if (requestDto.getUrlMs() == null) {
+        } else if (request.getUrlMs() == null) {
             field = Operations.PARAMETERS.URLMS.NAME;
-        } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
+        } else if (request.getAccountingMode() == null || !request.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
-        } else if (requestDto.getAuthorMode() == null || !requestDto.getAuthorMode().matches(Operations.PARAMETERS.AUTHORMODE.PATTERN)) {
+        } else if (request.getAuthorMode() == null || !request.getAuthorMode().matches(Operations.PARAMETERS.AUTHORMODE.PATTERN)) {
             field = Operations.PARAMETERS.AUTHORMODE.NAME;
         }
         if (!field.isEmpty())
@@ -212,52 +230,58 @@ public class RequestValidator {
 
     }
 
-    public static void validateAuthorizationRequest(AuthorizationRequest requestDto) throws VPosClientException {
+    /**
+     * Method used to validate an Authorization request.
+     *
+     * @param request request to validate
+     * @throws VPosClientException raised when a field is missing (if it is mandatory) or not valid
+     */
+    public static void validateAuthorizationRequest(AuthorizationRequest request) throws VPosClientException {
         String field = "";
 
-        if (requestDto.getOrderId() == null || !requestDto.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
+        if (request.getOrderId() == null || !request.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
-        } else if (requestDto.getOperatorId() == null || !requestDto.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
+        } else if (request.getOperatorId() == null || !request.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (requestDto.getPan() == null || !requestDto.getPan().matches(Operations.PARAMETERS.PAN.PATTERNGENERIC)) {
+        } else if (request.getPan() == null || !request.getPan().matches(Operations.PARAMETERS.PAN.PATTERNGENERIC)) {
             field = Operations.PARAMETERS.PAN.NAME;
-        } else if (requestDto.getCvv2() != null && !requestDto.getCvv2().matches(Operations.PARAMETERS.CVV2.PATTERN)) {
+        } else if (request.getCvv2() != null && !request.getCvv2().matches(Operations.PARAMETERS.CVV2.PATTERN)) {
             field = Operations.PARAMETERS.CVV2.NAME;
-        } else if (requestDto.getExpDate() == null || !requestDto.getExpDate().matches(Operations.PARAMETERS.EXPDATE.PATTERN)) {
+        } else if (request.getExpDate() == null || !request.getExpDate().matches(Operations.PARAMETERS.EXPDATE.PATTERN)) {
             field = Operations.PARAMETERS.EXPDATE.NAME;
-        } else if (requestDto.getAmount() == null || !requestDto.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
+        } else if (request.getAmount() == null || !request.getAmount().matches(Operations.PARAMETERS.AMOUNT.PATTERN)) {
             field = Operations.PARAMETERS.AMOUNT.NAME;
-        } else if (requestDto.getCurrency() == null || !requestDto.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
+        } else if (request.getCurrency() == null || !request.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
             field = Operations.PARAMETERS.CURRENCY.NAME;
-        } else if (!requestDto.getCurrency().equalsIgnoreCase("978") && (requestDto.getExponent() == null || requestDto.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
+        } else if (!request.getCurrency().equalsIgnoreCase("978") && (request.getExponent() == null || request.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
             field = Operations.PARAMETERS.EXPONENT.NAME;
-        } else if (requestDto.getAccountingMode() == null || !requestDto.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
+        } else if (request.getAccountingMode() == null || !request.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
-        } else if (requestDto.getNetwork() == null || !requestDto.getNetwork().matches(Operations.PARAMETERS.NETWORK.PATTERN)) {
+        } else if (request.getNetwork() == null || !request.getNetwork().matches(Operations.PARAMETERS.NETWORK.PATTERN)) {
             field = Operations.PARAMETERS.NETWORK.NAME;
-        } else if (requestDto.getEmailCh() != null && !requestDto.getEmailCh().matches(Operations.PARAMETERS.EMAIL.PATTERN)) {
+        } else if (request.getEmailCh() != null && !request.getEmailCh().matches(Operations.PARAMETERS.EMAIL.PATTERN)) {
             field = Operations.PARAMETERS.EMAIL.NAMECH;
-        }else if (requestDto.getUserId() != null && !requestDto.getUserId().matches(Operations.PARAMETERS.USERID.PATTERN)) {
+        }else if (request.getUserId() != null && !request.getUserId().matches(Operations.PARAMETERS.USERID.PATTERN)) {
             field = Operations.PARAMETERS.USERID.NAME;
-        } else if (requestDto.getAcquirer() != null && !requestDto.getAcquirer().matches(Operations.PARAMETERS.ACQUIRER.PATTERN)) {
+        } else if (request.getAcquirer() != null && !request.getAcquirer().matches(Operations.PARAMETERS.ACQUIRER.PATTERN)) {
             field = Operations.PARAMETERS.ACQUIRER.NAME;
-        } else if (requestDto.getIpAddress() != null && !requestDto.getIpAddress().matches(Operations.PARAMETERS.IPADDRESS.PATTERN)) {
+        } else if (request.getIpAddress() != null && !request.getIpAddress().matches(Operations.PARAMETERS.IPADDRESS.PATTERN)) {
             field = Operations.PARAMETERS.IPADDRESS.NAME;
-        } else if (requestDto.getUsrAuthFlag() != null && !requestDto.getUsrAuthFlag().matches(Operations.PARAMETERS.USRAUTHFLAG.PATTERN)) {
+        } else if (request.getUsrAuthFlag() != null && !request.getUsrAuthFlag().matches(Operations.PARAMETERS.USRAUTHFLAG.PATTERN)) {
             field = Operations.PARAMETERS.USRAUTHFLAG.NAME;
-        } else if (requestDto.getOpDescr() != null && !requestDto.getOpDescr().matches(Operations.PARAMETERS.OPDESCR.PATTERN)) {
+        } else if (request.getOpDescr() != null && !request.getOpDescr().matches(Operations.PARAMETERS.OPDESCR.PATTERN)) {
             field = Operations.PARAMETERS.OPDESCR.PATTERN;
-        } else if (requestDto.getAntiFraud() != null && !requestDto.getAntiFraud().matches(Operations.PARAMETERS.ANTIFRAUD.PATTERN)) {
+        } else if (request.getAntiFraud() != null && !request.getAntiFraud().matches(Operations.PARAMETERS.ANTIFRAUD.PATTERN)) {
             field = Operations.PARAMETERS.ANTIFRAUD.NAME;
-        } else if (requestDto.getProductRef() != null && !requestDto.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
+        } else if (request.getProductRef() != null && !request.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
             field = Operations.PARAMETERS.PRODUCTREF.NAME;
-        } else if (requestDto.getName() != null && !requestDto.getName().matches(Operations.PARAMETERS.NAME.PATTERN)) {
+        } else if (request.getName() != null && !request.getName().matches(Operations.PARAMETERS.NAME.PATTERN)) {
             field = Operations.PARAMETERS.NAME.NAME;
-        } else if (requestDto.getSurname() != null && !requestDto.getSurname().matches(Operations.PARAMETERS.SURNAME.PATTERN)) {
+        } else if (request.getSurname() != null && !request.getSurname().matches(Operations.PARAMETERS.SURNAME.PATTERN)) {
             field = Operations.PARAMETERS.SURNAME.NAME;
-        } else if (requestDto.getTaxId() != null && !requestDto.getTaxId().matches(Operations.PARAMETERS.TAXID.PATTERN)) {
+        } else if (request.getTaxId() != null && !request.getTaxId().matches(Operations.PARAMETERS.TAXID.PATTERN)) {
             field = Operations.PARAMETERS.TAXID.NAME;
-        } else if (requestDto.getCreatePanAlias() != null && !requestDto.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
+        } else if (request.getCreatePanAlias() != null && !request.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
             field = Operations.PARAMETERS.CREATEPANALIAS.NAME;
         }
 
