@@ -225,11 +225,7 @@ public class RequestValidator {
         } else if (request.getAuthorMode() == null || !request.getAuthorMode().matches(Operations.PARAMETERS.AUTHORMODE.PATTERN)) {
             field = Operations.PARAMETERS.AUTHORMODE.NAME;
         }
-        if (request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.TOKEN) && (!request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.NAMECH) ||
-                !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.SURNAMECH) || !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.EMAIL)
-                || !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.NETWORK)|| !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.EXPDATE))) {
-            throw new VPosClientException("BAD REQUEST: For Token payments email, surnameCH, nameCH, expDate, network are required");
-        }
+        
         if (!field.isEmpty())
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
 

@@ -49,7 +49,6 @@ public class VPosPaymentClient {
         this.ssl = false;
     }
 
-
     public BPWXmlResponse executeCall(BPWXmlRequest input) throws VPosClientException {
 
         try {
@@ -130,7 +129,6 @@ public class VPosPaymentClient {
         factory.setConnectTimeout(this.timeout);
         factory.setHttpClient(httpClient);
 
-
         return new RestTemplate(factory);
     }
 
@@ -146,7 +144,5 @@ public class VPosPaymentClient {
         this.sslContext = context;
         this.ssl = true;
     }
-
-
 }
 
