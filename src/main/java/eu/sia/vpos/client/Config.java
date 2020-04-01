@@ -47,4 +47,8 @@ public interface Config {
     SSLContext getSslContext();
 
     void setSslContext(SSLContext sslContext);
+
+    String getTimeout();
+
+    void setTimeout(String timeout);
 }

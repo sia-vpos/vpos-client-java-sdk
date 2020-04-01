@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 /**
  * Utility class used to generate payment initiation HTML document
  *
+ * @author a.simonetti
  * @author Gabriel Raul Marini
  */
 public class HTMLGenerator {
@@ -37,18 +38,6 @@ public class HTMLGenerator {
             html = html.replace("[PAGE]", "LAND");
         }
         html = html.replace("[PARAMETERS]", generateParamsHtml(params));
-        return html;
-    }
-
-    public String base64ToHtml(String base64, Integer delay) {
-        String html = new String(decoder.decode(base64.getBytes()));
-        String decodedFormPattern = new String(decoder.decode(FORM_PATTERN));
-        String decodedScript = new String(decoder.decode(SCRIPT));
-
-        html = html.replace("</body>", decodedFormPattern + "</body>");
-        html = html.replace("</html>", decodedScript + "</html>");
-        html = html.replace("[DELAY]", delay.toString());
-
         return html;
     }
 

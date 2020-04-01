@@ -40,7 +40,6 @@ public final class AESEncoder {
 
         // What we should encrypt
         byte[] toEncrypt = jsonObject.getBytes(CHARSET);
-        System.out.println("JSON: "+jsonObject);
 
         // Encrypt
         try {

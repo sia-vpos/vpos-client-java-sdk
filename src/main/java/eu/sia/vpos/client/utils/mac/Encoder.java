@@ -46,12 +46,11 @@ public final class Encoder {
      */
     public String getMac(Map<String, String> valueMap, String key) throws VPosClientException {
         StringBuilder sb = new StringBuilder();
-
         for (Entry<String, String> entry : valueMap.entrySet())
             appendField(entry.getKey().toUpperCase(), entry.getValue(), sb);
         //deleting the first &
         sb.deleteCharAt(0);
-        System.out.println("STRING FOR MAC: "+sb.toString());
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "STRING FOR MAC: " + sb.toString());
         return hmacCalculator.calculate(sb.toString(), key);
     }
 
@@ -72,7 +71,7 @@ public final class Encoder {
         }
 
         sb.deleteCharAt(0);
-        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "\n" + sb.toString() + "\n");
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "STRING FOR MAC: " + sb.toString());
         return hmacCalculator.calculate(sb.toString(), key);
     }
 

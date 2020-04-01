@@ -1,5 +1,7 @@
 package eu.sia.vpos.client.utils.constants;
 
+import org.omg.CORBA.TIMEOUT;
+
 public class ConfigConstants {
     private ConfigConstants(){}
 
@@ -13,4 +15,5 @@ public class ConfigConstants {
     public static final String PROXYPASS = "PROXY_PASS";
     public static final String PROXYUSERNAME = "PROXY_USERNAME";
     public static final String MACALG = "MAC_ALG";
+    public static final String TIMEOUT = "TIMEOUT";
 }

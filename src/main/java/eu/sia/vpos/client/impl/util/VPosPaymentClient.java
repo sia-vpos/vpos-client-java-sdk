@@ -1,6 +1,5 @@
 package eu.sia.vpos.client.impl.util;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import eu.sia.vpos.client.request.xml.BPWXmlRequest;
 import eu.sia.vpos.client.response.xml.BPWXmlResponse;
 import eu.sia.vpos.client.utils.constants.Errors;
@@ -23,16 +22,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.util.StreamReaderDelegate;
-import java.io.FileInputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,10 +39,12 @@ public class VPosPaymentClient {
     private String proxyUser;
     private String proxyPass;
     private String urlWebApi;
+    private int timeout;
 
 
-    public VPosPaymentClient(String urlWebApi) {
+    public VPosPaymentClient(String urlWebApi, int timeout) {
         this.urlWebApi = urlWebApi;
+        this.timeout = timeout;
         this.proxy = false;
         this.ssl = false;
     }
@@ -61,7 +55,7 @@ public class VPosPaymentClient {
         try {
             StringBuilder inputXml = new StringBuilder();
             inputXml.append(parseRequest(input));
-            MultiValueMap<String, String> map= new LinkedMultiValueMap<>();
+            MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("data", inputXml.toString());
             Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "OUTPUT XML: \n" + inputXml.toString());
             RestTemplate template = createRestTemplate();
@@ -69,30 +63,6 @@ public class VPosPaymentClient {
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
-            ResponseEntity<String> responseEntity = template.exchange(this.urlWebApi, HttpMethod.POST, entity, String.class);
-
-            String xmlResponse = responseEntity.getBody();
-            if (HttpStatus.OK != responseEntity.getStatusCode()) {
-                throw new VPosClientException("VPOS call failed with code " + responseEntity.getStatusCode().value());
-            }
-
-            return parseResponse(xmlResponse);
-
-        } catch (VPosClientException pe) {
-            throw pe;
-        } catch (Exception e) {
-            throw new VPosClientException(e.getMessage(), e.getCause());
-        }
-    }
-
-    public BPWXmlResponse executeCall(MultiValueMap<String,String> params) throws VPosClientException {
-
-        try {
-            RestTemplate template = createRestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-            HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
             ResponseEntity<String> responseEntity = template.exchange(this.urlWebApi, HttpMethod.POST, entity, String.class);
 
             String xmlResponse = responseEntity.getBody();
@@ -128,10 +98,7 @@ public class VPosPaymentClient {
         try {
             JAXBContext jc = JAXBContext.newInstance(BPWXmlResponse.class);
 
-            //XMLInputFactory xif = XMLInputFactory.newInstance();
             Reader reader = new StringReader(xmlResponse);
-            //XMLStreamReader xsr = xif.createXMLStreamReader( reader);
-            //xsr = new MyStreamReaderDelegate(xsr);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             return (BPWXmlResponse) unmarshaller.unmarshal(reader);
         } catch (JAXBException e) {
@@ -139,7 +106,6 @@ public class VPosPaymentClient {
             throw new VPosClientException(Errors.MALFORMED_RESPONSE, e);
         }
     }
-
 
     private RestTemplate createRestTemplate() {
 
@@ -161,7 +127,7 @@ public class VPosPaymentClient {
         }
         HttpClient httpClient = clientBuilder.build();
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setConnectTimeout(50000);
+        factory.setConnectTimeout(this.timeout);
         factory.setHttpClient(httpClient);
 
 
@@ -181,22 +147,6 @@ public class VPosPaymentClient {
         this.ssl = true;
     }
 
-    private static class MyStreamReaderDelegate extends StreamReaderDelegate {
 
-        public MyStreamReaderDelegate(XMLStreamReader xsr) {
-            super(xsr);
-        }
-
-        @Override
-        public String getAttributeLocalName(int index) {
-            return super.getAttributeLocalName(index).toLowerCase();
-        }
-
-        @Override
-        public String getLocalName() {
-            return super.getLocalName().toLowerCase();
-        }
-
-    }
 }
 

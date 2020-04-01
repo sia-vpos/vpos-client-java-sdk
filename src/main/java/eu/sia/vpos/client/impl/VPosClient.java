@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VPosClient implements Client {
 
@@ -66,21 +68,28 @@ public class VPosClient implements Client {
 
         this.responseMACCalculator = new ResponseMACCalculator(hmacCalculator);
         initPaymentClient();
-
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "Client correctly initialized");
     }
 
     private void validateConfig() throws VPosClientException {
         List<String> fields = new ArrayList<>();
         if (this.config.getShopID() == null || !this.config.getShopID().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
             fields.add(Operations.PARAMETERS.SHOPID.NAME);
-        } else if (this.config.getApiKey() == null) {
+        }
+        if (this.config.getApiKey() == null) {
             fields.add(ConfigConstants.APIRESULTKEY);
-        } else if (this.config.getApiUrl() == null) {
+        }
+        if (this.config.getApiUrl() == null) {
             fields.add(ConfigConstants.APIURL);
-        } else if (this.config.getRedirectKey() == null) {
+        }
+        if (this.config.getRedirectKey() == null) {
             fields.add(ConfigConstants.REDIRECTKEY);
-        } else if (this.config.getRedirectUrl() == null) {
+        }
+        if (this.config.getRedirectUrl() == null) {
             fields.add(ConfigConstants.REDIRECTURL);
+        }
+        if (this.config.getTimeout() == null) {
+            fields.add(ConfigConstants.TIMEOUT);
         }
         if (!fields.isEmpty()) {
             StringBuilder sb = new StringBuilder();
@@ -94,7 +103,7 @@ public class VPosClient implements Client {
     }
 
     private void initPaymentClient() {
-        this.vPosPaymentClient = new VPosPaymentClient(config.getApiUrl());
+        this.vPosPaymentClient = new VPosPaymentClient(config.getApiUrl(), Integer.parseInt(config.getTimeout()));
         if (config.getProxyHost() != null && config.getProxyPort() == null) {
             this.vPosPaymentClient.setProxy(config.getProxyHost(), config.getProxyPort(), config.getProxyUsername(), config.getProxyPassword());
         }

@@ -169,7 +169,7 @@ public class RequestValidator {
         String field = "";
         if (request.getOperatorId() == null || !request.getOperatorId().matches(Operations.PARAMETERS.OPERATORID.PATTERN)) {
             field = Operations.PARAMETERS.OPERATORID.NAME;
-        } else if (request.getThreeDSMtdComplInd() == null||!request.getThreeDSMtdComplInd().matches(Operations.PARAMETERS.THREEDSMTDCOMPLIND.PATTERN)) {
+        } else if (request.getThreeDSMtdComplInd() == null || !request.getThreeDSMtdComplInd().matches(Operations.PARAMETERS.THREEDSMTDCOMPLIND.PATTERN)) {
             field = Operations.PARAMETERS.THREEDSMTDCOMPLIND.NAME;
         } else if (request.getThreeDSTransId() == null) {
             field = Operations.PARAMETERS.THREEDSTRANSID.NAME;
@@ -225,6 +225,11 @@ public class RequestValidator {
         } else if (request.getAuthorMode() == null || !request.getAuthorMode().matches(Operations.PARAMETERS.AUTHORMODE.PATTERN)) {
             field = Operations.PARAMETERS.AUTHORMODE.NAME;
         }
+        if (request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.TOKEN) && (!request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.NAMECH) ||
+                !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.SURNAMECH) || !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.EMAIL)
+                || !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.NETWORK)|| !request.getNotCompulsoryFields().containsKey(PaymentInfo.FieldName.EXPDATE))) {
+            throw new VPosClientException("BAD REQUEST: For Token payments email, surnameCH, nameCH, expDate, network are required");
+        }
         if (!field.isEmpty())
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
 
@@ -261,7 +266,7 @@ public class RequestValidator {
             field = Operations.PARAMETERS.NETWORK.NAME;
         } else if (request.getEmailCh() != null && !request.getEmailCh().matches(Operations.PARAMETERS.EMAIL.PATTERN)) {
             field = Operations.PARAMETERS.EMAIL.NAMECH;
-        }else if (request.getUserId() != null && !request.getUserId().matches(Operations.PARAMETERS.USERID.PATTERN)) {
+        } else if (request.getUserId() != null && !request.getUserId().matches(Operations.PARAMETERS.USERID.PATTERN)) {
             field = Operations.PARAMETERS.USERID.NAME;
         } else if (request.getAcquirer() != null && !request.getAcquirer().matches(Operations.PARAMETERS.ACQUIRER.PATTERN)) {
             field = Operations.PARAMETERS.ACQUIRER.NAME;

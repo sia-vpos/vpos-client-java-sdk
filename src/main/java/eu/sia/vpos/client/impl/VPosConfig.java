@@ -32,7 +32,10 @@ public class VPosConfig implements Config {
 
     private SSLContext sslContext;
 
+    private String timeout;
+
     public VPosConfig() {
+        this.timeout = "10000";
     }
 
     public VPosConfig(Properties properties) {
@@ -54,6 +57,7 @@ public class VPosConfig implements Config {
         else{
             this.algorithm = Constants.DEFAULT_ALG;
         }
+        this.timeout = properties.getProperty(ConfigConstants.TIMEOUT,"10000");
 
     }
 
@@ -148,5 +152,13 @@ public class VPosConfig implements Config {
 
     public void setSslContext(SSLContext sslContext) {
         this.sslContext = sslContext;
+    }
+
+    public String getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(String timeout) {
+        this.timeout = timeout;
     }
 }
