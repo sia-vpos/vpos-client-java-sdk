@@ -1,11 +1,15 @@
 package eu.sia.vpos.client.request;
 
+import eu.sia.vpos.client.response.OrderStatusResponse;
+
 public class OrderStatusRequest extends RequestDto {
 
     private String orderId;
     private String productRef;
 
-    public OrderStatusRequest(String shopId, String operatorId, String orderId, String productRef, String options) {
+    public OrderStatusRequest(){}
+
+    public OrderStatusRequest(String operatorId, String orderId, String productRef, String options) {
         setOperatorId(operatorId);
         this.orderId = orderId;
         this.productRef = productRef;

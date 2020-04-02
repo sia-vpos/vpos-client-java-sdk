@@ -31,8 +31,6 @@ public class ThreeDSAuthorization0Request  extends RequestDto{
     private String threeDSMtdNotifyUrl;
     private String challengeWinSize;
 
-    private String merchantKey;
-
     public String getOrderId() {
         return orderId;
     }
@@ -257,11 +255,4 @@ public class ThreeDSAuthorization0Request  extends RequestDto{
         this.challengeWinSize = challengeWinSize;
     }
 
-    public String getMerchantKey() {
-        return merchantKey;
-    }
-
-    public void setMerchantKey(String merchantKey) {
-        this.merchantKey = merchantKey;
-    }
 }

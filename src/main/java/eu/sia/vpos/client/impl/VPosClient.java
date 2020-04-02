@@ -125,7 +125,7 @@ public class VPosClient implements Client {
     public ThreeDSAuthorization0Response threeDSAuthorize0(ThreeDSAuthorization0Request threeDSAuthorization0Request) throws VPosClientException {
 
         RequestValidator.validateThreeDSAuthorization0Request(threeDSAuthorization0Request);
-        BPWXmlRequest request = requestBuilder.buildThreeDS2Authorize0(threeDSAuthorization0Request, config.getShopID());
+        BPWXmlRequest request = requestBuilder.buildThreeDS2Authorize0(threeDSAuthorization0Request, config.getShopID(), this.apiResultKey);
         BPWXmlResponse xmlResponse = vPosPaymentClient.executeCall(request);
         //Verify MAC-Response
         verifyMacResponse(xmlResponse);

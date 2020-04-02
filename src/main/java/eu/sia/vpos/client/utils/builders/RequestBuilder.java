@@ -194,7 +194,7 @@ public class RequestBuilder {
      * @return the xml request
      * @throws VPosClientException
      */
-    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request authRequest, String shopId) throws VPosClientException {
+    public BPWXmlRequest buildThreeDS2Authorize0(ThreeDSAuthorization0Request authRequest, String shopId, String apiResultKey) throws VPosClientException {
         Date reqDate = new Date();
         BPWXmlRequest request = getBPWXmlRequest(Operations.PARAMETERS.AUTHORIZATION3DS2STEP0, reqDate);
         Auth3DS2AuthorizationStep0Request auth3DSStep0 = new Auth3DS2AuthorizationStep0Request(reqDate);
@@ -231,7 +231,7 @@ public class RequestBuilder {
         //System.out.println("URL ENCODED: "+URLEncoder.encode(AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()), StandardCharsets.UTF_8.toString()));
         //System.out.println("NORMAL : "+AESEncoder.encode3DSData(dtoRequest.getMerchantKey(),dtoRequest.getThreeDSData().toString()));
 
-        auth3DSStep0.setThreeDSData(AESEncoder.encode3DSData(authRequest.getMerchantKey(), authRequest.getThreeDSData().toString()));
+        auth3DSStep0.setThreeDSData(AESEncoder.encode3DSData(apiResultKey, authRequest.getThreeDSData().toString()));
         auth3DSStep0.setCprof(authRequest.getcProf());
         auth3DSStep0.setThreeDSMtdNotifyUrl(authRequest.getThreeDSMtdNotifyUrl());
         auth3DSStep0.setChallengeWinSize(authRequest.getChallengeWinSize());
