@@ -759,6 +759,8 @@ public final class Operations {
         public static final String PANTAIL = "PANTAIL";
         public static final String PANEXPIRYDATE = "PANEXPIRYDATE";
         public static final String CARDTYPE = "CARDTYPE";
+        public static final String AMAZONAUTHID = "AMAZONAUTHID";
+        public static final String AMAZONCAPTUREID = "AMAZONCAPTUREID";
 
         private AUTHORIZATION() {
 

@@ -60,9 +60,13 @@ public class MapBuilder {
         map.put(VPosConstants.ACCOUNTHOLDER, values.get(VPosConstants.ACCOUNTHOLDER));
         map.put(Operations.PARAMETERS.IBAN.NAME, values.get(Operations.PARAMETERS.IBAN.NAME));
         map.put(VPosConstants.ALIASSTR, values.get(VPosConstants.ALIASSTR));
+        map.put(VPosConstants.EMAILCH, values.get(VPosConstants.EMAILCH));
+        map.put(VPosConstants.CFISC, values.get(VPosConstants.CFISC));
         map.put(Operations.AUTHORIZATION.ACQUIRERBIN, values.get(Operations.AUTHORIZATION.ACQUIRERBIN));
         map.put(Operations.AUTHORIZATION.MERCHANTID, values.get(Operations.AUTHORIZATION.MERCHANTID));
         map.put(Operations.AUTHORIZATION.CARDTYPE, values.get(Operations.AUTHORIZATION.CARDTYPE));
+        map.put(Operations.AUTHORIZATION.AMAZONAUTHID, values.get(Operations.AUTHORIZATION.AMAZONAUTHID));
+        map.put(Operations.AUTHORIZATION.AMAZONCAPTUREID, values.get(Operations.AUTHORIZATION.AMAZONCAPTUREID));
         map.put(VPosConstants.CHINFO, values.get(VPosConstants.CHINFO));
         return map;
     }
