@@ -85,7 +85,6 @@ public class VPosConfig implements Config {
         this.redirectKey = redirectKey;
     }
 
-    @Override
     public String getRedirectUrl() {
         return redirectUrl;
     }

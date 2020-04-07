@@ -1,5 +1,6 @@
 package eu.sia.vpos.client.utils;
 
+import eu.sia.vpos.client.impl.VPosClient;
 import eu.sia.vpos.client.request.*;
 import eu.sia.vpos.client.utils.constants.Constants;
 import eu.sia.vpos.client.utils.constants.Operations;
@@ -153,6 +154,8 @@ public class RequestValidator {
         } else if (request.getNotifyUrl() == null) {
             field = Operations.PARAMETERS.NOTIFURL.NAME;
         }
+        if(request.getThreeDSData() != null)
+            validateThreeDsData(request.getThreeDSData());
 
         if (!field.isEmpty())
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
@@ -288,5 +291,29 @@ public class RequestValidator {
 
         if (!field.isEmpty())
             throw new VPosClientException(ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE);
+    }
+
+    public static void validateThreeDsData(Data3DSJson data) throws VPosClientException {
+        String field = null;
+        if( data.getBrowserAcceptHeader() == null){
+            field= "browserAcceptHeader";
+        }else if(data.getBrowserColorDepth() == null){
+            field= "browserColorDepth";
+        }else if(data.getBrowserJavaEnabled() == null){
+            field= "browserJavaEnabled";
+        }else if(data.getBrowserIP() == null){
+            field= "browserIP";
+        }else if(data.getBrowserLanguage() == null){
+            field= "browserLanguage";
+        }else if(data.getBrowserScreenHeight() == null){
+            field= "browserScreenHeight";
+        }else if(data.getBrowserScreenWidth() == null){
+            field= "browserScreenWidth";
+        }
+
+        if (field != null){
+            throw new VPosClientException("ERROR_MSG_PREMISE + field + ERROR_MSG_QUEUE");
+        }
+
     }
 }
