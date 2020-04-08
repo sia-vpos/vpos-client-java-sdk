@@ -16,7 +16,6 @@ public class PaymentInfo {
     private String currency;
     private String exponent;
     private String orderId;
-    private String shopId;
     private String urlBack;
     private String urlDone;
     private String urlMs;
@@ -70,14 +69,6 @@ public class PaymentInfo {
 
     public void setOrderId(String orderId) {
         this.orderId = orderId;
-    }
-
-    public String getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
     }
 
     public String getUrlBack() {

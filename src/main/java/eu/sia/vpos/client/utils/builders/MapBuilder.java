@@ -3,7 +3,6 @@ package eu.sia.vpos.client.utils.builders;
 
 import eu.sia.vpos.client.request.PaymentInfo;
 import eu.sia.vpos.client.request.xml.*;
-import eu.sia.vpos.client.response.xml.Operation;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.constants.VPosConstants;
 import eu.sia.vpos.client.utils.encryption.AESEncoder;
@@ -100,12 +99,12 @@ public class MapBuilder {
         return map;
     }
 
-    public static Map<String, String> getRedirectMap(PaymentInfo info, Encoder encoder, String macKey, String apiKey) throws VPosClientException {
+    public static Map<String, String> getRedirectMap(PaymentInfo info, Encoder encoder, String macKey, String apiKey, String shopId) throws VPosClientException {
         Map<String, String> map = new LinkedHashMap<>();
         map.put(Operations.PARAMETERS.URLMS.NAME, info.getUrlMs());
         map.put(Operations.PARAMETERS.URLDONE.NAME, info.getUrlDone());
         map.put(Operations.PARAMETERS.ORDERID.NAME, info.getOrderId());
-        map.put(VPosConstants.SHOPID, info.getShopId());
+        map.put(VPosConstants.SHOPID, shopId);
         map.put(Operations.PARAMETERS.AMOUNT.NAME, info.getAmount());
         map.put(Operations.PARAMETERS.CURRENCY.NAME, info.getCurrency());
         map.put(Operations.PARAMETERS.EXPONENT.NAME, info.getExponent());

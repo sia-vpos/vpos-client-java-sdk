@@ -215,8 +215,6 @@ public class RequestValidator {
             field = Operations.PARAMETERS.CURRENCY.NAME;
         } else if (request.getOrderId() == null || !request.getOrderId().matches(Operations.PARAMETERS.ORDERID.PATTERN)) {
             field = Operations.PARAMETERS.ORDERID.NAME;
-        } else if (request.getShopId() == null || !request.getShopId().matches(Operations.PARAMETERS.SHOPID.PATTERN)) {
-            field = Operations.PARAMETERS.SHOPID.NAME;
         } else if (request.getUrlBack() == null) {
             field = Operations.PARAMETERS.URLBACK.NAME;
         } else if (request.getUrlDone() == null) {
