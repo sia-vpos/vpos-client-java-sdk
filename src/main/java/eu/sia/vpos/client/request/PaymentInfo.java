@@ -2,6 +2,7 @@ package eu.sia.vpos.client.request;
 
 import eu.sia.vpos.client.request.Data3DSJson;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  *
  * @author gab.marini
  */
-public class PaymentInfo {
+public class PaymentInfo implements Serializable {
 
     private String amount;
     private String currency;

@@ -1,10 +1,11 @@
 package eu.sia.vpos.client.response;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderStatusResponse {
+public class OrderStatusResponse implements Serializable {
     private String result;
     private String timestamp;
     private String productRef;

@@ -1,6 +1,8 @@
 package eu.sia.vpos.client.response;
 
-public class AuthorizationResponse {
+import java.io.Serializable;
+
+public class AuthorizationResponse implements Serializable {
     private String result;
     private String paymentType;
     private String authorizationType;

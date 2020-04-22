@@ -2,7 +2,9 @@ package eu.sia.vpos.client.response;
 
 import eu.sia.vpos.client.response.xml.Authorization;
 
-public class RefundResponse {
+import java.io.Serializable;
+
+public class RefundResponse implements Serializable {
 
     private String transactionID;
     private String amount;
