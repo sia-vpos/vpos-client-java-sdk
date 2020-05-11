@@ -23,6 +23,10 @@ public class AuthorizationRequest extends RequestDto {
     private String name;
     private String surname;
     private String taxId;
+    private String tRecurr;
+    private String cRecurr;
+    private String installmentsNumber;
+
 
     public String getOrderId() {
         return orderId;
@@ -190,5 +194,29 @@ public class AuthorizationRequest extends RequestDto {
 
     public void setTaxId(String taxId) {
         this.taxId = taxId;
+    }
+
+    public String gettRecurr() {
+        return tRecurr;
+    }
+
+    public void settRecurr(String tRecurr) {
+        this.tRecurr = tRecurr;
+    }
+
+    public String getcRecurr() {
+        return cRecurr;
+    }
+
+    public void setcRecurr(String cRecurr) {
+        this.cRecurr = cRecurr;
+    }
+
+    public String getInstallmentsNumber() {
+        return installmentsNumber;
+    }
+
+    public void setInstallmentsNumber(String installmentsNumber) {
+        this.installmentsNumber = installmentsNumber;
     }
 }

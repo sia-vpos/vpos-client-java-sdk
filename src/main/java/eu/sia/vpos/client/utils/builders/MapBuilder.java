@@ -215,6 +215,10 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.NAME.NAME, authorizationRequest.getName());
         map.put(Operations.PARAMETERS.SURNAME.NAME, authorizationRequest.getSurname());
         map.put(Operations.PARAMETERS.TAXID.NAME, authorizationRequest.getTaxId());
+        // recurrency info
+        map.put(Operations.PARAMETERS.TRECURR.NAME, authorizationRequest.gettRecurr());
+        map.put(Operations.PARAMETERS.CRECURR.NAME, authorizationRequest.getcRecurr());
+        map.put(Operations.PARAMETERS.INSTALLMENTSNUMBER.NAME, authorizationRequest.getInstallmentsNumber());
         return map;
 
     }

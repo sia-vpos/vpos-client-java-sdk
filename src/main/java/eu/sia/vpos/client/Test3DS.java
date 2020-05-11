@@ -57,10 +57,10 @@ public class Test3DS {
 
             //String b = "OK";
             //ThreeDSAuthorization0Response resp = client.threeDSAuthorize0(build3DSRequest());
-            //client.authorize(buildAuthorizationRequest());
+            client.authorize(buildAuthorizationRequest());
             //client.threeDSAuthorize1(buildThreeDSAuthorizationRequest1());
             //client.threeDSAuthorize2(buildThreeDSAuthorizationRequest2());
-            System.out.println(client.buildHTMLRedirectFragment(buildPaymentTest()));
+            //System.out.println(client.buildHTMLRedirectFragment(buildPaymentTest()));
             //System.out.println(client.buildHTMLRedirectFragment(buildPaymentWithTokenTest()));
             //OrderStatusResponse resp= client.getOrderStatus(buildOrderStatusRequest("AUTH123456769123429"));
             //CaptureResponse resp = client.capture(buildCaptureRequest("8032112928SL2y94x1frnoyq4","1585841834944140177762812878779680802931184"));
@@ -198,14 +198,17 @@ public class Test3DS {
 
         req.setOrderId("AUTH123456769123" + rand.nextInt(1000));
         req.setOperatorId("OPERATOR");
-        req.setPan("4598250000000027");
+        req.setPan("0000500550493297466");
         req.setCvv2("111");
         req.setAmount("6000");
-        req.setExpDate("2112");
+        req.setExpDate("2301");
         req.setCurrency("978");
         req.setAccountingMode("I");
-        req.setNetwork("93");
+        req.setNetwork("98");
         req.setEmailCh("dsdsd@gmail.it");
+        req.setcRecurr("544834629200511");
+        req.settRecurr("U");
+        req.setInstallmentsNumber("11");
         return req;
     }
 

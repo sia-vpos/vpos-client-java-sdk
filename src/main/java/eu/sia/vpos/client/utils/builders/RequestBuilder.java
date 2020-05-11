@@ -178,6 +178,9 @@ public class RequestBuilder {
         authRequest.setName(request.getName());
         authRequest.setSurname(request.getSurname());
         authRequest.setTaxId(request.getTaxId());
+        authRequest.settRecurr(request.gettRecurr());
+        authRequest.setcRecurr(request.getcRecurr());
+        authRequest.setInstallmentsNumber(request.getInstallmentsNumber());
         Data data = new Data();
         data.setOnlineAuthorizationRequest(authRequest);
 
