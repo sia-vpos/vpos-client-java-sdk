@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Test3DS {
+public class Test3DSNoUnitTest {
 
     private static final String SHOP_ID = "129289999900002";
     private static final String REDIRECT_KEY_VPOS = "au-PA-B2AAHsQSG-UuaVNcHFpBk3GJBNWqR3--Tyf-Fa-wav--ySqz9f24-yvP-RvbMQx-VYz9jVDNe-uMwTSt3-tvPukbJTTt-U";
@@ -68,7 +68,7 @@ public class Test3DS {
             //boolean b=client.verifyMAC("http://localhost:8080/payment-gateway/vpos/tokenize?ORDERID=1585919322092143568728681910679428531949566&SHOPID=129289999900002&AUTHNUMBER=413889&AMOUNT=10&CURRENCY=978&TRANSACTIONID=8032112928SL211ntcm0icwf4&ACCOUNTINGMODE=D&AUTHORMODE=I&RESULT=00&TRANSACTIONTYPE=TT07&TRECURR=U&CRECURR=899107067200401&NETWORK=02&MAC=105e962d0727ef0d30a1ce21d14e6813449daa6375c433d2cc2fa631bc3bf680");
             //System.out.println(b);
         } catch (VPosClientException e) {
-            System.out.println(e.getExceptionMessage());
+            System.out.println(e);
         }
     }
 

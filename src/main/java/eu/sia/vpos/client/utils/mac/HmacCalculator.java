@@ -60,7 +60,7 @@ public final class HmacCalculator {
         try {
             result = innerCalculate(value, key);
         } catch (Exception e) {
-            throw new VPosClientException("Hmac calculation failed", e.getCause());
+            throw new VPosClientException("Hmac calculation failed", e);
         }
 
         return result;

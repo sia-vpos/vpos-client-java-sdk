@@ -49,7 +49,7 @@ public final class AESEncoder {
             // Convert to base64
             return DatatypeConverter.printBase64Binary(encrypted);
         }catch (Exception e) {
-            throw new VPosClientException(e.getMessage(), e.getCause());
+            throw new VPosClientException(e.getMessage(), e);
         }
     }
 

@@ -1,6 +1,8 @@
 package eu.sia.vpos.client.request;
 
-public class RequestDto {
+import java.io.Serializable;
+
+public class RequestDto implements Serializable {
 
     protected String operatorId;
     protected String options;

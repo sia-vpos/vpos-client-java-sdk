@@ -1,7 +1,9 @@
 package eu.sia.vpos.client.response;
 
 
-public class ThreeDSAuthorization0Response {
+import java.io.Serializable;
+
+public class ThreeDSAuthorization0Response implements Serializable {
 
     private String result;
     private String paymentType;

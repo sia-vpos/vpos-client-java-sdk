@@ -74,7 +74,7 @@ public class VPosPaymentClient {
         } catch (VPosClientException pe) {
             throw pe;
         } catch (Exception e) {
-            throw new VPosClientException(e.getMessage(), e.getCause());
+            throw new VPosClientException(e.getMessage(), e);
         }
     }
 
@@ -86,7 +86,7 @@ public class VPosPaymentClient {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(input, sw);
         } catch (JAXBException e) {
-            throw new VPosClientException(Errors.MALFORMED_REQUEST, e.getCause());
+            throw new VPosClientException(Errors.MALFORMED_REQUEST, e);
         }
 
         return sw.toString();

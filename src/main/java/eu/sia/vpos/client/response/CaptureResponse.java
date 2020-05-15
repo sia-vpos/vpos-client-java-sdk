@@ -2,7 +2,9 @@ package eu.sia.vpos.client.response;
 
 import eu.sia.vpos.client.response.xml.Authorization;
 
-public class CaptureResponse {
+import java.io.Serializable;
+
+public class CaptureResponse implements Serializable {
 
     private String transactionID;
     private String timestampReq;

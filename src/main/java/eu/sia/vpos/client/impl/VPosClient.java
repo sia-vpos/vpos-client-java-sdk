@@ -104,7 +104,7 @@ public class VPosClient implements Client {
 
     private void initPaymentClient() {
         this.vPosPaymentClient = new VPosPaymentClient(config.getApiUrl(), Integer.parseInt(config.getTimeout()));
-        if (config.getProxyHost() != null && config.getProxyPort() == null) {
+        if (config.getProxyHost() != null && config.getProxyPort() != null) {
             this.vPosPaymentClient.setProxy(config.getProxyHost(), config.getProxyPort(), config.getProxyUsername(), config.getProxyPassword());
         }
         if (config.getSslContext() != null)
