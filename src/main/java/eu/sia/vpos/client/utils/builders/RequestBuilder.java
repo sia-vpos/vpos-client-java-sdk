@@ -240,6 +240,10 @@ public class RequestBuilder {
         auth3DSStep0.setChallengeWinSize(authRequest.getChallengeWinSize());
         auth3DSStep0.setOptions(authRequest.getOptions());
 
+        auth3DSStep0.settRecurr(authRequest.gettRecurr());
+        auth3DSStep0.setcRecurr(authRequest.getcRecurr());
+        auth3DSStep0.setInstallmentsNumber(authRequest.getInstallmentsNumber());
+
         Data data = new Data();
         data.setAuth3DS2AuthorizationStep0Request(auth3DSStep0);
         request.setData(data);

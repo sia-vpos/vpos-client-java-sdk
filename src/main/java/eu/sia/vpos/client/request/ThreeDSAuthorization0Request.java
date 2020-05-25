@@ -30,6 +30,9 @@ public class ThreeDSAuthorization0Request  extends RequestDto{
     private String cProf;
     private String threeDSMtdNotifyUrl;
     private String challengeWinSize;
+    private String tRecurr;
+    private String cRecurr;
+    private String installmentsNumber;
 
     public String getOrderId() {
         return orderId;
@@ -255,4 +258,27 @@ public class ThreeDSAuthorization0Request  extends RequestDto{
         this.challengeWinSize = challengeWinSize;
     }
 
+    public String gettRecurr() {
+        return tRecurr;
+    }
+
+    public void settRecurr(String tRecurr) {
+        this.tRecurr = tRecurr;
+    }
+
+    public String getcRecurr() {
+        return cRecurr;
+    }
+
+    public void setcRecurr(String cRecurr) {
+        this.cRecurr = cRecurr;
+    }
+
+    public String getInstallmentsNumber() {
+        return installmentsNumber;
+    }
+
+    public void setInstallmentsNumber(String installmentsNumber) {
+        this.installmentsNumber = installmentsNumber;
+    }
 }

@@ -23,6 +23,8 @@ public class PaymentInfo {
     private String authorMode;
     private String urlApos;
 
+
+
     private Data3DSJson data3DSJson;
     private Map<FieldName, String> notCompulsoryFields;
 
@@ -159,6 +161,7 @@ public class PaymentInfo {
         ANTIFRAUD,
         TRECURR,
         CRECURR,
+        INSTALLMENTSNUMBER,
         TOKEN,
         EXPDATE,
         NETWORK,
