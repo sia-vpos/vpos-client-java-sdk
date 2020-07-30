@@ -147,6 +147,9 @@ public class MapBuilder {
 
         map.put(Operations.PARAMETERS.TRECURR.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.TRECURR.NAME)));
         map.put(Operations.PARAMETERS.CRECURR.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.CRECURR.NAME)));
+        //TODO verify installment number position
+        map.put(Operations.PARAMETERS.INSTALLMENTSNUMBER.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.INSTALLMENTSNUMBER.NAME)));
+
         map.put(Operations.PARAMETERS.TOKEN.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.TOKEN.NAME)));
 
         map.put(Operations.PARAMETERS.EXPDATE.NAME, info.getNotCompulsoryFields().get(PaymentInfo.FieldName.valueOf(Operations.PARAMETERS.EXPDATE.NAME)));
@@ -215,6 +218,10 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.NAME.NAME, authorizationRequest.getName());
         map.put(Operations.PARAMETERS.SURNAME.NAME, authorizationRequest.getSurname());
         map.put(Operations.PARAMETERS.TAXID.NAME, authorizationRequest.getTaxId());
+        // recurrency info
+        map.put(Operations.PARAMETERS.TRECURR.NAME, authorizationRequest.gettRecurr());
+        map.put(Operations.PARAMETERS.CRECURR.NAME, authorizationRequest.getcRecurr());
+        map.put(Operations.PARAMETERS.INSTALLMENTSNUMBER.NAME, authorizationRequest.getInstallmentsNumber());
         return map;
 
     }
@@ -252,6 +259,10 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.NOTIFURL.NAME, authorization3DSRequest.getNotifyUrl());
         map.put(Operations.PARAMETERS.THREEDSMTDNOTIFURL.NAME, authorization3DSRequest.getThreeDSMtdNotifyUrl());
         map.put(Operations.PARAMETERS.CHALLENGEWINSIZE.NAME, authorization3DSRequest.getChallengeWinSize());
+        // recurrency info
+        map.put(Operations.PARAMETERS.TRECURR.NAME, authorization3DSRequest.gettRecurr());
+        map.put(Operations.PARAMETERS.CRECURR.NAME, authorization3DSRequest.getcRecurr());
+        map.put(Operations.PARAMETERS.INSTALLMENTSNUMBER.NAME, authorization3DSRequest.getInstallmentsNumber());
 
         return map;
     }

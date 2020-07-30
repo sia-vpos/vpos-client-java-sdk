@@ -79,6 +79,15 @@ public class OnlineAuthorizationRequest {
     @XmlElement(name = "AntiFraud")
     private String antiFraud;
 
+    @XmlElement(name = "TRecurr")
+    private String tRecurr;
+
+    @XmlElement(name = "CRecurr")
+    private String cRecurr;
+
+    @XmlElement(name = "InstallmentsNumber")
+    private String installmentsNumber;
+
     public OnlineAuthorizationRequest(){}
 
     public OnlineAuthorizationRequest(Date date){
@@ -275,5 +284,29 @@ public class OnlineAuthorizationRequest {
 
     public void setAntiFraud(String antiFraud) {
         this.antiFraud = antiFraud;
+    }
+
+    public String gettRecurr() {
+        return tRecurr;
+    }
+
+    public void settRecurr(String tRecurr) {
+        this.tRecurr = tRecurr;
+    }
+
+    public String getcRecurr() {
+        return cRecurr;
+    }
+
+    public void setcRecurr(String cRecurr) {
+        this.cRecurr = cRecurr;
+    }
+
+    public String getInstallmentsNumber() {
+        return installmentsNumber;
+    }
+
+    public void setInstallmentsNumber(String installmentsNumber) {
+        this.installmentsNumber = installmentsNumber;
     }
 }

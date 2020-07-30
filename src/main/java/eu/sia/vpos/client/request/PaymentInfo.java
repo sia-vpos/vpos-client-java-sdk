@@ -24,6 +24,8 @@ public class PaymentInfo implements Serializable {
     private String authorMode;
     private String urlApos;
 
+
+
     private Data3DSJson data3DSJson;
     private Map<FieldName, String> notCompulsoryFields;
 
@@ -160,6 +162,7 @@ public class PaymentInfo implements Serializable {
         ANTIFRAUD,
         TRECURR,
         CRECURR,
+        INSTALLMENTSNUMBER,
         TOKEN,
         EXPDATE,
         NETWORK,

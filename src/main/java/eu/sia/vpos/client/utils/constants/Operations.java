@@ -228,6 +228,10 @@ public final class Operations {
             public static final String NAME = "CRECURR";
         }
 
+        public static final class INSTALLMENTSNUMBER{
+            public static final String NAME = "INSTALLMENTSNUMBER";
+        }
+
         public static final class TOKEN{
             public static final String NAME = "TOKEN";
         }

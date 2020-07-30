@@ -95,6 +95,15 @@ public class Auth3DS2AuthorizationStep0Request {
     @XmlElement(name = "Options")
     private String options;
 
+    @XmlElement(name = "TRecurr")
+    private String tRecurr;
+
+    @XmlElement(name = "CRecurr")
+    private String cRecurr;
+
+    @XmlElement(name = "InstallmentsNumber")
+    private String installmentsNumber;
+
     public Auth3DS2AuthorizationStep0Request(){
 
     }
@@ -333,5 +342,29 @@ public class Auth3DS2AuthorizationStep0Request {
 
     public void setOptions(String options) {
         this.options = options;
+    }
+
+    public String gettRecurr() {
+        return tRecurr;
+    }
+
+    public void settRecurr(String tRecurr) {
+        this.tRecurr = tRecurr;
+    }
+
+    public String getcRecurr() {
+        return cRecurr;
+    }
+
+    public void setcRecurr(String cRecurr) {
+        this.cRecurr = cRecurr;
+    }
+
+    public String getInstallmentsNumber() {
+        return installmentsNumber;
+    }
+
+    public void setInstallmentsNumber(String installmentsNumber) {
+        this.installmentsNumber = installmentsNumber;
     }
 }
