@@ -11,7 +11,7 @@ public class ThreeDSChallenge {
     private String threeDSTransId;
     @XmlElement(name = "CReq")
     private String creq;
-    @XmlElement(name = "URLAcs")
+    @XmlElement(name = "ACSUrl")
     private String acsUrl;
     @XmlElement(name = "MAC")
     private String mac;
