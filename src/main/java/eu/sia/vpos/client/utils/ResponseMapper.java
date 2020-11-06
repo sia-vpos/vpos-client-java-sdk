@@ -294,6 +294,13 @@ public class ResponseMapper {
             authorizationResponse.setCardType(auth.getCardType());
             return authorizationResponse;
         }
+        if (response.getData().getPanAliasData() != null) {
+            PanAliasData pan = response.getData().getPanAliasData();
+            authorizationResponse.setPanAlias(pan.getPanAlias());
+            authorizationResponse.setPanAliasExpDate(pan.getPanAliasExpDate());
+            authorizationResponse.setPanAliasRev(pan.getPanAliasRev());
+            authorizationResponse.setPanAliasTail(pan.getPanAliasTail());
+        }
         return authorizationResponse;
 
     }

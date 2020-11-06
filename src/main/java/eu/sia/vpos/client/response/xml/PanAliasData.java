@@ -19,6 +19,9 @@ public class PanAliasData {
 	@XmlElement(name = "PanAliasTail")
 	private String panAliasTail;
 
+	@XmlElement(name = "Crecurr")
+	private String cRecurr;
+
 	@XmlElement(name = "MAC")
 	private String mac;
 
@@ -62,4 +65,11 @@ public class PanAliasData {
 		this.mac = mac;
 	}
 
+	public String getcRecurr() {
+		return cRecurr;
+	}
+
+	public void setcRecurr(String cRecurr) {
+		this.cRecurr = cRecurr;
+	}
 }

@@ -208,6 +208,10 @@ public class VPosClient implements Client {
     private void verifyMacResponse(BPWXmlResponse response) throws VPosClientException {
         final String NEUTRAL_MAC_VALUE = "NULL";
 
+        if (config.isDisableResponseMACCheck()) {
+            return;
+        }
+
         String responseMac = responseMACCalculator.getBPWXmlResponseMac(response, config.getApiKey());
         if (!response.getMac().equals(NEUTRAL_MAC_VALUE) && !response.getMac().equals(responseMac))
             throw new VPosClientException("Response MAC is not valid");

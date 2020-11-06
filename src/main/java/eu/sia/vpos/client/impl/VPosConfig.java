@@ -34,6 +34,8 @@ public class VPosConfig implements Config {
 
     private String timeout;
 
+    private boolean disableResponseMACCheck;
+
     public VPosConfig() {
         this.timeout = "10000";
     }
@@ -58,7 +60,8 @@ public class VPosConfig implements Config {
             this.algorithm = Constants.DEFAULT_ALG;
         }
         this.timeout = properties.getProperty(ConfigConstants.TIMEOUT,"10000");
-
+        this.disableResponseMACCheck = Boolean.parseBoolean(
+                properties.getProperty(ConfigConstants.DISABLERESPONSEMACCHECK, "false"));
     }
 
     public String getApiUrl() {
@@ -159,5 +162,13 @@ public class VPosConfig implements Config {
 
     public void setTimeout(String timeout) {
         this.timeout = timeout;
+    }
+
+    public boolean isDisableResponseMACCheck() {
+        return disableResponseMACCheck;
+    }
+
+    public void setDisableResponseMACCheck(boolean disableResponseMACCheck) {
+        this.disableResponseMACCheck = disableResponseMACCheck;
     }
 }

@@ -21,14 +21,11 @@ public final class HmacCalculator {
     private static final Charset CHARSET = StandardCharsets.UTF_8;
 
     private MacAlgorithms algorithm;
-    private Mac mac;
 
     /**
      * Creates an instance of HmacCalculator enabled to perform HMAC-256 calculations
-     *
-     * @throws VPosClientException in case of code corruption (invalid algorithm)
      */
-    public HmacCalculator() throws VPosClientException {
+    public HmacCalculator() {
         this(MacAlgorithms.HMAC_SHA_256);
     }
 
@@ -37,15 +34,9 @@ public final class HmacCalculator {
      * with the specified algorithm
      *
      * @param algorithm used to perform the MAC calculation
-     * @throws VPosClientException in case of code corruption (invalid algorithm)
      */
-    public HmacCalculator(MacAlgorithms algorithm) throws VPosClientException {
-        try {
-            this.algorithm = algorithm;
-            this.mac = Mac.getInstance(algorithm.getValue());
-        } catch (NoSuchAlgorithmException e) {
-            throw new VPosClientException("Invalid algorithm. Code corruption", e);
-        }
+    public HmacCalculator(MacAlgorithms algorithm) {
+        this.algorithm = algorithm;
     }
 
     /**
@@ -67,18 +58,6 @@ public final class HmacCalculator {
     }
 
     /**
-     * @param value on which MAC is calculated
-     * @param key   used to calculate the MAC
-     * @return the MAC of the string value
-     * @throws VPosClientException with relative description in case of failure
-     */
-    public String calculateWith512(String value, String key) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
-        algorithm = MacAlgorithms.HMAC_SHA_512;
-        mac = Mac.getInstance(MacAlgorithms.HMAC_SHA_512.getValue());
-        return innerCalculate(value, key);
-    }
-
-    /**
      * @return the algorithm used to perform HMAC calculation
      */
     public MacAlgorithms getAlgorithm() {
@@ -92,8 +71,9 @@ public final class HmacCalculator {
         this.algorithm = algorithm;
     }
 
-    private String innerCalculate(String value, String key) throws InvalidKeyException, UnsupportedEncodingException {
+    private String innerCalculate(String value, String key) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException {
         SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(CHARSET.name()), algorithm.getValue());
+        Mac mac = Mac.getInstance(algorithm.getValue());
         mac.init(secretKey);
         return Hex.encodeHexString(mac.doFinal(value.getBytes(CHARSET.name())));
     }

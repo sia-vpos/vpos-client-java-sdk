@@ -51,4 +51,9 @@ public interface Config {
     String getTimeout();
 
     void setTimeout(String timeout);
+
+    boolean isDisableResponseMACCheck();
+
+    void setDisableResponseMACCheck(boolean disableResponseMACCheck);
+
 }

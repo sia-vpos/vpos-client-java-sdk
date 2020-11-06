@@ -16,4 +16,5 @@ public class ConfigConstants {
     public static final String PROXYUSERNAME = "PROXY_USERNAME";
     public static final String MACALG = "MAC_ALG";
     public static final String TIMEOUT = "TIMEOUT";
+    public static final String DISABLERESPONSEMACCHECK = "DISABLE_RESPONSE_MAC_CHECK";
 }
