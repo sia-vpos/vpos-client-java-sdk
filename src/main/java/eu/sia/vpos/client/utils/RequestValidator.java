@@ -136,7 +136,7 @@ public class RequestValidator {
         } else if (request.getUsrAuthFlag() != null && !request.getUsrAuthFlag().matches(Operations.PARAMETERS.USRAUTHFLAG.PATTERN)) {
             field = Operations.PARAMETERS.USRAUTHFLAG.NAME;
         } else if (request.getOpDescr() != null && !request.getOpDescr().matches(Operations.PARAMETERS.OPDESCR.PATTERN)) {
-            field = Operations.PARAMETERS.OPDESCR.PATTERN;
+            field = Operations.PARAMETERS.OPDESCR.NAME;
         } else if (request.getAntifraud() != null && !request.getAntifraud().matches(Operations.PARAMETERS.ANTIFRAUD.PATTERN)) {
             field = Operations.PARAMETERS.ANTIFRAUD.NAME;
         } else if (request.getProductRef() != null && !request.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
