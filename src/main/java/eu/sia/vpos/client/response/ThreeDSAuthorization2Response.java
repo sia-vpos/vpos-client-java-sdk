@@ -27,6 +27,7 @@ public class ThreeDSAuthorization2Response implements Serializable {
     private String panAliasExpDate;
     private String panAliasRev;
     private String panAliasTail;
+    private String cRecurr;
 
     public String getResult() {
         return result;
@@ -202,5 +203,13 @@ public class ThreeDSAuthorization2Response implements Serializable {
 
     public void setPanAliasTail(String panAliasTail) {
         this.panAliasTail = panAliasTail;
+    }
+
+    public String getcRecurr() {
+        return cRecurr;
+    }
+
+    public void setcRecurr(String cRecurr) {
+        this.cRecurr = cRecurr;
     }
 }

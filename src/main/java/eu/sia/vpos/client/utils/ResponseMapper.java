@@ -174,6 +174,7 @@ public class ResponseMapper {
             dto.setPanAliasExpDate(pan.getPanAliasExpDate());
             dto.setPanAliasRev(pan.getPanAliasRev());
             dto.setPanAliasTail(pan.getPanAliasTail());
+            dto.setcRecurr(pan.getcRecurr());
         }
         return dto;
     }
@@ -219,6 +220,7 @@ public class ResponseMapper {
             dto.setPanAliasExpDate(pan.getPanAliasExpDate());
             dto.setPanAliasRev(pan.getPanAliasRev());
             dto.setPanAliasTail(pan.getPanAliasTail());
+            dto.setcRecurr(pan.getcRecurr());
         }
         return dto;
     }
@@ -258,6 +260,7 @@ public class ResponseMapper {
             dto.setPanAliasExpDate(pan.getPanAliasExpDate());
             dto.setPanAliasRev(pan.getPanAliasRev());
             dto.setPanAliasTail(pan.getPanAliasTail());
+            dto.setcRecurr(pan.getcRecurr());
         }
 
         return dto;
@@ -300,6 +303,7 @@ public class ResponseMapper {
             authorizationResponse.setPanAliasExpDate(pan.getPanAliasExpDate());
             authorizationResponse.setPanAliasRev(pan.getPanAliasRev());
             authorizationResponse.setPanAliasTail(pan.getPanAliasTail());
+            authorizationResponse.setcRecurr(pan.getcRecurr());
         }
         return authorizationResponse;
 
