@@ -295,7 +295,6 @@ public class ResponseMapper {
             authorizationResponse.setPaymentTypePP(auth.getPaymentTypePP());
             authorizationResponse.setRRN(auth.getRRN());
             authorizationResponse.setCardType(auth.getCardType());
-            return authorizationResponse;
         }
         if (response.getData().getPanAliasData() != null) {
             PanAliasData pan = response.getData().getPanAliasData();
