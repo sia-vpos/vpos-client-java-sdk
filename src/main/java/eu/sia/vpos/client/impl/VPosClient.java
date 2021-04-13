@@ -201,12 +201,17 @@ public class VPosClient implements Client {
     @Override
     public String buildHTMLRedirectFragment(PaymentInfo paymentInfo) throws VPosClientException {
         RequestValidator.validateHTMLRedirectFragmentRequest(paymentInfo);
-        Map<String,String> map = MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, redirectKey, apiResultKey, config.getShopID());
+        Map<String, String> map = MapBuilder.getRedirectMap(paymentInfo, hmacCalculator, redirectKey, apiResultKey, config.getShopID());
         return htmlTool.buildHtmlPaymentDiv(redirectUrl, map);
     }
 
     private void verifyMacResponse(BPWXmlResponse response) throws VPosClientException {
         final String NEUTRAL_MAC_VALUE = "NULL";
+        final String INVALID_MAC = "04";
+        final String BAD_REQUEST = "03";
+
+        if (INVALID_MAC.equals(response.getResult()) || BAD_REQUEST.equals(response.getResult()))
+            return;
 
         String responseMac = responseMACCalculator.getBPWXmlResponseMac(response, config.getApiKey());
         if (!response.getMac().equals(NEUTRAL_MAC_VALUE) && !response.getMac().equals(responseMac))

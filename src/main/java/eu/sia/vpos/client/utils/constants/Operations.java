@@ -84,7 +84,7 @@ public final class Operations {
 
 
         public static final class USRAUTHFLAG {
-            public static final String NAME = " USRAUTHFLAG";
+            public static final String NAME = "USRAUTHFLAG";
             public static final String PATTERN = "[0-2]{1}";
 
             private USRAUTHFLAG() {
