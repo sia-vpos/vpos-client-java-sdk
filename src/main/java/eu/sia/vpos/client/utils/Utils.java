@@ -38,7 +38,7 @@ public class Utils {
 
     public static Map<String, String> splitQuery(String urlString) throws  VPosClientException {
         URL url= null;
-        Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+        Map<String, String> query_pairs = new LinkedHashMap<>();
         try {
             url = new URL(urlString);
 
