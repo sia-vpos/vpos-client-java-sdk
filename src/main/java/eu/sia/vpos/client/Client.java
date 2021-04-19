@@ -95,5 +95,5 @@ public interface Client {
      * @return the HTML fragment
      * @throws VPosClientException in case of failure (see exception message for more info)
      */
-    String buildHTMLRedirectFragment(PaymentInfo PaymentInfo) throws VPosClientException;
+    String buildHTMLRedirectFragment(PaymentInfo paymentInfo) throws VPosClientException;
 }

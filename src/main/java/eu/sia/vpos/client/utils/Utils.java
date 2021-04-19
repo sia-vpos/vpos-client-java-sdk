@@ -37,21 +37,20 @@ public class Utils {
     }
 
     public static Map<String, String> splitQuery(String urlString) throws  VPosClientException {
-        URL url= null;
-        Map<String, String> query_pairs = new LinkedHashMap<>();
+        Map<String, String> queryPairs = new LinkedHashMap<>();
         try {
-            url = new URL(urlString);
+            URL url = new URL(urlString);
 
             String query = url.getQuery();
             String[] pairs = query.split("&");
             for (String pair : pairs) {
                 int idx = pair.indexOf("=");
-                query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+                queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
             }
         } catch (MalformedURLException | UnsupportedEncodingException e) {
             throw new VPosClientException("Malformed Url");
         }
-        return query_pairs;
+        return queryPairs;
     }
 
 }
