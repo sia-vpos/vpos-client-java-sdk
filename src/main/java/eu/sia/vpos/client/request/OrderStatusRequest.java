@@ -1,7 +1,5 @@
 package eu.sia.vpos.client.request;
 
-import eu.sia.vpos.client.response.OrderStatusResponse;
-
 public class OrderStatusRequest extends RequestDto {
 
     private String orderId;
