@@ -119,7 +119,7 @@ public class RequestValidator {
             field = Operations.PARAMETERS.AMOUNT.NAME;
         } else if (request.getCurrency() == null || !request.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
             field = Operations.PARAMETERS.CURRENCY.NAME;
-        } else if (!request.getCurrency().equalsIgnoreCase("978") && (request.getExponent() == null || request.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
+        } else if (request.getExponent() != null && !request.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN)) {
             field = Operations.PARAMETERS.EXPONENT.NAME;
         } else if (request.getAccountingMode() == null || !request.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
@@ -255,7 +255,7 @@ public class RequestValidator {
             field = Operations.PARAMETERS.AMOUNT.NAME;
         } else if (request.getCurrency() == null || !request.getCurrency().matches(Operations.PARAMETERS.CURRENCY.PATTERN)) {
             field = Operations.PARAMETERS.CURRENCY.NAME;
-        } else if (!request.getCurrency().equalsIgnoreCase("978") && (request.getExponent() == null || request.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN))) {
+        } else if (request.getExponent() != null && !request.getExponent().matches(Operations.PARAMETERS.EXPONENT.PATTERN)) {
             field = Operations.PARAMETERS.EXPONENT.NAME;
         } else if (request.getAccountingMode() == null || !request.getAccountingMode().matches(Operations.PARAMETERS.ACCOUNTINGMODE.PATTERN)) {
             field = Operations.PARAMETERS.ACCOUNTINGMODE.NAME;
@@ -272,7 +272,7 @@ public class RequestValidator {
         } else if (request.getUsrAuthFlag() != null && !request.getUsrAuthFlag().matches(Operations.PARAMETERS.USRAUTHFLAG.PATTERN)) {
             field = Operations.PARAMETERS.USRAUTHFLAG.NAME;
         } else if (request.getOpDescr() != null && !request.getOpDescr().matches(Operations.PARAMETERS.OPDESCR.PATTERN)) {
-            field = Operations.PARAMETERS.OPDESCR.PATTERN;
+            field = Operations.PARAMETERS.OPDESCR.NAME;
         } else if (request.getAntiFraud() != null && !request.getAntiFraud().matches(Operations.PARAMETERS.ANTIFRAUD.PATTERN)) {
             field = Operations.PARAMETERS.ANTIFRAUD.NAME;
         } else if (request.getProductRef() != null && !request.getProductRef().matches(Operations.PARAMETERS.PRODUCTREF.PATTERN)) {
