@@ -131,7 +131,7 @@ public class ResponseMapper {
     public ThreeDSAuthorization0Response threeDSAuthorization0Response(BPWXmlResponse response) {
         ThreeDSAuthorization0Response dto = new ThreeDSAuthorization0Response();
         dto.setResult(response.getResult());
-        if (response == null || response.getData() == null) {
+        if (response.getData() == null) {
             return dto;
         }
         if (response.getData().getThreeDSchallenge() != null) {

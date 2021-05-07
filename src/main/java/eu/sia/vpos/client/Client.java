@@ -5,7 +5,6 @@ import eu.sia.vpos.client.response.*;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Client interface used to perform common requests to SIA VPOS.
@@ -96,5 +95,5 @@ public interface Client {
      * @return the HTML fragment
      * @throws VPosClientException in case of failure (see exception message for more info)
      */
-    String buildHTMLRedirectFragment(PaymentInfo PaymentInfo) throws VPosClientException;
+    String buildHTMLRedirectFragment(PaymentInfo paymentInfo) throws VPosClientException;
 }

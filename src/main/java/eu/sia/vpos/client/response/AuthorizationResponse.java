@@ -25,7 +25,7 @@ public class AuthorizationResponse implements Serializable {
     private String panTail;
     private String panExpiryDate;
     private String paymentTypePP;
-    private String RRN;
+    private String rrn;
     private String cardType;
 
     //Pan Alias Data
@@ -212,11 +212,11 @@ public class AuthorizationResponse implements Serializable {
     }
 
     public String getRRN() {
-        return RRN;
+        return rrn;
     }
 
-    public void setRRN(String RRN) {
-        this.RRN = RRN;
+    public void setRRN(String rrn) {
+        this.rrn = rrn;
     }
 
     public String getCardType() {

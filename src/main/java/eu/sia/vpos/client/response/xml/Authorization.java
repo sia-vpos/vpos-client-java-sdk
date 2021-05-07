@@ -50,7 +50,7 @@ public class Authorization {
 	@XmlElement(name = "PaymentTypePP")
 	private String paymentTypePP;
 	@XmlElement(name = "RRN")
-	private String RRN;
+	private String rrn;
 	@XmlElement(name = "CardType")
 	private String cardType;
 	@XmlElement(name = "MAC")
@@ -234,12 +234,12 @@ public class Authorization {
 
 	public String getRRN() {
 
-		return RRN;
+		return rrn;
 	}
 
-	public void setRRN(String RRN) {
+	public void setRRN(String rrn) {
 
-		this.RRN = RRN;
+		this.rrn = rrn;
 	}
 
 	public String getCardType() {
