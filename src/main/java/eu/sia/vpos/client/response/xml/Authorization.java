@@ -3,285 +3,373 @@ package eu.sia.vpos.client.response.xml;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Authorization {
 
-	@XmlElement(name = "PaymentType")
-	private String paymentType;
-	@XmlElement(name = "AuthorizationType")
-	private String authorizationType;
-	@XmlElement(name = "TransactionID")
-	private String transactionId;
-	@XmlElement(name = "Network")
-	private String network;
-	@XmlElement(name = "OrderId")
-	private String orderId;
-	@XmlElement(name = "TransactionAmount")
-	private String transactionAmount;
-	@XmlElement(name = "AuthorizedAmount")
-	private String authorizedAmount;
-	@XmlElement(name = "Currency")
-	private String currency;
-	@XmlElement(name="Exponent")
-	private String exponent;
-	@XmlElement(name = "AccountedAmount")
-	private String accountedAmount;
-	@XmlElement(name = "RefundedAmount")
-	private String refundedAmount;
-	@XmlElement(name = "TransactionResult")
-	private String transactionResult;
-	@XmlElement(name = "Timestamp")
-	private String timestamp;
-	@XmlElement(name = "AuthorizationNumber")
-	private String authorizationNumber;
-	@XmlElement(name = "AcquirerBIN")
-	private String acquirerBin;
-	@XmlElement(name = "MerchantID")
-	private String merchantId;
-	@XmlElement(name = "TransactionStatus")
-	private String transactionStatus;
-	@XmlElement(name="ResponseCodeISO")
-	private String responseCodeIso;
-	@XmlElement(name = "PanTail")
-	private String panTail;
-	@XmlElement(name = "PanExpiryDate")
-	private String panExpiryDate;
-	@XmlElement(name = "PaymentTypePP")
-	private String paymentTypePP;
-	@XmlElement(name = "RRN")
-	private String RRN;
-	@XmlElement(name = "CardType")
-	private String cardType;
-	@XmlElement(name = "MAC")
-	private String mac;
+    @XmlElement(name = "PaymentType")
+    private String paymentType;
+    @XmlElement(name = "AuthorizationType")
+    private String authorizationType;
+    @XmlElement(name = "TransactionID")
+    private String transactionId;
+    @XmlElement(name = "Network")
+    private String network;
+    @XmlElements({
+            @XmlElement(name = "OrderId"),
+            @XmlElement(name = "OrderID")
+    })
+    private String orderId;
+    @XmlElement(name = "TransactionAmount")
+    private String transactionAmount;
+    @XmlElement(name = "AuthorizedAmount")
+    private String authorizedAmount;
+    @XmlElement(name = "Currency")
+    private String currency;
+    @XmlElement(name = "Exponent")
+    private String exponent;
+    @XmlElement(name = "AccountedAmount")
+    private String accountedAmount;
+    @XmlElement(name = "RefundedAmount")
+    private String refundedAmount;
+    @XmlElement(name = "TransactionResult")
+    private String transactionResult;
+    @XmlElement(name = "Timestamp")
+    private String timestamp;
+    @XmlElement(name = "AuthorizationNumber")
+    private String authorizationNumber;
+    @XmlElement(name = "AcquirerBIN")
+    private String acquirerBin;
+    @XmlElement(name = "MerchantID")
+    private String merchantId;
+    @XmlElement(name = "TransactionStatus")
+    private String transactionStatus;
+    @XmlElement(name = "ResponseCodeISO")
+    private String responseCodeIso;
+    @XmlElement(name = "PanTail")
+    private String panTail;
+    @XmlElement(name = "PanExpiryDate")
+    private String panExpiryDate;
+    @XmlElement(name = "PaymentTypePP")
+    private String paymentTypePP;
+    @XmlElement(name = "RRN")
+    private String RRN;
+    @XmlElement(name = "CardType")
+    private String cardType;
+    @XmlElement(name = "CardholderInfo")
+    private String cardholderInfo;
+    @XmlElement(name = "InstallmentsNumber")
+    private String installmentsNumber;
+    @XmlElement(name = "TicklerMerchantCode")
+    private String ticklerMerchantCode;
+    @XmlElement(name = "TicklerPlanCode")
+    private String ticklerPlanCode;
+    @XmlElement(name = "TicklerSubscriptionCode")
+    private String ticklerSubscriptionCode;
+    @XmlElement(name = "MAC")
+    private String mac;
+
+    public String getPaymentType() {
 
-	public String getPaymentType() {
+        return paymentType;
+    }
 
-		return paymentType;
-	}
+    public void setPaymentType(String paymentType) {
 
-	public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
 
-		this.paymentType = paymentType;
-	}
+    public String getAuthorizationType() {
 
-	public String getAuthorizationType() {
+        return authorizationType;
+    }
 
-		return authorizationType;
-	}
+    public void setAuthorizationType(String authorizationType) {
 
-	public void setAuthorizationType(String authorizationType) {
+        this.authorizationType = authorizationType;
+    }
 
-		this.authorizationType = authorizationType;
-	}
+    public String getTransactionId() {
 
-	public String getTransactionId() {
+        return transactionId;
+    }
 
-		return transactionId;
-	}
+    public void setTransactionId(String transactionId) {
 
-	public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
 
-		this.transactionId = transactionId;
-	}
+    public String getNetwork() {
 
-	public String getNetwork() {
+        return network;
+    }
 
-		return network;
-	}
+    public void setNetwork(String network) {
 
-	public void setNetwork(String network) {
+        this.network = network;
+    }
 
-		this.network = network;
-	}
+    public String getOrderId() {
 
-	public String getOrderId() {
+        return orderId;
+    }
 
-		return orderId;
-	}
+    public void setOrderId(String orderId) {
 
-	public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 
-		this.orderId = orderId;
-	}
+    public String getTransactionAmount() {
 
-	public String getTransactionAmount() {
+        return transactionAmount;
+    }
 
-		return transactionAmount;
-	}
+    public void setTransactionAmount(String transactionAmount) {
 
-	public void setTransactionAmount(String transactionAmount) {
+        this.transactionAmount = transactionAmount;
+    }
 
-		this.transactionAmount = transactionAmount;
-	}
+    public String getCurrency() {
 
-	public String getCurrency() {
+        return currency;
+    }
 
-		return currency;
-	}
+    public void setCurrency(String currency) {
 
-	public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
-		this.currency = currency;
-	}
+    public String getAccountedAmount() {
 
-	public String getAccountedAmount() {
+        return accountedAmount;
+    }
 
-		return accountedAmount;
-	}
+    public void setAccountedAmount(String accountedAmount) {
 
-	public void setAccountedAmount(String accountedAmount) {
+        this.accountedAmount = accountedAmount;
+    }
 
-		this.accountedAmount = accountedAmount;
-	}
+    public String getRefundedAmount() {
 
-	public String getRefundedAmount() {
+        return refundedAmount;
+    }
 
-		return refundedAmount;
-	}
+    public void setRefundedAmount(String refundedAmount) {
 
-	public void setRefundedAmount(String refundedAmount) {
+        this.refundedAmount = refundedAmount;
+    }
 
-		this.refundedAmount = refundedAmount;
-	}
+    public String getTransactionResult() {
 
-	public String getTransactionResult() {
+        return transactionResult;
+    }
 
-		return transactionResult;
-	}
+    public void setTransactionResult(String transactionResult) {
 
-	public void setTransactionResult(String transactionResult) {
+        this.transactionResult = transactionResult;
+    }
 
-		this.transactionResult = transactionResult;
-	}
+    public String getTimestamp() {
 
-	public String getTimestamp() {
+        return timestamp;
+    }
 
-		return timestamp;
-	}
+    public void setTimestamp(String timestamp) {
 
-	public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
 
-		this.timestamp = timestamp;
-	}
+    public String getAuthorizationNumber() {
 
-	public String getAuthorizationNumber() {
+        return authorizationNumber;
+    }
 
-		return authorizationNumber;
-	}
+    public void setAuthorizationNumber(String authorizationNumber) {
 
-	public void setAuthorizationNumber(String authorizationNumber) {
+        this.authorizationNumber = authorizationNumber;
+    }
 
-		this.authorizationNumber = authorizationNumber;
-	}
+    public String getAcquirerBin() {
 
-	public String getAcquirerBin() {
+        return acquirerBin;
+    }
 
-		return acquirerBin;
-	}
+    public void setAcquirerBin(String acquirerBin) {
 
-	public void setAcquirerBin(String acquirerBin) {
+        this.acquirerBin = acquirerBin;
+    }
 
-		this.acquirerBin = acquirerBin;
-	}
+    public String getMerchantId() {
 
-	public String getMerchantId() {
+        return merchantId;
+    }
 
-		return merchantId;
-	}
+    public void setMerchantId(String merchantId) {
 
-	public void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
+    }
 
-		this.merchantId = merchantId;
-	}
+    public String getTransactionStatus() {
 
-	public String getTransactionStatus() {
+        return transactionStatus;
+    }
 
-		return transactionStatus;
-	}
+    public void setTransactionStatus(String transactionStatus) {
 
-	public void setTransactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
 
-		this.transactionStatus = transactionStatus;
-	}
+    public String getPanTail() {
+        return panTail;
+    }
 
-	public String getPanTail() {
-		return panTail;
-	}
+    public void setPanTail(String panTail) {
+        this.panTail = panTail;
+    }
 
-	public void setPanTail(String panTail) {
-		this.panTail = panTail;
-	}
+    public String getPanExpiryDate() {
+        return panExpiryDate;
+    }
 
-	public String getPanExpiryDate() {
-		return panExpiryDate;
-	}
+    public void setPanExpiryDate(String panExpiryDate) {
+        this.panExpiryDate = panExpiryDate;
+    }
 
-	public void setPanExpiryDate(String panExpiryDate) {
-		this.panExpiryDate = panExpiryDate;
-	}
+    public String getPaymentTypePP() {
 
-	public String getPaymentTypePP() {
+        return paymentTypePP;
+    }
 
-		return paymentTypePP;
-	}
+    public void setPaymentTypePP(String paymentTypePP) {
 
-	public void setPaymentTypePP(String paymentTypePP) {
+        this.paymentTypePP = paymentTypePP;
+    }
 
-		this.paymentTypePP = paymentTypePP;
-	}
+    public String getRRN() {
 
-	public String getRRN() {
+        return RRN;
+    }
 
-		return RRN;
-	}
+    public void setRRN(String RRN) {
 
-	public void setRRN(String RRN) {
+        this.RRN = RRN;
+    }
 
-		this.RRN = RRN;
-	}
+    public String getCardType() {
+        return cardType;
+    }
 
-	public String getCardType() {
-		return cardType;
-	}
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
 
-	public void setCardType(String cardType) {
-		this.cardType = cardType;
-	}
+    public String getMac() {
 
-	public String getMac() {
+        return mac;
+    }
 
-		return mac;
-	}
+    public void setMac(String mac) {
 
-	public void setMac(String mac) {
+        this.mac = mac;
+    }
 
-		this.mac = mac;
-	}
+    public String getAuthorizedAmount() {
+        return authorizedAmount;
+    }
 
-	public String getAuthorizedAmount() {
-		return authorizedAmount;
-	}
+    public void setAuthorizedAmount(String authorizedAmount) {
+        this.authorizedAmount = authorizedAmount;
+    }
 
-	public void setAuthorizedAmount(String authorizedAmount) {
-		this.authorizedAmount = authorizedAmount;
-	}
+    public String getExponent() {
+        return exponent;
+    }
 
-	public String getExponent() {
-		return exponent;
-	}
+    public void setExponent(String exponent) {
+        this.exponent = exponent;
+    }
 
-	public void setExponent(String exponent) {
-		this.exponent = exponent;
-	}
+    public String getResponseCodeIso() {
+        return responseCodeIso;
+    }
 
-	public String getResponseCodeIso() {
-		return responseCodeIso;
-	}
+    public void setResponseCodeIso(String responseCodeIso) {
+        this.responseCodeIso = responseCodeIso;
+    }
 
-	public void setResponseCodeIso(String responseCodeIso) {
-		this.responseCodeIso = responseCodeIso;
-	}
+    public String getCardholderInfo() {
+        return cardholderInfo;
+    }
 
+    public void setCardholderInfo(String cardholderInfo) {
+        this.cardholderInfo = cardholderInfo;
+    }
+
+    public String getInstallmentsNumber() {
+        return installmentsNumber;
+    }
+
+    public void setInstallmentsNumber(String installmentsNumber) {
+        this.installmentsNumber = installmentsNumber;
+    }
+
+    public String getTicklerMerchantCode() {
+        return ticklerMerchantCode;
+    }
+
+    public void setTicklerMerchantCode(String ticklerMerchantCode) {
+        this.ticklerMerchantCode = ticklerMerchantCode;
+    }
+
+    public String getTicklerPlanCode() {
+        return ticklerPlanCode;
+    }
+
+    public void setTicklerPlanCode(String ticklerPlanCode) {
+        this.ticklerPlanCode = ticklerPlanCode;
+    }
+
+    public String getTicklerSubscriptionCode() {
+        return ticklerSubscriptionCode;
+    }
+
+    public void setTicklerSubscriptionCode(String ticklerSubscriptionCode) {
+        this.ticklerSubscriptionCode = ticklerSubscriptionCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Authorization{" +
+                "paymentType='" + paymentType + '\'' +
+                ", authorizationType='" + authorizationType + '\'' +
+                ", transactionId='" + transactionId + '\'' +
+                ", network='" + network + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", transactionAmount='" + transactionAmount + '\'' +
+                ", authorizedAmount='" + authorizedAmount + '\'' +
+                ", currency='" + currency + '\'' +
+                ", exponent='" + exponent + '\'' +
+                ", accountedAmount='" + accountedAmount + '\'' +
+                ", refundedAmount='" + refundedAmount + '\'' +
+                ", transactionResult='" + transactionResult + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", authorizationNumber='" + authorizationNumber + '\'' +
+                ", acquirerBin='" + acquirerBin + '\'' +
+                ", merchantId='" + merchantId + '\'' +
+                ", transactionStatus='" + transactionStatus + '\'' +
+                ", responseCodeIso='" + responseCodeIso + '\'' +
+                ", panTail='" + panTail + '\'' +
+                ", panExpiryDate='" + panExpiryDate + '\'' +
+                ", paymentTypePP='" + paymentTypePP + '\'' +
+                ", RRN='" + RRN + '\'' +
+                ", cardType='" + cardType + '\'' +
+                ", cardholderInfo='" + cardholderInfo + '\'' +
+                ", installmentsNumber='" + installmentsNumber + '\'' +
+                ", ticklerMerchantCode='" + ticklerMerchantCode + '\'' +
+                ", ticklerPlanCode='" + ticklerPlanCode + '\'' +
+                ", ticklerSubscriptionCode='" + ticklerSubscriptionCode + '\'' +
+                ", mac='" + mac + '\'' +
+                '}';
+    }
 }

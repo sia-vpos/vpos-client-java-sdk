@@ -49,6 +49,11 @@ public class ResponseMACCalculator {
         valueList.add(authorization.getPaymentTypePP());
         valueList.add(authorization.getRRN());
         valueList.add(authorization.getCardType());
+        valueList.add(authorization.getCardholderInfo());
+        valueList.add(authorization.getInstallmentsNumber());
+        valueList.add(authorization.getTicklerMerchantCode());
+        valueList.add(authorization.getTicklerPlanCode());
+        valueList.add(authorization.getTicklerSubscriptionCode());
         return encoder.getMac(valueList, key);
     }
 

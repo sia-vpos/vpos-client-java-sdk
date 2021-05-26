@@ -22,12 +22,16 @@ public class ThreeDSAuthorization2Response implements Serializable {
     private String responseCodeIso;
     private String panTail;
     private String panExpiryDate;
+
     //Pan Alias Data
     private String panAlias;
     private String panAliasExpDate;
     private String panAliasRev;
     private String panAliasTail;
     private String cRecurr;
+
+    private String cardholderInfo;
+    private String installmentsNumber;
 
     public String getResult() {
         return result;
@@ -212,4 +216,21 @@ public class ThreeDSAuthorization2Response implements Serializable {
     public void setcRecurr(String cRecurr) {
         this.cRecurr = cRecurr;
     }
+
+    public String getCardholderInfo() {
+        return cardholderInfo;
+    }
+
+    public void setCardholderInfo(String cardholderInfo) {
+        this.cardholderInfo = cardholderInfo;
+    }
+
+    public String getInstallmentsNumber() {
+        return installmentsNumber;
+    }
+
+    public void setInstallmentsNumber(String installmentsNumber) {
+        this.installmentsNumber = installmentsNumber;
+    }
+
 }

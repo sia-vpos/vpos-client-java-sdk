@@ -40,6 +40,9 @@ public class ThreeDSAuthorization1Response implements Serializable {
     private String panAliasTail;
     private String cRecurr;
 
+    private String cardholderInfo;
+    private String installmentsNumber;
+
     public String getResult() {
         return result;
     }
@@ -295,4 +298,21 @@ public class ThreeDSAuthorization1Response implements Serializable {
     public void setcRecurr(String cRecurr) {
         this.cRecurr = cRecurr;
     }
+
+    public String getCardholderInfo() {
+        return cardholderInfo;
+    }
+
+    public void setCardholderInfo(String cardholderInfo) {
+        this.cardholderInfo = cardholderInfo;
+    }
+
+    public String getInstallmentsNumber() {
+        return installmentsNumber;
+    }
+
+    public void setInstallmentsNumber(String installmentsNumber) {
+        this.installmentsNumber = installmentsNumber;
+    }
+
 }
