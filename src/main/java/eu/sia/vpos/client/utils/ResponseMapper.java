@@ -2,10 +2,7 @@ package eu.sia.vpos.client.utils;
 
 
 import eu.sia.vpos.client.response.*;
-import eu.sia.vpos.client.response.xml.Authorization;
-import eu.sia.vpos.client.response.xml.BPWXmlResponse;
-import eu.sia.vpos.client.response.xml.Operation;
-import eu.sia.vpos.client.response.xml.PanAliasData;
+import eu.sia.vpos.client.response.xml.*;
 
 import java.util.List;
 
@@ -87,6 +84,11 @@ public class ResponseMapper {
                 authElement.setPaymentTypePP(element.getPaymentTypePP());
                 authElement.setRRN(element.getRRN());
                 authElement.setCardType(element.getCardType());
+                authElement.setInstallmentsNumber(element.getInstallmentsNumber());
+                authElement.setCardholderInfo(element.getCardholderInfo());
+                authElement.setTicklerMerchantCode(element.getTicklerMerchantCode());
+                authElement.setTicklerPlanCode(element.getTicklerPlanCode());
+                authElement.setTicklerSubscriptionCode(element.getTicklerSubscriptionCode());
                 dto.getAuthorizations().add(authElement);
                 //dtoElement.clearAllIndividualFields();
             }
@@ -97,6 +99,19 @@ public class ResponseMapper {
             dto.setPanAliasExpDate(panData.getPanAliasExpDate());
             dto.setPanAliasRev(panData.getPanAliasRev());
             dto.setPanAliasTail(panData.getPanAliasTail());
+        }
+
+        if (response.getData() != null && response.getData().getCardHolderData() != null) {
+            CardHolderData cardHolderData = response.getData().getCardHolderData();
+            dto.setCardHolderName(cardHolderData.getCardHolderName());
+            dto.setCardHolderEmail(cardHolderData.getCardHolderEmail());
+            dto.setBillingAddressPostalcode(cardHolderData.getBillingAddressPostalcode());
+            dto.setBillingAddressCity(cardHolderData.getBillingAddressCity());
+            dto.setBillingAddressLine1(cardHolderData.getBillingAddressLine1());
+            dto.setBillingAddressLine2(cardHolderData.getBillingAddressLine2());
+            dto.setBillingAddressLine3(cardHolderData.getBillingAddressLine3());
+            dto.setBillingAddressState(cardHolderData.getBillingAddressState());
+            dto.setBillingAddressCountry(cardHolderData.getBillingAddressCountry());
         }
 
         return dto;
@@ -165,9 +180,11 @@ public class ResponseMapper {
                 dto.setResponseCodeIso(authorization.getResponseCodeIso());
                 dto.setPanTail(authorization.getPanTail());
                 dto.setPanExpiryDate(authorization.getPanExpiryDate());
+                dto.setCardholderInfo(authorization.getCardholderInfo());
+                dto.setInstallmentsNumber(authorization.getInstallmentsNumber());
             }
-
         }
+
         if (response.getData().getPanAliasData() != null) {
             PanAliasData pan = response.getData().getPanAliasData();
             dto.setPanAlias(pan.getPanAlias());
@@ -211,6 +228,8 @@ public class ResponseMapper {
                 dto.setResponseCodeIso(authorization.getResponseCodeIso());
                 dto.setPanTail(authorization.getPanTail());
                 dto.setPanExpiryDate(authorization.getPanExpiryDate());
+                dto.setCardholderInfo(authorization.getCardholderInfo());
+                dto.setInstallmentsNumber(authorization.getInstallmentsNumber());
             }
 
         }
@@ -251,6 +270,8 @@ public class ResponseMapper {
                 dto.setResponseCodeIso(authorization.getResponseCodeIso());
                 dto.setPanTail(authorization.getPanTail());
                 dto.setPanExpiryDate(authorization.getPanExpiryDate());
+                dto.setCardholderInfo(authorization.getCardholderInfo());
+                dto.setInstallmentsNumber(authorization.getInstallmentsNumber());
             }
 
         }
@@ -295,6 +316,7 @@ public class ResponseMapper {
             authorizationResponse.setPaymentTypePP(auth.getPaymentTypePP());
             authorizationResponse.setRRN(auth.getRRN());
             authorizationResponse.setCardType(auth.getCardType());
+            authorizationResponse.setInstallmentsNumber(auth.getInstallmentsNumber());
         }
         if (response.getData().getPanAliasData() != null) {
             PanAliasData pan = response.getData().getPanAliasData();

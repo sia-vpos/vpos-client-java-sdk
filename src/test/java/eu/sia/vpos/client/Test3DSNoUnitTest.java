@@ -17,9 +17,9 @@ import java.util.Random;
 
 public class Test3DSNoUnitTest {
 
-    private static final String SHOP_ID = "129289999900002";
+    private static final String SHOP_ID = "123451231231231";
     private static final String REDIRECT_KEY_VPOS = "au-PA-B2AAHsQSG-UuaVNcHFpBk3GJBNWqR3--Tyf-Fa-wav--ySqz9f24-yvP-RvbMQx-VYz9jVDNe-uMwTSt3-tvPukbJTTt-U";
-    private static final String API_RESULT_KEY = "hSAc7sg-z-vZ-296FuwwUaqHmzQ-eQ-E--2pXV-mEGh6YQtBdDK-NH9KeCyQrtBtmwFv-m6kEUtn27-6ATfkB-x2Dy3F4G-9t4sp";
+    private static final String API_RESULT_KEY = "RsZ-cNF32-rKb-Gy-xxzb2W-b9p-Cz--Q4F3GhXS-EDgz---t-g4fKwSWeWgMWkhw-R-ZLjstQcDmBc-Aamg-LLngtdJBf2LV-MR";
     private static final String URL_REDIRECT = "https://atpostest.ssb.it/atpos/pagamenti/main";
     private static final String URL_DONE = "http://localhost:8080/payment-gateway/vpos/tokenize";
     private static final String URL_BACK = "http://localhost:8080/payment-gateway/vpos/tokenize";
@@ -57,12 +57,14 @@ public class Test3DSNoUnitTest {
 
             //String b = "OK";
             //ThreeDSAuthorization0Response resp = client.threeDSAuthorize0(build3DSRequest());
-            client.authorize(buildAuthorizationRequest());
+            //client.authorize(buildAuthorizationRequest());
+            //client.threeDSAuthorize0(build3DSRequest());
             //client.threeDSAuthorize1(buildThreeDSAuthorizationRequest1());
             //client.threeDSAuthorize2(buildThreeDSAuthorizationRequest2());
             //System.out.println(client.buildHTMLRedirectFragment(buildPaymentTest()));
             //System.out.println(client.buildHTMLRedirectFragment(buildPaymentWithTokenTest()));
-            //OrderStatusResponse resp= client.getOrderStatus(buildOrderStatusRequest("AUTH123456769123429"));
+           // System.out.println(client.getOrderStatus(buildInstallmentsNumberOrderStatusRequest()));
+            System.out.println(client.getOrderStatus(buildTicklerOrderStatusRequest()));
             //CaptureResponse resp = client.capture(buildCaptureRequest("8032112928SL2y94x1frnoyq4","1585841834944140177762812878779680802931184"));
             //RefundResponse resp = client.refund(buildRefundRequest("8032112928SL243jga1ewbdr4", "Redirect30533", "50"));
             //boolean b=client.verifyMAC("http://localhost:8080/payment-gateway/vpos/tokenize?ORDERID=1585919322092143568728681910679428531949566&SHOPID=129289999900002&AUTHNUMBER=413889&AMOUNT=10&CURRENCY=978&TRANSACTIONID=8032112928SL211ntcm0icwf4&ACCOUNTINGMODE=D&AUTHORMODE=I&RESULT=00&TRANSACTIONTYPE=TT07&TRECURR=U&CRECURR=899107067200401&NETWORK=02&MAC=105e962d0727ef0d30a1ce21d14e6813449daa6375c433d2cc2fa631bc3bf680");
@@ -76,12 +78,12 @@ public class Test3DSNoUnitTest {
         ThreeDSAuthorization0Request request3DS0 = new ThreeDSAuthorization0Request();
         request3DS0.setAmount("6600");
         request3DS0.setAccountingMode("D");
-        request3DS0.setPan("4118830900940017");
+        request3DS0.setPan("5577231205012597");
         request3DS0.setExpDate("2112");
         request3DS0.setCvv2("111");
         request3DS0.setCurrency("978");
 
-        request3DS0.setNetwork("01");
+        request3DS0.setNetwork("02");
         request3DS0.setEmailCh("asdas@fgd.id");
         Random rand = new Random();
 
@@ -173,6 +175,22 @@ public class Test3DSNoUnitTest {
                 orderId, null, null);
     }
 
+    private static OrderStatusRequest buildInstallmentsNumberOrderStatusRequest() {
+        return new OrderStatusRequest( "operator",
+                "API20210519164328", null, null);
+    }
+
+    private static OrderStatusRequest buildCardHolderDataRequest() {
+        return new OrderStatusRequest( "operator",
+                "test20210324125539230", null, null);
+    }
+
+    private static OrderStatusRequest buildTicklerOrderStatusRequest() {
+        return new OrderStatusRequest( "operator",
+                "test20210518112729594", null, null);
+    }
+
+
     private static CaptureRequest buildCaptureRequest(String transactionId, String orderId) {
         CaptureRequest req = new CaptureRequest();
         req.setAmount("500");
@@ -215,8 +233,8 @@ public class Test3DSNoUnitTest {
     private static ThreeDSAuthorization1Request buildThreeDSAuthorizationRequest1() {
         ThreeDSAuthorization1Request req = new ThreeDSAuthorization1Request();
         req.setOperatorId("operatorID");
-        req.setThreeDSMtdComplInd("N");
-        req.setThreeDSTransId("b76e13ac-ba8c-4f90-b00c-9cffe9cbc049");
+        req.setThreeDSMtdComplInd("Y");
+        req.setThreeDSTransId("c5d89c6f-0562-46a0-babb-ea432e59e953");
         return req;
     }
 

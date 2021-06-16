@@ -49,6 +49,9 @@ public class Data {
     @XmlElement(name = "ThreeDSChallenge")
     private ThreeDSChallenge threeDSchallenge;
 
+    @XmlElement(name = "CardHolderData")
+    private CardHolderData cardHolderData;
+
 
     public Data() {
         /*
@@ -101,7 +104,6 @@ public class Data {
     }
 
     public void setOperation(Operation operation) {
-
         this.operation = operation;
     }
 
@@ -117,10 +119,9 @@ public class Data {
         return orderStatusRequest;
     }
 
-    public void setOrderStatusRequest(StatusRequest orderStatus) {
-        this.orderStatusRequest = orderStatus;
+    public void setOrderStatusRequest(StatusRequest orderStatusRequest) {
+        this.orderStatusRequest = orderStatusRequest;
     }
-
 
     public RefundRequest getRefundRequest() {
         return refundRequest;
@@ -130,20 +131,20 @@ public class Data {
         this.refundRequest = refundRequest;
     }
 
-    public VBVRedirect getVbvRedirect() {
-        return vbvRedirect;
-    }
-
-    public void setVbvRedirect(VBVRedirect vbvRedirect) {
-        this.vbvRedirect = vbvRedirect;
-    }
-
     public GeneralRequest getAccounting() {
         return accounting;
     }
 
     public void setAccounting(GeneralRequest accounting) {
         this.accounting = accounting;
+    }
+
+    public VBVRedirect getVbvRedirect() {
+        return vbvRedirect;
+    }
+
+    public void setVbvRedirect(VBVRedirect vbvRedirect) {
+        this.vbvRedirect = vbvRedirect;
     }
 
     public ThreeDSMethod getThreeDSMethod() {
@@ -160,5 +161,13 @@ public class Data {
 
     public void setThreeDSchallenge(ThreeDSChallenge threeDSchallenge) {
         this.threeDSchallenge = threeDSchallenge;
+    }
+
+    public CardHolderData getCardHolderData() {
+        return cardHolderData;
+    }
+
+    public void setCardHolderData(CardHolderData cardHolderData) {
+        this.cardHolderData = cardHolderData;
     }
 }
