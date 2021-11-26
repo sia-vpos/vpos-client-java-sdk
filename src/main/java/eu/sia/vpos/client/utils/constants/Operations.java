@@ -517,7 +517,7 @@ public final class Operations {
             public static final String NAME = "OPERATORID";
             public static final int MIN_LEN = 8;
             public static final int MAX_LEN = 18;
-            public static final String PATTERN = "[a-zA-Z0-9]{" + MIN_LEN + "," + MAX_LEN + "}";
+            public static final String PATTERN = "^.{" + MIN_LEN + "," + MAX_LEN + "}$";
             public static final boolean MANDATORY = false; // RECOMMENDED
             public static final String DEFAULT = "VPOSTELOP";
 
