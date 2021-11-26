@@ -91,6 +91,9 @@ public class VPosClient implements Client {
         if (this.config.getTimeout() == null) {
             fields.add(ConfigConstants.TIMEOUT);
         }
+        if (this.config.getSocketReadTimeout() == null) {
+            fields.add(ConfigConstants.SOCKET_READ_TIMEOUT);
+        }
         if (!fields.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             sb.append("Invalid or missing configuration params: ");
@@ -103,9 +106,16 @@ public class VPosClient implements Client {
     }
 
     private void initPaymentClient() {
-        this.vPosPaymentClient = new VPosPaymentClient(config.getApiUrl(), Integer.parseInt(config.getTimeout()));
+        this.vPosPaymentClient = new VPosPaymentClient(
+                config.getApiUrl(),
+                Integer.parseInt(config.getTimeout()),
+                Integer.parseInt(config.getSocketReadTimeout()));
         if (config.getProxyHost() != null && config.getProxyPort() != null) {
-            this.vPosPaymentClient.setProxy(config.getProxyHost(), config.getProxyPort(), config.getProxyUsername(), config.getProxyPassword());
+            this.vPosPaymentClient.setProxy(
+                    config.getProxyHost(),
+                    config.getProxyPort(),
+                    config.getProxyUsername(),
+                    config.getProxyPassword());
         }
         if (config.getSslContext() != null)
             this.vPosPaymentClient.setSslContext(config.getSslContext());

@@ -56,4 +56,8 @@ public interface Config {
 
     void setDisableResponseMACCheck(boolean disableResponseMACCheck);
 
+    String getSocketReadTimeout();
+
+    void setSocketReadTimeout(String socketReadTimeout);
+
 }

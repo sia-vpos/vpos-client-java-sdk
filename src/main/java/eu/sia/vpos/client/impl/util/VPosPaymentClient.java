@@ -38,15 +38,16 @@ public class VPosPaymentClient {
     private Integer proxyPort;
     private String proxyUser;
     private String proxyPass;
-    private String urlWebApi;
-    private int timeout;
+    private final String urlWebApi;
+    private final int timeout;
+    private final int socketReadTimeout;
 
-
-    public VPosPaymentClient(String urlWebApi, int timeout) {
+    public VPosPaymentClient(String urlWebApi, int timeout, int socketReadTimeout) {
         this.urlWebApi = urlWebApi;
         this.timeout = timeout;
         this.proxy = false;
         this.ssl = false;
+        this.socketReadTimeout = socketReadTimeout;
     }
 
     public BPWXmlResponse executeCall(BPWXmlRequest input) throws VPosClientException {
@@ -127,6 +128,7 @@ public class VPosPaymentClient {
         HttpClient httpClient = clientBuilder.build();
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
         factory.setConnectTimeout(this.timeout);
+        factory.setReadTimeout(this.socketReadTimeout);
         factory.setHttpClient(httpClient);
 
         return new RestTemplate(factory);

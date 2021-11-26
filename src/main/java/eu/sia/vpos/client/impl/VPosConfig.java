@@ -36,6 +36,8 @@ public class VPosConfig implements Config {
 
     private boolean disableResponseMACCheck;
 
+    private String socketReadTimeout;
+
     public VPosConfig() {
         this.timeout = "10000";
     }
@@ -62,6 +64,8 @@ public class VPosConfig implements Config {
         this.timeout = properties.getProperty(ConfigConstants.TIMEOUT,"10000");
         this.disableResponseMACCheck = Boolean.parseBoolean(
                 properties.getProperty(ConfigConstants.DISABLERESPONSEMACCHECK, "false"));
+        // backward compatibility: 0 means infinite
+        this.timeout = properties.getProperty(ConfigConstants.SOCKET_READ_TIMEOUT,"0");
     }
 
     public String getApiUrl() {
@@ -170,5 +174,13 @@ public class VPosConfig implements Config {
 
     public void setDisableResponseMACCheck(boolean disableResponseMACCheck) {
         this.disableResponseMACCheck = disableResponseMACCheck;
+    }
+
+    public String getSocketReadTimeout() {
+        return socketReadTimeout;
+    }
+
+    public void setSocketReadTimeout(String socketReadTimeout) {
+        this.socketReadTimeout = socketReadTimeout;
     }
 }
