@@ -680,7 +680,7 @@ public final class Operations {
 
             public static final String NAME = "PRODUCTREF";
             public static final int MIN_LEN = 1;
-            public static final int MAX_LEN = 15;
+            public static final int MAX_LEN = 50;
             public static final String PATTERN = ".{" + MIN_LEN + "," + MAX_LEN + "}";
             public static final boolean MANDATORY = true;
 
