@@ -65,7 +65,7 @@ public class VPosConfig implements Config {
         this.disableResponseMACCheck = Boolean.parseBoolean(
                 properties.getProperty(ConfigConstants.DISABLERESPONSEMACCHECK, "false"));
         // backward compatibility: 0 means infinite
-        this.timeout = properties.getProperty(ConfigConstants.SOCKET_READ_TIMEOUT,"0");
+        this.socketReadTimeout = properties.getProperty(ConfigConstants.SOCKET_READ_TIMEOUT,"0");
     }
 
     public String getApiUrl() {
