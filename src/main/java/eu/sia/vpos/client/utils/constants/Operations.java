@@ -130,7 +130,7 @@ public final class Operations {
 
         public static final class AMOUNT {
             public static final String NAME = "AMOUNT";
-            public static final int MIN_LEN = 2;
+            public static final int MIN_LEN = 1;
             public static final int MAX_LEN = 8;
             public static final String PATTERN = "[0-9]{" + MIN_LEN + "," + MAX_LEN + "}";
             public static final boolean MANDATORY = true;
