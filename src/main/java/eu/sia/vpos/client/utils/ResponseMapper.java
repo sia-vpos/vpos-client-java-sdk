@@ -291,7 +291,11 @@ public class ResponseMapper {
         AuthorizationResponse authorizationResponse = new AuthorizationResponse();
         authorizationResponse.setResult(response.getResult());
 
-        if (response.getData() != null && response.getData().getAuthorization() != null) {
+        if (response.getData() == null) {
+            return authorizationResponse;
+        }
+
+        if (response.getData().getAuthorization() != null) {
             Authorization auth = response.getData().getAuthorization().get(0);
             authorizationResponse.setPaymentType(auth.getPaymentType());
             authorizationResponse.setAuthorizationType(auth.getAuthorizationType());
