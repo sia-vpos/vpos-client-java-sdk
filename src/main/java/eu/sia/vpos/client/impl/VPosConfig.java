@@ -40,6 +40,7 @@ public class VPosConfig implements Config {
 
     public VPosConfig() {
         this.timeout = "10000";
+        this.socketReadTimeout = "0";
     }
 
     public VPosConfig(Properties properties) {
