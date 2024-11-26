@@ -26,7 +26,24 @@ public class AuthorizationRequest extends RequestDto {
     private String tRecurr;
     private String cRecurr;
     private String installmentsNumber;
+    private String aftData;
+    private String dsTransId;
 
+    public String getDsTransId() {
+        return dsTransId;
+    }
+
+    public void setDsTransId(String dsTransId) {
+        this.dsTransId = dsTransId;
+    }
+
+    public String getAftData() {
+        return aftData;
+    }
+
+    public void setAftData(String aftData) {
+        this.aftData = aftData;
+    }
 
     public String getOrderId() {
         return orderId;

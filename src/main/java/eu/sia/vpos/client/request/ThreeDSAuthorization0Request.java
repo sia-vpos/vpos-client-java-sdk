@@ -33,6 +33,15 @@ public class ThreeDSAuthorization0Request  extends RequestDto{
     private String tRecurr;
     private String cRecurr;
     private String installmentsNumber;
+    private String aftData;
+
+    public String getAftData() {
+        return aftData;
+    }
+
+    public void setAftData(String aftData) {
+        this.aftData = aftData;
+    }
 
     public String getOrderId() {
         return orderId;

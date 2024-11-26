@@ -104,12 +104,23 @@ public class Auth3DS2AuthorizationStep0Request {
     @XmlElement(name = "InstallmentsNumber")
     private String installmentsNumber;
 
+    @XmlElement(name = "AftData")
+    private String aftData;
+
     public Auth3DS2AuthorizationStep0Request(){
 
     }
 
     public Auth3DS2AuthorizationStep0Request(Date date){
         this.header = new Header(date);
+    }
+
+    public String getAftData() {
+        return aftData;
+    }
+
+    public void setAftData(String aftData) {
+        this.aftData = aftData;
     }
 
     public Header getHeader() {

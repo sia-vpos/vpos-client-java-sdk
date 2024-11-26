@@ -149,6 +149,9 @@ public class RequestValidator {
             field = Operations.PARAMETERS.TAXID.NAME;
         } else if (request.getCreatePanAlias() != null && !request.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
             field = Operations.PARAMETERS.CREATEPANALIAS.NAME;
+        } else if (request.getAftData() != null && !request.getAftData().matches(Operations.PARAMETERS.AFTDATA.PATTERN)
+                && !(request.getAftData().length() >= Operations.PARAMETERS.AFTDATA.MIN_LEN && request.getAftData().length() <= Operations.PARAMETERS.AFTDATA.MAX_LEN)){
+            field = Operations.PARAMETERS.AFTDATA.NAME;
         } else if (request.getThreeDSData() == null) {
             field = Operations.PARAMETERS.THREEDSDATA.NAME;
         } else if (request.getNotifyUrl() == null) {
@@ -285,6 +288,11 @@ public class RequestValidator {
             field = Operations.PARAMETERS.TAXID.NAME;
         } else if (request.getCreatePanAlias() != null && !request.getCreatePanAlias().matches(Operations.PARAMETERS.CREATEPANALIAS.PATTERN)) {
             field = Operations.PARAMETERS.CREATEPANALIAS.NAME;
+        } else if (request.getAftData() != null && !request.getAftData().matches(Operations.PARAMETERS.AFTDATA.PATTERN)
+                && !(request.getAftData().length() >= Operations.PARAMETERS.AFTDATA.MIN_LEN && request.getAftData().length() <= Operations.PARAMETERS.AFTDATA.MAX_LEN)){
+            field = Operations.PARAMETERS.AFTDATA.NAME;
+        } else if (request.getDsTransId() != null && !request.getDsTransId().matches(Operations.PARAMETERS.DSTRANSID.PATTERN)){
+            field = Operations.PARAMETERS.DSTRANSID.NAME;
         }
 
         if (!field.isEmpty())

@@ -181,6 +181,8 @@ public class RequestBuilder {
         authRequest.settRecurr(request.gettRecurr());
         authRequest.setcRecurr(request.getcRecurr());
         authRequest.setInstallmentsNumber(request.getInstallmentsNumber());
+        authRequest.setAftData(request.getAftData());
+        authRequest.setDsTransId(request.getDsTransId());
         Data data = new Data();
         data.setOnlineAuthorizationRequest(authRequest);
 
@@ -243,6 +245,7 @@ public class RequestBuilder {
         auth3DSStep0.settRecurr(authRequest.gettRecurr());
         auth3DSStep0.setcRecurr(authRequest.getcRecurr());
         auth3DSStep0.setInstallmentsNumber(authRequest.getInstallmentsNumber());
+        auth3DSStep0.setAftData(authRequest.getAftData());
 
         Data data = new Data();
         data.setAuth3DS2AuthorizationStep0Request(auth3DSStep0);

@@ -88,10 +88,32 @@ public class OnlineAuthorizationRequest {
     @XmlElement(name = "InstallmentsNumber")
     private String installmentsNumber;
 
+    @XmlElement(name = "AftData")
+    private String aftData;
+
+    @XmlElement(name = "dsTransId")
+    private String dsTransId;
+
     public OnlineAuthorizationRequest(){}
 
     public OnlineAuthorizationRequest(Date date){
         this.header = new Header(date);
+    }
+
+    public String getDsTransId() {
+        return dsTransId;
+    }
+
+    public void setDsTransId(String dsTransId) {
+        this.dsTransId = dsTransId;
+    }
+
+    public String getAftData() {
+        return aftData;
+    }
+
+    public void setAftData(String aftData) {
+        this.aftData = aftData;
     }
 
     public Header getHeader() {

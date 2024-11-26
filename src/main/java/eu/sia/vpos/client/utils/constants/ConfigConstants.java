@@ -1,7 +1,5 @@
 package eu.sia.vpos.client.utils.constants;
 
-import org.omg.CORBA.TIMEOUT;
-
 public class ConfigConstants {
     private ConfigConstants(){}
 

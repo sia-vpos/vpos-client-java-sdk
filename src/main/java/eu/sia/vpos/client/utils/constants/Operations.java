@@ -32,6 +32,31 @@ public final class Operations {
 
         }
 
+        public static final class DSTRANSID {
+            public static final String NAME = "DSTRANSID";
+            public static final int MIN_LEN = 36;
+            public static final int MAX_LEN = 36;
+            public static final String PATTERN = ".{" + MIN_LEN + "," + MAX_LEN + "}";
+            public static final boolean MANDATORY = false;
+
+            private DSTRANSID() {
+
+            }
+        }
+
+        public static final class AFTDATA {
+
+            public static final String NAME = "AFTDATA";
+            public static final int MIN_LEN = 1;
+            public static final int MAX_LEN = 5000;
+            public static final String PATTERN = "^[A-Za-z0-9\\/+]+[=]{0,2}$";
+            public static final boolean MANDATORY = false; // OPTIONAL
+
+            private AFTDATA() {
+
+            }
+        }
+
         public static final class CREATEPANALIAS {
             public static final String NAME = "CREATEPANALIAS";
             public static final String PATTERN = "S";

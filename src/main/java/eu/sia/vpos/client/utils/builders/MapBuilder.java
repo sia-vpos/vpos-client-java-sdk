@@ -3,6 +3,7 @@ package eu.sia.vpos.client.utils.builders;
 
 import eu.sia.vpos.client.request.PaymentInfo;
 import eu.sia.vpos.client.request.xml.*;
+import eu.sia.vpos.client.response.xml.Operation;
 import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.constants.VPosConstants;
 import eu.sia.vpos.client.utils.encryption.AESEncoder;
@@ -218,6 +219,8 @@ public class MapBuilder {
         map.put(Operations.PARAMETERS.NAME.NAME, authorizationRequest.getName());
         map.put(Operations.PARAMETERS.SURNAME.NAME, authorizationRequest.getSurname());
         map.put(Operations.PARAMETERS.TAXID.NAME, authorizationRequest.getTaxId());
+        map.put(Operations.PARAMETERS.AFTDATA.NAME,authorizationRequest.getAftData());
+        map.put(Operations.PARAMETERS.DSTRANSID.NAME,authorizationRequest.getDsTransId());
         // recurrency info
         map.put(Operations.PARAMETERS.TRECURR.NAME, authorizationRequest.gettRecurr());
         map.put(Operations.PARAMETERS.CRECURR.NAME, authorizationRequest.getcRecurr());
