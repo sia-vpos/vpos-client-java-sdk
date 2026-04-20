@@ -53,4 +53,53 @@ public class Utils {
         return queryPairs;
     }
 
+
+    /**
+     * Hide a PAN
+     *
+     * @param pan (String): pan
+     * @return String: hidden pan
+     */
+    public static String HidePan(String pan) {
+
+        if (pan != null && !pan.trim().isEmpty()) {
+            // pan length minore di 12 = viene restituito il valore ricevuto in ingresso
+            if (pan.length() < 12) {
+                return pan;
+                // pan length compreso tra 12 e 15 = oscuro solo i primi e gli ultimi 3 caratteri
+            } else if (pan.length() >= 12 && pan.length() < 16) {
+                return (pan.substring(0, 3) + pan.substring(3, pan.length() - 3).replaceAll("[0-9]", "x"))
+                        + pan.substring(pan.length() - 3, pan.length());
+                // pan length maggiore di 16 = oscuro i primi 6 e gli ultimi 4 caratteri
+            } else {
+                return (pan.substring(0, 6) + pan.substring(6, pan.length() - 4).replaceAll("[0-9]", "x"))
+                        + pan.substring(pan.length() - 4, pan.length());
+            }
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * Hide a CVV
+     *
+     * @param cvv (String): cvv
+     * @return String: hidden cvv
+     */
+    public static String HideCVV(String cvv) {
+
+        if (cvv != null && !cvv.trim().isEmpty()) {
+
+            StringBuilder hiddenCVV = new StringBuilder();
+
+            for (int i = 0; i < cvv.length(); i++) {
+                hiddenCVV.append('X');
+            }
+
+            return hiddenCVV.toString();
+        } else {
+            return "";
+        }
+    }
+
 }

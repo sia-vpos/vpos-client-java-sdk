@@ -1,5 +1,7 @@
 package eu.sia.vpos.client.utils.mac;
 
+import eu.sia.vpos.client.utils.Utils;
+import eu.sia.vpos.client.utils.constants.Operations;
 import eu.sia.vpos.client.utils.exception.VPosClientException;
 
 import java.util.List;
@@ -46,11 +48,30 @@ public final class Encoder {
      */
     public String getMac(Map<String, String> valueMap, String key) throws VPosClientException {
         StringBuilder sb = new StringBuilder();
-        for (Entry<String, String> entry : valueMap.entrySet())
+        StringBuilder loggingSb = new StringBuilder();
+
+        for (Entry<String, String> entry : valueMap.entrySet()) {
             appendField(entry.getKey().toUpperCase(), entry.getValue(), sb);
+
+            // hidden fields management
+            if(Operations.PARAMETERS.CVV.NAME.equals(entry.getKey().toUpperCase())) {
+                appendField(entry.getKey().toUpperCase(), Utils.HideCVV(entry.getValue()), loggingSb);
+            } else
+            if(Operations.PARAMETERS.CVV2.NAME.equals(entry.getKey().toUpperCase())) {
+                appendField(entry.getKey().toUpperCase(), Utils.HideCVV(entry.getValue()), loggingSb);
+            } else
+            if(Operations.PARAMETERS.PAN.NAME.equals(entry.getKey().toUpperCase())) {
+                appendField(entry.getKey().toUpperCase(), Utils.HidePan(entry.getValue()), loggingSb);
+            } else {
+                appendField(entry.getKey().toUpperCase(), entry.getValue(), loggingSb);
+            }
+        }
+
         //deleting the first &
         sb.deleteCharAt(0);
-        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "STRING FOR MAC: " + sb.toString());
+        loggingSb.deleteCharAt(0);
+
+        Logger.getLogger(this.getClass().getSimpleName()).log(Level.INFO, "STRING FOR MAC: " + loggingSb.toString());
         return hmacCalculator.calculate(sb.toString(), key);
     }
 
